@@ -13,7 +13,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="~/assets/images/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="~/assets/images/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="~/assets/images/favicon/favicon-16x16.png">
-    <!-- <link rel="manifest" href="~/assets/images/favicon/site.webmanifest"> -->
+
     <!-- Google Fonts (Using: Rubik & Montserrat & Roboto) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,7 +43,7 @@
     <link rel="stylesheet" href="~/assets/slick-carousel/slick-1.8.1/slick/slick.css">
     <link rel="stylesheet" href="~/assets/slick-carousel/slick-1.8.1/slick/slick-theme.css">
 
-    <!-- Toastr -->
+    <!-- Toastr CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
           integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA=="
           crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -277,7 +277,7 @@
                                                 <a href="blog.html" class="nav-link">Blog</a>
                                             </li>
                                             <li>
-                                                <a href="faq.html" class="nav-link">FAQ</a>
+                                                <a asp-controller="faq" asp-action="index" class="nav-link">FAQ</a>
                                             </li>
                                             <li>
                                                 <a asp-controller="contact" asp-action="index" class="nav-link">Contact</a>
@@ -599,6 +599,7 @@
         </div>
     </header>
     <!-- Header end -->
+
     <!-- Mobile fix menu start -->
     <div class="mobile-menu d-sm-none">
         <ul>
@@ -739,6 +740,7 @@
         </div>
     </footer>
     <!-- Footer end -->
+
     <!-- Quick view modal start -->
     <div class="modal fade quick-view-modal" id="quick-view">
         <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -848,6 +850,7 @@
         </div>
     </div>
     <!-- Quick view modal end -->
+
     <!-- Cookie Section Start -->
     <div class="cookie-bar-section hide">
         <div class="content">
@@ -859,6 +862,7 @@
         </div>
     </div>
     <!-- Cookie Section End -->
+
     <!-- Tap to top Section Start -->
     <div class="tap-to-top">
         <a href="#home">
@@ -869,32 +873,32 @@
 
     <div class="bg-overlay"></div>
 
-    <!-- latest jquery-->
+    <!-- Latest jQuery -->
     <script src="~/assets/js/jquery-3.5.1.min.js"></script>
 
-    <!-- Bootstrap js-->
+    <!-- Bootstrap JS -->
     <script src="~/assets/bootstrap/bootstrap-5.2.0-beta1/js/bootstrap.min.js"></script>
     <script src="~/assets/bootstrap/bootstrap-5.2.0-beta1/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Feather icon js -->
+    <!-- Feather icon JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js"
             integrity="sha512-24XP4a9KVoIinPFUbcnjIjAjtS59PUoxQj3GNVpWc86bCqPuy3YxAcxJrxFCxXe4GHtAumCbO2Ze2bddtuxaRw=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <!-- lazyload js-->
+    <!-- Lazyload JS -->
     <script src="~/assets/js/lazysizes.min.js"></script>
 
-    <!-- Slick js-->
+    <!-- Slick JS -->
     <script src="~/assets/js/slick/slick.js"></script>
     <script src="~/assets/js/slick/slick-animation.min.js"></script>
     <script src="~/assets/js/slick/custom_slick.js"></script>
 
-    <!-- Toastr js -->
+    <!-- Toastr JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
             integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <!-- script js -->
+    <!-- Script JS -->
     <script src="~/assets/js/script.js"></script>
 
 </body>
