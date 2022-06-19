@@ -511,7 +511,7 @@
                                                 <h6 class="cart-total">
                                                     <span class="font-light">Total:</span> $542.00
                                                 </h6>
-                                                <a href="cart.html" class="btn btn-solid-default btn-block">
+                                                <a asp-controller="shoppingcart" asp-action="index" class="btn btn-solid-default btn-block">
                                                     Proceed to payment
                                                 </a>
                                             </div>
@@ -616,7 +616,7 @@
                 </a>
             </li>
             <li>
-                <a href="cart.html">
+                <a asp-controller="shoppingcart" asp-action="index">
                     <i data-feather="shopping-cart"></i>
                     <span>Cart</span>
                 </a>
@@ -836,7 +836,7 @@
                                     </ul>
                                 </div>
                                 <div class="product-btns">
-                                    <a href="cart.html" class="btn btn-solid-default btn-sm">Add to cart</a>
+                                    <a asp-controller="shoppingcart" asp-action="index" class="btn btn-solid-default btn-sm">Add to cart</a>
                                     <a href="product-left-sidebar.html" class="btn btn-solid-default btn-sm">
                                         View
                                         details
