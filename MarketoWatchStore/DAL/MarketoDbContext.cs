@@ -12,5 +12,6 @@ namespace MarketoWatchStore.DAL
         public MarketoDbContext(DbContextOptions<MarketoDbContext> options) : base(options) { }
 
         public DbSet<Setting> Settings { get; set; }
+        public DbSet<Brand> Brands { get; set; }
     }
 }
