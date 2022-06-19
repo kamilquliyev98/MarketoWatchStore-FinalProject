@@ -18,5 +18,6 @@ namespace MarketoWatchStore.DAL
         public DbSet<SpecialType> SpecialTypes { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Colour> Colours { get; set; }
+        public DbSet<Feature> Features { get; set; }
     }
 }
