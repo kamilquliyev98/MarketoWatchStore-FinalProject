@@ -14,5 +14,6 @@ namespace MarketoWatchStore.DAL
         public DbSet<Setting> Settings { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Display> Displays { get; set; }
+        public DbSet<PowerSource> PowerSources { get; set; }
     }
 }
