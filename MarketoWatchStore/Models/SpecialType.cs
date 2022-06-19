@@ -13,5 +13,7 @@ namespace MarketoWatchStore.Models
         [StringLength(1000)]
         public string Image { get; set; }
         public bool IsShared { get; set; }
+
+        public IEnumerable<Product> Products { get; set; }
     }
 }

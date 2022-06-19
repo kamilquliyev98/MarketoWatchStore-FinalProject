@@ -10,5 +10,7 @@ namespace MarketoWatchStore.Models
     {
         [StringLength(255), Required]
         public string Title { get; set; }
+
+        public IEnumerable<ProductFeature> ProductFeatures { get; set; }
     }
 }
