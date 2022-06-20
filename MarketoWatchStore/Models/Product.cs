@@ -42,5 +42,6 @@ namespace MarketoWatchStore.Models
         public IEnumerable<ProductColour> ProductColours { get; set; }
         public IEnumerable<ProductFeature> ProductFeatures { get; set; }
         public IEnumerable<ProductImage> ProductImages { get; set; }
+        public IEnumerable<Review> Reviews { get; set; }
     }
 }

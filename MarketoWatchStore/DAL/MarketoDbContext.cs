@@ -24,5 +24,6 @@ namespace MarketoWatchStore.DAL
         public DbSet<ProductColour> ProductColours { get; set; }
         public DbSet<ProductFeature> ProductFeatures { get; set; }
         public DbSet<ProductImage> ProductImages { get; set; }
+        public DbSet<Review> Reviews { get; set; }
     }
 }
