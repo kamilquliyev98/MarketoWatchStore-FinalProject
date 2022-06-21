@@ -1,0 +1,101 @@
+﻿@model Setting
+@{
+    ViewData["Title"] = "Edit Settings";
+}
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Edit Settings</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-area="manage" asp-controller="dashboard" asp-action="index">Dashboard</a></li>
+                <li class="breadcrumb-item"><a asp-area="manage" asp-controller="setting" asp-action="index">Settings</a></li>
+                <li class="breadcrumb-item active">Edit Settings</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"></h5>
+
+                        <!-- Form -->
+                        <form class="row g-3" novalidate="" method="post" enctype="multipart/form-data" autocomplete="off">
+                            <div class="col-md-6">
+                                <label asp-for="Email1" class="form-label">Email *</label>
+                                <input asp-for="Email1" class="form-control" required>
+                                <span asp-validation-for="Email1" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Email2" class="form-label">Additional Email (optional)</label>
+                                <input asp-for="Email2" class="form-control">
+                                <span asp-validation-for="Email2" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Phone1" class="form-label">Phone *</label>
+                                <input asp-for="Phone1" class="form-control" required>
+                                <span asp-validation-for="Phone1" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Phone2" class="form-label">Additional Phone (optional)</label>
+                                <input asp-for="Phone2" class="form-control">
+                                <span asp-validation-for="Phone2" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Address" class="form-label">Address *</label>
+                                <input asp-for="Address" class="form-control" required>
+                                <span asp-validation-for="Address" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Offer" class="form-label"></label>
+                                <input asp-for="Offer" class="form-control">
+                                <span asp-validation-for="Offer" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-12">
+                                <label asp-for="Facebook" class="form-label"></label>
+                                <input asp-for="Facebook" class="form-control">
+                                <span asp-validation-for="Facebook" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-12">
+                                <label asp-for="Instagram" class="form-label"></label>
+                                <input asp-for="Instagram" class="form-control">
+                                <span asp-validation-for="Instagram" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-12">
+                                <label asp-for="Twitter" class="form-label"></label>
+                                <input asp-for="Twitter" class="form-control">
+                                <span asp-validation-for="Twitter" class="text-danger"></span>
+                            </div>
+                            <div class="col-12">
+                                <label asp-for="LogoImage" class="form-label">Logo</label>
+                                <input asp-for="LogoImage" class="form-control" accept="image/png">
+                                <span asp-validation-for="LogoImage" class="text-danger"></span>
+                                <div class="my-2">
+                                    <p>Current Logo:</p>
+                                    <img class="img-fluid" src="~/assets/images/logo/@Model.Logo" />
+                                </div>
+                            </div>
+                            <div class="col-12 d-grid gap-2 mt-3">
+                                <button class="btn btn-success" type="submit">Save changes</button>
+                                <a asp-area="manage" asp-controller="setting" asp-action="index" class="btn btn-info">Go back</a>
+                            </div>
+                        </form>
+                        <!-- End Form -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main><!-- End #main -->
+
+@section JS{
+    <partial name="_ValidationFormScriptPartial">
+}
