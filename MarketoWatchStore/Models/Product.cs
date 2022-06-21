@@ -23,6 +23,7 @@ namespace MarketoWatchStore.Models
         public string Description { get; set; }
         [StringLength(255)]
         public string Code { get; set; }
+        public bool IsNewArrival { get; set; }
         public bool IsForMen { get; set; }
         public bool IsForWomen { get; set; }
 
