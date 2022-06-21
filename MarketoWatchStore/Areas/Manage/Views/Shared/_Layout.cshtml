@@ -36,40 +36,9 @@
     <header id="header" class="header fixed-top d-flex align-items-center">
 
         <div class="d-flex align-items-center justify-content-between">
-            <a asp-controller="dashboard" asp-action="index" class="logo d-flex align-items-center">
-                <span id="MyClockDisplay" class="clock"></span>
-                <script>
-                    function checkTime(i) {
-                        if (i < 10) {
-                            i = "0" + i;
-                        }
-                        return i;
-                    }
-
-                    function showTime() {
-                        var date = new Date();
-                        var day = date.getDate(); // 0-31
-                        var month = date.getMonth() + 1; // 0-12
-                        var year = date.getFullYear();
-                        var hour = date.getHours(); // 0 - 23
-                        var minute = date.getMinutes(); // 0 - 59
-                        var second = date.getSeconds(); // 0 - 59
-
-                        day = checkTime(day);
-                        month = checkTime(month);
-                        hour = checkTime(hour);
-                        minute = checkTime(minute);
-                        second = checkTime(second);
-
-                        var time = day + "." + month + "." + year + "/" + hour + ":" + minute + ":" + second;
-                        document.getElementById("MyClockDisplay").innerText = time;
-                        document.getElementById("MyClockDisplay").textContent = time;
-
-                        setTimeout(showTime, 1000);
-                    }
-
-                    showTime();
-                </script>
+            <a asp-area="manage" asp-controller="dashboard" asp-action="index" class="logo d-flex align-items-center">
+                <img src="~/manage/assets/img/logo.png" />
+                <span class="d-none d-lg-block">Marketo</span>
             </a>
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
@@ -134,11 +103,18 @@
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
-                <a class="nav-link " asp-controller="dashboard" asp-action="index">
+                <a class="nav-link collapsed" asp-area="manage" asp-controller="dashboard" asp-action="index">
                     <i class="bi bi-house-door"></i>
                     <span>Dashboard</span>
                 </a>
             </li><!-- End Dashboard Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" asp-area="manage" asp-controller="setting" asp-action="index">
+                    <i class="bi bi-layout-wtf"></i>
+                    <span>Settings</span>
+                </a>
+            </li><!-- End Settings Nav -->
 
         </ul>
 

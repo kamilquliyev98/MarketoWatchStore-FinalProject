@@ -40,6 +40,7 @@
 
                         </div>
                     </div><!-- End Sales Card -->
+
                     <!-- Revenue Card -->
                     <div class="col-xxl-4 col-md-6">
                         <div class="card info-card revenue-card">
@@ -59,6 +60,7 @@
 
                         </div>
                     </div><!-- End Revenue Card -->
+
                     <!-- Customers Card -->
                     <div class="col-xxl-4 col-xl-12">
 
@@ -80,6 +82,107 @@
                         </div>
 
                     </div><!-- End Customers Card -->
+
+                    <!-- Date -->
+                    <div class="col-xxl-6 col-md-6">
+
+                        <div class="card info-card sales-card">
+
+                            <div class="card-body">
+                                <h5 class="card-title">Date</h5>
+
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-calendar2-event"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6 id="today"></h6>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <script>
+                            function checkTime(i) {
+                                if (i < 10) {
+                                    i = "0" + i;
+                                }
+                                return i;
+                            }
+
+                            function showDate() {
+                                var date = new Date();
+
+                                var day = date.getDate(); // 0-31
+                                var month = date.getMonth() + 1; // 0-12
+                                var year = date.getFullYear();
+
+                                day = checkTime(day);
+                                month = checkTime(month);
+
+                                var today = day + "." + month + "." + year;
+                                document.getElementById("today").innerText = today;
+                                document.getElementById("today").textContent = today;
+
+                                setTimeout(showDate, 1000);
+                            }
+
+                            showDate();
+                        </script>
+
+                    </div><!-- End Date Card -->
+
+                    <!-- Time -->
+                    <div class="col-xxl-6 col-md-6">
+
+                        <div class="card info-card sales-card">
+
+                            <div class="card-body">
+                                <h5 class="card-title">Time</h5>
+
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-clock"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6 id="time"></h6>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <script>
+                            function checkTime(i) {
+                                if (i < 10) {
+                                    i = "0" + i;
+                                }
+                                return i;
+                            }
+
+                            function showTime() {
+                                var date = new Date();
+
+                                var hour = date.getHours(); // 0 - 23
+                                var minute = date.getMinutes(); // 0 - 59
+                                var second = date.getSeconds(); // 0 - 59
+
+                                hour = checkTime(hour);
+                                minute = checkTime(minute);
+                                second = checkTime(second);
+
+                                var time = hour + ":" + minute + ":" + second;
+                                document.getElementById("time").innerText = time;
+                                document.getElementById("time").textContent = time;
+
+                                setTimeout(showTime, 1000);
+                            }
+
+                            showTime();
+                        </script>
+
+                    </div><!-- End Time Card -->
 
                 </div>
             </div><!-- End Left side columns -->
