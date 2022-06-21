@@ -16,6 +16,9 @@ namespace MarketoWatchStore.Models
         [StringLength(1000)]
         public string SlideImage { get; set; }
         public bool ShareOnHomeSlide { get; set; }
+        [StringLength(1000)]
+        public string PosterImage { get; set; }
+        public bool ShareAsPoster { get; set; }
         [Column(TypeName = "money"), Required]
         public double Price { get; set; }
         [Column(TypeName = "money")]

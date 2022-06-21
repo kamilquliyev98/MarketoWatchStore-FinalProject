@@ -6227,6 +6227,11 @@ header {
                     width: 40px;
                     height: 40px;
                 }
+
+                img {
+                    width: 40px;
+                    height: auto;
+                }
             }
         }
     }
@@ -6243,6 +6248,12 @@ header {
                 height: 55px;
                 fill: $mainColor;
                 stroke: $mainColor;
+                margin-right: 20px;
+            }
+
+            img {
+                width: 55px;
+                height: auto;
                 margin-right: 20px;
             }
         }
@@ -6269,6 +6280,11 @@ header {
                 width: 45px;
                 height: 45px;
             }
+
+            img {
+                width: 45px;
+                height: auto;
+            }
         }
     }
 }
@@ -6280,6 +6296,11 @@ header {
                 svg {
                     width: 35px;
                     height: 35px;
+                }
+
+                img {
+                    width: 35px;
+                    height: auto;
                 }
             }
         }

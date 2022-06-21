@@ -1,5 +1,5 @@
-﻿using Juan_ShoesStore.Extensions;
-using Juan_ShoesStore.Helpers;
+﻿using MarketoWatchStore.Extensions;
+using MarketoWatchStore.Helpers;
 using MarketoWatchStore.DAL;
 using MarketoWatchStore.Models;
 using Microsoft.AspNetCore.Hosting;

@@ -7120,6 +7120,10 @@ header .main-navbar .nav-menu > li.mega-menu.home-menu .megamenu-image-title {
     width: 40px;
     height: 40px;
   }
+  .service-section .service-wrap .service-icon img {
+    width: 40px;
+    height: auto;
+  }
 }
 
 .service-section .service-wrap {
@@ -7139,6 +7143,12 @@ header .main-navbar .nav-menu > li.mega-menu.home-menu .megamenu-image-title {
   margin-right: 20px;
 }
 
+.service-section .service-wrap .service-icon img {
+  width: 55px;
+  height: auto;
+  margin-right: 20px;
+}
+
 .service-section .service-wrap .service-content h3 {
   margin-top: -3px;
 }
@@ -7155,10 +7165,19 @@ header .main-navbar .nav-menu > li.mega-menu.home-menu .megamenu-image-title {
   height: 45px;
 }
 
+.service-section.about-page .service-wrap .service-icon img {
+  width: 45px;
+  height: auto;
+}
+
 @media (max-width: 767px) {
   .service-section .service-wrap .service-icon svg {
     width: 35px;
     height: 35px;
+  }
+  .service-section .service-wrap .service-icon img {
+    width: 35px;
+    height: auto;
   }
 }
 

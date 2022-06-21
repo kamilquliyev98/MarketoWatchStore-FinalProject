@@ -4,14 +4,16 @@ using MarketoWatchStore.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MarketoWatchStore.Migrations
 {
     [DbContext(typeof(MarketoDbContext))]
-    partial class MarketoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220621215549_AddedPosterColumnsToProductsTable")]
+    partial class AddedPosterColumnsToProductsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,9 +43,6 @@ namespace MarketoWatchStore.Migrations
                     b.Property<string>("Logo")
                         .HasColumnType("nvarchar(1000)")
                         .HasMaxLength(1000);
-
-                    b.Property<DateTime?>("RestoredAt")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -78,9 +77,6 @@ namespace MarketoWatchStore.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime?>("RestoredAt")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(255)")
@@ -109,9 +105,6 @@ namespace MarketoWatchStore.Migrations
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
-
-                    b.Property<DateTime?>("RestoredAt")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -142,9 +135,6 @@ namespace MarketoWatchStore.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime?>("RestoredAt")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(255)")
@@ -173,9 +163,6 @@ namespace MarketoWatchStore.Migrations
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
-
-                    b.Property<DateTime?>("RestoredAt")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -250,9 +237,6 @@ namespace MarketoWatchStore.Migrations
 
                     b.Property<decimal>("Price")
                         .HasColumnType("money");
-
-                    b.Property<DateTime?>("RestoredAt")
-                        .HasColumnType("datetime2");
 
                     b.Property<bool>("ShareAsPoster")
                         .HasColumnType("bit");
@@ -355,9 +339,6 @@ namespace MarketoWatchStore.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("RestoredAt")
-                        .HasColumnType("datetime2");
-
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
@@ -424,9 +405,6 @@ namespace MarketoWatchStore.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("RestoredAt")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("Star")
                         .HasColumnType("int");
 
@@ -464,9 +442,6 @@ namespace MarketoWatchStore.Migrations
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
-
-                    b.Property<DateTime?>("RestoredAt")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -536,9 +511,6 @@ namespace MarketoWatchStore.Migrations
                         .HasColumnType("nvarchar(255)")
                         .HasMaxLength(255);
 
-                    b.Property<DateTime?>("RestoredAt")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Twitter")
                         .HasColumnType("nvarchar(1000)")
                         .HasMaxLength(1000);
@@ -574,9 +546,6 @@ namespace MarketoWatchStore.Migrations
                     b.Property<bool>("IsShared")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime?>("RestoredAt")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(255)")
@@ -605,9 +574,6 @@ namespace MarketoWatchStore.Migrations
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
-
-                    b.Property<DateTime?>("RestoredAt")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
                         .IsRequired()

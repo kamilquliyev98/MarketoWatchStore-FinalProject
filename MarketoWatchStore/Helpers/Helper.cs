@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Juan_ShoesStore.Helpers
+namespace MarketoWatchStore.Helpers
 {
     public class Helper
     {
