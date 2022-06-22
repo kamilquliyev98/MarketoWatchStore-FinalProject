@@ -55,7 +55,7 @@
         </div>
         <div class="col-md-2">
             <div class="d-grid">
-                <a asp-area="manage" asp-controller="powersource" asp-action="create" asp-route-page="@ViewBag.CurrentPage" asp-route-status="@ViewBag.Status" class="btn btn-success" type="button">Create</a>
+                <a asp-area="manage" asp-controller="@(this.ViewContext.RouteData.Values["controller"].ToString())" asp-action="create" asp-route-page="@ViewBag.CurrentPage" asp-route-status="@ViewBag.Status" class="btn btn-success" type="button">Create</a>
             </div>
         </div>
     </div>
@@ -78,43 +78,43 @@
                         <nav>
                             <ul class="pagination justify-content-center">
                                 <li class="page-item @(ViewBag.CurrentPage <= 1 ? "disabled" : "")">
-                                    <a class="page-link" asp-controller="powersource" asp-action="index" asp-route-page="1" asp-route-status="@ViewBag.Status" aria-label="First" data-bs-toggle="tooltip" data-bs-placement="left" title="" data-bs-original-title="First page">
+                                    <a class="page-link" asp-controller="@(this.ViewContext.RouteData.Values["controller"].ToString())" asp-action="index" asp-route-page="1" asp-route-status="@ViewBag.Status" aria-label="First" data-bs-toggle="tooltip" data-bs-placement="left" title="" data-bs-original-title="First page">
                                         <span aria-hidden="true">&laquo;</span>
                                     </a>
                                 </li>
                                 <li class="page-item @(ViewBag.CurrentPage <= 1 ? "disabled" : "")">
-                                    <a class="page-link" asp-controller="powersource" asp-action="index" asp-route-page="@(ViewBag.CurrentPage - 1)" asp-route-status="@ViewBag.Status" aria-label="Previous" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Previous">
+                                    <a class="page-link" asp-controller="@(this.ViewContext.RouteData.Values["controller"].ToString())" asp-action="index" asp-route-page="@(ViewBag.CurrentPage - 1)" asp-route-status="@ViewBag.Status" aria-label="Previous" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Previous">
                                         <span aria-hidden="true">&lsaquo;</span>
                                     </a>
                                 </li>
 
                                 @if (ViewBag.CurrentPage == ViewBag.PageCount && ViewBag.CurrentPage > 2)
                                 {
-                                    <li class="page-item"><a class="page-link" asp-controller="powersource" asp-action="index" asp-route-page="@(ViewBag.CurrentPage - 2)" asp-route-status="@ViewBag.Status">@(ViewBag.CurrentPage - 2)</a></li>
+                                    <li class="page-item"><a class="page-link" asp-controller="@(this.ViewContext.RouteData.Values["controller"].ToString())" asp-action="index" asp-route-page="@(ViewBag.CurrentPage - 2)" asp-route-status="@ViewBag.Status">@(ViewBag.CurrentPage - 2)</a></li>
                                 }
                                 @if (ViewBag.CurrentPage > 1)
                                 {
-                                    <li class="page-item"><a class="page-link" asp-controller="powersource" asp-action="index" asp-route-page="@(ViewBag.CurrentPage - 1)" asp-route-status="@ViewBag.Status">@(ViewBag.CurrentPage - 1)</a></li>
+                                    <li class="page-item"><a class="page-link" asp-controller="@(this.ViewContext.RouteData.Values["controller"].ToString())" asp-action="index" asp-route-page="@(ViewBag.CurrentPage - 1)" asp-route-status="@ViewBag.Status">@(ViewBag.CurrentPage - 1)</a></li>
                                 }
 
-                                <li class="page-item active" aria-current="page"><a class="page-link" asp-controller="powersource" asp-action="index" asp-route-page="@(ViewBag.CurrentPage)" asp-route-status="@ViewBag.Status">@(ViewBag.CurrentPage)</a></li>
+                                <li class="page-item active" aria-current="page"><a class="page-link" asp-controller="@(this.ViewContext.RouteData.Values["controller"].ToString())" asp-action="index" asp-route-page="@(ViewBag.CurrentPage)" asp-route-status="@ViewBag.Status">@(ViewBag.CurrentPage)</a></li>
 
                                 @if (ViewBag.CurrentPage < ViewBag.PageCount)
                                 {
-                                    <li class="page-item"><a class="page-link" asp-controller="powersource" asp-action="index" asp-route-page="@(ViewBag.CurrentPage + 1)" asp-route-status="@ViewBag.Status">@(ViewBag.CurrentPage + 1)</a></li>
+                                    <li class="page-item"><a class="page-link" asp-controller="@(this.ViewContext.RouteData.Values["controller"].ToString())" asp-action="index" asp-route-page="@(ViewBag.CurrentPage + 1)" asp-route-status="@ViewBag.Status">@(ViewBag.CurrentPage + 1)</a></li>
                                 }
                                 @if (ViewBag.CurrentPage == 1 && (ViewBag.CurrentPage + 2) <= ViewBag.PageCount)
                                 {
-                                    <li class="page-item"><a class="page-link" asp-controller="powersource" asp-action="index" asp-route-page="@(ViewBag.CurrentPage + 2)" asp-route-status="@ViewBag.Status">@(ViewBag.CurrentPage + 2)</a></li>
+                                    <li class="page-item"><a class="page-link" asp-controller="@(this.ViewContext.RouteData.Values["controller"].ToString())" asp-action="index" asp-route-page="@(ViewBag.CurrentPage + 2)" asp-route-status="@ViewBag.Status">@(ViewBag.CurrentPage + 2)</a></li>
                                 }
 
                                 <li class="page-item @(ViewBag.CurrentPage >= ViewBag.PageCount ? "disabled" : "")">
-                                    <a class="page-link" asp-controller="powersource" asp-action="index" asp-route-page="@(ViewBag.CurrentPage + 1)" asp-route-status="@ViewBag.Status" aria-label="Next" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Next">
+                                    <a class="page-link" asp-controller="@(this.ViewContext.RouteData.Values["controller"].ToString())" asp-action="index" asp-route-page="@(ViewBag.CurrentPage + 1)" asp-route-status="@ViewBag.Status" aria-label="Next" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Next">
                                         <span aria-hidden="true">&rsaquo;</span>
                                     </a>
                                 </li>
                                 <li class="page-item @(ViewBag.CurrentPage >= ViewBag.PageCount ? "disabled" : "")">
-                                    <a class="page-link" asp-controller="powersource" asp-action="index" asp-route-page="@ViewBag.PageCount" asp-route-status="@ViewBag.Status" aria-label="Last" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Last page">
+                                    <a class="page-link" asp-controller="@(this.ViewContext.RouteData.Values["controller"].ToString())" asp-action="index" asp-route-page="@ViewBag.PageCount" asp-route-status="@ViewBag.Status" aria-label="Last" data-bs-toggle="tooltip" data-bs-placement="right" title="" data-bs-original-title="Last page">
                                         <span aria-hidden="true">&raquo;</span>
                                     </a>
                                 </li>

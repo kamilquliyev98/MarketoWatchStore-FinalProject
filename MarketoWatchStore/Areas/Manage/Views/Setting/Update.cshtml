@@ -10,7 +10,7 @@
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a asp-area="manage" asp-controller="dashboard" asp-action="index">Dashboard</a></li>
-                <li class="breadcrumb-item"><a asp-area="manage" asp-controller="setting" asp-action="index">Settings</a></li>
+                <li class="breadcrumb-item"><a asp-area="manage" asp-controller="@(this.ViewContext.RouteData.Values["controller"].ToString())" asp-action="index">Settings</a></li>
                 <li class="breadcrumb-item active">Edit Settings</li>
             </ol>
         </nav>
@@ -82,7 +82,7 @@
                             </div>
                             <div class="col-12 d-grid gap-2 mt-3">
                                 <button class="btn btn-success" type="submit">Save changes</button>
-                                <a asp-area="manage" asp-controller="setting" asp-action="index" class="btn btn-info">Go back</a>
+                                <a asp-area="manage" asp-controller="@(this.ViewContext.RouteData.Values["controller"].ToString())" asp-action="index" class="btn btn-info">Go back</a>
                             </div>
                         </form>
                         <!-- End Form -->
