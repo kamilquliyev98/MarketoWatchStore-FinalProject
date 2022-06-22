@@ -21,7 +21,7 @@
             <tr>
                 <th scope="row">@tableRow</th>
                 <td>@display.Title</td>
-                <td>@display.Products.Where(c => !c.IsDeleted).Count()</td>
+                <td>@display.Products.Where(p => !p.IsDeleted).Count()</td>
                 <td>
                     @if (display.IsDeleted)
                     {
