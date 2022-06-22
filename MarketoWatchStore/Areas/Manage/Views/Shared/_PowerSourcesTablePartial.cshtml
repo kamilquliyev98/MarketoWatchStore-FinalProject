@@ -1,0 +1,55 @@
+﻿@model IEnumerable<PowerSource>
+@{
+    int tableRow = (ViewBag.CurrentPage - 1) * 5;
+}
+
+<table class="table table-striped table-bordered align-middle">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Product count</th>
+            <th scope="col">Status</th>
+            <th scope="col">Settings</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (PowerSource powerSource in Model)
+        {
+
+            tableRow++;
+            <tr>
+                <th scope="row">@tableRow</th>
+                <td>@powerSource.Title</td>
+                <td>@powerSource.Products.Where(p => !p.IsDeleted).Count()</td>
+                <td>
+                    @if (powerSource.IsDeleted)
+                    {
+                        <span class="text-danger">Deleted</span>
+                    }
+                    else
+                    {
+                        <span class="text-success">Active</span>
+                    }
+                </td>
+                <td>
+                    @if (powerSource.IsDeleted)
+                    {
+                        <a asp-area="manage" asp-controller="powersource" asp-action="restore" asp-route-id="@powerSource.Id" asp-route-page="@ViewBag.CurrentPage" asp-route-status="@ViewBag.Status" class="btn btn-info restoreBtn" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Restore">
+                            <i class="bi bi-recycle"></i>
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-area="manage" asp-controller="powersource" asp-action="update" asp-route-id="@powerSource.Id" asp-route-page="@ViewBag.CurrentPage" asp-route-status="@ViewBag.Status" class="btn btn-warning" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Edit">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
+                        <a asp-area="manage" asp-controller="powersource" asp-action="delete" asp-route-id="@powerSource.Id" asp-route-page="@ViewBag.CurrentPage" asp-route-status="@ViewBag.Status" class="btn btn-danger deleteBtn" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Delete">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
