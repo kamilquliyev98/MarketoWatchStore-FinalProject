@@ -168,3 +168,7 @@ C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcor
 C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Shared\_ServicePoliciesTablePartial.cshtml.g.cs
 C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\SpecialType\Create.cshtml.g.cs
 C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\SpecialType\Update.cshtml.g.cs
+C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Shared\_DisplaysTablePartial.cshtml.g.cs
+C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Display\Index.cshtml.g.cs
+C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Display\Create.cshtml.g.cs
+C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Display\Update.cshtml.g.cs
