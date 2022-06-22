@@ -1,0 +1,65 @@
+﻿@model SpecialType
+@{
+    ViewData["Title"] = "Create a new special type";
+}
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Create a new special type</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-area="manage" asp-controller="dashboard" asp-action="index">Dashboard</a></li>
+                <li class="breadcrumb-item"><a asp-area="manage" asp-controller="specialtype" asp-action="index">Special Types</a></li>
+                <li class="breadcrumb-item active">Create</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"></h5>
+
+                        <!-- Form -->
+                        <form class="row g-3" novalidate="" method="post" enctype="multipart/form-data" autocomplete="off">
+                            <div class="col-md-12">
+                                <label asp-for="ImageFile" class="form-label">Image *</label>
+                                <input asp-for="ImageFile" class="form-control" accept="image/png" required>
+                                <span asp-validation-for="ImageFile" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-12">
+                                <label asp-for="Title" class="form-label">Name *</label>
+                                <input asp-for="Title" class="form-control" required>
+                                <span asp-validation-for="Title" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-check">
+                                    <label asp-for="IsShared" class="form-label">Tick, if you want to share</label>
+                                    <input asp-for="IsShared" class="form-check-input">
+                                    <span asp-validation-for="IsShared" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-12 d-grid gap-2 mt-3">
+                                <button class="btn btn-success" type="submit">Create</button>
+                                <a asp-area="manage" asp-controller="specialtype" asp-action="index" class="btn btn-info">Go back</a>
+                            </div>
+                        </form>
+                        <!-- End Form -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main><!-- End #main -->
+
+@section JS{
+    <partial name="_ValidationFormScriptPartial">
+}

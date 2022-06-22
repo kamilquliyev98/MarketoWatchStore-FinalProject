@@ -157,10 +157,14 @@ C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcor
 C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Setting\Update.cshtml.g.cs
 C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Shared\_ValidationFormScriptPartial.cshtml.g.cs
 C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\ServicePolicy\Index.cshtml.g.cs
-C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Shared\_ServicePoliciesTablePartial.cshtml.g.cs
 C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\ServicePolicy\Create.cshtml.g.cs
 C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\ServicePolicy\Update.cshtml.g.cs
-C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Shared\_BrandsTablePartial.cshtml.g.cs
 C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Brand\Create.cshtml.g.cs
 C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Brand\Index.cshtml.g.cs
 C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Brand\Update.cshtml.g.cs
+C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\SpecialType\Index.cshtml.g.cs
+C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Shared\_SpecialTypesTablePartial.cshtml.g.cs
+C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Shared\_BrandsTablePartial.cshtml.g.cs
+C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Shared\_ServicePoliciesTablePartial.cshtml.g.cs
+C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\SpecialType\Create.cshtml.g.cs
+C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\SpecialType\Update.cshtml.g.cs

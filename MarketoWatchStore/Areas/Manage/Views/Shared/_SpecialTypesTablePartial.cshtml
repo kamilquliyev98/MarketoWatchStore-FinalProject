@@ -1,0 +1,71 @@
+﻿@model IEnumerable<SpecialType>
+@{
+    int tableRow = (ViewBag.CurrentPage - 1) * 5;
+}
+
+<table class="table table-striped table-bordered align-middle">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Image</th>
+            <th scope="col">Title</th>
+            <th scope="col">Product count</th>
+            <th scope="col">Shared</th>
+            <th scope="col">Status</th>
+            <th scope="col">Settings</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (SpecialType specialType in Model)
+        {
+            tableRow++;
+            <tr>
+                <th scope="row">@tableRow</th>
+                <td>
+                    @if (specialType.Image != null)
+                    {
+                        <img src="~/assets/images/special-types/@specialType.Image" alt="image" class="img-fluid" style="max-width: 60px;" />
+                    }
+                    else
+                    {
+                        <i class="bi bi-file-earmark-x" style="font-size: 2rem"></i>
+                    }
+                </td>
+                <td>@specialType.Title</td>
+                <td>
+                    @specialType.Products.Where(p => !p.IsDeleted).Count()
+                </td>
+                <td>
+                    @(specialType.IsShared ? "Yes" : "No")
+                </td>
+                <td>
+                    @if (specialType.IsDeleted)
+                    {
+                        <span class="text-danger">Deleted</span>
+                    }
+                    else
+                    {
+                        <span class="text-success">Active</span>
+                    }
+                </td>
+                <td>
+                    @if (specialType.IsDeleted)
+                    {
+                        <a asp-area="manage" asp-controller="specialtype" asp-action="restore" asp-route-id="@specialType.Id" asp-route-page="@ViewBag.CurrentPage" asp-route-status="@ViewBag.Status" class="btn btn-info restoreBtn" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Restore">
+                            <i class="bi bi-recycle"></i>
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-area="manage" asp-controller="specialtype" asp-action="update" asp-route-id="@specialType.Id" asp-route-page="@ViewBag.CurrentPage" asp-route-status="@ViewBag.Status" class="btn btn-warning" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Edit">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
+                        <a asp-area="manage" asp-controller="specialtype" asp-action="delete" asp-route-id="@specialType.Id" asp-route-page="@ViewBag.CurrentPage" asp-route-status="@ViewBag.Status" class="btn btn-danger deleteBtn" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Delete">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

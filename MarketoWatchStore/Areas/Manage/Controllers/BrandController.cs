@@ -98,7 +98,8 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
             }
             else
             {
-                brand.IsShared = false;
+                ModelState.AddModelError("IsShared", "You can't share without image.");
+                return View();
             }
 
             brand.CreatedAt = DateTime.UtcNow.AddHours(4);
@@ -157,14 +158,15 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
                 dbBrand.Logo = brand.ImageFile.CreateFile(_env, "assets", "images", "brand");
             }
 
+            if (dbBrand.Logo == null && brand.Logo == null && brand.IsShared == true)
+            {
+                ModelState.AddModelError("IsShared", "You can't share without image.");
+                return View();
+            }
+
             dbBrand.Title = brand.Title;
             dbBrand.Website = brand.Website;
             dbBrand.IsShared = brand.IsShared;
-
-            if (dbBrand.Logo == null && brand.Logo == null)
-            {
-                dbBrand.IsShared = false;
-            }
 
             dbBrand.UpdatedAt = DateTime.UtcNow.AddHours(4);
 
