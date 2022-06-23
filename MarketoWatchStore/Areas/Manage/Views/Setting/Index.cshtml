@@ -1,6 +1,7 @@
-﻿@model Setting 
+﻿@model Setting
 @{
     ViewData["Title"] = "Settings";
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
 }
 
 <main id="main" class="main">
@@ -13,7 +14,8 @@
                 <li class="breadcrumb-item active">Settings</li>
             </ol>
         </nav>
-    </div><!-- End Page Title -->
+    </div>
+    <!-- End Page Title -->
 
     <section class="section">
         <div class="row">
@@ -75,7 +77,7 @@
                         <!-- End Table -->
 
                         <div class="d-grid gap-2 mt-3">
-                            <a asp-area="manage" asp-controller="@(this.ViewContext.RouteData.Values["controller"].ToString())" asp-action="update" class="btn btn-warning" type="button">Edit</a>
+                            <a asp-area="manage" asp-controller="@controller" asp-action="update" class="btn btn-warning" type="button">Edit</a>
                         </div>
 
                     </div>
@@ -85,4 +87,5 @@
         </div>
     </section>
 
-</main><!-- End #main -->
+</main>
+<!-- End #main -->

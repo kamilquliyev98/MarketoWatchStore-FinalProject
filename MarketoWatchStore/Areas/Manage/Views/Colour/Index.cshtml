@@ -1,6 +1,6 @@
-﻿@model IEnumerable<Display>
+﻿@model IEnumerable<Colour>
 @{
-    ViewData["Title"] = "Displays";
+    ViewData["Title"] = "Colours";
     string controller = this.ViewContext.RouteData.Values["controller"].ToString();
 }
 
@@ -9,11 +9,11 @@
     <div class="row justify-content-between align-items-center">
         <div class="col-md-3">
             <div class="pagetitle">
-                <h1>Displays</h1>
+                <h1>Colours</h1>
                 <nav>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a asp-area="manage" asp-controller="dashboard" asp-action="index">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Displays</li>
+                        <li class="breadcrumb-item active">Colours</li>
                     </ol>
                 </nav>
             </div>
@@ -72,7 +72,7 @@
 
                         <!-- Products Table -->
                         <div id="table" class="table-responsive">
-                            @await Html.PartialAsync("_DisplaysTablePartial", Model)
+                            @await Html.PartialAsync("_ColoursTablePartial", Model)
                         </div>
                         <!-- End Table -->
                         <!-- Pagination -->

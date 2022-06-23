@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<ServicePolicy>
 @{
     int tableRow = (ViewBag.CurrentPage - 1) * 5;
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
 }
 
 <table class="table table-striped table-bordered align-middle">
@@ -38,16 +39,16 @@
                 <td>
                     @if (servicePolicy.IsDeleted)
                     {
-                        <a asp-area="manage" asp-controller="@(this.ViewContext.RouteData.Values["controller"].ToString())" asp-action="restore" asp-route-id="@servicePolicy.Id" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.CurrentPage" class="btn btn-info restoreBtn" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Restore">
+                        <a asp-area="manage" asp-controller="@controller" asp-action="restore" asp-route-id="@servicePolicy.Id" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.CurrentPage" class="btn btn-info restoreBtn" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Restore">
                             <i class="bi bi-recycle"></i>
                         </a>
                     }
                     else
                     {
-                        <a asp-area="manage" asp-controller="@(this.ViewContext.RouteData.Values["controller"].ToString())" asp-action="update" asp-route-id="@servicePolicy.Id" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.CurrentPage" class="btn btn-warning" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Edit">
+                        <a asp-area="manage" asp-controller="@controller" asp-action="update" asp-route-id="@servicePolicy.Id" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.CurrentPage" class="btn btn-warning" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Edit">
                             <i class="bi bi-pencil-square"></i>
                         </a>
-                        <a asp-area="manage" asp-controller="@(this.ViewContext.RouteData.Values["controller"].ToString())" asp-action="delete" asp-route-id="@servicePolicy.Id" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.CurrentPage" class="btn btn-danger deleteBtn" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Delete">
+                        <a asp-area="manage" asp-controller="@controller" asp-action="delete" asp-route-id="@servicePolicy.Id" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.CurrentPage" class="btn btn-danger deleteBtn" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Delete">
                             <i class="bi bi-trash"></i>
                         </a>
                     }

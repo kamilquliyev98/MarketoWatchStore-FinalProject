@@ -1,18 +1,18 @@
-﻿@model ServicePolicy
+﻿@model Colour
 @{
-    ViewData["Title"] = "Create a new service policy";
+    ViewData["Title"] = "Edit colour";
     string controller = this.ViewContext.RouteData.Values["controller"].ToString();
 }
 
 <main id="main" class="main">
 
     <div class="pagetitle">
-        <h1>Create a new service policy</h1>
+        <h1>Edit colour</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a asp-area="manage" asp-controller="dashboard" asp-action="index">Dashboard</a></li>
-                <li class="breadcrumb-item"><a asp-area="manage" asp-controller="@controller" asp-action="index">Service Policies</a></li>
-                <li class="breadcrumb-item active">Create</li>
+                <li class="breadcrumb-item"><a asp-area="manage" asp-controller="@controller" asp-action="index">Colours</a></li>
+                <li class="breadcrumb-item active">Edit</li>
             </ol>
         </nav>
     </div>
@@ -27,25 +27,15 @@
                         <h5 class="card-title"></h5>
 
                         <!-- Form -->
-                        <form class="row g-3" novalidate="" method="post" enctype="multipart/form-data" autocomplete="off">
+                        <form class="row g-3" novalidate="" method="post" autocomplete="off">
                             <div class="col-md-12">
-                                <label asp-for="ImageFile" class="form-label">Image *</label>
-                                <input asp-for="ImageFile" class="form-control" accept="image/png" required>
-                                <span asp-validation-for="ImageFile" class="text-danger"></span>
-                            </div>
-                            <div class="col-md-12">
-                                <label asp-for="Title" class="form-label">Title *</label>
+                                <label asp-for="Title" class="form-label">Colour name</label>
                                 <input asp-for="Title" class="form-control" required>
                                 <span asp-validation-for="Title" class="text-danger"></span>
                             </div>
-                            <div class="col-md-12">
-                                <label asp-for="Description" class="form-label">Description *</label>
-                                <textarea asp-for="Description" class="form-control" required></textarea>
-                                <span asp-validation-for="Description" class="text-danger"></span>
-                            </div>
 
                             <div class="col-12 d-grid gap-2 mt-3">
-                                <button class="btn btn-success" type="submit">Create</button>
+                                <button class="btn btn-success" type="submit">Save changes</button>
                                 <a asp-area="manage" asp-controller="@controller" asp-action="index" class="btn btn-info">Go back</a>
                             </div>
                         </form>

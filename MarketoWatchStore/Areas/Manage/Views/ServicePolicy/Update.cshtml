@@ -1,6 +1,7 @@
 ﻿@model ServicePolicy
 @{
     ViewData["Title"] = "Edit service policy";
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
 }
 
 <main id="main" class="main">
@@ -10,11 +11,12 @@
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a asp-area="manage" asp-controller="dashboard" asp-action="index">Dashboard</a></li>
-                <li class="breadcrumb-item"><a asp-area="manage" asp-controller="@(this.ViewContext.RouteData.Values["controller"].ToString())" asp-action="index">Service Policies</a></li>
+                <li class="breadcrumb-item"><a asp-area="manage" asp-controller="@controller" asp-action="index">Service Policies</a></li>
                 <li class="breadcrumb-item active">Edit</li>
             </ol>
         </nav>
-    </div><!-- End Page Title -->
+    </div>
+    <!-- End Page Title -->
 
     <section class="section">
         <div class="row">
@@ -50,7 +52,7 @@
 
                             <div class="col-12 d-grid gap-2 mt-3">
                                 <button class="btn btn-success" type="submit">Save changes</button>
-                                <a asp-area="manage" asp-controller="@(this.ViewContext.RouteData.Values["controller"].ToString())" asp-action="index" class="btn btn-info">Go back</a>
+                                <a asp-area="manage" asp-controller="@controller" asp-action="index" class="btn btn-info">Go back</a>
                             </div>
                         </form>
                         <!-- End Form -->
@@ -62,7 +64,8 @@
         </div>
     </section>
 
-</main><!-- End #main -->
+</main>
+<!-- End #main -->
 
 @section JS{
     <partial name="_ValidationFormScriptPartial">
