@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Tag>
+@{
+    int tableRow = (ViewBag.CurrentPage - 1) * 5;
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+<table class="table table-hover table-bordered align-middle">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Tag</th>
+            <th scope="col">Product count</th>
+            <th scope="col">Status</th>
+            <th scope="col">Settings</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Tag tag in Model)
+        {
+
+            tableRow++;
+            <tr>
+                <th scope="row">@tableRow</th>
+                <td>@tag.Title</td>
+                <td>@tag.ProductTags.Where(pt => pt.ProductId == tag.Id).Count()</td>
+                <td>
+                    @if (tag.IsDeleted)
+                    {
+                        <span class="text-danger">Deleted</span>
+                    }
+                    else
+                    {
+                        <span class="text-success">Active</span>
+                    }
+                </td>
+                <td>
+                    @if (tag.IsDeleted)
+                    {
+                        <a asp-area="manage" asp-controller="@controller" asp-action="restore" asp-route-id="@tag.Id" asp-route-page="@ViewBag.CurrentPage" asp-route-status="@ViewBag.Status" class="btn btn-info restoreBtn" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Restore">
+                            <i class="bi bi-recycle"></i>
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-area="manage" asp-controller="@controller" asp-action="update" asp-route-id="@tag.Id" asp-route-page="@ViewBag.CurrentPage" asp-route-status="@ViewBag.Status" class="btn btn-warning" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Edit">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
+                        <a asp-area="manage" asp-controller="@controller" asp-action="delete" asp-route-id="@tag.Id" asp-route-page="@ViewBag.CurrentPage" asp-route-status="@ViewBag.Status" class="btn btn-danger deleteBtn" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Delete">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

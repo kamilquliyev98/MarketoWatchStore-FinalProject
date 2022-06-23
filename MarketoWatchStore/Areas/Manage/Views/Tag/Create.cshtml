@@ -1,18 +1,18 @@
-﻿@model Colour
+﻿@model Tag
 @{
-    ViewData["Title"] = "Edit colour";
+    ViewData["Title"] = "Create a new tag";
     string controller = this.ViewContext.RouteData.Values["controller"].ToString();
 }
 
 <main id="main" class="main">
 
     <div class="pagetitle">
-        <h1>Edit colour</h1>
+        <h1>Create a new tag</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a asp-area="manage" asp-controller="dashboard" asp-action="index">Dashboard</a></li>
-                <li class="breadcrumb-item"><a asp-area="manage" asp-controller="@controller" asp-action="index">Colours</a></li>
-                <li class="breadcrumb-item active">Edit</li>
+                <li class="breadcrumb-item"><a asp-area="manage" asp-controller="@controller" asp-action="index">Tags</a></li>
+                <li class="breadcrumb-item active">Create</li>
             </ol>
         </nav>
     </div>
@@ -29,13 +29,13 @@
                         <!-- Form -->
                         <form class="row g-3" novalidate="" method="post" autocomplete="off">
                             <div class="col-md-12">
-                                <label asp-for="Title" class="form-label">Colour name *</label>
+                                <label asp-for="Title" class="form-label">Tag name *</label>
                                 <input asp-for="Title" class="form-control" required>
                                 <span asp-validation-for="Title" class="text-danger"></span>
                             </div>
 
                             <div class="col-12 d-grid gap-2 mt-3">
-                                <button class="btn btn-success" type="submit">Save changes</button>
+                                <button class="btn btn-success" type="submit">Create</button>
                                 <a asp-area="manage" asp-controller="@controller" asp-action="index" class="btn btn-info">Go back</a>
                             </div>
                         </form>
