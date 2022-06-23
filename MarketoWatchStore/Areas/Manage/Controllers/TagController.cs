@@ -84,11 +84,9 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
                 return View(tag);
             }
 
-            string[] subs = tag.Title.Split(' ');
-
-            if (subs.Count() > 1)
+            if (!tag.Title.All(c => Char.IsLetterOrDigit(c)))
             {
-                ModelState.AddModelError("Title", "Don't use space button.");
+                ModelState.AddModelError("Title", "It's wrong tag type.");
                 return View(tag);
             }
 
@@ -132,11 +130,9 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
                 return View(tag);
             }
 
-            string[] subs = tag.Title.Split(' ');
-
-            if (subs.Count() > 1)
+            if (!tag.Title.All(c => Char.IsLetterOrDigit(c)))
             {
-                ModelState.AddModelError("Title", "Don't use space button.");
+                ModelState.AddModelError("Title", "It's wrong tag type.");
                 return View(tag);
             }
 
