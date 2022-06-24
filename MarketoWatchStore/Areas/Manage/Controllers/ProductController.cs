@@ -348,7 +348,7 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
 
                     if (!file.CheckFileSize(50))
                     {
-                        ModelState.AddModelError("ProductImagesFiles", "Max file size: 50 KB");
+                        ModelState.AddModelError("ProductImagesFiles", "Max size for each file: 50 KB");
                         return View();
                     }
 
