@@ -1,0 +1,176 @@
+﻿@model Product
+@{
+    ViewData["Title"] = "Create a new product";
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Create a new product</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-area="manage" asp-controller="dashboard" asp-action="index">Dashboard</a></li>
+                <li class="breadcrumb-item"><a asp-area="manage" asp-controller="@controller" asp-action="index">Products</a></li>
+                <li class="breadcrumb-item active">Create</li>
+            </ol>
+        </nav>
+    </div>
+    <!-- End Page Title -->
+
+    <section class="section">
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"></h5>
+                        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+
+                        <!-- Table -->
+                        <form class="row g-3" novalidate="" method="post" enctype="multipart/form-data" autocomplete="off">
+                            <div class="col-md-6">
+                                <label asp-for="MainImageFile" class="form-label">Main Image *</label>
+                                <input asp-for="MainImageFile" class="form-control" accept="image/jpeg" required>
+                                <span asp-validation-for="MainImageFile" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="ProductImagesFiles" class="form-label">Additional Images *</label>
+                                <input asp-for="ProductImagesFiles" class="form-control" accept="image/jpeg" required>
+                                <span asp-validation-for="ProductImagesFiles" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="BrandId" class="form-label">Brand *</label>
+                                <select asp-for="BrandId" asp-items="@new SelectList(ViewBag.Brands, nameof(Brand.Id), nameof(Brand.Title))" class="form-select" required>
+                                    <option value="" selected>Choose</option>
+                                </select>
+                                <span asp-validation-for="BrandId" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Title" class="form-label">Title *</label>
+                                <input asp-for="Title" class="form-control" required>
+                                <span asp-validation-for="Title" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="Price" class="form-label">Price *</label>
+                                <input asp-for="Price" class="form-control" required>
+                                <span asp-validation-for="Price" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="DiscountPrice" class="form-label">Discount Price</label>
+                                <input asp-for="DiscountPrice" class="form-control">
+                                <span asp-validation-for="DiscountPrice" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="ExTax" class="form-label">Tax *</label>
+                                <input asp-for="ExTax" class="form-control" required>
+                                <span asp-validation-for="ExTax" class="text-danger"></span>
+                            </div>
+                            @*<div class="col-md-4">
+            <label asp-for="Count" class="form-label">Count *</label>
+            <input asp-for="Count" class="form-control" required>
+            <span asp-validation-for="Count" class="text-danger"></span>
+        </div>*@
+                            <div class="col-md-12">
+                                <label asp-for="Description" class="form-label">Description *</label>
+                                <textarea asp-for="Description" id="textEditor" class="form-control" required></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-12">
+                                <label asp-for="SlideImageFile" class="form-label">Slide Image *</label>
+                                <input asp-for="SlideImageFile" class="form-control" accept="image/png, image/webp">
+                                <span asp-validation-for="SlideImageFile" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-check">
+                                    <label asp-for="ShareOnHomeSlide" class="form-check-label">Tick if you want to share this product as slide on home page</label>
+                                    <input asp-for="ShareOnHomeSlide" class="form-check-input">
+                                    <span asp-validation-for="ShareOnHomeSlide" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label asp-for="PosterImageFile" class="form-label">Poster Image *</label>
+                                <input asp-for="PosterImageFile" class="form-control" accept="image/jpeg">
+                                <span asp-validation-for="PosterImageFile" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-check">
+                                    <label asp-for="ShareAsPoster" class="form-check-label">Tick if you want to share this product as poster on home page</label>
+                                    <input asp-for="ShareAsPoster" class="form-check-input">
+                                    <span asp-validation-for="ShareAsPoster" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="DisplayId" class="form-label">Display *</label>
+                                <select asp-for="DisplayId" asp-items="@new SelectList(ViewBag.Displays, nameof(Display.Id), nameof(Display.Title))" class="form-select" required>
+                                    <option value="" selected>Choose</option>
+                                </select>
+                                <span asp-validation-for="DisplayId" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="PowerSourceId" class="form-label">Power Source *</label>
+                                <select asp-for="PowerSourceId" asp-items="@new SelectList(ViewBag.PowerSources, nameof(PowerSource.Id), nameof(PowerSource.Title))" class="form-select" required>
+                                    <option value="" selected>Choose</option>
+                                </select>
+                                <span asp-validation-for="PowerSourceId" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Gender" class="form-label">Gender *</label>
+                                <select asp-for="Gender" asp-items="@Html.GetEnumSelectList<GenderType>()" class="form-select" required>
+                                    <option value="" selected>Choose</option>
+                                </select>
+                                <span asp-validation-for="PowerSourceId" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="SpecialTypeId" class="form-label">Special Type</label>
+                                <select asp-for="SpecialTypeId" asp-items="@new SelectList(ViewBag.SpecialTypes, nameof(SpecialType.Id), nameof(SpecialType.Title))" class="form-select">
+                                    <option value="" selected>Choose</option>
+                                </select>
+                                <span asp-validation-for="SpecialTypeId" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-check">
+                                    <label asp-for="IsNewArrival" class="form-check-label">Tick if product is new arrival</label>
+                                    <input asp-for="IsNewArrival" class="form-check-input">
+                                    <span asp-validation-for="IsNewArrival" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <!-- start -->
+                            <div class="col-md-12">
+                                <div class="controls">
+                                    <div class="entry">
+                                        @await Html.PartialAsync("_ProductColourCountPartial")
+                                    </div>
+
+                                    <div class="col-12 d-grid gap-2 mt-4 mb-5 customButtons">
+                                        <a asp-controller="@controller" asp-action="addproduct" type="button" class="btn btn-outline-primary rounded-pill btn-add">Add other</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end -->
+
+
+
+                            <div class="col-12 d-grid gap-2 mt-3">
+                                <button class="btn btn-success" type="submit">Create</button>
+                                <a asp-area="manage" asp-controller="@controller" asp-action="index" class="btn btn-info">Go back</a>
+                            </div>
+                        </form>
+                        <!-- Table -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main>
+<!-- End #main -->
+
+@section JS{
+    <partial name="_ValidationFormScriptPartial">
+        <partial name="_CKEditorScriptPartial">
+            <script src="~/manage/assets/js/custom.js" asp-append-version="true"></script>
+}

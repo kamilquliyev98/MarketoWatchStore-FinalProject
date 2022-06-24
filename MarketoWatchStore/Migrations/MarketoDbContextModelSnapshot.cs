@@ -225,13 +225,10 @@ namespace MarketoWatchStore.Migrations
                     b.Property<decimal>("ExTax")
                         .HasColumnType("money");
 
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsForMen")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsForWomen")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsNewArrival")

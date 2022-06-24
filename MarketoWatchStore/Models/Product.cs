@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MarketoWatchStore.Enums;
+using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -23,15 +25,15 @@ namespace MarketoWatchStore.Models
         public double Price { get; set; }
         [Column(TypeName = "money")]
         public double DiscountPrice { get; set; }
-        [Column(TypeName = "money")]
+        [Column(TypeName = "money"), Required]
         public double ExTax { get; set; }
+        [Range(1, int.MaxValue), Required]
         public int Count { get; set; }
         public string Description { get; set; }
         [StringLength(255)]
         public string Code { get; set; }
         public bool IsNewArrival { get; set; }
-        public bool IsForMen { get; set; }
-        public bool IsForWomen { get; set; }
+        public GenderType Gender { get; set; }
 
         public Nullable<int> BrandId { get; set; }
         public Brand Brand { get; set; }
@@ -50,5 +52,18 @@ namespace MarketoWatchStore.Models
         public IEnumerable<ProductFeature> ProductFeatures { get; set; }
         public IEnumerable<ProductImage> ProductImages { get; set; }
         public IEnumerable<Review> Reviews { get; set; }
+
+        [NotMapped]
+        public IFormFile MainImageFile { get; set; }
+        [NotMapped]
+        public IFormFile[] ProductImagesFiles { get; set; }
+        [NotMapped]
+        public IFormFile SlideImageFile { get; set; }
+        [NotMapped]
+        public IFormFile PosterImageFile { get; set; }
+        [NotMapped]
+        public List<int> ColourIds { get; set; } = new List<int>();
+        [NotMapped]
+        public List<int> Counts { get; set; } = new List<int>();
     }
 }

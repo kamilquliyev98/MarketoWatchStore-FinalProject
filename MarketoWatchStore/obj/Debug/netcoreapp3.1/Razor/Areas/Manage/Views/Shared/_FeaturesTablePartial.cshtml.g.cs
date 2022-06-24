@@ -19,8 +19,15 @@ using MarketoWatchStore.Models;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 3 "C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\Areas\Manage\Views\_ViewImports.cshtml"
+using MarketoWatchStore.Enums;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"f170dfa010b7104965dc5a5709efe44fdcd712bf", @"/Areas/Manage/Views/Shared/_FeaturesTablePartial.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"eef58f885b7ce15840b5282a509eab1836ccb6a0", @"/Areas/Manage/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"7bae956963a663587de8a1d28408088a1171d100", @"/Areas/Manage/Views/_ViewImports.cshtml")]
     public class Areas_Manage_Views_Shared__FeaturesTablePartial : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<IEnumerable<Feature>>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-area", "manage", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -154,7 +161,7 @@ using MarketoWatchStore.Models;
 #line hidden
 #nullable disable
             WriteLiteral("                        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f170dfa010b7104965dc5a5709efe44fdcd712bf11274", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f170dfa010b7104965dc5a5709efe44fdcd712bf11489", async() => {
                 WriteLiteral("\r\n                            <i class=\"bi bi-recycle\"></i>\r\n                        ");
             }
             );
@@ -236,7 +243,7 @@ using MarketoWatchStore.Models;
 #line hidden
 #nullable disable
             WriteLiteral("                        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f170dfa010b7104965dc5a5709efe44fdcd712bf17094", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f170dfa010b7104965dc5a5709efe44fdcd712bf17309", async() => {
                 WriteLiteral("\r\n                            <i class=\"bi bi-pencil-square\"></i>\r\n                        ");
             }
             );
@@ -308,7 +315,7 @@ using MarketoWatchStore.Models;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f170dfa010b7104965dc5a5709efe44fdcd712bf22615", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f170dfa010b7104965dc5a5709efe44fdcd712bf22830", async() => {
                 WriteLiteral("\r\n                            <i class=\"bi bi-trash\"></i>\r\n                        ");
             }
             );

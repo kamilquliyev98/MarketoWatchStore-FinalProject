@@ -1,0 +1,14 @@
+﻿<div class="row m-0 mt-2">
+    <div class="col-md-6">
+        <label class="form-label">Colour *</label>
+        <select name="ColourIds[]" asp-items="@new SelectList(ViewBag.Colours, nameof(Colour.Id), nameof(Colour.Title))" class="form-select" required>
+            <option value="" selected>Choose</option>
+        </select>
+        <span class="text-danger"></span>
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Count *</label>
+        <input type="number" min="1" value="1" name="Counts[]" class="form-control" placeholder="Enter count" required>
+        <span class="text-danger"></span>
+    </div>
+</div>

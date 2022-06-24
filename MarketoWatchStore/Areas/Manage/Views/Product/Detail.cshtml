@@ -1,0 +1,161 @@
+﻿@model Product
+@{
+    ViewData["Title"] = Model.Brand.Title + " " + Model.Title;
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Product details</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-area="manage" asp-controller="dashboard" asp-action="index">Dashboard</a></li>
+                <li class="breadcrumb-item"><a asp-area="manage" asp-controller="@controller" asp-action="index">Products</a></li>
+                <li class="breadcrumb-item active">Detail</li>
+            </ol>
+        </nav>
+    </div>
+    <!-- End Page Title -->
+
+    <section class="section profile">
+        <div class="row">
+            <div class="col-xl-5">
+
+                <div class="row">
+
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+
+                                <img src="~/assets/images/products/@Model.MainImage" alt="product-image" class="img-fluid">
+                                <h2 class="text-center">@(Model.Brand.Title + " " + Model.Title)</h2>
+                                @if (Model.IsNewArrival)
+                                {
+                                    <h3>~ New Arrival ~</h3>
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+
+                                <h2>Other images</h2>
+                                <h3></h3>
+                                <div class="row">
+
+                                    @foreach (ProductImage productImage in Model.ProductImages.Where(pi => !pi.IsDeleted))
+                                    {
+                                        <div class="col-4 mb-2">
+                                            <img src="~/assets/images/products/@productImage.Image" alt="product-image" class="img-thumbnail">
+                                        </div>
+                                    }
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-xl-7">
+
+                <div class="card">
+                    <div class="card-body pt-3">
+                        <!-- Bordered Tabs -->
+                        <ul class="nav nav-tabs nav-tabs-bordered">
+
+                            <li class="nav-item">
+                                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#overview">Overview</button>
+                            </li>
+
+                            <li class="nav-item">
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#description">Description</button>
+                            </li>
+
+                        </ul>
+                        <div class="tab-content pt-2">
+
+                            <div class="tab-pane fade show active profile-overview" id="overview">
+
+                                <h5 class="card-title"></h5>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label ">Product</div>
+                                    <div class="col-lg-9 col-md-8">@Model.Title</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Price</div>
+                                    <div class="col-lg-9 col-md-8">@Model.Price.ToString("0.00")</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Discount price</div>
+                                    <div class="col-lg-9 col-md-8">@Model.DiscountPrice.ToString("0.00")</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Eco Tax</div>
+                                    <div class="col-lg-9 col-md-8">@Model.ExTax.ToString("0.00")</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Brand</div>
+                                    <div class="col-lg-9 col-md-8">@Model.Brand.Title</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Created at:</div>
+                                    <div class="col-lg-9 col-md-8">@Model.CreatedAt</div>
+                                </div>
+
+                                @if (Model.IsDeleted)
+                                {
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">Deleted at:</div>
+                                        <div class="col-lg-9 col-md-8">@Model.DeletedAt</div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    if (Model.UpdatedAt != null)
+                                    {
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-4 label">Last update:</div>
+                                            <div class="col-lg-9 col-md-8">@Model.UpdatedAt</div>
+                                        </div>
+                                    }
+                                }
+
+                            </div>
+
+                            <div class="tab-pane fade profile-edit pt-3" id="description">
+
+                                <h5 class="card-title"></h5>
+                                <p>@Model.Description</p>
+
+                            </div>
+
+                        </div>
+                        <!-- End Bordered Tabs -->
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-xl-12 d-grid mt-3">
+                <a asp-area="manage" asp-controller="@controller" asp-action="index" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.CurrentPage" class="btn btn-info">Go back</a>
+            </div>
+        </div>
+    </section>
+
+</main>
+<!-- End #main -->

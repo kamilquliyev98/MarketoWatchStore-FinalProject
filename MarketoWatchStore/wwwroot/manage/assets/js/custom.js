@@ -165,4 +165,31 @@
 
     });
 
+    $(document).on("click", ".btn-add", function (e) {
+        e.preventDefault();
+
+        let rowCount = $(".entry").children().length;
+        let button = `<a href="javascript:void(0)" type="button" class="btn btn-outline-danger rounded-pill btn-remove">Remove last added</a>`;
+
+        if (rowCount >= 1 && !$(".btn-remove").length) {
+            $('.customButtons').append(button);
+        }
+
+        let url = $(this).attr("href");
+
+        fetch(url).then(response => response.text()).then(data => $(".entry").append(data));
+    });
+
+    $(document).on("click", ".btn-remove", function (e) {
+        e.preventDefault();
+
+        let rowCount = $(".entry").children().length;
+
+        if (rowCount <= 2 && $(".btn-remove").length) {
+            $('.btn-remove').remove();
+        }
+
+        $('div.entry').children().last().remove();
+    });
+
 });
