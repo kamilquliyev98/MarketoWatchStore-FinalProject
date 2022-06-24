@@ -24,14 +24,12 @@ namespace MarketoWatchStore.Models
         [Column(TypeName = "money"), Required]
         public double Price { get; set; }
         [Column(TypeName = "money")]
-        public double DiscountPrice { get; set; }
+        public Nullable<double> DiscountPrice { get; set; }
         [Column(TypeName = "money"), Required]
         public double ExTax { get; set; }
-        [Range(1, int.MaxValue), Required]
         public int Count { get; set; }
+        [Required]
         public string Description { get; set; }
-        [StringLength(255)]
-        public string Code { get; set; }
         public bool IsNewArrival { get; set; }
         public GenderType Gender { get; set; }
 
@@ -62,8 +60,14 @@ namespace MarketoWatchStore.Models
         [NotMapped]
         public IFormFile PosterImageFile { get; set; }
         [NotMapped]
+        public List<int> FeatureIds { get; set; } = new List<int>();
+        [NotMapped]
+        public List<int> TagIds { get; set; } = new List<int>();
+        [NotMapped]
         public List<int> ColourIds { get; set; } = new List<int>();
         [NotMapped]
         public List<int> Counts { get; set; } = new List<int>();
+        [NotMapped]
+        public List<int> ProductColourCounts { get; set; } = new List<int>();
     }
 }

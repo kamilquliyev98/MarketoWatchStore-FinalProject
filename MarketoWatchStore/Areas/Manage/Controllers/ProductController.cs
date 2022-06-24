@@ -1,4 +1,5 @@
 ﻿using MarketoWatchStore.DAL;
+using MarketoWatchStore.Enums;
 using MarketoWatchStore.Extensions;
 using MarketoWatchStore.Models;
 using Microsoft.AspNetCore.Hosting;
@@ -126,13 +127,13 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         #region Create
         public async Task<IActionResult> Create()
         {
-            ViewBag.Brands = await _context.Brands.Where(b => !b.IsDeleted).ToListAsync();
-            ViewBag.Displays = await _context.Displays.Where(d => !d.IsDeleted).ToListAsync();
-            ViewBag.PowerSources = await _context.PowerSources.Where(ps => !ps.IsDeleted).ToListAsync();
-            ViewBag.SpecialTypes = await _context.SpecialTypes.Where(st => !st.IsDeleted).ToListAsync();
-            ViewBag.Tags = await _context.Tags.Where(t => !t.IsDeleted).ToListAsync();
-            ViewBag.Colours = await _context.Colours.Where(c => !c.IsDeleted).ToListAsync();
-            ViewBag.Features = await _context.Features.Where(f => !f.IsDeleted).ToListAsync();
+            ViewBag.Brands = await _context.Brands.Where(b => !b.IsDeleted).OrderBy(b => b.Title).ToListAsync();
+            ViewBag.Displays = await _context.Displays.Where(d => !d.IsDeleted).OrderBy(d => d.Title).ToListAsync();
+            ViewBag.PowerSources = await _context.PowerSources.Where(ps => !ps.IsDeleted).OrderBy(ps => ps.Title).ToListAsync();
+            ViewBag.SpecialTypes = await _context.SpecialTypes.Where(st => !st.IsDeleted).OrderBy(st => st.Title).ToListAsync();
+            ViewBag.Tags = await _context.Tags.Where(t => !t.IsDeleted).OrderBy(t => t.Title).ToListAsync();
+            ViewBag.Colours = await _context.Colours.Where(c => !c.IsDeleted).OrderBy(c => c.Title).ToListAsync();
+            ViewBag.Features = await _context.Features.Where(f => !f.IsDeleted).OrderBy(f => f.Title).ToListAsync();
 
             return View();
         }
@@ -141,13 +142,13 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Product product, string status = "active", int page = 1)
         {
-            ViewBag.Brands = await _context.Brands.Where(b => !b.IsDeleted).ToListAsync();
-            ViewBag.Displays = await _context.Displays.Where(d => !d.IsDeleted).ToListAsync();
-            ViewBag.PowerSources = await _context.PowerSources.Where(ps => !ps.IsDeleted).ToListAsync();
-            ViewBag.SpecialTypes = await _context.SpecialTypes.Where(st => !st.IsDeleted).ToListAsync();
-            ViewBag.Tags = await _context.Tags.Where(t => !t.IsDeleted).ToListAsync();
-            ViewBag.Colours = await _context.Colours.Where(c => !c.IsDeleted).ToListAsync();
-            ViewBag.Features = await _context.Features.Where(f => !f.IsDeleted).ToListAsync();
+            ViewBag.Brands = await _context.Brands.Where(b => !b.IsDeleted).OrderBy(b => b.Title).ToListAsync();
+            ViewBag.Displays = await _context.Displays.Where(d => !d.IsDeleted).OrderBy(d => d.Title).ToListAsync();
+            ViewBag.PowerSources = await _context.PowerSources.Where(ps => !ps.IsDeleted).OrderBy(ps => ps.Title).ToListAsync();
+            ViewBag.SpecialTypes = await _context.SpecialTypes.Where(st => !st.IsDeleted).OrderBy(st => st.Title).ToListAsync();
+            ViewBag.Tags = await _context.Tags.Where(t => !t.IsDeleted).OrderBy(t => t.Title).ToListAsync();
+            ViewBag.Colours = await _context.Colours.Where(c => !c.IsDeleted).OrderBy(c => c.Title).ToListAsync();
+            ViewBag.Features = await _context.Features.Where(f => !f.IsDeleted).OrderBy(f => f.Title).ToListAsync();
 
             if (!ModelState.IsValid) return View();
 
@@ -163,11 +164,19 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
                 return View();
             }
 
+
+
+
+
             if (!await _context.Brands.AnyAsync(b => b.Id == product.BrandId && !b.IsDeleted))
             {
                 ModelState.AddModelError("BrandId", "Has been selected incorrect brand.");
                 return View();
             }
+
+
+
+
 
             if (!await _context.Displays.AnyAsync(d => d.Id == product.DisplayId && !d.IsDeleted))
             {
@@ -175,27 +184,131 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
                 return View();
             }
 
+
+
+
+
             if (!await _context.PowerSources.AnyAsync(ps => ps.Id == product.PowerSourceId && !ps.IsDeleted))
             {
                 ModelState.AddModelError("PowerSourceId", "Has been selected incorrect power source.");
                 return View();
             }
 
-            if (!await _context.SpecialTypes.AnyAsync(st => st.Id == product.SpecialTypeId && !st.IsDeleted))
+
+
+
+
+            if ((int)product.Gender < 1 || (int)product.Gender > 3)
             {
-                ModelState.AddModelError("SpecialTypeId", "Has been selected incorrect special type.");
+                ModelState.AddModelError("Gender", "Has been selected incorrect gender.");
                 return View();
             }
 
-            if (product.ProductImagesFiles.Count() > 6)
+
+
+
+
+            if (product.SpecialTypeId != null)
             {
-                ModelState.AddModelError("ProductImagesFiles", "Max 6 images can be uploaded...");
+                if (!await _context.SpecialTypes.AnyAsync(st => st.Id == product.SpecialTypeId && !st.IsDeleted))
+                {
+                    ModelState.AddModelError("SpecialTypeId", "Has been selected incorrect special type.");
+                    return View();
+                }
+            }
+
+
+
+
+
+            foreach (int featureId in product.FeatureIds)
+            {
+                if (!await _context.Features.AnyAsync(c => c.Id == featureId))
+                {
+                    ModelState.AddModelError("", "Has been selected incorrect feature.");
+                    return View();
+                }
+            }
+
+            List<ProductFeature> productFeatures = new List<ProductFeature>();
+            foreach (var item in product.FeatureIds)
+            {
+                ProductFeature productFeature = new ProductFeature
+                {
+                    FeatureId = item
+                };
+
+                productFeatures.Add(productFeature);
+            }
+            product.ProductFeatures = productFeatures;
+
+
+
+
+
+            foreach (int tagId in product.TagIds)
+            {
+                if (!await _context.Tags.AnyAsync(c => c.Id == tagId))
+                {
+                    ModelState.AddModelError("", "Has been selected incorrect tag.");
+                    return View();
+                }
+            }
+
+            List<ProductTag> tags = new List<ProductTag>();
+            foreach (int item in product.TagIds)
+            {
+                ProductTag productTag = new ProductTag
+                {
+                    TagId = item
+                };
+
+                tags.Add(productTag);
+            }
+            product.ProductTags = tags;
+
+
+
+
+
+            if (product.ColourIds.Count != product.Counts.Count)
+            {
+                ModelState.AddModelError("", "Please, select all options.");
                 return View();
             }
 
+            foreach (int colourId in product.ColourIds)
+            {
+                if (!await _context.Colours.AnyAsync(c => c.Id == colourId))
+                {
+                    ModelState.AddModelError("", "Has been selected incorrect colour.");
+                    return View();
+                }
+            }
+
+            List<ProductColour> productColourCounts = new List<ProductColour>();
+            for (int i = 0; i < product.ColourIds.Count; i++)
+            {
+                ProductColour productColourCount = new ProductColour
+                {
+                    ColourId = product.ColourIds[i],
+                    Count = product.Counts[i]
+                };
+
+                productColourCounts.Add(productColourCount);
+            }
+            product.ProductColours = productColourCounts;
+
+            product.Count = product.Counts.Sum();
+
+
+
+
+
+            #region Images Checking & Saving
             if (product.ProductImagesFiles != null && product.ProductImagesFiles.Count() > 6)
             {
-                ModelState.AddModelError("ProductImagesFiles", "You can upload max 6 images.");
+                ModelState.AddModelError("ProductImagesFiles", "Max 6 images can be uploaded...");
                 return View();
             }
 
@@ -305,6 +418,11 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
                     return View();
                 }
             }
+            #endregion
+
+
+
+
 
             product.CreatedAt = DateTime.UtcNow.AddHours(4);
 

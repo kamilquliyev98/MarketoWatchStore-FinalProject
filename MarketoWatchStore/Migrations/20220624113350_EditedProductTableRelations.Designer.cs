@@ -4,14 +4,16 @@ using MarketoWatchStore.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MarketoWatchStore.Migrations
 {
     [DbContext(typeof(MarketoDbContext))]
-    partial class MarketoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220624113350_EditedProductTableRelations")]
+    partial class EditedProductTableRelations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -213,7 +215,7 @@ namespace MarketoWatchStore.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal?>("DiscountPrice")
+                    b.Property<decimal>("DiscountPrice")
                         .HasColumnType("money");
 
                     b.Property<int?>("DisplayId")
@@ -247,6 +249,10 @@ namespace MarketoWatchStore.Migrations
 
                     b.Property<DateTime?>("RestoredAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("SKU")
+                        .HasColumnType("nvarchar(255)")
+                        .HasMaxLength(255);
 
                     b.Property<bool>("ShareAsPoster")
                         .HasColumnType("bit");

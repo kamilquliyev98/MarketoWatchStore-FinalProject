@@ -22,7 +22,7 @@
             <tr>
                 <th scope="row">@tableRow</th>
                 <td>@feature.Title</td>
-                <td>@feature.ProductFeatures.Where(pf => pf.ProductId == feature.Id).Count()</td>
+                <td>@feature.ProductFeatures.Where(pf => !pf.Product.IsDeleted).Count()</td>
                 <td>
                     @if (feature.IsDeleted)
                     {

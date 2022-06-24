@@ -24,7 +24,7 @@
                 <th scope="row">@tableRow</th>
                 <td>@colour.Title</td>
                 <td style="background-color: @colour.Title;"></td>
-                <td>@colour.ProductColours.Where(pc => pc.ProductId == colour.Id).Count()</td>
+                <td>@colour.ProductColours.Where(pc => !pc.Product.IsDeleted).Count()</td>
                 <td>
                     @if (colour.IsDeleted)
                     {

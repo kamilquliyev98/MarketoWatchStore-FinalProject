@@ -66,18 +66,13 @@
                                 <input asp-for="ExTax" class="form-control" required>
                                 <span asp-validation-for="ExTax" class="text-danger"></span>
                             </div>
-                            @*<div class="col-md-4">
-            <label asp-for="Count" class="form-label">Count *</label>
-            <input asp-for="Count" class="form-control" required>
-            <span asp-validation-for="Count" class="text-danger"></span>
-        </div>*@
                             <div class="col-md-12">
                                 <label asp-for="Description" class="form-label">Description *</label>
                                 <textarea asp-for="Description" id="textEditor" class="form-control" required></textarea>
                                 <span asp-validation-for="Description" class="text-danger"></span>
                             </div>
                             <div class="col-md-12">
-                                <label asp-for="SlideImageFile" class="form-label">Slide Image *</label>
+                                <label asp-for="SlideImageFile" class="form-label">Slide Image</label>
                                 <input asp-for="SlideImageFile" class="form-control" accept="image/png, image/webp">
                                 <span asp-validation-for="SlideImageFile" class="text-danger"></span>
                             </div>
@@ -89,7 +84,7 @@
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <label asp-for="PosterImageFile" class="form-label">Poster Image *</label>
+                                <label asp-for="PosterImageFile" class="form-label">Poster Image</label>
                                 <input asp-for="PosterImageFile" class="form-control" accept="image/jpeg">
                                 <span asp-validation-for="PosterImageFile" class="text-danger"></span>
                             </div>
@@ -103,21 +98,21 @@
                             <div class="col-md-6">
                                 <label asp-for="DisplayId" class="form-label">Display *</label>
                                 <select asp-for="DisplayId" asp-items="@new SelectList(ViewBag.Displays, nameof(Display.Id), nameof(Display.Title))" class="form-select" required>
-                                    <option value="" selected>Choose</option>
+                                    <option value="0" selected>Choose</option>
                                 </select>
                                 <span asp-validation-for="DisplayId" class="text-danger"></span>
                             </div>
                             <div class="col-md-6">
                                 <label asp-for="PowerSourceId" class="form-label">Power Source *</label>
                                 <select asp-for="PowerSourceId" asp-items="@new SelectList(ViewBag.PowerSources, nameof(PowerSource.Id), nameof(PowerSource.Title))" class="form-select" required>
-                                    <option value="" selected>Choose</option>
+                                    <option value="0" selected>Choose</option>
                                 </select>
                                 <span asp-validation-for="PowerSourceId" class="text-danger"></span>
                             </div>
                             <div class="col-md-6">
                                 <label asp-for="Gender" class="form-label">Gender *</label>
                                 <select asp-for="Gender" asp-items="@Html.GetEnumSelectList<GenderType>()" class="form-select" required>
-                                    <option value="" selected>Choose</option>
+                                    @*<option value="0" selected>Choose</option>*@
                                 </select>
                                 <span asp-validation-for="PowerSourceId" class="text-danger"></span>
                             </div>
@@ -127,6 +122,20 @@
                                     <option value="" selected>Choose</option>
                                 </select>
                                 <span asp-validation-for="SpecialTypeId" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-12">
+                                <label asp-for="FeatureIds" class="form-label">Features</label>
+                                <select asp-for="FeatureIds" asp-items="@new SelectList(ViewBag.Features, nameof(Feature.Id), nameof(Feature.Title))" class="form-select">
+                                    <option value="0" selected>Choose</option>
+                                </select>
+                                <span asp-validation-for="FeatureIds" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-12">
+                                <label asp-for="TagIds" class="form-label">Tags</label>
+                                <select asp-for="TagIds" asp-items="@new SelectList(ViewBag.Tags, nameof(Tag.Id), nameof(Tag.Title))" class="form-select">
+                                    <option value="0" selected>Choose</option>
+                                </select>
+                                <span asp-validation-for="TagIds" class="text-danger"></span>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-check">

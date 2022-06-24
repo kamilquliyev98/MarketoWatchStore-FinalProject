@@ -8,6 +8,7 @@ namespace MarketoWatchStore.Models
     public class ProductColour
     {
         public int Id { get; set; }
+        public int Count { get; set; }
 
         public Nullable<int> ProductId { get; set; }
         public Product Product { get; set; }

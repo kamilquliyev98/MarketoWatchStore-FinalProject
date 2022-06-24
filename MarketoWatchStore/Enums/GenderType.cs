@@ -7,8 +7,8 @@ namespace MarketoWatchStore.Enums
 {
     public enum GenderType
     {
-        Man = 1,
-        Woman,
+        Men = 1,
+        Women,
         Unisex
     }
 }
