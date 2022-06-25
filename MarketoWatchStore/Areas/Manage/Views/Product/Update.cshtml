@@ -1,0 +1,54 @@
+﻿@model Product
+@{
+    ViewData["Title"] = "Edit product";
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Edit product</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-area="manage" asp-controller="dashboard" asp-action="index">Dashboard</a></li>
+                <li class="breadcrumb-item"><a asp-area="manage" asp-controller="@controller" asp-action="index">Products</a></li>
+                <li class="breadcrumb-item active">Create</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"></h5>
+                        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+
+                        <!-- Form -->
+                        <div class="product-update">
+                            @await Html.PartialAsync("_UpdateProductImagesPartial", Model)
+                        </div>
+                        <!-- End Form -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main><!-- End #main -->
+
+@section CSS{
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+}
+
+@section JS{
+    <partial name="_ValidationFormScriptPartial">
+        <partial name="_CKEditorScriptPartial">
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+            <script src="~/manage/assets/js/custom.js" asp-append-version="true"></script>
+}

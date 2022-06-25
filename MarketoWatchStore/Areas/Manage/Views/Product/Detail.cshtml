@@ -105,7 +105,7 @@
                                     <div class="col-lg-9 col-md-8">
                                         @if (Model.DiscountPrice == null)
                                         {
-                                            @Model.Price.ToString("0.00")
+                                            @(Model.Price.ToString("0.00") + " (no discount)")
                                         }
                                         else
                                         {

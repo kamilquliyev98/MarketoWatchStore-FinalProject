@@ -84,13 +84,13 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
             {
                 if (!brand.ImageFile.CheckFileContentType("image/png"))
                 {
-                    ModelState.AddModelError("ImageFile", "Content type must be .png");
+                    ModelState.AddModelError("ImageFile", "File content type is not image/png");
                     return View();
                 }
 
                 if (!brand.ImageFile.CheckFileSize(20))
                 {
-                    ModelState.AddModelError("ImageFile", "Max file size: 20 KB");
+                    ModelState.AddModelError("ImageFile", "File size is greater than 20 KB");
                     return View();
                 }
 
@@ -143,13 +143,13 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
             {
                 if (!brand.ImageFile.CheckFileContentType("image/png"))
                 {
-                    ModelState.AddModelError("ImageFile", "Content type must be .png");
+                    ModelState.AddModelError("ImageFile", "File content type is not image/png");
                     return View(dbBrand);
                 }
 
                 if (!brand.ImageFile.CheckFileSize(20))
                 {
-                    ModelState.AddModelError("ImageFile", "Max file size: 20 KB");
+                    ModelState.AddModelError("ImageFile", "File size is greater than 20 KB");
                     return View(dbBrand);
                 }
 

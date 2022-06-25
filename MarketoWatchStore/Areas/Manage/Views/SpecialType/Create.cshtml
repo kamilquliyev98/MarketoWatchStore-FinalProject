@@ -32,6 +32,12 @@
                                 <label asp-for="ImageFile" class="form-label">Image *</label>
                                 <input asp-for="ImageFile" class="form-control" accept="image/png" required>
                                 <span asp-validation-for="ImageFile" class="text-danger"></span>
+                                <small class="form-text text-muted">
+                                    <ul>
+                                        <li>Content type: "image/png"</li>
+                                        <li>Max size: 20 KB</li>
+                                    </ul>
+                                </small>
                             </div>
                             <div class="col-md-12">
                                 <label asp-for="Title" class="form-label">Name *</label>

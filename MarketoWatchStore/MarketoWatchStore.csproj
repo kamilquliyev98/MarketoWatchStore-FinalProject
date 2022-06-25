@@ -13,6 +13,8 @@
     <Compile Remove="Migrations\20220624082624_AllowNullCountForModelState.Designer.cs" />
     <Compile Remove="Migrations\20220624144733_Check.cs" />
     <Compile Remove="Migrations\20220624144733_Check.Designer.cs" />
+    <Compile Remove="Migrations\20220625144700_check.cs" />
+    <Compile Remove="Migrations\20220625144700_check.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

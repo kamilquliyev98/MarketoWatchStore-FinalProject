@@ -55,13 +55,13 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
             {
                 if (!setting.LogoImage.CheckFileContentType("image/png"))
                 {
-                    ModelState.AddModelError("LogoImage", "File type of logo must be .png");
+                    ModelState.AddModelError("LogoImage", "File content type is not image/png");
                     return View(dbSetting);
                 }
 
-                if (!setting.LogoImage.CheckFileSize(5))
+                if (!setting.LogoImage.CheckFileSize(10))
                 {
-                    ModelState.AddModelError("LogoImage", "Max size of logo must be 5 KB");
+                    ModelState.AddModelError("LogoImage", "File size is greater than 10 KB");
                     return View(dbSetting);
                 }
 

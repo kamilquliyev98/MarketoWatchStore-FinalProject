@@ -77,11 +77,18 @@
                                 <label asp-for="LogoImage" class="form-label">Logo</label>
                                 <input asp-for="LogoImage" class="form-control" accept="image/png">
                                 <span asp-validation-for="LogoImage" class="text-danger"></span>
+                                <small class="form-text text-muted">
+                                    <ul>
+                                        <li>Content type: "image/png"</li>
+                                        <li>Max size: 10 KB</li>
+                                    </ul>
+                                </small>
                                 <div class="my-2">
                                     <p>Current Logo:</p>
                                     <img class="img-fluid" src="~/assets/images/logo/@Model.Logo" />
                                 </div>
                             </div>
+
                             <div class="col-12 d-grid gap-2 mt-3">
                                 <button class="btn btn-success" type="submit">Save changes</button>
                                 <a asp-area="manage" asp-controller="@controller" asp-action="index" class="btn btn-info">Go back</a>
