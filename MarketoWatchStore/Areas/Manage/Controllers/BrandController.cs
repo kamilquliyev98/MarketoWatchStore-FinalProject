@@ -98,8 +98,11 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
             }
             else
             {
-                ModelState.AddModelError("IsShared", "You can't share without image.");
-                return View();
+                if (brand.IsShared == true)
+                {
+                    ModelState.AddModelError("IsShared", "You can't share without image.");
+                    return View();
+                }
             }
 
             brand.CreatedAt = DateTime.UtcNow.AddHours(4);

@@ -2,6 +2,10 @@
 @{
     ViewData["Title"] = Model.Brand.Title + " " + Model.Title;
     string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+    int featuresCount = Model.ProductFeatures.Count();
+    int countF = 0;
+    int tagsCount = Model.ProductFeatures.Count();
+    int countT = 0;
 }
 
 <main id="main" class="main">
@@ -108,7 +112,7 @@
                                             var calculateDiscount = 100 - (double)Model.DiscountPrice * 100 / Model.Price;
 
                                             <span>@Model.DiscountPrice?.ToString("0.00")</span>
-                                            <span>(@calculateDiscount.ToString("0.00")% off)</span>
+                                            <span>(@calculateDiscount.ToString("0")% off)</span>
                                         }
                                     </div>
                                 </div>
@@ -152,6 +156,34 @@
                                     <div class="row">
                                         <div class="col-lg-3 col-md-4 label">Special type</div>
                                         <div class="col-lg-9 col-md-8">@Model.SpecialType.Title</div>
+                                    </div>
+                                }
+
+                                @if (Model.ProductFeatures.Where(pf => pf.ProductId == Model.Id) != null)
+                                {
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">Features</div>
+                                        <div class="col-lg-9 col-md-8">
+                                            @foreach (ProductFeature productFeature in Model.ProductFeatures.Where(pf => pf.ProductId == Model.Id))
+                                            {
+                                                countF++;
+                                                @(productFeature.Feature.Title + ((featuresCount == countF) ? "" : ", "));
+                                            }
+                                        </div>
+                                    </div>
+                                }
+
+                                @if (Model.ProductTags.Where(pt => pt.ProductId == Model.Id) != null)
+                                {
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">Tags</div>
+                                        <div class="col-lg-9 col-md-8">
+                                            @foreach (ProductTag productTag in Model.ProductTags.Where(pt => pt.ProductId == Model.Id))
+                                            {
+                                                countT++;
+                                                @("#" + productTag.Tag.Title + ((tagsCount == countT) ? "" : ", "));
+                                            }
+                                        </div>
                                     </div>
                                 }
 

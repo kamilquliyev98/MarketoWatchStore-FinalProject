@@ -152,6 +152,22 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
 
             if (!ModelState.IsValid) return View();
 
+            if (product.Title.Length > 255)
+            {
+                ModelState.AddModelError("Title", "Max 255 symbols");
+                return View();
+            }
+
+            if (product.Price < 0 || product.DiscountPrice < 0 || product.ExTax < 0)
+            {
+                ModelState.AddModelError("", "Money can not be lower than 0.");
+                return View();
+            }
+
+
+
+
+
             if (product.DiscountPrice >= product.Price)
             {
                 ModelState.AddModelError("DiscountPrice", "Discount price cannot be equal to or greater than price.");
@@ -221,51 +237,57 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
 
 
 
-            foreach (int featureId in product.FeatureIds)
+            if (product.FeatureIds.Count > 0)
             {
-                if (!await _context.Features.AnyAsync(c => c.Id == featureId))
+                foreach (int featureId in product.FeatureIds)
                 {
-                    ModelState.AddModelError("", "Has been selected incorrect feature.");
-                    return View();
+                    if (!await _context.Features.AnyAsync(c => c.Id == featureId))
+                    {
+                        ModelState.AddModelError("", "Has been selected incorrect feature.");
+                        return View();
+                    }
                 }
-            }
 
-            List<ProductFeature> productFeatures = new List<ProductFeature>();
-            foreach (var item in product.FeatureIds)
-            {
-                ProductFeature productFeature = new ProductFeature
+                List<ProductFeature> productFeatures = new List<ProductFeature>();
+                foreach (var item in product.FeatureIds)
                 {
-                    FeatureId = item
-                };
+                    ProductFeature productFeature = new ProductFeature
+                    {
+                        FeatureId = item
+                    };
 
-                productFeatures.Add(productFeature);
-            }
-            product.ProductFeatures = productFeatures;
-
-
-
-
-
-            foreach (int tagId in product.TagIds)
-            {
-                if (!await _context.Tags.AnyAsync(c => c.Id == tagId))
-                {
-                    ModelState.AddModelError("", "Has been selected incorrect tag.");
-                    return View();
+                    productFeatures.Add(productFeature);
                 }
+                product.ProductFeatures = productFeatures;
             }
 
-            List<ProductTag> tags = new List<ProductTag>();
-            foreach (int item in product.TagIds)
+
+
+
+
+            if (product.TagIds.Count > 0)
             {
-                ProductTag productTag = new ProductTag
+                foreach (int tagId in product.TagIds)
                 {
-                    TagId = item
-                };
+                    if (!await _context.Tags.AnyAsync(c => c.Id == tagId))
+                    {
+                        ModelState.AddModelError("", "Has been selected incorrect tag.");
+                        return View();
+                    }
+                }
 
-                tags.Add(productTag);
+                List<ProductTag> tags = new List<ProductTag>();
+                foreach (int item in product.TagIds)
+                {
+                    ProductTag productTag = new ProductTag
+                    {
+                        TagId = item
+                    };
+
+                    tags.Add(productTag);
+                }
+                product.ProductTags = tags;
             }
-            product.ProductTags = tags;
 
 
 
@@ -346,9 +368,9 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
                         return View();
                     }
 
-                    if (!file.CheckFileSize(50))
+                    if (!file.CheckFileSize(100))
                     {
-                        ModelState.AddModelError("ProductImagesFiles", "Max size for each file: 50 KB");
+                        ModelState.AddModelError("ProductImagesFiles", "Max size for each file: 100 KB");
                         return View();
                     }
 
