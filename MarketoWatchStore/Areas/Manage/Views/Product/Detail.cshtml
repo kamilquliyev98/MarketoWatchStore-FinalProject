@@ -53,7 +53,7 @@
 
                                     @foreach (ProductImage productImage in Model.ProductImages.Where(pi => !pi.IsDeleted))
                                     {
-                                        <div class="col-4 mb-2">
+                                        <div class="@((Model.ProductImages.Where(pi => !pi.IsDeleted).Count() == 2) ? "col-6" : "col-4") mb-2">
                                             <img src="~/assets/images/products/@productImage.Image" alt="product-image" class="img-thumbnail">
                                         </div>
                                     }
@@ -112,7 +112,7 @@
                                             var calculateDiscount = 100 - (double)Model.DiscountPrice * 100 / Model.Price;
 
                                             <span>@Model.DiscountPrice?.ToString("0.00")</span>
-                                            <span>(@calculateDiscount.ToString("0")% off)</span>
+                                            <span>(@calculateDiscount.ToString("0.00")% off)</span>
                                         }
                                     </div>
                                 </div>
