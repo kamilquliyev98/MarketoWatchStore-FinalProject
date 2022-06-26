@@ -4,7 +4,7 @@
     string controller = this.ViewContext.RouteData.Values["controller"].ToString();
     int featuresCount = Model.ProductFeatures.Count();
     int countF = 0;
-    int tagsCount = Model.ProductFeatures.Count();
+    int tagsCount = Model.ProductTags.Count();
     int countT = 0;
 }
 
@@ -126,7 +126,7 @@
                                 }
 
                                 <div class="row">
-                                    <div class="col-lg-3 col-md-4 label">Eco Tax</div>
+                                    <div class="col-lg-3 col-md-4 label">Tax</div>
                                     <div class="col-lg-9 col-md-8">@Model.ExTax.ToString("0.00")</div>
                                 </div>
 
@@ -177,7 +177,7 @@
                                     </div>
                                 }
 
-                                @if (Model.ProductFeatures.Where(pf => pf.ProductId == Model.Id) != null)
+                                @if (Model.ProductFeatures.Where(pf => pf.ProductId == Model.Id) != null && Model.ProductFeatures.Where(pf => pf.ProductId == Model.Id).Count() > 0)
                                 {
                                     <div class="row">
                                         <div class="col-lg-3 col-md-4 label">Features</div>
@@ -191,7 +191,7 @@
                                     </div>
                                 }
 
-                                @if (Model.ProductTags.Where(pt => pt.ProductId == Model.Id) != null)
+                                @if (Model.ProductTags.Where(pt => pt.ProductId == Model.Id) != null && Model.ProductTags.Where(pt => pt.ProductId == Model.Id).Count() > 0)
                                 {
                                     <div class="row">
                                         <div class="col-lg-3 col-md-4 label">Tags</div>

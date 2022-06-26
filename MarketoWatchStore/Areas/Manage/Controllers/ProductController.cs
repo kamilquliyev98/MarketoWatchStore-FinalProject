@@ -899,6 +899,62 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
 
             return PartialView("_UpdateProductImagesPartial", product);
         }
+
+        public async Task<IActionResult> DeleteSlideImage(string slide)
+        {
+            if (slide == null) return BadRequest();
+
+            Product product = await _context.Products
+                .Include(p => p.ProductImages)
+                .FirstOrDefaultAsync(p => p.SlideImage == slide && !p.IsDeleted);
+
+            if (product == null) return NotFound();
+
+            ViewBag.Brands = await _context.Brands.Where(b => !b.IsDeleted).OrderBy(b => b.Title).ToListAsync();
+            ViewBag.Displays = await _context.Displays.Where(d => !d.IsDeleted).OrderBy(d => d.Title).ToListAsync();
+            ViewBag.PowerSources = await _context.PowerSources.Where(ps => !ps.IsDeleted).OrderBy(ps => ps.Title).ToListAsync();
+            ViewBag.SpecialTypes = await _context.SpecialTypes.Where(st => !st.IsDeleted).OrderBy(st => st.Title).ToListAsync();
+            ViewBag.Tags = await _context.Tags.Where(t => !t.IsDeleted).OrderBy(t => t.Title).ToListAsync();
+            ViewBag.Colours = await _context.Colours.Where(c => !c.IsDeleted).OrderBy(c => c.Title).ToListAsync();
+            ViewBag.Features = await _context.Features.Where(f => !f.IsDeleted).OrderBy(f => f.Title).ToListAsync();
+
+            Helper.DeleteFile(_env, product.SlideImage, "assets", "images", "slider");
+
+            product.SlideImage = null;
+            product.ShareOnHomeSlide = false;
+
+            await _context.SaveChangesAsync();
+
+            return PartialView("_UpdateProductImagesPartial", product);
+        }
+
+        public async Task<IActionResult> DeletePosterImage(string poster)
+        {
+            if (poster == null) return BadRequest();
+
+            Product product = await _context.Products
+                .Include(p => p.ProductImages)
+                .FirstOrDefaultAsync(p => p.PosterImage == poster && !p.IsDeleted);
+
+            if (product == null) return NotFound();
+
+            ViewBag.Brands = await _context.Brands.Where(b => !b.IsDeleted).OrderBy(b => b.Title).ToListAsync();
+            ViewBag.Displays = await _context.Displays.Where(d => !d.IsDeleted).OrderBy(d => d.Title).ToListAsync();
+            ViewBag.PowerSources = await _context.PowerSources.Where(ps => !ps.IsDeleted).OrderBy(ps => ps.Title).ToListAsync();
+            ViewBag.SpecialTypes = await _context.SpecialTypes.Where(st => !st.IsDeleted).OrderBy(st => st.Title).ToListAsync();
+            ViewBag.Tags = await _context.Tags.Where(t => !t.IsDeleted).OrderBy(t => t.Title).ToListAsync();
+            ViewBag.Colours = await _context.Colours.Where(c => !c.IsDeleted).OrderBy(c => c.Title).ToListAsync();
+            ViewBag.Features = await _context.Features.Where(f => !f.IsDeleted).OrderBy(f => f.Title).ToListAsync();
+
+            Helper.DeleteFile(_env, product.PosterImage, "assets", "images", "poster");
+
+            product.PosterImage = null;
+            product.ShareAsPoster = false;
+
+            await _context.SaveChangesAsync();
+
+            return PartialView("_UpdateProductImagesPartial", product);
+        }
         #endregion
     }
 }

@@ -9,6 +9,12 @@
         <label asp-for="MainImageFile" class="form-label">Main Image *</label>
         <input asp-for="MainImageFile" class="form-control" accept="image/jpeg">
         <span asp-validation-for="MainImageFile" class="text-danger"></span>
+        <small class="form-text text-muted">
+            <ul>
+                <li>Content type: "image/jpeg"</li>
+                <li>Max size: 100 KB</li>
+            </ul>
+        </small>
         <div class="my-3">
             <div class="container-fluid">
                 <div class="row">
@@ -88,6 +94,7 @@
         <textarea asp-for="Description" id="textEditor" class="form-control" required></textarea>
         <span asp-validation-for="Description" class="text-danger"></span>
     </div>
+    <hr />
     <div class="col-md-12">
         <label asp-for="SlideImageFile" class="form-label">Slide Image</label>
         <input asp-for="SlideImageFile" class="form-control" accept="image/png, image/webp">
@@ -98,6 +105,22 @@
                 <li>Max size: 100 KB</li>
             </ul>
         </small>
+        @if (Model.SlideImage != null)
+        {
+            <div class="my-3">
+                <div class="container-fluid">
+                    <div class="row">
+                        <p>Current slide image:</p>
+                        <div class="col-md-3">
+                            <img class="img-thumbnail" src="~/assets/images/slider/@Model.SlideImage" />
+                            <div class="d-grid">
+                                <a asp-controller="@controller" asp-action="deleteslideimage" asp-route-slide="@Model.SlideImage" class="btn btn-sm btn-outline-danger btn-delete">Delete image</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
     </div>
     <div class="col-md-12">
         <div class="form-check">
@@ -106,6 +129,7 @@
             <span asp-validation-for="ShareOnHomeSlide" class="text-danger"></span>
         </div>
     </div>
+    <hr />
     <div class="col-md-12">
         <label asp-for="PosterImageFile" class="form-label">Poster Image</label>
         <input asp-for="PosterImageFile" class="form-control" accept="image/jpeg">
@@ -116,6 +140,22 @@
                 <li>Max size: 100 KB</li>
             </ul>
         </small>
+        @if (Model.PosterImage != null)
+        {
+            <div class="my-3">
+                <div class="container-fluid">
+                    <div class="row">
+                        <p>Current poster image:</p>
+                        <div class="col-md-3">
+                            <img class="img-thumbnail" src="~/assets/images/poster/@Model.PosterImage" />
+                            <div class="d-grid">
+                                <a asp-controller="@controller" asp-action="deleteposterimage" asp-route-poster="@Model.PosterImage" class="btn btn-sm btn-outline-danger btn-delete">Delete image</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
     </div>
     <div class="col-md-12">
         <div class="form-check">
@@ -124,6 +164,7 @@
             <span asp-validation-for="ShareAsPoster" class="text-danger"></span>
         </div>
     </div>
+    <hr />
     <div class="col-md-6">
         <label asp-for="DisplayId" class="form-label">Display *</label>
         <select asp-for="DisplayId" asp-items="@new SelectList(ViewBag.Displays, nameof(Display.Id), nameof(Display.Title))" class="form-select" required>
