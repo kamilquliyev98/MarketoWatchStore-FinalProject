@@ -140,141 +140,11 @@
                                             <li>
                                                 <a asp-controller="home" asp-action="index" class="nav-link">Home</a>
                                             </li>
-                                            <li class="mega-menu dropdown ratio_40">
-                                                <a href="javascript:void(0)" class="nav-link menu-title">Shop</a>
-                                                <div class="mega-menu-container poster-bg-image menu-content">
-                                                    <div class="container-fluid">
-                                                        <div class="row row-cols-5">
-
-                                                            <div class="col mega-box">
-                                                                <div class="link-section">
-                                                                    <div class="submenu-title">
-                                                                        <h5>Special types</h5>
-                                                                    </div>
-                                                                    <div class="submenu-content opensubmegamenu">
-                                                                        <ul class="list">
-                                                                            <li>
-                                                                                <a href="#">Dive watches</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Military Watches</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Pilot Watches</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Watches for Nurses</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Police Watches</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Triathlon Watches</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Pocket Watches</a>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col mega-box">
-                                                                <div class="link-section">
-                                                                    <div class="submenu-title">
-                                                                        <h5>Gender</h5>
-                                                                    </div>
-                                                                    <div class="submenu-content opensubmegamenu">
-                                                                        <ul class="list">
-                                                                            <li>
-                                                                                <a href="#">Men's</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Women's</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Unisex</a>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col mega-box">
-                                                                <div class="link-section">
-                                                                    <div class="submenu-title">
-                                                                        <h5>Features</h5>
-                                                                    </div>
-                                                                    <div class="submenu-content opensubmegamenu">
-                                                                        <ul class="list">
-                                                                            <li>
-                                                                                <a href="#">Alarm</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Altimeter</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Calendar</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Compass</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Chronograph</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Depth Measurement</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">GPS</a>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col mega-box">
-                                                                <div class="link-section">
-                                                                    <div class="submenu-title">
-                                                                        <h5>Power source</h5>
-                                                                    </div>
-                                                                    <div class="submenu-content opensubmegamenu">
-                                                                        <ul class="list">
-                                                                            <li>
-                                                                                <a href="#">Solar</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Quartz</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">Smartwatch</a>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col mega-box">
-                                                                <div class="link-section">
-                                                                    <div class="submenu-title">
-                                                                        <h5>All</h5>
-                                                                    </div>
-                                                                    <div class="submenu-content opensubmegamenu">
-                                                                        <ul class="list">
-                                                                            <li>
-                                                                                <a href="shop.html">All products</a>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                            <li>
+                                                <a asp-controller="shop" asp-action="index" class="nav-link">Shop</a>
                                             </li>
                                             <li>
-                                                <a href="blog.html" class="nav-link">Blog</a>
+                                                <a asp-controller="blog" asp-action="index" class="nav-link">Blog</a>
                                             </li>
                                             <li>
                                                 <a asp-controller="faq" asp-action="index" class="nav-link">FAQ</a>
@@ -446,13 +316,15 @@
                                             <span>$25.00</span>
                                         </button>
                                         <div class="onhover-div">
-                                            <!-- <a href="shop.html">
+                                            @*<a asp-controller="shop" asp-action="index">
                                                 <div class="wislist-empty">
                                                     <i class="fa-solid fa-cart-arrow-down"></i>
-                                                    <h6 class="mb-1">Your shopping cart is empty! Click here to go to
-                                                        shop! :)</h6>
+                                                    <h6 class="mb-1">
+                                                        Your shopping cart is empty! Click here to go to
+                                                        shop! :)
+                                                    </h6>
                                                 </div>
-                                            </a> -->
+                                            </a>*@
                                             <div class="cart-menu">
                                                 <div class="cart-title">
                                                     <h6>
@@ -599,7 +471,6 @@
         </div>
     </header>
     <!-- Header end -->
-
     <!-- Mobile fix menu start -->
     <div class="mobile-menu d-sm-none">
         <ul>
@@ -610,7 +481,7 @@
                 </a>
             </li>
             <li>
-                <a href="shop.html" class="">
+                <a asp-controller="shop" asp-action="index">
                     <i data-feather="shopping-bag"></i>
                     <span>Shop</span>
                 </a>
@@ -740,7 +611,6 @@
         </div>
     </footer>
     <!-- Footer end -->
-
     <!-- Quick view modal start -->
     <div class="modal fade quick-view-modal" id="quick-view">
         <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -837,7 +707,7 @@
                                 </div>
                                 <div class="product-btns">
                                     <a asp-controller="shoppingcart" asp-action="index" class="btn btn-solid-default btn-sm">Add to cart</a>
-                                    <a href="product-left-sidebar.html" class="btn btn-solid-default btn-sm">
+                                    <a href="product.html" class="btn btn-solid-default btn-sm">
                                         View
                                         details
                                     </a>
@@ -850,7 +720,6 @@
         </div>
     </div>
     <!-- Quick view modal end -->
-
     <!-- Cookie Section Start -->
     <div class="cookie-bar-section hide">
         <div class="content">
@@ -862,7 +731,6 @@
         </div>
     </div>
     <!-- Cookie Section End -->
-
     <!-- Tap to top Section Start -->
     <div class="tap-to-top">
         <a href="#">

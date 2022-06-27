@@ -35,20 +35,20 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
                     tags = await _context.Tags
                         .Include(t => t.ProductTags).ThenInclude(t => t.Product)
                         .Where(t => !t.IsDeleted)
-                        .OrderByDescending(t => t.Id)
+                        .OrderBy(t => t.Title)
                         .ToListAsync();
                     break;
                 case "deleted":
                     tags = await _context.Tags
                         .Include(t => t.ProductTags).ThenInclude(t => t.Product)
                         .Where(t => t.IsDeleted)
-                        .OrderByDescending(t => t.Id)
+                        .OrderBy(t => t.Title)
                         .ToListAsync();
                     break;
                 default:
                     tags = await _context.Tags
                         .Include(t => t.ProductTags).ThenInclude(t => t.Product)
-                        .OrderByDescending(t => t.Id)
+                        .OrderBy(t => t.Title)
                         .ToListAsync();
                     break;
             }

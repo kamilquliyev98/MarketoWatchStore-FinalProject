@@ -35,20 +35,20 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
                     features = await _context.Features
                         .Include(f => f.ProductFeatures).ThenInclude(f => f.Product)
                         .Where(f => !f.IsDeleted)
-                        .OrderByDescending(f => f.Id)
+                        .OrderBy(f => f.Title)
                         .ToListAsync();
                     break;
                 case "deleted":
                     features = await _context.Features
                         .Include(f => f.ProductFeatures).ThenInclude(f => f.Product)
                         .Where(f => f.IsDeleted)
-                        .OrderByDescending(f => f.Id)
+                        .OrderBy(f => f.Title)
                         .ToListAsync();
                     break;
                 default:
                     features = await _context.Features
                         .Include(f => f.ProductFeatures).ThenInclude(f => f.Product)
-                        .OrderByDescending(f => f.Id)
+                        .OrderBy(f => f.Title)
                         .ToListAsync();
                     break;
             }

@@ -35,20 +35,20 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
                     powerSources = await _context.PowerSources
                         .Include(ps => ps.Products)
                         .Where(ps => !ps.IsDeleted)
-                        .OrderByDescending(ps => ps.Id)
+                        .OrderBy(ps => ps.Title)
                         .ToListAsync();
                     break;
                 case "deleted":
                     powerSources = await _context.PowerSources
                         .Include(ps => ps.Products)
                         .Where(ps => ps.IsDeleted)
-                        .OrderByDescending(ps => ps.Id)
+                        .OrderBy(ps => ps.Title)
                         .ToListAsync();
                     break;
                 default:
                     powerSources = await _context.PowerSources
                         .Include(ps => ps.Products)
-                        .OrderByDescending(ps => ps.Id)
+                        .OrderBy(ps => ps.Title)
                         .ToListAsync();
                     break;
             }

@@ -35,20 +35,20 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
                     displays = await _context.Displays
                         .Include(d => d.Products)
                         .Where(d => !d.IsDeleted)
-                        .OrderByDescending(d => d.Id)
+                        .OrderBy(d => d.Title)
                         .ToListAsync();
                     break;
                 case "deleted":
                     displays = await _context.Displays
                         .Include(d => d.Products)
                         .Where(d => d.IsDeleted)
-                        .OrderByDescending(d => d.Id)
+                        .OrderBy(d => d.Title)
                         .ToListAsync();
                     break;
                 default:
                     displays = await _context.Displays
                         .Include(d => d.Products)
-                        .OrderByDescending(d => d.Id)
+                        .OrderBy(d => d.Title)
                         .ToListAsync();
                     break;
             }
