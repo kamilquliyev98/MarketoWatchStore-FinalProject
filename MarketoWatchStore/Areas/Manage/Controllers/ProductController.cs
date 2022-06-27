@@ -394,9 +394,9 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
 
             if (product.SlideImageFile != null)
             {
-                if (!product.SlideImageFile.CheckFileContentType("image/png") || !product.SlideImageFile.CheckFileContentType("image/webp"))
+                if (!product.SlideImageFile.CheckFileContentType("image/png"))
                 {
-                    ModelState.AddModelError("SlideImageFile", "File content type is not image/png or image/webp");
+                    ModelState.AddModelError("SlideImageFile", "File content type is not image/png");
                     return View();
                 }
 
@@ -522,13 +522,13 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
             if (product.Title.Length > 255)
             {
                 ModelState.AddModelError("Title", "Max 255 symbols");
-                return View();
+                return View(dbProduct);
             }
 
             if (product.Price < 0 || product.DiscountPrice < 0 || product.ExTax < 0)
             {
                 ModelState.AddModelError("", "Money can not be lower than 0.");
-                return View();
+                return View(dbProduct);
             }
 
 
@@ -538,13 +538,13 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
             if (product.DiscountPrice >= product.Price)
             {
                 ModelState.AddModelError("DiscountPrice", "Discount price cannot be equal to or greater than price.");
-                return View();
+                return View(dbProduct);
             }
 
             if (product.ExTax >= product.Price)
             {
                 ModelState.AddModelError("ExTax", "Tax price cannot be equal to or greater than price.");
-                return View();
+                return View(dbProduct);
             }
 
 
@@ -554,7 +554,7 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
             if (!await _context.Brands.AnyAsync(b => b.Id == product.BrandId && !b.IsDeleted))
             {
                 ModelState.AddModelError("BrandId", "Has been selected incorrect brand.");
-                return View();
+                return View(dbProduct);
             }
 
 
@@ -564,7 +564,7 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
             if (!await _context.Displays.AnyAsync(d => d.Id == product.DisplayId && !d.IsDeleted))
             {
                 ModelState.AddModelError("DisplayId", "Has been selected incorrect display.");
-                return View();
+                return View(dbProduct);
             }
 
 
@@ -574,7 +574,7 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
             if (!await _context.PowerSources.AnyAsync(ps => ps.Id == product.PowerSourceId && !ps.IsDeleted))
             {
                 ModelState.AddModelError("PowerSourceId", "Has been selected incorrect power source.");
-                return View();
+                return View(dbProduct);
             }
 
 
@@ -584,7 +584,7 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
             if ((int)product.Gender < 1 || (int)product.Gender > 3)
             {
                 ModelState.AddModelError("Gender", "Has been selected incorrect gender.");
-                return View();
+                return View(dbProduct);
             }
 
 
@@ -596,7 +596,7 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
                 if (!await _context.SpecialTypes.AnyAsync(st => st.Id == product.SpecialTypeId && !st.IsDeleted))
                 {
                     ModelState.AddModelError("SpecialTypeId", "Has been selected incorrect special type.");
-                    return View();
+                    return View(dbProduct);
                 }
             }
 
@@ -611,7 +611,7 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
                     if (!await _context.Features.AnyAsync(c => c.Id == featureId))
                     {
                         ModelState.AddModelError("", "Has been selected incorrect feature.");
-                        return View();
+                        return View(dbProduct);
                     }
                 }
 
@@ -645,7 +645,7 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
                     if (!await _context.Tags.AnyAsync(c => c.Id == tagId))
                     {
                         ModelState.AddModelError("", "Has been selected incorrect tag.");
-                        return View();
+                        return View(dbProduct);
                     }
                 }
 
@@ -675,7 +675,7 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
             if (product.ColourIds.Count != product.Counts.Count)
             {
                 ModelState.AddModelError("", "Please, select all options.");
-                return View();
+                return View(dbProduct);
             }
 
             foreach (int colourId in product.ColourIds)
@@ -683,7 +683,7 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
                 if (!await _context.Colours.AnyAsync(c => c.Id == colourId))
                 {
                     ModelState.AddModelError("", "Has been selected incorrect colour.");
-                    return View();
+                    return View(dbProduct);
                 }
             }
 
@@ -791,26 +791,26 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
 
             if (product.SlideImageFile != null)
             {
-                if (!product.SlideImageFile.CheckFileContentType("image/png") || !product.SlideImageFile.CheckFileContentType("image/webp"))
+                if (!product.SlideImageFile.CheckFileContentType("image/png"))
                 {
-                    ModelState.AddModelError("SlideImageFile", "File content type is not image/png or image/webp");
-                    return View();
+                    ModelState.AddModelError("SlideImageFile", "File content type is not image/png");
+                    return View(dbProduct);
                 }
 
                 if (!product.SlideImageFile.CheckFileSize(100))
                 {
                     ModelState.AddModelError("SlideImageFile", "File size is greater than 100 KB");
-                    return View();
+                    return View(dbProduct);
                 }
 
-                product.SlideImage = product.SlideImageFile.CreateFile(_env, "assets", "images", "slider");
+                dbProduct.SlideImage = product.SlideImageFile.CreateFile(_env, "assets", "images", "slider");
             }
             else
             {
-                if (product.ShareOnHomeSlide == true)
+                if (product.ShareOnHomeSlide == true && dbProduct.SlideImage == null)
                 {
                     ModelState.AddModelError("ShareOnHomeSlide", "You have to upload an image for slide.");
-                    return View();
+                    return View(dbProduct);
                 }
             }
 
@@ -823,23 +823,23 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
                 if (!product.PosterImageFile.CheckFileContentType("image/jpeg"))
                 {
                     ModelState.AddModelError("PosterImageFile", "File content type is not image/jpeg");
-                    return View();
+                    return View(dbProduct);
                 }
 
                 if (!product.PosterImageFile.CheckFileSize(100))
                 {
                     ModelState.AddModelError("PosterImageFile", "File size is greater than 100 KB");
-                    return View();
+                    return View(dbProduct);
                 }
 
-                product.PosterImage = product.PosterImageFile.CreateFile(_env, "assets", "images", "poster");
+                dbProduct.PosterImage = product.PosterImageFile.CreateFile(_env, "assets", "images", "poster");
             }
             else
             {
-                if (product.ShareAsPoster == true)
+                if (product.ShareAsPoster == true && dbProduct.PosterImage == null)
                 {
                     ModelState.AddModelError("ShareAsPoster", "You have to upload an image for poster.");
-                    return View();
+                    return View(dbProduct);
                 }
             }
             #endregion

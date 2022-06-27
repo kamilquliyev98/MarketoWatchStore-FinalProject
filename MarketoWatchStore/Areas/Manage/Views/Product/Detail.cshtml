@@ -64,6 +64,36 @@
                         </div>
                     </div>
 
+                    @if (Model.PosterImage != null)
+                    {
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+
+                                    <h2>Poster image</h2>
+                                    <h3>~ @((Model.ShareAsPoster) ? "Active poster" : "Not sharing now") ~</h3>
+                                    <img src="~/assets/images/poster/@Model.PosterImage" alt="poster-image" class="img-fluid" style="max-width: 100%;">
+
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    @if (Model.SlideImage != null)
+                    {
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+
+                                    <h2>Slide image</h2>
+                                    <h3>~ @((Model.ShareOnHomeSlide) ? "Active slide" : "Not sharing now") ~</h3>
+                                    <img src="~/assets/images/slider/@Model.SlideImage" alt="poster-image" class="img-fluid" style="max-width: 100%;">
+
+                                </div>
+                            </div>
+                        </div>
+                    }
+
                 </div>
 
             </div>
