@@ -194,6 +194,5 @@ C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcor
 C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Shared\_CKEditorScriptPartial.cshtml.g.cs
 C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Shared\_ProductColourCountPartial.cshtml.g.cs
 C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Shared\_PaginationPartial.cshtml.g.cs
-C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcoreapp3.1\MarketoWatchStore.csproj.AssemblyReference.cache
 C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Product\Update.cshtml.g.cs
 C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Shared\_UpdateProductImagesPartial.cshtml.g.cs
