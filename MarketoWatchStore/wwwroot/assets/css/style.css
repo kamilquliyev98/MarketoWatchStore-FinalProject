@@ -7510,9 +7510,8 @@ header .main-navbar .nav-menu > li.mega-menu.home-menu .megamenu-image-title {
   margin-top: 15px;
 }
 
-.product-box .product-details h3 span {
+.product-box .product-details h3 s {
   font-size: 15px;
-  text-decoration: line-through;
   margin-left: 4px;
 }
 

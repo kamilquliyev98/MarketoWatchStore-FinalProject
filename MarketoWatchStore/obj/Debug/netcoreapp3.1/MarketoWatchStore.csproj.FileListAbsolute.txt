@@ -196,3 +196,8 @@ C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcor
 C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Shared\_PaginationPartial.cshtml.g.cs
 C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Product\Update.cshtml.g.cs
 C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Shared\_UpdateProductImagesPartial.cshtml.g.cs
+C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\FAQ\Index.cshtml.g.cs
+C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Shared\_FAQsTablePartial.cshtml.g.cs
+C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Product\DeleteRestore.cshtml.g.cs
+C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\FAQ\Create.cshtml.g.cs
+C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\FAQ\Update.cshtml.g.cs

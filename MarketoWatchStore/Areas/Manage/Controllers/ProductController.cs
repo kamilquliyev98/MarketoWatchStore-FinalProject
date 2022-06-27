@@ -956,5 +956,87 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
             return PartialView("_UpdateProductImagesPartial", product);
         }
         #endregion
+
+        #region Delete and Restore mutual view
+        public async Task<IActionResult> DeleteRestore(int? id, string status = "active", int page = 1)
+        {
+            if (id == null) return BadRequest();
+
+            Product product = await _context.Products
+                .Include(p => p.ProductImages)
+                .Include(p => p.Brand)
+                .Include(p => p.Display)
+                .Include(p => p.PowerSource)
+                .Include(p => p.SpecialType)
+                .Include(p => p.ProductTags).ThenInclude(p => p.Tag)
+                .Include(p => p.ProductColours).ThenInclude(p => p.Colour)
+                .Include(p => p.ProductFeatures).ThenInclude(p => p.Feature)
+                .FirstOrDefaultAsync(p => p.Id == id);
+
+            if (product == null) return NotFound();
+
+            ViewBag.Status = status;
+            ViewBag.CurrentPage = page;
+            ViewBag.ProductId = id;
+
+            return View(product);
+        }
+        #endregion
+
+        #region Delete
+        public async Task<IActionResult> Delete(int? id, string status = "active", int page = 1)
+        {
+            if (id == null) return BadRequest();
+
+            Product product = await _context.Products
+                .Include(p => p.ProductImages)
+                .Include(p => p.Brand)
+                .Include(p => p.Display)
+                .Include(p => p.PowerSource)
+                .Include(p => p.SpecialType)
+                .Include(p => p.ProductTags).ThenInclude(p => p.Tag)
+                .Include(p => p.ProductColours).ThenInclude(p => p.Colour)
+                .Include(p => p.ProductFeatures).ThenInclude(p => p.Feature)
+                .FirstOrDefaultAsync(p => p.Id == id);
+
+            if (product == null) return NotFound();
+
+            product.IsDeleted = true;
+            product.ShareAsPoster = false;
+            product.ShareOnHomeSlide = false;
+            product.DeletedAt = DateTime.UtcNow.AddHours(4);
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("index", new { status, page });
+        }
+        #endregion
+
+        #region Restore
+        public async Task<IActionResult> Restore(int? id, string status = "active", int page = 1)
+        {
+            if (id == null) return BadRequest();
+
+            Product product = await _context.Products
+                .Include(p => p.ProductImages)
+                .Include(p => p.Brand)
+                .Include(p => p.Display)
+                .Include(p => p.PowerSource)
+                .Include(p => p.SpecialType)
+                .Include(p => p.ProductTags).ThenInclude(p => p.Tag)
+                .Include(p => p.ProductColours).ThenInclude(p => p.Colour)
+                .Include(p => p.ProductFeatures).ThenInclude(p => p.Feature)
+                .FirstOrDefaultAsync(p => p.Id == id);
+
+            if (product == null) return NotFound();
+
+            product.IsDeleted = false;
+            product.UpdatedAt = DateTime.UtcNow.AddHours(4);
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("index", new { status, page });
+        }
+        #endregion
     }
 }

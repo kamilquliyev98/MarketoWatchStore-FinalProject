@@ -28,6 +28,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\assets\css\style.css.map" />
+    <None Include="wwwroot\assets\css\style.scss" />
+    <None Include="wwwroot\assets\css\style_dark.css.map" />
+    <None Include="wwwroot\assets\css\style_dark.scss" />
+    <None Include="wwwroot\assets\css\_animation.scss" />
+    <None Include="wwwroot\assets\css\_common.scss" />
+    <None Include="wwwroot\assets\css\_media.scss" />
+    <None Include="wwwroot\assets\css\_reset.scss" />
+    <None Include="wwwroot\assets\css\_variables.scss" />
     <None Include="wwwroot\assets\ion.rangeSlider\.github\FUNDING.yml" />
     <None Include="wwwroot\assets\ion.rangeSlider\.github\ISSUE_TEMPLATE\question.md" />
   </ItemGroup>

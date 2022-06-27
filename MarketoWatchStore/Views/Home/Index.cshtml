@@ -4,186 +4,96 @@
 }
 
 <!-- Home Slider start -->
-<section class="pt-0 overflow-hidden">
-    <div>
-        <div class="banner-slider box-arrow">
-            <!-- Slider 1 Start -->
-            <div class="banner-poster">
-                <div class="slider-right-detail">
-                    <div class="labels">
-                        <ul class="label-15">
-                            <li>
-                                <a href="https://www.facebook.com/" target="_blank">
-                                    <img src="~/assets/images/social-icon/1.png" class="img-fluid blur-up lazyload"
-                                         alt="facebook">
-                                    <h5 class="d-lg-block d-none">Facebook</h5>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.instagram.com/" target="_blank">
-                                    <img src="~/assets/images/social-icon/2.png" class="img-fluid blur-up lazyload"
-                                         alt="Instagram">
-                                    <h5 class="d-lg-block d-none">Instagram</h5>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://twitter.com/" target="_blank">
-                                    <img src="~/assets/images/social-icon/3.png" class="img-fluid blur-up lazyload"
-                                         alt="Twitter">
-                                    <h5 class="d-lg-block d-none">Twitter</h5>
-                                </a>
-                            </li>
-                        </ul>
+@if (Model.Slides != null && Model.Slides.Count() > 0)
+{
+    <section class="pt-0 overflow-hidden">
+        <div>
+            <div class="banner-slider box-arrow">
+                @foreach (Product productSlide in Model.Slides)
+                {
+                    <!-- Slider Start -->
+                    <div class="banner-poster">
+                        <div class="slider-right-detail">
+                            <div class="labels">
+                                <ul class="label-15">
+                                    <li>
+                                        <a href="https://www.facebook.com/" target="_blank">
+                                            <img src="~/assets/images/social-icon/1.png" class="img-fluid blur-up lazyload"
+                                                 alt="facebook">
+                                            <h5 class="d-lg-block d-none">Facebook</h5>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.instagram.com/" target="_blank">
+                                            <img src="~/assets/images/social-icon/2.png" class="img-fluid blur-up lazyload"
+                                                 alt="Instagram">
+                                            <h5 class="d-lg-block d-none">Instagram</h5>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://twitter.com/" target="_blank">
+                                            <img src="~/assets/images/social-icon/3.png" class="img-fluid blur-up lazyload"
+                                                 alt="Twitter">
+                                            <h5 class="d-lg-block d-none">Twitter</h5>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            @if (productSlide.DiscountPrice != null)
+                            {
+                                <h4>Discount</h4>
+                                <div class="offer-box">
+                                    @{var calculateDiscount = 100 - (double)productSlide.DiscountPrice * 100 / productSlide.Price;}
+                                    <h6>@calculateDiscount.ToString("0.00")% off</h6>
+                                </div>
+                            }
+                        </div>
+
+                        <div class="slider-bg">
+                            <div class="bg-text">
+                                <span>
+                                    @if (productSlide.Brand.Title.Length > 7)
+                                    {
+                                        @("Marketo")
+                                    }
+                                    else
+                                    {
+                                        @productSlide.Brand.Title
+                                    }
+                                </span>
+                            </div>
+
+                            <div class="bg-circle" style="background: #362319;"></div>
+                            <img src="~/assets/images/slider/@productSlide.SlideImage" class="watch-1 img-fluid blur-up lazyload" alt="slider-image">
+                        </div>
+
+                        <div class="price-number">
+                            <h2>
+                                @if (productSlide.DiscountPrice != null)
+                                {
+                                    @("$" + productSlide.DiscountPrice) <span><del>@("$" + productSlide.Price)</del></span>
+                                }
+                                else
+                                {
+                                    @productSlide.Price
+                                }
+                            </h2>
+                        </div>
+
+                        @if (Model.Slides.Count() > 1)
+                        {
+                            <div class="slider-arrow-2">
+                                <div class="left-arrow d-lg-block d-none"></div>
+                                <div class="right-arrow d-lg-block d-none"></div>
+                            </div>
+                        }
                     </div>
-                    <h4>New Offer</h4>
-                    <div class="offer-box">
-                        <h6>65% off</h6>
-                    </div>
-                </div>
-
-                <div class="slider-bg">
-                    <div class="bg-text">
-                        <span>max7smb</span>
-                    </div>
-
-                    <div class="bg-circle" style="background: #362319;"></div>
-                    <img src="~/assets/images/slider/slider-1.webp" class="watch-1 img-fluid blur-up lazyload"
-                         alt="slider-image">
-                </div>
-
-                <div class="price-number">
-                    <h2>$79.00 <span><del>$65.00</del></span></h2>
-                    <h6>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae minima asperiores
-                        possimus ad quae.
-                    </h6>
-                </div>
-
-                <div class="slider-arrow-2">
-                    <div class="left-arrow d-lg-block d-none"></div>
-                    <div class="right-arrow d-lg-block d-none"></div>
-                </div>
+                    <!-- Slider End -->
+                }
             </div>
-            <!-- Slider 1 End -->
-            <!-- Slider 2 Start -->
-            <div class="banner-poster">
-                <div class="slider-right-detail">
-                    <div class="labels">
-                        <ul class="label-15">
-                            <li>
-                                <a href="https://www.facebook.com/" target="_blank">
-                                    <img src="~/assets/images/social-icon/1.png" class="img-fluid blur-up lazyload"
-                                         alt="facebook">
-                                    <h5 class="d-lg-block d-none">Facebook</h5>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.instagram.com/" target="_blank">
-                                    <img src="~/assets/images/social-icon/2.png" class="img-fluid blur-up lazyload"
-                                         alt="Instagram">
-                                    <h5 class="d-lg-block d-none">Instagram</h5>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://twitter.com/" target="_blank">
-                                    <img src="~/assets/images/social-icon/3.png" class="img-fluid blur-up lazyload"
-                                         alt="Twitter">
-                                    <h5 class="d-lg-block d-none">Twitter</h5>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <h4>New Offer</h4>
-                    <div class="offer-box">
-                        <h6>65% off</h6>
-                    </div>
-                </div>
-
-                <div class="slider-bg">
-                    <div class="bg-text">
-                        <span>marketo</span>
-                    </div>
-
-                    <div class="bg-circle"></div>
-                    <img src="~/assets/images/slider/slider-2.webp" class="watch-1 img-fluid blur-up lazyload"
-                         alt="slider-image">
-                </div>
-
-                <div class="price-number">
-                    <h2>$79.00 <span><del>$65.00</del></span></h2>
-                    <h6>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae minima asperiores
-                        possimus ad quae.
-                    </h6>
-                </div>
-
-                <div class="slider-arrow-2">
-                    <div class="left-arrow d-lg-block d-none"></div>
-                    <div class="right-arrow d-lg-block d-none"></div>
-                </div>
-            </div>
-            <!-- Slider 2 End -->
-            <!-- Slider 3 Start -->
-            <div class="banner-poster">
-                <div class="slider-right-detail">
-                    <div class="labels">
-                        <ul class="label-15">
-                            <li>
-                                <a href="https://www.facebook.com/" target="_blank">
-                                    <img src="~/assets/images/social-icon/1.png" class="img-fluid blur-up lazyload"
-                                         alt="facebook">
-                                    <h5 class="d-lg-block d-none">Facebook</h5>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.instagram.com/" target="_blank">
-                                    <img src="~/assets/images/social-icon/2.png" class="img-fluid blur-up lazyload"
-                                         alt="Instagram">
-                                    <h5 class="d-lg-block d-none">Instagram</h5>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://twitter.com/" target="_blank">
-                                    <img src="~/assets/images/social-icon/3.png" class="img-fluid blur-up lazyload"
-                                         alt="Twitter">
-                                    <h5 class="d-lg-block d-none">Twitter</h5>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <h4>New Offer</h4>
-                    <div class="offer-box">
-                        <h6>65% off</h6>
-                    </div>
-                </div>
-
-                <div class="slider-bg">
-                    <div class="bg-text">
-                        <span>Tissot</span>
-                    </div>
-
-                    <div class="bg-circle"></div>
-                    <img src="~/assets/images/slider/slider-3.webp" class="watch-1 img-fluid blur-up lazyload"
-                         alt="slider-image">
-                </div>
-
-                <div class="price-number">
-                    <h2>$79.00 <span><del>$65.00</del></span></h2>
-                    <h6>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae minima asperiores
-                        possimus ad quae.
-                    </h6>
-                </div>
-
-                <div class="slider-arrow-2">
-                    <div class="left-arrow d-lg-block d-none"></div>
-                    <div class="right-arrow d-lg-block d-none"></div>
-                </div>
-            </div>
-            <!-- Slider 3 End -->
         </div>
-    </div>
-</section>
+    </section>
+}
 <!-- Home Slider end -->
 <!-- Custom Services Section Start -->
 <section class="service-section">
@@ -208,49 +118,49 @@
 </section>
 <!-- Custom Services Section End -->
 <!-- Poster Section Start -->
-<section class="poster-section ratio2_1">
-    <div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="poster-image">
-                        <img src="~/assets/images/poster/1.png" class="img-fluid bg-img blur-up lazyload" alt="poster-image">
-                        <div class="poster-image-details">
-                            <div>
-                                <h5>Get 25% Rewarded</h5>
-                                <h2>CITIZEN</h2>
-                                <p class="d-sm-block d-none my-1">Promaster Dive Automatic</p>
-                                <h3>$49.00 <span><del>$58.00</del></span></h3>
-                                <button onclick="location.href = 'shop.html';" class="btn btn-solid-default">
-                                    BUY
-                                    NOW
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+@if (Model.Posters != null && Model.Posters.Count() > 0)
+{
+    <section class="poster-section ratio2_1">
+        <div>
+            <div class="container">
+                <div class="row justify-content-center">
 
-                <div class="col-lg-6 mt-lg-0 mt-4">
-                    <div class="poster-image">
-                        <img src="~/assets/images/poster/2.png" class="img-fluid bg-img blur-up lazyload" alt="poster-image">
-                        <div class="poster-image-details">
-                            <div>
-                                <h5>Get 38% Rewarded</h5>
-                                <h2>TAG Heuer</h2>
-                                <p class="d-sm-block d-none my-1">Fully Comforable and Smooth Product</p>
-                                <h3>$56.00 <span><del>$58.00</del></span></h3>
-                                <button onclick="location.href = 'shop.html';" class="btn btn-solid-default">
-                                    BUY
-                                    NOW
-                                </button>
+                    @foreach (Product productPoster in Model.Posters)
+                    {
+                        <div class="col-lg-6 mt-4">
+                            <div class="poster-image">
+                                <img src="~/assets/images/poster/@productPoster.PosterImage" class="img-fluid bg-img blur-up lazyload" alt="poster-image">
+                                <div class="poster-image-details">
+                                    <div>
+                                        @if (productPoster.DiscountPrice != null)
+                                        {
+                                            var calculateDiscount = 100 - (double)productPoster.DiscountPrice * 100 / productPoster.Price;
+                                            <h5>Get @calculateDiscount.ToString("0.00")% Rewarded</h5>
+                                        }
+                                        <h2>@productPoster.Brand.Title</h2>
+                                        <p class="d-sm-block d-none my-1">@productPoster.Title</p>
+                                        <h3>
+                                            @if (productPoster.DiscountPrice != null)
+                                            {
+                                                @("$" + @productPoster.DiscountPrice) <span><del>$@productPoster.Price</del></span>
+                                            }
+                                            else
+                                            {
+                                                @("$" + @productPoster.Price)
+                                            }
+                                        </h3>
+                                        <a href="shop.html" class="btn btn-solid-default">BUY NOW</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    }
+
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+}
 <!-- Poster Section End -->
 <!-- New Arrival Section Start -->
 <section class="ratio_asos">
@@ -258,940 +168,82 @@
         <div class="row m-0">
             <div class="col-sm-12 p-0">
                 <div class="title title-2 text-center">
-                    <h2>Latest Products</h2>
+                    <h2>New Arrival</h2>
                     <h5>Our Collection</h5>
                 </div>
                 <div class="product-wrapper slide-6">
 
-                    <div>
-                        <div class="product-box">
-                            <div class="img-wrapper">
-                                <a href="product.html">
-                                    <img src="~/assets/images/products/product-1.webp"
-                                         class="bg-img img-fluid blur-up lazyload" alt="product">
-                                </a>
-                                <div class="cart-wrap">
-                                    <ul>
-                                        <li>
-                                            <a href="javascript:void(0)" class="addtocart-btn">
-                                                <i data-feather="shopping-bag"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" data-bs-toggle="modal"
-                                               data-bs-target="#quick-view">
-                                                <i data-feather="eye"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" class="addtocompare-btn">
-                                                <i data-feather="refresh-cw"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" class="wishlist addtowishlist-btn">
-                                                <i data-feather="heart"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
+                    @foreach (Product product in Model.NewArrival)
+                    {
+                        <div>
+                            <div class="product-box">
+                                <div class="img-wrapper">
+                                    <a href="product.html">
+                                        <img src="~/assets/images/products/@product.MainImage" class="img-fluid bg-img blur-up lazyload" alt="product">
+                                    </a>
+                                    <div class="cart-wrap">
+                                        <ul>
+                                            <li>
+                                                <a href="javascript:void(0)" class="addtocart-btn">
+                                                    <i data-feather="shopping-bag"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                   data-bs-target="#quick-view">
+                                                    <i data-feather="eye"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)" class="addtocompare-btn">
+                                                    <i data-feather="refresh-cw"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)" class="wishlist addtowishlist-btn">
+                                                    <i data-feather="heart"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="product-details text-center">
-                                <h3 class="theme-color">
-                                    $49.00
-                                    <span class="font-light ml-1">$52.00</span>
-                                </h3>
-                                <a href="product.html" class="font-default">
-                                    <h5>Latest Sports Shoes</h5>
-                                </a>
-                                <ul class="rating mt-1">
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star"></i>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                                <div class="product-details text-center">
+                                    <h3 class="theme-color">
+                                        @if (product.DiscountPrice != null)
+                                        {
+                                            <span class="font-light">$@product.DiscountPrice</span>
+                                            <s class="ml-1">$@product.Price</s>
+                                        }
+                                        else
+                                        {
+                                            <span class="font-light">$@product.Price</span>
+                                        }
 
-                    <div>
-                        <div class="product-box">
-                            <div class="img-wrapper">
-                                <a href="product.html">
-                                    <img src="~/assets/images/products/product-3.webp"
-                                         class="bg-img img-fluid blur-up lazyload" alt="product">
-                                </a>
-                                <div class="cart-wrap">
-                                    <ul>
+                                    </h3>
+                                    <a href="product.html" class="font-default">
+                                        <h5>@(product.Brand.Title + " " + product.Title)</h5>
+                                    </a>
+                                    <ul class="rating mt-1">
                                         <li>
-                                            <a href="javascript:void(0)" class="addtocart-btn">
-                                                <i data-feather="shopping-bag"></i>
-                                            </a>
+                                            <i class="fas fa-star theme-color"></i>
                                         </li>
                                         <li>
-                                            <a href="javascript:void(0)" data-bs-toggle="modal"
-                                               data-bs-target="#quick-view">
-                                                <i data-feather="eye"></i>
-                                            </a>
+                                            <i class="fas fa-star theme-color"></i>
                                         </li>
                                         <li>
-                                            <a href="javascript:void(0)" class="addtocompare-btn">
-                                                <i data-feather="refresh-cw"></i>
-                                            </a>
+                                            <i class="fas fa-star"></i>
                                         </li>
                                         <li>
-                                            <a href="javascript:void(0)" class="wishlist addtowishlist-btn">
-                                                <i data-feather="heart"></i>
-                                            </a>
+                                            <i class="fas fa-star"></i>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-star"></i>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="product-details text-center">
-                                <h3 class="theme-color">
-                                    $49.00
-                                    <span class="font-light ml-1">$52.00</span>
-                                </h3>
-                                <a href="product.html" class="font-default">
-                                    <h5>Latest Sports Shoes</h5>
-                                </a>
-                                <ul class="rating mt-1">
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star"></i>
-                                    </li>
-                                </ul>
-                            </div>
                         </div>
-                    </div>
-
-                    <div>
-                        <div class="product-box">
-                            <div class="img-wrapper">
-                                <a href="product.html">
-                                    <img src="~/assets/images/products/product-7.webp"
-                                         class="bg-img img-fluid blur-up lazyload" alt="product">
-                                </a>
-                                <div class="cart-wrap">
-                                    <ul>
-                                        <li>
-                                            <a href="javascript:void(0)" class="addtocart-btn">
-                                                <i data-feather="shopping-bag"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" data-bs-toggle="modal"
-                                               data-bs-target="#quick-view">
-                                                <i data-feather="eye"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" class="addtocompare-btn">
-                                                <i data-feather="refresh-cw"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" class="wishlist addtowishlist-btn">
-                                                <i data-feather="heart"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="product-details text-center">
-                                <h3 class="theme-color">
-                                    $49.00
-                                    <span class="font-light ml-1">$52.00</span>
-                                </h3>
-                                <a href="product.html" class="font-default">
-                                    <h5>Latest Sports Shoes</h5>
-                                </a>
-                                <ul class="rating mt-1">
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star"></i>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="product-box">
-                            <div class="img-wrapper">
-                                <a href="product.html">
-                                    <img src="~/assets/images/products/product-8.webp"
-                                         class="bg-img img-fluid blur-up lazyload" alt="product">
-                                </a>
-                                <div class="cart-wrap">
-                                    <ul>
-                                        <li>
-                                            <a href="javascript:void(0)" class="addtocart-btn">
-                                                <i data-feather="shopping-bag"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" data-bs-toggle="modal"
-                                               data-bs-target="#quick-view">
-                                                <i data-feather="eye"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" class="addtocompare-btn">
-                                                <i data-feather="refresh-cw"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" class="wishlist addtowishlist-btn">
-                                                <i data-feather="heart"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="product-details text-center">
-                                <h3 class="theme-color">
-                                    $49.00
-                                    <span class="font-light ml-1">$52.00</span>
-                                </h3>
-                                <a href="product.html" class="font-default">
-                                    <h5>Latest Sports Shoes</h5>
-                                </a>
-                                <ul class="rating mt-1">
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star"></i>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="product-box">
-                            <div class="img-wrapper">
-                                <a href="product.html">
-                                    <img src="~/assets/images/products/product-9.webp"
-                                         class="bg-img img-fluid blur-up lazyload" alt="product">
-                                </a>
-                                <div class="cart-wrap">
-                                    <ul>
-                                        <li>
-                                            <a href="javascript:void(0)" class="addtocart-btn">
-                                                <i data-feather="shopping-bag"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" data-bs-toggle="modal"
-                                               data-bs-target="#quick-view">
-                                                <i data-feather="eye"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" class="addtocompare-btn">
-                                                <i data-feather="refresh-cw"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" class="wishlist addtowishlist-btn">
-                                                <i data-feather="heart"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="product-details text-center">
-                                <h3 class="theme-color">
-                                    $49.00
-                                    <span class="font-light ml-1">$52.00</span>
-                                </h3>
-                                <a href="product.html" class="font-default">
-                                    <h5>Latest Sports Shoes</h5>
-                                </a>
-                                <ul class="rating mt-1">
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star"></i>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="product-box">
-                            <div class="img-wrapper">
-                                <a href="product.html">
-                                    <img src="~/assets/images/products/product-10.webp"
-                                         class="bg-img img-fluid blur-up lazyload" alt="product">
-                                </a>
-                                <div class="cart-wrap">
-                                    <ul>
-                                        <li>
-                                            <a href="javascript:void(0)" class="addtocart-btn">
-                                                <i data-feather="shopping-bag"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" data-bs-toggle="modal"
-                                               data-bs-target="#quick-view">
-                                                <i data-feather="eye"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" class="addtocompare-btn">
-                                                <i data-feather="refresh-cw"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" class="wishlist addtowishlist-btn">
-                                                <i data-feather="heart"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="product-details text-center">
-                                <h3 class="theme-color">
-                                    $49.00
-                                    <span class="font-light ml-1">$52.00</span>
-                                </h3>
-                                <a href="product.html" class="font-default">
-                                    <h5>Latest Sports Shoes</h5>
-                                </a>
-                                <ul class="rating mt-1">
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star"></i>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="product-box">
-                            <div class="img-wrapper">
-                                <a href="product.html">
-                                    <img src="~/assets/images/products/product-11.webp"
-                                         class="bg-img img-fluid blur-up lazyload" alt="product">
-                                </a>
-                                <div class="cart-wrap">
-                                    <ul>
-                                        <li>
-                                            <a href="javascript:void(0)" class="addtocart-btn">
-                                                <i data-feather="shopping-bag"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" data-bs-toggle="modal"
-                                               data-bs-target="#quick-view">
-                                                <i data-feather="eye"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" class="addtocompare-btn">
-                                                <i data-feather="refresh-cw"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" class="wishlist addtowishlist-btn">
-                                                <i data-feather="heart"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="product-details text-center">
-                                <h3 class="theme-color">
-                                    $49.00
-                                    <span class="font-light ml-1">$52.00</span>
-                                </h3>
-                                <a href="product.html" class="font-default">
-                                    <h5>Latest Sports Shoes</h5>
-                                </a>
-                                <ul class="rating mt-1">
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star"></i>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="product-box">
-                            <div class="img-wrapper">
-                                <a href="product.html">
-                                    <img src="~/assets/images/products/product-13.webp"
-                                         class="bg-img img-fluid blur-up lazyload" alt="product">
-                                </a>
-                                <div class="cart-wrap">
-                                    <ul>
-                                        <li>
-                                            <a href="javascript:void(0)" class="addtocart-btn">
-                                                <i data-feather="shopping-bag"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" data-bs-toggle="modal"
-                                               data-bs-target="#quick-view">
-                                                <i data-feather="eye"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" class="addtocompare-btn">
-                                                <i data-feather="refresh-cw"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" class="wishlist addtowishlist-btn">
-                                                <i data-feather="heart"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="product-details text-center">
-                                <h3 class="theme-color">
-                                    $49.00
-                                    <span class="font-light ml-1">$52.00</span>
-                                </h3>
-                                <a href="product.html" class="font-default">
-                                    <h5>Latest Sports Shoes</h5>
-                                </a>
-                                <ul class="rating mt-1">
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star"></i>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="product-box">
-                            <div class="img-wrapper">
-                                <a href="product.html">
-                                    <img src="~/assets/images/products/product-14.webp"
-                                         class="bg-img img-fluid blur-up lazyload" alt="product">
-                                </a>
-                                <div class="cart-wrap">
-                                    <ul>
-                                        <li>
-                                            <a href="javascript:void(0)" class="addtocart-btn">
-                                                <i data-feather="shopping-bag"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" data-bs-toggle="modal"
-                                               data-bs-target="#quick-view">
-                                                <i data-feather="eye"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" class="addtocompare-btn">
-                                                <i data-feather="refresh-cw"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" class="wishlist addtowishlist-btn">
-                                                <i data-feather="heart"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="product-details text-center">
-                                <h3 class="theme-color">
-                                    $49.00
-                                    <span class="font-light ml-1">$52.00</span>
-                                </h3>
-                                <a href="product.html" class="font-default">
-                                    <h5>Latest Sports Shoes</h5>
-                                </a>
-                                <ul class="rating mt-1">
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star"></i>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="product-box">
-                            <div class="img-wrapper">
-                                <a href="product.html">
-                                    <img src="~/assets/images/products/product-15.webp"
-                                         class="bg-img img-fluid blur-up lazyload" alt="product">
-                                </a>
-                                <div class="cart-wrap">
-                                    <ul>
-                                        <li>
-                                            <a href="javascript:void(0)" class="addtocart-btn">
-                                                <i data-feather="shopping-bag"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" data-bs-toggle="modal"
-                                               data-bs-target="#quick-view">
-                                                <i data-feather="eye"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" class="addtocompare-btn">
-                                                <i data-feather="refresh-cw"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" class="wishlist addtowishlist-btn">
-                                                <i data-feather="heart"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="product-details text-center">
-                                <h3 class="theme-color">
-                                    $49.00
-                                    <span class="font-light ml-1">$52.00</span>
-                                </h3>
-                                <a href="product.html" class="font-default">
-                                    <h5>Latest Sports Shoes</h5>
-                                </a>
-                                <ul class="rating mt-1">
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star"></i>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="product-box">
-                            <div class="img-wrapper">
-                                <a href="product.html">
-                                    <img src="~/assets/images/products/product-16.webp"
-                                         class="bg-img img-fluid blur-up lazyload" alt="product">
-                                </a>
-                                <div class="cart-wrap">
-                                    <ul>
-                                        <li>
-                                            <a href="javascript:void(0)" class="addtocart-btn">
-                                                <i data-feather="shopping-bag"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" data-bs-toggle="modal"
-                                               data-bs-target="#quick-view">
-                                                <i data-feather="eye"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" class="addtocompare-btn">
-                                                <i data-feather="refresh-cw"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" class="wishlist addtowishlist-btn">
-                                                <i data-feather="heart"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="product-details text-center">
-                                <h3 class="theme-color">
-                                    $49.00
-                                    <span class="font-light ml-1">$52.00</span>
-                                </h3>
-                                <a href="product.html" class="font-default">
-                                    <h5>Latest Sports Shoes</h5>
-                                </a>
-                                <ul class="rating mt-1">
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star"></i>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="product-box">
-                            <div class="img-wrapper">
-                                <a href="product.html">
-                                    <img src="~/assets/images/products/product-17.webp"
-                                         class="bg-img img-fluid blur-up lazyload" alt="product">
-                                </a>
-                                <div class="cart-wrap">
-                                    <ul>
-                                        <li>
-                                            <a href="javascript:void(0)" class="addtocart-btn">
-                                                <i data-feather="shopping-bag"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" data-bs-toggle="modal"
-                                               data-bs-target="#quick-view">
-                                                <i data-feather="eye"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" class="addtocompare-btn">
-                                                <i data-feather="refresh-cw"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" class="wishlist addtowishlist-btn">
-                                                <i data-feather="heart"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="product-details text-center">
-                                <h3 class="theme-color">
-                                    $49.00
-                                    <span class="font-light ml-1">$52.00</span>
-                                </h3>
-                                <a href="product.html" class="font-default">
-                                    <h5>Latest Sports Shoes</h5>
-                                </a>
-                                <ul class="rating mt-1">
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star"></i>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="product-box">
-                            <div class="img-wrapper">
-                                <a href="product.html">
-                                    <img src="~/assets/images/products/product-18.webp"
-                                         class="bg-img img-fluid blur-up lazyload" alt="product">
-                                </a>
-                                <div class="cart-wrap">
-                                    <ul>
-                                        <li>
-                                            <a href="javascript:void(0)" class="addtocart-btn">
-                                                <i data-feather="shopping-bag"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" data-bs-toggle="modal"
-                                               data-bs-target="#quick-view">
-                                                <i data-feather="eye"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" class="addtocompare-btn">
-                                                <i data-feather="refresh-cw"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" class="wishlist addtowishlist-btn">
-                                                <i data-feather="heart"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="product-details text-center">
-                                <h3 class="theme-color">
-                                    $49.00
-                                    <span class="font-light ml-1">$52.00</span>
-                                </h3>
-                                <a href="product.html" class="font-default">
-                                    <h5>Latest Sports Shoes</h5>
-                                </a>
-                                <ul class="rating mt-1">
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star"></i>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="product-box">
-                            <div class="img-wrapper">
-                                <a href="product.html">
-                                    <img src="~/assets/images/products/product-19.webp"
-                                         class="bg-img img-fluid blur-up lazyload" alt="product">
-                                </a>
-                                <div class="cart-wrap">
-                                    <ul>
-                                        <li>
-                                            <a href="javascript:void(0)" class="addtocart-btn">
-                                                <i data-feather="shopping-bag"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" data-bs-toggle="modal"
-                                               data-bs-target="#quick-view">
-                                                <i data-feather="eye"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" class="addtocompare-btn">
-                                                <i data-feather="refresh-cw"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" class="wishlist addtowishlist-btn">
-                                                <i data-feather="heart"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="product-details text-center">
-                                <h3 class="theme-color">
-                                    $49.00
-                                    <span class="font-light ml-1">$52.00</span>
-                                </h3>
-                                <a href="product.html" class="font-default">
-                                    <h5>Latest Sports Shoes</h5>
-                                </a>
-                                <ul class="rating mt-1">
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star"></i>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="product-box">
-                            <div class="img-wrapper">
-                                <a href="product.html">
-                                    <img src="~/assets/images/products/product-21.webp"
-                                         class="bg-img img-fluid blur-up lazyload" alt="product">
-                                </a>
-                                <div class="cart-wrap">
-                                    <ul>
-                                        <li>
-                                            <a href="javascript:void(0)" class="addtocart-btn">
-                                                <i data-feather="shopping-bag"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" data-bs-toggle="modal"
-                                               data-bs-target="#quick-view">
-                                                <i data-feather="eye"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" class="addtocompare-btn">
-                                                <i data-feather="refresh-cw"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" class="wishlist addtowishlist-btn">
-                                                <i data-feather="heart"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="product-details text-center">
-                                <h3 class="theme-color">
-                                    $49.00
-                                    <span class="font-light ml-1">$52.00</span>
-                                </h3>
-                                <a href="product.html" class="font-default">
-                                    <h5>Latest Sports Shoes</h5>
-                                </a>
-                                <ul class="rating mt-1">
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star"></i>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    }
 
                 </div>
             </div>
@@ -1238,19 +290,18 @@
         <div class="row m-0">
             <div class="col-sm-12 p-0">
                 <div class="title title-2 text-center">
-                    <h2>New Arrival</h2>
+                    <h2>Latest Products</h2>
                     <h5>Our collection</h5>
                 </div>
                 <div class="product-wrapper slide-5 light-arrow bottom-space">
 
-                    @foreach (Product product in Model.NewArrival)
+                    @foreach (Product product in Model.LatestProducts)
                     {
                         <div>
                             <div class="product-box">
                                 <div class="img-wrapper">
                                     <a href="product.html">
-                                        <img src="~/assets/images/products/@product.MainImage"
-                                             class="img-fluid bg-img blur-up lazyload" alt="product">
+                                        <img src="~/assets/images/products/@product.MainImage" class="img-fluid bg-img blur-up lazyload" alt="product">
                                     </a>
                                     <div class="cart-wrap">
                                         <ul>
@@ -1280,8 +331,16 @@
                                 </div>
                                 <div class="product-details text-center">
                                     <h3 class="theme-color">
-                                        $49.00
-                                        <span class="font-light ml-1">$52.00</span>
+                                        @if (product.DiscountPrice != null)
+                                        {
+                                            <span class="font-light">$@product.DiscountPrice</span>
+                                            <s class="ml-1">$@product.Price</s>
+                                        }
+                                        else
+                                        {
+                                            <span class="font-light">$@product.Price</span>
+                                        }
+
                                     </h3>
                                     <a href="product.html" class="font-default">
                                         <h5>@(product.Brand.Title + " " + product.Title)</h5>
@@ -1314,7 +373,6 @@
     </div>
 </section>
 <!-- Product Section end -->
-
 <!-- Brand Section start -->
 <section class="section-b-space">
     <div class="container">

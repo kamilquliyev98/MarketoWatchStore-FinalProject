@@ -164,7 +164,7 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
             if (dbBrand.Logo == null && brand.Logo == null && brand.IsShared == true)
             {
                 ModelState.AddModelError("IsShared", "You can't share without image.");
-                return View();
+                return View(dbBrand);
             }
 
             dbBrand.Title = brand.Title;
