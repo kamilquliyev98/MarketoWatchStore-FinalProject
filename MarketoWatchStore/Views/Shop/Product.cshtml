@@ -33,7 +33,7 @@
                                 Shop
                             </a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">@Model.Title</li>
+                        <li class="breadcrumb-item active" aria-current="page">@(Model.Brand.Title + " " + Model.Title)</li>
                     </ol>
                 </nav>
             </div>
@@ -53,7 +53,7 @@
                                 <div class="details-image ratio_asos">
                                     <div>
                                         <div class="product-image-tag">
-                                            <img src="~/assets/images/products/1.jpg" class="img-fluid w-100 blur-up lazyload" alt="product">
+                                            <img src="~/assets/images/products/@Model.MainImage" class="img-fluid w-100 blur-up lazyload" alt="product">
 
                                             <div class="label-tag">
                                                 <h6>
@@ -62,58 +62,33 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div>
-                                        <div class="product-image-tag">
-                                            <img src="~/assets/images/products/8.jpg"
-                                                 class="img-fluid w-100 blur-up lazyload" alt="product">
+                                    @foreach (ProductImage productImage in Model.ProductImages)
+                                    {
+                                        <div>
+                                            <div class="product-image-tag">
+                                                <img src="~/assets/images/products/@productImage.Image" class="img-fluid w-100 blur-up lazyload" alt="product">
 
-                                            <div class="label-tag">
-                                                <h6>
-                                                    <i class="fas fa-star"></i> 4.8 <span class="font-light">120</span>
-                                                </h6>
+                                                <div class="label-tag">
+                                                    <h6>
+                                                        <i class="fas fa-star"></i> 4.8 <span class="font-light">120</span>
+                                                    </h6>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div>
-                                        <div class="product-image-tag">
-                                            <img src="~/assets/images/products/9.jpg" class="img-fluid w-100 blur-up lazyload" alt="product">
+                                    }
 
-                                            <div class="label-tag">
-                                                <h6>
-                                                    <i class="fas fa-star"></i> 4.8 <span class="font-light">120</span>
-                                                </h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="product-image-tag">
-                                            <img src="~/assets/images/products/1.jpg" class="img-fluid w-100 blur-up lazyload" alt="product">
-
-                                            <div class="label-tag">
-                                                <h6>
-                                                    <i class="fas fa-star"></i> 4.8 <span class="font-light">120</span>
-                                                </h6>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
 
                                 <div class="details-image-option black-slide mt-4 rounded">
                                     <div>
-                                        <img src="~/assets/images/products/1.jpg" class="img-fluid blur-up lazyload" alt="product">
+                                        <img src="~/assets/images/products/@Model.MainImage" class="img-fluid blur-up lazyload" alt="product">
                                     </div>
-                                    <div>
-                                        <img src="~/assets/images/products/8.jpg" class="img-fluid blur-up lazyload"
-                                             alt="product">
-                                    </div>
-                                    <div>
-                                        <img src="~/assets/images/products/9.jpg" class="img-fluid blur-up lazyload"
-                                             alt="product">
-                                    </div>
-                                    <div>
-                                        <img src="~/assets/images/products/1.jpg" class="img-fluid blur-up lazyload"
-                                             alt="product">
-                                    </div>
+                                    @foreach (ProductImage productImage in Model.ProductImages)
+                                    {
+                                        <div>
+                                            <img src="~/assets/images/products/@productImage.Image" class="img-fluid blur-up lazyload" alt="product">
+                                        </div>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -122,24 +97,41 @@
                             <div class="cloth-details-size">
 
                                 <div class="details-image-concept">
-                                    <h2>CASIO G-Shock Rubiks Cube Limited Edition</h2>
+                                    <h2>@(Model.Brand.Title + " " + Model.Title)</h2>
                                 </div>
 
                                 <div class="label-section">
-                                    <span class="badge badge-grey-color">#1 Best seller</span>
-                                    <span class="label-text">in fashion</span>
+                                    @if (Model.ProductTags.Count() > 0)
+                                    {
+                                        foreach (ProductTag productTag in Model.ProductTags)
+                                        {
+                                            <span class="badge badge-grey-color">#@(productTag.Tag.Title)</span>
+                                        }
+                                    }
+                                    @if (Model.Count > 0)
+                                    {
+                                        <span class="label-text">In stock</span>
+                                    }
                                 </div>
 
-                                <h3 class="price-detail">$32.96 <del>$459.00</del><span>55% off</span></h3>
+                                @if (Model.DiscountPrice != null)
+                                {
+                                    var calculateDiscount = 100 - (double)Model.DiscountPrice * 100 / Model.Price;
+                                    <h3 class="price-detail">$@Model.DiscountPrice.Value.ToString("0.00") <del>$@(Model.Price.ToString("0.00"))</del><span>@(calculateDiscount.ToString("0.00"))% off</span></h3>
+                                }
+                                else
+                                {
+                                    <h3 class="price-detail">$@(Model.Price.ToString("0.00"))</h3>
+                                }
 
                                 <div class="color-image">
                                     <div class="image-select">
                                         <h5>Available Colors:</h5>
                                         <ul class="color-variant">
-                                            <li style="background-color: blue;"></li>
-                                            <li style="background-color: red;"></li>
-                                            <li style="background-color: green;"></li>
-                                            <li style="background-color: rebeccapurple;"></li>
+                                            @foreach (ProductColour productColour in Model.ProductColours)
+                                            {
+                                                <li style="background-color: @productColour.Colour.Title;"></li>
+                                            }
                                         </ul>
                                     </div>
                                 </div>
@@ -155,8 +147,7 @@
                                                     <i class="fas fa-minus"></i>
                                                 </button>
                                             </span>
-                                            <input type="text" name="quantity" class="form-control input-number"
-                                                   value="1">
+                                            <input type="text" name="quantity" class="form-control input-number" value="1">
                                             <span class="input-group-prepend">
                                                 <button type="button" class="btn quantity-right-plus"
                                                         data-type="plus" data-field="">
@@ -172,8 +163,7 @@
                                         <i class="fa fa-bookmark fz-16 me-2"></i>
                                         <span>Wishlist</span>
                                     </a>
-                                    <a href="javascript:void(0)" id="cartEffect"
-                                       class="btn btn-solid hover-solid btn-animation">
+                                    <a href="javascript:void(0)" id="cartEffect" class="btn btn-solid hover-solid btn-animation">
                                         <i class="fa fa-shopping-cart"></i>
                                         <span>Add To Cart</span>
                                     </a>
@@ -189,184 +179,58 @@
                 <div class="cloth-review">
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                            <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
-                                    data-bs-target="#desc" type="button">
-                                Description
-                            </button>
-
-                            <button class="nav-link" id="nav-speci-tab" data-bs-toggle="tab" data-bs-target="#speci"
-                                    type="button">
+                            <button class="nav-link active" id="nav-speci-tab" data-bs-toggle="tab" data-bs-target="#speci" type="button">
                                 Specifications
                             </button>
 
-                            <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab"
-                                    data-bs-target="#review" type="button">
+                            <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#review" type="button">
                                 Review
                             </button>
                         </div>
                     </nav>
 
                     <div class="tab-content" id="nav-tabContent">
-                        <div class="tab-pane fade show active" id="desc">
-                            <div class="shipping-chart">
-                                <div class="part">
-                                    <h4 class="inner-title mb-2">Give you a complete account of the system</h4>
-                                    <p class="font-light">
-                                        Nor again is there anyone who loves or pursues or
-                                        desires
-                                        to
-                                        obtain pain of itself, because it is pain, but because occasionally
-                                        circumstances occur in which toil and pain can procure him some great
-                                        pleasure.
-                                        To take a trivial example, which of us ever undertakes laborious
-                                        physical
-                                        exercise, except to obtain some advantage from it? But who has any right
-                                        to
-                                        find
-                                        fault with a man who chooses to enjoy a pleasure that has no annoying
-                                        consequences, or one who avoids a pain that produces no resultant
-                                        pleasure.
-                                    </p>
-                                </div>
-
-                                <div class="row g-3 align-items-center">
-                                    <div class="col-lg-8">
-                                        <p class="font-light">
-                                            Lorem ipsum dolor sit amet, consectetur
-                                            adipisicing
-                                            elit.
-                                            Ab, autem nemo? Tempora vitae assumenda laudantium unde magni,
-                                            soluta
-                                            repudiandae quam, neque voluptate deleniti consequatur laboriosam
-                                            veritatis?
-                                            Tempore dolor molestias voluptatum! Minima possimus, pariatur sed,
-                                            quasi
-                                            provident dolorum unde molestias, assumenda consequuntur odit magni
-                                            blanditiis obcaecati? Ea corporis odit dolorem fuga, fugiat soluta
-                                            consequuntur magni.
-                                        </p>
-
-                                        <div class="part mt-3">
-                                            <h5 class="inner-title mb-2">fabric:</h5>
-                                            <p class="font-light">
-                                                Art silk is manufactured by synthetic fibres
-                                                like
-                                                rayon. It's light in weight and is soft on the skin for comfort
-                                                in
-                                                summers.Art silk is manufactured by synthetic fibres like rayon.
-                                                It's
-                                                light in weight and is soft on the skin for comfort in summers.
-                                            </p>
-                                            <p class="font-light">
-                                                Lorem Ipsum is simply dummy text of the
-                                                printing
-                                                and typesetting industry. Lorem Ipsum has been the industry's
-                                                standard dummy text ever since the 1500s
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-4">
-                                        <img src="~/assets/images/poster/3.jpg"
-                                             class="img-fluid rounded blur-up lazyload" alt="poster-image">
-                                    </div>
-
-                                    <div class="col-lg-8 order-lg-2 mt-4">
-                                        <p class="font-light">
-                                            Lorem ipsum dolor sit amet, consectetur
-                                            adipisicing
-                                            elit.
-                                            Ab, autem nemo? Tempora vitae assumenda laudantium unde magni,
-                                            soluta
-                                            repudiandae quam, neque voluptate deleniti consequatur laboriosam
-                                            veritatis?
-                                            Tempore dolor molestias voluptatum! Minima possimus, pariatur sed,
-                                            quasi
-                                            provident dolorum unde molestias, assumenda consequuntur odit magni
-                                            blanditiis obcaecati? Ea corporis odit dolorem fuga, fugiat soluta
-                                            consequuntur magni.
-                                        </p>
-                                        <div class="part mt-3">
-                                            <p class="font-light">
-                                                Lorem ipsum, dolor sit amet consectetur
-                                                adipisicing
-                                                elit. Odio repellat numquam perspiciatis eum quis ab, sed dicta
-                                                tenetur
-                                                fugit culpa, aut distinctio deserunt quisquam ipsam
-                                                reprehenderit
-                                                iure?
-                                                Adipisci, optio enim? Voluptates voluptatum neque id ad commodi
-                                                quisquam
-                                                dolorem vitae inventore quasi! Officiis facere, iusto tempore
-                                                atque
-                                                magnam voluptas. Architecto laboriosam deleniti hic veritatis
-                                                nesciunt.
-                                                Aut officia quasi inventore et. Debitis.
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-4 order-lg-0 mt-4">
-                                        <img src="~/assets/images/poster/4.jpg"
-                                             class="img-fluid rounded blur-up lazyload" alt="poster-image">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="tab-pane fade" id="speci">
+                        <div class="tab-pane fade show active" id="speci">
                             <div class="pro mb-4">
-                                <p class="font-light">
-                                    The Model is wearing a white blouse from our stylist's
-                                    collection, see the image for a mock-up of what the actual blouse would look
-                                    like.it has text written on it in a black cursive language which looks great
-                                    on a white color.
-                                </p>
+                                @Html.Raw(Model.Description)
+
                                 <div class="table-responsive">
                                     <table class="table table-part">
                                         <tr>
-                                            <th>Product Dimensions</th>
-                                            <td>15 x 15 x 3 cm; 250 Grams</td>
+                                            <th>Brand</th>
+                                            <td>@Model.Brand.Title</td>
                                         </tr>
                                         <tr>
-                                            <th>Date First Available</th>
+                                            <th>Price</th>
                                             <td>5 April 2021</td>
                                         </tr>
                                         <tr>
-                                            <th>Manufacturer‏</th>
+                                            <th>Tax</th>
                                             <td>Aditya Birla Fashion and Retail Limited</td>
                                         </tr>
                                         <tr>
-                                            <th>ASIN</th>
+                                            <th>Gender</th>
                                             <td>B06Y28LCDN</td>
                                         </tr>
                                         <tr>
-                                            <th>Item model number</th>
+                                            <th>Display</th>
                                             <td>AMKP317G04244</td>
                                         </tr>
                                         <tr>
-                                            <th>Department</th>
+                                            <th>Power source</th>
                                             <td>Men</td>
                                         </tr>
                                         <tr>
-                                            <th>Item Weight</th>
+                                            <th>Special type</th>
                                             <td>250 G</td>
                                         </tr>
                                         <tr>
-                                            <th>Item Dimensions LxWxH</th>
+                                            <th>Features</th>
                                             <td>15 x 15 x 3 Centimeters</td>
                                         </tr>
                                         <tr>
-                                            <th>Net Quantity</th>
+                                            <th>Tags</th>
                                             <td>1 U</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Included Components‏</th>
-                                            <td>1-T-shirt</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Generic Name</th>
-                                            <td>T-shirt</td>
                                         </tr>
                                     </table>
                                 </div>
