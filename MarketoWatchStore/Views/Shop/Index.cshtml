@@ -1,6 +1,7 @@
 ﻿@model ShopVM
 @{
     ViewBag.Title = "Marketo | Shop";
+    int inputId = 0;
 }
 
 <!-- Breadcrumb section start -->
@@ -48,177 +49,56 @@
                     <div class="accordion category-name" id="accordionExample">
 
                         <div class="accordion-item category-rating">
-                            <h2 class="accordion-header" id="headingTwo">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseTwo">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
                                     Brand
                                 </button>
                             </h2>
-                            <div id="collapseTwo" class="accordion-collapse collapse show"
-                                 data-bs-parent="#accordionExample">
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                 <div class="accordion-body category-scroll">
                                     <ul class="category-list">
-                                        <li>
-                                            <div class="form-check ps-0 custom-form-check">
-                                                <input class="checkbox_animated check-it" type="checkbox"
-                                                       id="flexCheckDefault1">
-                                                <label class="form-check-label" for="flexCheckDefault1">Zara</label>
-                                                <p class="font-light">(25)</p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="form-check ps-0 custom-form-check">
-                                                <input class="checkbox_animated check-it" type="checkbox"
-                                                       id="flexCheckDefault2">
-                                                <label class="form-check-label" for="flexCheckDefault2">
-                                                    Allen
-                                                    Solly
-                                                </label>
-                                                <p class="font-light">(25)</p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="form-check ps-0 custom-form-check">
-                                                <input class="checkbox_animated check-it" type="checkbox"
-                                                       id="flexCheckDefault3">
-                                                <label class="form-check-label" for="flexCheckDefault3">
-                                                    Louis
-                                                    Philippe
-                                                </label>
-                                                <p class="font-light">(25)</p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="form-check ps-0 custom-form-check">
-                                                <input class="checkbox_animated check-it" type="checkbox"
-                                                       id="flexCheckDefault4">
-                                                <label class="form-check-label" for="flexCheckDefault4">
-                                                    Louis
-                                                    Philippe Sport
-                                                </label>
-                                                <p class="font-light">(25)</p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="form-check ps-0 custom-form-check">
-                                                <input class="checkbox_animated check-it" type="checkbox"
-                                                       id="flexCheckDefault5">
-                                                <label class="form-check-label" for="flexCheckDefault5">H&M</label>
-                                                <p class="font-light">(25)</p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="form-check ps-0 custom-form-check">
-                                                <input class="checkbox_animated check-it" type="checkbox"
-                                                       id="flexCheckDefault6">
-                                                <label class="form-check-label" for="flexCheckDefault6">Fila</label>
-                                                <p class="font-light">(25)</p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="form-check ps-0 custom-form-check">
-                                                <input class="checkbox_animated check-it" type="checkbox"
-                                                       id="flexCheckDefault7">
-                                                <label class="form-check-label" for="flexCheckDefault7">Puma</label>
-                                                <p class="font-light">(25)</p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="form-check ps-0 custom-form-check">
-                                                <input class="checkbox_animated check-it" type="checkbox"
-                                                       id="flexCheckDefault8">
-                                                <label class="form-check-label" for="flexCheckDefault8">Nike</label>
-                                                <p class="font-light">(25)</p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="form-check ps-0 custom-form-check">
-                                                <input class="checkbox_animated check-it" type="checkbox"
-                                                       id="flexCheckDefault9">
-                                                <label class="form-check-label" for="flexCheckDefault9">HRX</label>
-                                                <p class="font-light">(25)</p>
-                                            </div>
-                                        </li>
+                                        @foreach (Brand brand in Model.Brands)
+                                        {
+                                            <li>
+                                                <div class="form-check ps-0 custom-form-check">
+                                                    <input class="checkbox_animated check-it" type="checkbox" id="brand@(brand.Id)">
+                                                    <label class="form-check-label" for="brand@(brand.Id)">@brand.Title</label>
+                                                    <p class="font-light">(@brand.Products.Where(p => !p.IsDeleted).Count())</p>
+                                                </div>
+                                            </li>
+                                        }
                                     </ul>
                                 </div>
                             </div>
                         </div>
 
                         <div class="accordion-item category-color">
-                            <h2 class="accordion-header" id="headingThree">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseThree">
-                                    Color
+                            <h2 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                                    Colour
                                 </button>
                             </h2>
-                            <div id="collapseThree" class="accordion-collapse collapse show"
-                                 aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                            <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     <ul class="category-list">
-                                        <li>
-                                            <a href="javascript:void(0)">
-                                                <i class="fas fa-check"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" style="background-color: #fab1a0;">
-                                                <i class="fas fa-check"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" style="background-color: #10ac84;">
-                                                <i class="fas fa-check"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" style="background-color: #ff9f43;">
-                                                <i class="fas fa-check"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" style="background-color: #8395a7;">
-                                                <i class="fas fa-check"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" style="background-color: #fab1a0;">
-                                                <i class="fas fa-check"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" style="background-color: #10ac84;">
-                                                <i class="fas fa-check"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" style="background-color: blue;">
-                                                <i class="fas fa-check"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" style="background-color: red;">
-                                                <i class="fas fa-check"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)" style="background-color: green;">
-                                                <i class="fas fa-check"></i>
-                                            </a>
-                                        </li>
+                                        @foreach (Colour colour in Model.Colours)
+                                        {
+                                            <li>
+                                                <a asp-route-colourId="@colour.Id" style="background-color: @colour.Title;"></a>
+                                            </li>
+                                        }
                                     </ul>
                                 </div>
                             </div>
                         </div>
 
                         <div class="accordion-item category-price">
-                            <h2 class="accordion-header" id="headingFour">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseFour">
+                            <h2 class="accordion-header" id="headingThree">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
                                     Price
                                 </button>
                             </h2>
-                            <div id="collapseFour" class="accordion-collapse collapse show"
-                                 aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                            <div id="collapseThree" class="accordion-collapse collapse show" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     <div class="range-slider category-list">
                                         <input type="text" class="js-range-slider" value="" />
@@ -228,36 +108,52 @@
                         </div>
 
                         <div class="accordion-item category-rating">
-                            <h2 class="accordion-header" id="headingOne">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseOne">
+                            <h2 class="accordion-header" id="headingFour">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour">
                                     Gender
                                 </button>
                             </h2>
-                            <div id="collapseOne" class="accordion-collapse collapse show"
-                                 aria-labelledby="headingOne">
+                            <div id="collapseFour" class="accordion-collapse collapse show" aria-labelledby="headingFour">
                                 <div class="accordion-body category-scroll">
                                     <ul class="category-list">
-                                        <li>
-                                            <div class="form-check ps-0 custom-form-check">
-                                                <input class="checkbox_animated check-it" type="checkbox"
-                                                       id="flexCheckDefault10">
-                                                <label class="form-check-label" for="flexCheckDefault10">
-                                                    Men's
-                                                </label>
-                                                <p class="font-light">(25)</p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="form-check ps-0 custom-form-check">
-                                                <input class="checkbox_animated check-it" type="checkbox"
-                                                       id="flexCheckDefault11">
-                                                <label class="form-check-label" for="flexCheckDefault11">
-                                                    Women's
-                                                </label>
-                                                <p class="font-light">(25)</p>
-                                            </div>
-                                        </li>
+                                        @foreach (var gender in Model.Genders)
+                                        {
+                                            <li>
+                                                <div class="form-check ps-0 custom-form-check">
+                                                    <input class="checkbox_animated check-it" type="checkbox" id="gender@(++inputId)">
+                                                    <label class="form-check-label" for="gender@(inputId)">
+                                                        @gender
+                                                    </label>
+                                                    <p class="font-light">@Model.Products.Where(p => p.Gender == gender && !p.IsDeleted).Count()</p>
+                                                </div>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item category-rating">
+                            <h2 class="accordion-header" id="headingFive">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive">
+                                    Features
+                                </button>
+                            </h2>
+                            <div id="collapseFive" class="accordion-collapse collapse show" aria-labelledby="headingFive">
+                                <div class="accordion-body category-scroll">
+                                    <ul class="category-list">
+                                        @foreach (Feature feature in Model.Features)
+                                        {
+                                            <li>
+                                                <div class="form-check ps-0 custom-form-check">
+                                                    <input class="checkbox_animated check-it" type="checkbox" id="feature@(feature.Id)">
+                                                    <label class="form-check-label" for="feature@(feature.Id)">
+                                                        @feature.Title
+                                                    </label>
+                                                    <p class="font-light">(@(feature.ProductFeatures.Count()))</p>
+                                                </div>
+                                            </li>
+                                        }
                                     </ul>
                                 </div>
                             </div>
@@ -265,134 +161,60 @@
 
                         <div class="accordion-item category-rating">
                             <h2 class="accordion-header" id="headingSix">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseSix">
-                                    Features
-                                </button>
-                            </h2>
-                            <div id="collapseSix" class="accordion-collapse collapse show"
-                                 aria-labelledby="headingSix">
-                                <div class="accordion-body category-scroll">
-                                    <ul class="category-list">
-                                        <li>
-                                            <div class="form-check ps-0 custom-form-check">
-                                                <input class="checkbox_animated check-it" type="checkbox"
-                                                       id="flexCheckDefault10">
-                                                <label class="form-check-label" for="flexCheckDefault10">
-                                                    Alarm
-                                                </label>
-                                                <p class="font-light">(25)</p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="form-check ps-0 custom-form-check">
-                                                <input class="checkbox_animated check-it" type="checkbox"
-                                                       id="flexCheckDefault11">
-                                                <label class="form-check-label" for="flexCheckDefault11">
-                                                    Altimeter
-                                                </label>
-                                                <p class="font-light">(25)</p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="form-check ps-0 custom-form-check">
-                                                <input class="checkbox_animated check-it" type="checkbox"
-                                                       id="flexCheckDefault11">
-                                                <label class="form-check-label" for="flexCheckDefault11">
-                                                    Calendar
-                                                </label>
-                                                <p class="font-light">(25)</p>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item category-rating">
-                            <h2 class="accordion-header" id="headingSeven">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseSeven">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix">
                                     Power Source
                                 </button>
                             </h2>
-                            <div id="collapseSeven" class="accordion-collapse collapse show"
-                                 aria-labelledby="headingSeven">
+                            <div id="collapseSix" class="accordion-collapse collapse show" aria-labelledby="headingSix">
                                 <div class="accordion-body category-scroll">
                                     <ul class="category-list">
-                                        <li>
-                                            <div class="form-check ps-0 custom-form-check">
-                                                <input class="checkbox_animated check-it" type="checkbox"
-                                                       id="flexCheckDefault10">
-                                                <label class="form-check-label" for="flexCheckDefault10">
-                                                    Solar
-                                                </label>
-                                                <p class="font-light">(25)</p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="form-check ps-0 custom-form-check">
-                                                <input class="checkbox_animated check-it" type="checkbox"
-                                                       id="flexCheckDefault11">
-                                                <label class="form-check-label" for="flexCheckDefault11">
-                                                    Quartz
-                                                </label>
-                                                <p class="font-light">(25)</p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="form-check ps-0 custom-form-check">
-                                                <input class="checkbox_animated check-it" type="checkbox"
-                                                       id="flexCheckDefault11">
-                                                <label class="form-check-label" for="flexCheckDefault11">
-                                                    Smartwatch
-                                                </label>
-                                                <p class="font-light">(25)</p>
-                                            </div>
-                                        </li>
+                                        @foreach (PowerSource powerSource in Model.PowerSources)
+                                        {
+                                            <li>
+                                                <div class="form-check ps-0 custom-form-check">
+                                                    <input class="checkbox_animated check-it" type="checkbox" id="powersource@(powerSource.Id)">
+                                                    <label class="form-check-label" for="powersource@(powerSource.Id)">
+                                                        @powerSource.Title
+                                                    </label>
+                                                    <p class="font-light">(@(powerSource.Products.Where(p => !p.IsDeleted).Count()))</p>
+                                                </div>
+                                            </li>
+                                        }
                                     </ul>
                                 </div>
                             </div>
                         </div>
 
                         <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingFive">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseFive">
+                            <h2 class="accordion-header" id="headingSeven">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven">
                                     Discount Range
                                 </button>
                             </h2>
-                            <div id="collapseFive" class="accordion-collapse collapse show"
-                                 aria-labelledby="headingFive" data-bs-parent="#accordionExample">
+                            <div id="collapseSeven" class="accordion-collapse collapse show" aria-labelledby="headingSeven" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     <ul class="category-list">
                                         <li>
                                             <div class="form-check ps-0 custom-form-check">
-                                                <input class="checkbox_animated check-it" type="checkbox"
-                                                       id="flexCheckDefault19">
-                                                <label class="form-check-label" for="flexCheckDefault19">
-                                                    5% and
-                                                    above
+                                                <input class="checkbox_animated check-it" type="checkbox" id="off5">
+                                                <label class="form-check-label" for="off5">
+                                                    5% and above
                                                 </label>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="form-check ps-0 custom-form-check">
-                                                <input class="checkbox_animated check-it" type="checkbox"
-                                                       id="flexCheckDefault20">
-                                                <label class="form-check-label" for="flexCheckDefault20">
-                                                    10% and
-                                                    above
+                                                <input class="checkbox_animated check-it" type="checkbox" id="off10">
+                                                <label class="form-check-label" for="off10">
+                                                    10% and above
                                                 </label>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="form-check ps-0 custom-form-check">
-                                                <input class="checkbox_animated check-it" type="checkbox"
-                                                       id="flexCheckDefault21">
-                                                <label class="form-check-label" for="flexCheckDefault21">
-                                                    20% and
-                                                    above
+                                                <input class="checkbox_animated check-it" type="checkbox" id="off20">
+                                                <label class="form-check-label" for="off20">
+                                                    20% and above
                                                 </label>
                                             </div>
                                         </li>
@@ -443,9 +265,21 @@
                             <div class="product-box">
                                 <div class="img-wrapper">
                                     <div class="front">
-                                        <a href="product.html">
+                                        <a asp-controller="shop" asp-action="product" asp-route-id="@product.Id">
                                             <img src="~/assets/images/products/@product.MainImage" class="bg-img blur-up lazyload" alt="product">
                                         </a>
+                                    </div>
+                                    <div class="label-block">
+                                        @if (product.IsNewArrival)
+                                        {
+                                            <span class="label label-black">New</span>
+                                        }
+                                        @if (product.DiscountPrice != null)
+                                        {
+                                            var calculateDiscount = 100 - (double)product.DiscountPrice * 100 / product.Price;
+
+                                            <span class="label label-theme">@(calculateDiscount.ToString("0.00"))% Off</span>
+                                        }
                                     </div>
                                     <div class="cart-wrap">
                                         <ul>
@@ -455,7 +289,7 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view">
+                                                <a asp-controller="shop" asp-action="quickview" asp-route-id="@product.Id" id="quickViewBtn" data-bs-toggle="modal" data-bs-target="#quick-view">
                                                     <i data-feather="eye"></i>
                                                 </a>
                                             </li>
@@ -510,19 +344,9 @@
                                         </ul>
                                     </div>
                                     <div class="main-price">
-                                        <a href="product.html" class="font-default">
+                                        <a asp-controller="shop" asp-action="product" class="font-default">
                                             <h5 class="ms-0">@product.Title</h5>
                                         </a>
-                                        <div class="listing-content">
-                                            <span class="font-light">Regular Fit</span>
-                                            <p class="font-light">
-                                                Lorem ipsum, dolor sit amet consectetur adipisicing
-                                                elit. Sit, deserunt? Asperiores aliquam voluptatum culpa aliquid ab
-                                                ducimus eaque illum, quibusdam reiciendis id ad consectetur quis, animi
-                                                qui, minus quidem eveniet! Dolorum magnam numquam, asperiores
-                                                accusantium architecto placeat quam officia, tempore repellendus.
-                                            </p>
-                                        </div>
                                         <h3 class="theme-color">$78.00</h3>
                                         <a href="#" class="btn listing-content">Add To Cart</a>
                                     </div>
@@ -566,3 +390,14 @@
     </div>
 </section>
 <!-- Shop Section end -->
+
+@section CSS{
+    <link rel="stylesheet" href="~/assets/ion.rangeSlider/css/ion.rangeSlider.min.css">
+}
+
+@section JS{
+    <script src="~/assets/js/price-filter.js"></script>
+    <script src="~/assets/ion.rangeSlider/js/ion.rangeSlider.min.js"></script>
+    <script src="~/assets/js/filter.js"></script>
+    <script src="~/assets/js/custom.js"></script>
+}

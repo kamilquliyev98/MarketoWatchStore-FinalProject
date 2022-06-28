@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@inject LayoutService layoutService
+@{ 
+    Setting setting = await layoutService.GetSetting();
+}
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -48,11 +53,13 @@
           integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA=="
           crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    @RenderSection("CSS", required: false)
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="~/assets/css/style.css" id="mainCSS">
 
     <!-- Dark / Light Mode JS -->
-    <script src="~/assets/js/dark-mode.js"></script>
+    <script src="~/assets/js/dark-mode.js" asp-append-version="true"></script>
 </head>
 
 <body>
@@ -64,7 +71,7 @@
                 <div class="row">
                     <div class="col-auto d-xl-block d-none">
                         <ul class="border-list">
-                            <li>Marketo Ecommerce always free delivery</li>
+                            <li>@setting?.Offer</li>
                         </ul>
                     </div>
                     <div class="col-auto">
@@ -122,7 +129,7 @@
                             <div class="menu-left">
                                 <div class="brand-logo">
                                     <a asp-controller="home" asp-action="index">
-                                        <img src="~/assets/images/logo/logo.png" class="img-fluid blur-up lazyload" alt="logo">
+                                        <img src="~/assets/images/logo/@setting.Logo" class="img-fluid blur-up lazyload" alt="logo">
                                     </a>
                                 </div>
                             </div>
@@ -207,7 +214,7 @@
                                                     </li>
                                                     <li>
                                                         <div class="media">
-                                                            <img src="~/assets/images/products/9.jpg"
+                                                            <img src="~/assets/images/products/3.jpg"
                                                                  class="img-fluid blur-up lazyload" alt="product">
                                                             <div class="media-body">
                                                                 <h6>Womens Stylish Jacket</h6>
@@ -261,7 +268,7 @@
                                                 <ul class="custom-scroll">
                                                     <li>
                                                         <div class="media">
-                                                            <img src="~/assets/images/products/9.jpg"
+                                                            <img src="~/assets/images/products/3.jpg"
                                                                  class="img-fluid blur-up lazyload" alt="product">
                                                             <div class="media-body">
                                                                 <h6>Slim Fit Plastic Coat</h6>
@@ -277,8 +284,7 @@
                                                     </li>
                                                     <li>
                                                         <div class="media">
-                                                            <img src="~/assets/images/products/8.jpg"
-                                                                 class="img-fluid blur-up lazyload" alt="product">
+                                                            <img src="~/assets/images/products/2.jpg" class="img-fluid blur-up lazyload" alt="product">
                                                             <div class="media-body">
                                                                 <h6>Womens Stylish Jacket</h6>
                                                                 <div class="qty-with-price">
@@ -317,14 +323,14 @@
                                         </button>
                                         <div class="onhover-div">
                                             @*<a asp-controller="shop" asp-action="index">
-                                                <div class="wislist-empty">
-                                                    <i class="fa-solid fa-cart-arrow-down"></i>
-                                                    <h6 class="mb-1">
-                                                        Your shopping cart is empty! Click here to go to
-                                                        shop! :)
-                                                    </h6>
-                                                </div>
-                                            </a>*@
+                                                    <div class="wislist-empty">
+                                                        <i class="fa-solid fa-cart-arrow-down"></i>
+                                                        <h6 class="mb-1">
+                                                            Your shopping cart is empty! Click here to go to
+                                                            shop! :)
+                                                        </h6>
+                                                    </div>
+                                                </a>*@
                                             <div class="cart-menu">
                                                 <div class="cart-title">
                                                     <h6>
@@ -339,7 +345,7 @@
                                                 <ul class="custom-scroll">
                                                     <li>
                                                         <div class="media">
-                                                            <img src="~/assets/images/products/8.jpg"
+                                                            <img src="~/assets/images/products/2.jpg"
                                                                  class="img-fluid blur-up lazyload" alt="product">
                                                             <div class="media-body">
                                                                 <h6>Slim Fit Plastic Coat</h6>
@@ -359,7 +365,7 @@
                                                     </li>
                                                     <li>
                                                         <div class="media">
-                                                            <img src="~/assets/images/products/9.jpg"
+                                                            <img src="~/assets/images/products/3.jpg"
                                                                  class="img-fluid blur-up lazyload" alt="product">
                                                             <div class="media-body">
                                                                 <h6>Womens Stylish Jacket</h6>
@@ -434,7 +440,7 @@
                                         </li>
                                         <li>
                                             <div class="product-cart media">
-                                                <img src="~/assets/images/products/8.jpg"
+                                                <img src="~/assets/images/products/2.jpg"
                                                      class="img-fluid blur-up lazyload" alt="product">
                                                 <div class="media-body">
                                                     <a href="javascript:void(0)">
@@ -519,27 +525,36 @@
                         <div class="footer-contact">
                             <div class="brand-logo">
                                 <a asp-controller="home" asp-action="index" class="footer-logo">
-                                    <img src="~/assets/images/logo/logo.png" class="img-fluid blur-up lazyload"
-                                         alt="logo">
+                                    <img src="~/assets/images/logo/@setting.Logo" class="img-fluid blur-up lazyload" alt="logo">
                                 </a>
                             </div>
 
                             <ul class="contact-lists">
+                                @if (setting.Phone2 != null)
+                                {
+                                    <li>
+                                        <span>
+                                            <b>Phone:</b> <span class="font-light">@setting.Phone2</span>
+                                        </span>
+                                    </li>
+                                }
                                 <li>
                                     <span>
-                                        <b>Phone:</b> <span class="font-light"> + 185659635</span>
+                                        <b>Email:</b><span class="font-light">@setting.Email1</span>
                                     </span>
-
                                 </li>
+                                @if (setting.Email2 != null)
+                                {
+                                    <li>
+                                        <span>
+                                            <b>Other email:</b> <span class="font-light">@setting.Email2</span>
+                                        </span>
+                                    </li>
+                                }
                                 <li>
                                     <span>
                                         <b>Address:</b>
-                                        <span class="font-light">1418 Riverwood Drive, Suite 3245 Cottonwood, CA 96052, United States</span>
-                                    </span>
-                                </li>
-                                <li>
-                                    <span>
-                                        <b>Email:</b><span class="font-light">marketo@gmail.com</span>
+                                        <span class="font-light">@setting.Address</span>
                                     </span>
                                 </li>
                             </ul>
@@ -573,22 +588,12 @@
                             <h3>Got Qustion? Call Us 24/7</h3>
                             <div class="footer-number">
                                 <div class="footer-number-image">
-                                    <img src="~/assets/images/other/headphone.png"
-                                         class="img-fluid blur-up lazyload" alt="phone">
+                                    <img src="~/assets/images/other/headphone.png" class="img-fluid blur-up lazyload" alt="phone">
                                 </div>
 
                                 <div class="footer-number-container">
-                                    <h3>+91 98765 43210</h3>
+                                    <h3>@setting.Phone1</h3>
                                 </div>
-                            </div>
-
-                            <div class="footer-details">
-                                <p class="font-light">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo ab
-                                    dolorem nulla
-                                    impedit saepe esse et? Ea, totam recusandae doloribus ipsa esse voluptate quis nisi?
-                                    Voluptate.
-                                </p>
                             </div>
                         </div>
                     </div>
@@ -614,109 +619,7 @@
     <!-- Quick view modal start -->
     <div class="modal fade quick-view-modal" id="quick-view">
         <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                <div class="modal-body">
-                    <div class="row gy-4">
-                        <div class="col-lg-6">
-                            <div class="quick-view-image">
-                                <div class="quick-view-slider ratio_2">
-                                    <div>
-                                        <img src="~/assets/images/products/1.jpg"
-                                             class="img-fluid bg-img blur-up lazyload" alt="product">
-                                    </div>
-                                    <div>
-                                        <img src="~/assets/images/products/8.jpg"
-                                             class="img-fluid bg-img blur-up lazyload" alt="product">
-                                    </div>
-                                    <div>
-                                        <img src="~/assets/images/products/9.jpg"
-                                             class="img-fluid bg-img blur-up lazyload" alt="product">
-                                    </div>
-                                    <div>
-                                        <img src="~/assets/images/products/1.jpg"
-                                             class="img-fluid bg-img blur-up lazyload" alt="product">
-                                    </div>
-                                </div>
-                                <div class="quick-nav">
-                                    <div>
-                                        <img src="~/assets/images/products/1.jpg" class="img-fluid blur-up lazyload"
-                                             alt="product">
-                                    </div>
-                                    <div>
-                                        <img src="~/assets/images/products/8.jpg" class="img-fluid blur-up lazyload"
-                                             alt="product">
-                                    </div>
-                                    <div>
-                                        <img src="~/assets/images/products/9.jpg" class="img-fluid blur-up lazyload"
-                                             alt="product">
-                                    </div>
-                                    <div>
-                                        <img src="~/assets/images/products/1.jpg" class="img-fluid blur-up lazyload"
-                                             alt="product">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="product-right">
-                                <h2 class="mb-2">Latest Sports Shoes</h2>
-                                <ul class="rating mt-1">
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star theme-color"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-star"></i>
-                                    </li>
-                                    <li class="font-light">(In stock)</li>
-                                </ul>
-                                <div class="price mt-3">
-                                    <h3>$20.00</h3>
-                                </div>
-                                <div class="color-types">
-                                    <h4>available colors:</h4>
-                                    <ul class="color-variant mb-0">
-                                        <li style="background-color: blue;"></li>
-                                        <li style="background-color: red;"></li>
-                                        <li style="background-color: green;"></li>
-                                        <li style="background-color: rebeccapurple;"></li>
-                                    </ul>
-                                </div>
-                                <div class="product-details">
-                                    <h4>product details</h4>
-                                    <ul>
-                                        <li>
-                                            <span class="font-light">Style :</span> Boat Shoe
-                                        </li>
-                                        <li>
-                                            <span class="font-light">Catgory :</span> Sports Shoes
-                                        </li>
-                                        <li>
-                                            <span class="font-light">Tags:</span> Summer
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="product-btns">
-                                    <a asp-controller="shoppingcart" asp-action="index" class="btn btn-solid-default btn-sm">Add to cart</a>
-                                    <a href="product.html" class="btn btn-solid-default btn-sm">
-                                        View
-                                        details
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div class="modal-content"></div>
         </div>
     </div>
     <!-- Quick view modal end -->
@@ -765,6 +668,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
             integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    @RenderSection("JS", required: false)
 
     <!-- Script JS -->
     <script src="~/assets/js/script.js"></script>

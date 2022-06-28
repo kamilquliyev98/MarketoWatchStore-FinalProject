@@ -149,7 +149,7 @@
                                                 @("$" + @productPoster.Price)
                                             }
                                         </h3>
-                                        <a href="shop.html" class="btn btn-solid-default">BUY NOW</a>
+                                        <a asp-controller="shop" asp-action="product" asp-route-id="@productPoster.Id" class="btn btn-solid-default">BUY NOW</a>
                                     </div>
                                 </div>
                             </div>
@@ -178,7 +178,7 @@
                         <div>
                             <div class="product-box">
                                 <div class="img-wrapper">
-                                    <a href="product.html">
+                                    <a asp-controller="shop" asp-action="product" asp-route-id="@product.Id">
                                         <img src="~/assets/images/products/@product.MainImage" class="img-fluid bg-img blur-up lazyload" alt="product">
                                     </a>
                                     <div class="cart-wrap">
@@ -189,8 +189,7 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                   data-bs-target="#quick-view">
+                                                <a asp-controller="shop" asp-action="quickview" asp-route-id="@product.Id" id="quickViewBtn" data-bs-toggle="modal" data-bs-target="#quick-view">
                                                     <i data-feather="eye"></i>
                                                 </a>
                                             </li>
@@ -220,7 +219,7 @@
                                         }
 
                                     </h3>
-                                    <a href="product.html" class="font-default">
+                                    <a asp-controller="shop" asp-action="product" asp-route-id="@product.Id" class="font-default">
                                         <h5>@(product.Brand.Title + " " + product.Title)</h5>
                                     </a>
                                     <ul class="rating mt-1">
@@ -300,7 +299,7 @@
                         <div>
                             <div class="product-box">
                                 <div class="img-wrapper">
-                                    <a href="product.html">
+                                    <a asp-controller="shop" asp-action="product" asp-route-id="@product.Id">
                                         <img src="~/assets/images/products/@product.MainImage" class="img-fluid bg-img blur-up lazyload" alt="product">
                                     </a>
                                     <div class="cart-wrap">
@@ -311,8 +310,7 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                   data-bs-target="#quick-view">
+                                                <a asp-controller="shop" asp-action="quickview" asp-route-id="@product.Id" id="quickViewBtn" data-bs-toggle="modal" data-bs-target="#quick-view">
                                                     <i data-feather="eye"></i>
                                                 </a>
                                             </li>
@@ -342,7 +340,7 @@
                                         }
 
                                     </h3>
-                                    <a href="product.html" class="font-default">
+                                    <a asp-controller="shop" asp-action="product" asp-route-id="@product.Id" class="font-default">
                                         <h5>@(product.Brand.Title + " " + product.Title)</h5>
                                     </a>
                                     <ul class="rating mt-1">
@@ -404,3 +402,7 @@
     </div>
 </section>
 <!-- Brand Section end -->
+
+@section JS{
+    <script src="~/assets/js/custom.js" asp-append-version="true"></script>
+}

@@ -26,8 +26,15 @@ using MarketoWatchStore.ViewModels;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 4 "C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\Views\_ViewImports.cshtml"
+using MarketoWatchStore.Services;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"4d2e6fcd58ca066ebb9934a198d0fc340d19ee14", @"/Views/FAQ/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"a726e7f69dcd06b93b9fc1fc595269a54470df9e", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d7a921d3e41219aae199cad09ee3084e90fd730c", @"/Views/_ViewImports.cshtml")]
     public class Views_FAQ_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<FAQVM>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-controller", "home", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -89,7 +96,7 @@ using MarketoWatchStore.ViewModels;
                     <ol class=""breadcrumb"">
                         <li class=""breadcrumb-item"">
                             ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4d2e6fcd58ca066ebb9934a198d0fc340d19ee144606", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4d2e6fcd58ca066ebb9934a198d0fc340d19ee144811", async() => {
                 WriteLiteral("\r\n                                <i class=\"fas fa-home\"></i>\r\n                            ");
             }
             );

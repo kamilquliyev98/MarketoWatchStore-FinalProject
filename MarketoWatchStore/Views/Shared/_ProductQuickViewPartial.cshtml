@@ -1,0 +1,93 @@
+﻿@model Product
+
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="modal-body">
+        <div class="row gy-4">
+            <div class="col-lg-6">
+                <div class="quick-view-image">
+                    <div class="quick-view-slider ratio_2">
+                        <div>
+                            <img src="~/assets/images/products/@Model.MainImage" class="img-fluid bg-img blur-up lazyload" alt="product">
+                        </div>
+                        @foreach (ProductImage productImage in Model.ProductImages)
+                        {
+                            <div>
+                                <img src="~/assets/images/products/@productImage.Image" class="img-fluid bg-img blur-up lazyload" alt="product">
+                            </div>
+                        }
+                    </div>
+                    <div class="quick-nav">
+                        <div>
+                            <img src="~/assets/images/products/@Model.MainImage" class="img-fluid bg-img blur-up lazyload" alt="product">
+                        </div>
+                        @foreach (ProductImage productImage in Model.ProductImages)
+                        {
+                            <div>
+                                <img src="~/assets/images/products/@productImage.Image" class="img-fluid bg-img blur-up lazyload" alt="product">
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="product-right">
+                    <h2 class="mb-2">@(Model.Brand.Title + " " + Model.Title)</h2>
+                    <ul class="rating mt-1">
+                        <li>
+                            <i class="fas fa-star theme-color"></i>
+                        </li>
+                        <li>
+                            <i class="fas fa-star theme-color"></i>
+                        </li>
+                        <li>
+                            <i class="fas fa-star theme-color"></i>
+                        </li>
+                        <li>
+                            <i class="fas fa-star"></i>
+                        </li>
+                        <li>
+                            <i class="fas fa-star"></i>
+                        </li>
+                        <li class="font-light">(@((Model.Count > 0) ? "In stock" : "Out of stock"))</li>
+                    </ul>
+                    <div class="price mt-3">
+                        @if (Model.DiscountPrice != null)
+                        {
+                            <h3>$@(Model.DiscountPrice) <s>$@(Model.Price)</s></h3>
+                        }
+                        else
+                        {
+                            <h3>$@(Model.Price)</h3>
+                        }
+                    </div>
+                    <div class="color-types">
+                        <h4>Available colors:</h4>
+                        <ul class="color-variant mb-0">
+                            @foreach (ProductColour productColour in Model.ProductColours)
+                            {
+                                <li style="background-color: @productColour.Colour.Title;"></li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="product-details">
+                        <h4>product details</h4>
+                        <ul>
+                            <li>
+                                <span class="font-light">Style :</span> Boat Shoe
+                            </li>
+                            <li>
+                                <span class="font-light">Catgory :</span> Sports Shoes
+                            </li>
+                            <li>
+                                <span class="font-light">Tags:</span> Summer
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="product-btns">
+                        <a asp-controller="shoppingcart" asp-action="index" asp-route-id="@Model.Id" class="btn btn-solid-default btn-sm">Add to cart</a>
+                        <a asp-controller="shop" asp-action="product" asp-route-id="@Model.Id" class="btn btn-solid-default btn-sm">View details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

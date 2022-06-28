@@ -15,6 +15,8 @@
     <Compile Remove="Migrations\20220624144733_Check.Designer.cs" />
     <Compile Remove="Migrations\20220625144700_check.cs" />
     <Compile Remove="Migrations\20220625144700_check.Designer.cs" />
+    <Compile Remove="Migrations\20220628112243_check.cs" />
+    <Compile Remove="Migrations\20220628112243_check.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

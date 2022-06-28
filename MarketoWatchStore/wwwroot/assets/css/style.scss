@@ -12611,7 +12611,6 @@ table.accordion-table {
                             a {
                                 width: 30px;
                                 height: 30px;
-                                background-color: #ff0000;
                                 border-radius: 5px;
                                 display: flex;
                                 align-items: center;
@@ -12624,54 +12623,6 @@ table.accordion-table {
 
                                 i.active {
                                     display: block;
-                                }
-                            }
-
-                            &:nth-child(2) {
-                                a {
-                                    background-color: #fab1a0;
-                                }
-                            }
-
-                            &:nth-child(3) {
-                                a {
-                                    background-color: #10ac84;
-                                }
-                            }
-
-                            &:nth-child(4) {
-                                a {
-                                    background-color: #ff9f43;
-                                }
-                            }
-
-                            &:nth-child(5) {
-                                a {
-                                    background-color: #8395a7;
-                                }
-                            }
-
-                            &:nth-child(6) {
-                                a {
-                                    background-color: #fab1a0;
-                                }
-                            }
-
-                            &:nth-child(7) {
-                                a {
-                                    background-color: #10ac84;
-                                }
-                            }
-
-                            &:nth-child(8) {
-                                a {
-                                    background-color: #ff9f43;
-                                }
-                            }
-
-                            &:nth-child(9) {
-                                a {
-                                    background-color: #8395a7;
                                 }
                             }
                         }
@@ -12783,7 +12734,7 @@ table.accordion-table {
 
     .filter-btn {
         border: none;
-        color: #fff;
+        color: #212529;
     }
 }
 
