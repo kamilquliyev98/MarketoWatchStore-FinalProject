@@ -1,0 +1,153 @@
+﻿@model IEnumerable<Blog>
+@{
+    ViewData["Title"] = "Blogs";
+    int tableRow = (ViewBag.CurrentPage - 1) * 5;
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+<main id="main" class="main">
+
+    <div class="row justify-content-between align-items-center">
+        <div class="col-md-3">
+            <div class="pagetitle">
+                <h1>Blogs</h1>
+                <nav>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-area="manage" asp-controller="dashboard" asp-action="index">Dashboard</a></li>
+                        <li class="breadcrumb-item active">Blogs</li>
+                    </ol>
+                </nav>
+            </div>
+            <!-- End Page Title -->
+        </div>
+        <div class="col-md-3">
+            <form class="form-group">
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <label for="status" class="col-form-label">Show:</label>
+                    </div>
+                    <div class="col-auto">
+                        <select class="form-select" id="status" name="status">
+                            @switch (ViewBag.Status)
+                            {
+                                case "all":
+                                    <option value="all" selected>All</option>
+                                    <option value="active">Active</option>
+                                    <option value="deleted">Deleted</option>
+                                    break;
+                                case "deleted":
+                                    <option value="all">All</option>
+                                    <option value="active">Active</option>
+                                    <option value="deleted" selected>Deleted</option>
+                                    break;
+                                default:
+                                    <option value="all">All</option>
+                                    <option value="active" selected>Active</option>
+                                    <option value="deleted">Deleted</option>
+                                    break;
+                            }
+
+                        </select>
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-info">Filter</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-2">
+            <div class="d-grid">
+                <a asp-area="manage" asp-controller="@controller" asp-action="create" asp-route-page="@ViewBag.CurrentPage" asp-route-status="@ViewBag.Status" class="btn btn-success" type="button">Create</a>
+            </div>
+        </div>
+    </div>
+
+    <section class="section">
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                        </h5>
+
+                        <!-- Blogs Table -->
+                        <div class="table-responsive">
+                            <table class="table table-hover table-bordered align-middle">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Image</th>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Content</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Settings</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (Blog blog in Model)
+                                    {
+                                        tableRow++;
+                                        <tr>
+                                            <th scope="row">@tableRow</th>
+                                            <td>
+                                                <div style="max-width: 50%; margin: 0 auto;">
+                                                    <img src="~/assets/images/blog/@blog.Image" alt="blog-img" class="img-thumbnail" />
+                                                </div>
+                                            </td>
+                                            <td>
+                                                @((blog.Title.Length > 100) ? blog.Title.Substring(0, 100) + "..." : blog.Title)
+                                            </td>
+                                            <td>
+                                                @{string content = Html.Raw(blog.Content).ToString();}
+                                                @((blog.Content.Length > 200) ? blog.Content.Substring(0, 200) + "..." : blog.Content)
+                                            </td>
+                                            <td>
+                                                @if (blog.IsDeleted)
+                                                {
+                                                    <span class="text-danger">Deleted</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-success">Active</span>
+                                                }
+                                            </td>
+                                            <td>
+                                                <a asp-area="manage" asp-controller="@controller" asp-action="detail" asp-route-id="@blog.Id" asp-route-page="@ViewBag.CurrentPage" asp-route-status="@ViewBag.Status" class="btn btn-info" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Detail">
+                                                    <i class="bi bi-eye"></i>
+                                                </a>
+                                                @if (blog.IsDeleted)
+                                                {
+                                                    <a asp-area="manage" asp-controller="@controller" asp-action="deleterestore" asp-route-id="@blog.Id" asp-route-page="@ViewBag.CurrentPage" asp-route-status="@ViewBag.Status" class="btn btn-primary" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Restore">
+                                                        <i class="bi bi-recycle"></i>
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <a asp-area="manage" asp-controller="@controller" asp-action="update" asp-route-id="@blog.Id" asp-route-page="@ViewBag.CurrentPage" asp-route-status="@ViewBag.Status" class="btn btn-warning" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Edit">
+                                                        <i class="bi bi-pencil-square"></i>
+                                                    </a>
+                                                    <a asp-area="manage" asp-controller="@controller" asp-action="deleterestore" asp-route-id="@blog.Id" asp-route-page="@ViewBag.CurrentPage" asp-route-status="@ViewBag.Status" class="btn btn-danger" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Delete">
+                                                        <i class="bi bi-trash"></i>
+                                                    </a>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- End Table -->
+                        <!-- Pagination -->
+                        @await Html.PartialAsync("_PaginationPartial")
+                        <!-- End Pagination -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main>
+<!-- End #main -->
