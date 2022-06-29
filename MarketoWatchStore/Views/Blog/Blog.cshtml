@@ -1,0 +1,77 @@
+﻿@model Blog
+@{
+    ViewBag.Title = Model?.Title + " | Marketo";
+}
+
+<!-- Breadcrumb section start -->
+<section class="breadcrumb-section section-b-space">
+    <ul class="circles">
+        @for (int i = 1; i <= 10; i++)
+        {
+            <li></li>
+        }
+    </ul>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h3>Blog Details</h3>
+                <nav>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a asp-controller="home" asp-action="index">
+                                <i class="fas fa-home"></i>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a asp-controller="blog" asp-action="index">
+                                Blog
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">@Model.Title</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb section end -->
+
+<!-- Details Blog Section Start -->
+<section class="masonary-blog-section">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-12 col-md-12 order-md-1 ratio_square">
+                <div class="row g-4">
+                    <div class="col-12">
+                        <div class="blog-details">
+                            <div class="blog-image-box">
+                                <img src="~/assets/images/blog/@Model.Image" alt="blog-image" class="card-img-top">
+                            </div>
+
+                            <div class="blog-detail-contain">
+                                <span class="font-light">@Model.CreatedAt?.ToString("g")</span>
+                                <h2 class="card-title">@Model?.Title</h2>
+                                <p class="font-light firt-latter">
+                                    @Model.Content
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="blog-profile box-center mb-lg-5 mb-4">
+                            <div class="image-profile">
+                                <img src="~/assets/images/profile-pictures/2.jpg" class="img-fluid blur-up lazyload" alt="image">
+                            </div>
+
+                            <div class="image-name text-weight">
+                                <h3>@Model.CreatedBy</h3>
+                                <h6>@Model.CreatedAt?.ToString("g")</h6>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Details Blog Section End -->

@@ -1,0 +1,146 @@
+﻿@model IEnumerable<Blog>
+@{
+    ViewBag.Title = "Blogs | Marketo";
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+<!-- Breadcrumb section start -->
+<section class="breadcrumb-section section-b-space">
+    <ul class="circles">
+        @for (int i = 1; i <= 10; i++)
+        {
+            <li></li>
+        }
+    </ul>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h3>Blog</h3>
+                <nav>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a asp-controller="home" asp-action="index">
+                                <i class="fas fa-home"></i>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">Blog</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb section end -->
+
+<!-- Blog Section Start -->
+<section id="portfolio" class="left-sidebar-section masonary-blog-section section-b-space">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-9 col-md-7 order-md-1 ratio3_2">
+                <div class="row g-4">
+
+                    @foreach (Blog blog in Model)
+                    {
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card blog-categority">
+                                <a asp-controller="blog" asp-action="blog" asp-route-id="@blog.Id" class="blog-img">
+                                    <img src="assets/images/blog/@blog.Image" alt="blog-image" class="card-img-top blur-up lazyload bg-img">
+                                </a>
+                                <div class="card-body">
+                                    <a asp-controller="blog" asp-action="blog" asp-route-id="@blog.Id">
+                                        <h2 class="card-title">@blog.Title</h2>
+                                    </a>
+                                    <div class="blog-profile">
+                                        <div class="image-name">
+                                            <h3>@((blog.CreatedBy != null) ? blog.CreatedBy : "Admin")</h3>
+                                            <h6>@blog.CreatedAt?.ToString("g")</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+                <div class="col-12">
+                    <nav class="page-section">
+                        <ul class="pagination">
+
+                            <li class="page-item @(ViewBag.CurrentPage <= 1 ? "disabled" : "")">
+                                <a class="page-link" asp-controller="@controller" asp-action="index" asp-route-page="@(ViewBag.CurrentPage - 1)">
+                                    <span aria-hidden="true">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                </a>
+                            </li>
+
+                            @if (ViewBag.CurrentPage == ViewBag.PageCount && ViewBag.CurrentPage > 2)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" asp-controller="@controller" asp-action="index" asp-route-page="@(ViewBag.CurrentPage - 2)">
+                                        @(ViewBag.CurrentPage - 2)
+                                    </a>
+                                </li>
+                            }
+                            @if (ViewBag.CurrentPage > 1)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" asp-controller="@controller" asp-action="index" asp-route-page="@(ViewBag.CurrentPage - 1)">
+                                        @(ViewBag.CurrentPage - 1)
+                                    </a>
+                                </li>
+                            }
+
+                            <li class="page-item active">
+                                <a class="page-link" asp-controller="@controller" asp-action="index" asp-route-page="@(ViewBag.CurrentPage)">
+                                    @(ViewBag.CurrentPage)
+                                </a>
+                            </li>
+
+                            @if (ViewBag.CurrentPage < ViewBag.PageCount)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" asp-controller="@controller" asp-action="index" asp-route-page="@(ViewBag.CurrentPage + 1)">
+                                        @(ViewBag.CurrentPage + 1)
+                                    </a>
+                                </li>
+                            }
+                            @if (ViewBag.CurrentPage == 1 && (ViewBag.CurrentPage + 2) <= ViewBag.PageCount)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" asp-controller="@controller" asp-action="index" asp-route-page="@(ViewBag.CurrentPage + 2)">
+                                        @(ViewBag.CurrentPage + 2)
+                                    </a>
+                                </li>
+                            }
+
+                            <li class="page-item @(ViewBag.CurrentPage >= ViewBag.PageCount ? "disabled" : "")">
+                                <a class="page-link" asp-controller="@controller" asp-action="index" asp-route-page="@(ViewBag.CurrentPage + 1)">
+                                    <span aria-hidden="true">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-5">
+                <div class="left-side">
+                    <!-- Search Bar Start -->
+                    <div class="search-section">
+                        <div class="input-group search-bar">
+                            <input type="search" class="form-control search-input" placeholder="Search">
+                            <button class="input-group-text search-button" id="basic-addon2">
+                                <i class="fas fa-search text-color"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Search Bar End -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Blog Section End -->
