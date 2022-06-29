@@ -1,0 +1,75 @@
+﻿@model Blog
+@{
+    ViewData["Title"] = "Edit blog";
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Edit blog</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-area="manage" asp-controller="dashboard" asp-action="index">Dashboard</a></li>
+                <li class="breadcrumb-item"><a asp-area="manage" asp-controller="@controller" asp-action="index">Blogs</a></li>
+                <li class="breadcrumb-item active">Edit</li>
+            </ol>
+        </nav>
+    </div>
+    <!-- End Page Title -->
+
+    <section class="section">
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"></h5>
+                        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+
+                        <!-- Table -->
+                        <form class="row g-3" novalidate="" method="post" enctype="multipart/form-data" autocomplete="off">
+                            <div class="col-md-12">
+                                <label asp-for="ImageFile" class="form-label">Image</label>
+                                <input asp-for="ImageFile" class="form-control" accept="image/jpeg">
+                                <span asp-validation-for="ImageFile" class="text-danger"></span>
+                                <small class="form-text text-muted">
+                                    <ul>
+                                        <li>Content type: "image/jpeg"</li>
+                                        <li>Max size: 100 KB</li>
+                                    </ul>
+                                </small>
+                            </div>
+                            <div class="col-md-12">
+                                <label asp-for="Title" class="form-label">Title *</label>
+                                <input asp-for="Title" class="form-control" required>
+                                <span asp-validation-for="Title" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-12">
+                                <label asp-for="Content" class="form-label">Content *</label>
+                                <textarea asp-for="Content" id="textEditor" class="form-control" required></textarea>
+                                <span asp-validation-for="Content" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-12 d-grid gap-2 mt-3">
+                                <button class="btn btn-success" type="submit">Save changes</button>
+                                <a asp-area="manage" asp-controller="@controller" asp-action="index" class="btn btn-info">Go back</a>
+                            </div>
+                        </form>
+                        <!-- Table -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main>
+<!-- End #main -->
+
+@section JS{
+    <partial name="_ValidationFormScriptPartial">
+        <partial name="_CKEditorScriptPartial">
+            <script src="~/manage/assets/js/custom.js" asp-append-version="true"></script>
+}

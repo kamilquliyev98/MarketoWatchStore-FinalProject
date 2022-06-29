@@ -1,6 +1,6 @@
 ﻿@model Blog
 @{
-    ViewData["Title"] = "Blog | " + Model.Title;
+    ViewData["Title"] = Model.Title;
     string controller = this.ViewContext.RouteData.Values["controller"].ToString();
 }
 
@@ -106,7 +106,15 @@
 
             </div>
 
-            <div class="col-xl-12 d-grid mt-3">
+            <div class="col-xl-12 d-grid gap-2 mt-3">
+                @if (Model.IsDeleted)
+                {
+                    <a asp-area="manage" asp-controller="@controller" asp-action="restore" asp-route-id="@ViewBag.BlogId" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.CurrentPage" class="btn btn-primary">Restore</a>
+                }
+                else
+                {
+                    <a asp-area="manage" asp-controller="@controller" asp-action="delete" asp-route-id="@ViewBag.BlogId" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.CurrentPage" class="btn btn-danger">Delete</a>
+                }
                 <a asp-area="manage" asp-controller="@controller" asp-action="index" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.CurrentPage" class="btn btn-info">Go back</a>
             </div>
         </div>

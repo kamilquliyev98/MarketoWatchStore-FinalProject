@@ -51,9 +51,9 @@
                             <div class="blog-detail-contain">
                                 <span class="font-light">@Model.CreatedAt?.ToString("g")</span>
                                 <h2 class="card-title">@Model?.Title</h2>
-                                <p class="font-light firt-latter">
-                                    @Model.Content
-                                </p>
+                                <div>
+                                    @Html.Raw(Model.Content)
+                                </div>
                             </div>
                         </div>
 

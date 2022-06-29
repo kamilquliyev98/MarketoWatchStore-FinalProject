@@ -79,7 +79,6 @@
                                         <th scope="col">#</th>
                                         <th scope="col">Image</th>
                                         <th scope="col">Title</th>
-                                        <th scope="col">Content</th>
                                         <th scope="col">Status</th>
                                         <th scope="col">Settings</th>
                                     </tr>
@@ -92,15 +91,11 @@
                                             <th scope="row">@tableRow</th>
                                             <td>
                                                 <div style="max-width: 50%; margin: 0 auto;">
-                                                    <img src="~/assets/images/blog/@blog.Image" alt="blog-img" class="img-thumbnail" />
+                                                    <img src="~/assets/images/blog/@blog.Image" alt="blog-img" class="img-thumbnail" style="width: " />
                                                 </div>
                                             </td>
                                             <td>
                                                 @((blog.Title.Length > 100) ? blog.Title.Substring(0, 100) + "..." : blog.Title)
-                                            </td>
-                                            <td>
-                                                @{string content = Html.Raw(blog.Content).ToString();}
-                                                @((blog.Content.Length > 200) ? blog.Content.Substring(0, 200) + "..." : blog.Content)
                                             </td>
                                             <td>
                                                 @if (blog.IsDeleted)
