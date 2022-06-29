@@ -1,5 +1,5 @@
 ﻿@inject LayoutService layoutService
-@{ 
+@{
     Setting setting = await layoutService.GetSetting();
 }
 
@@ -540,17 +540,9 @@
                                 }
                                 <li>
                                     <span>
-                                        <b>Email:</b><span class="font-light">@setting.Email1</span>
+                                        <b>Email:</b><span class="font-light">@setting.Email1 @((setting.Email2 != null) ? ("| " + setting.Email2) : "")</span>
                                     </span>
                                 </li>
-                                @if (setting.Email2 != null)
-                                {
-                                    <li>
-                                        <span>
-                                            <b>Other email:</b> <span class="font-light">@setting.Email2</span>
-                                        </span>
-                                    </li>
-                                }
                                 <li>
                                     <span>
                                         <b>Address:</b>
@@ -585,16 +577,22 @@
 
                     <div class="col-xl-4 col-lg-4 col-sm-6 d-none d-sm-block">
                         <div class="footer-newsletter">
-                            <h3>Got Qustion? Call Us 24/7</h3>
+                            <h3>Got Question? Call Us 24/7</h3>
                             <div class="footer-number">
                                 <div class="footer-number-image">
                                     <img src="~/assets/images/other/headphone.png" class="img-fluid blur-up lazyload" alt="phone">
                                 </div>
 
                                 <div class="footer-number-container">
-                                    <h3>@setting.Phone1</h3>
+                                    <h3>@setting.SupportPhone</h3>
                                 </div>
                             </div>
+                            @if (setting.SupportText != null)
+                            {
+                                <div class="footer-details">
+                                    <p class="font-light">@setting.SupportText</p>
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>

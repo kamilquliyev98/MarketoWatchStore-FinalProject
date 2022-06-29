@@ -51,6 +51,24 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
 
             if (!ModelState.IsValid) return View(dbSetting);
 
+            if (setting.Offer != null && setting.Offer.Length > 255)
+            {
+                ModelState.AddModelError("Offer", "Max length: 255 symbols");
+                return View(dbSetting);
+            }
+
+            if (setting.SupportText != null && setting.SupportText.Length > 255)
+            {
+                ModelState.AddModelError("SupportText", "Max length: 255 symbols");
+                return View(dbSetting);
+            }
+
+            if (setting.Address.Length > 255)
+            {
+                ModelState.AddModelError("Address", "Max length: 255 symbols");
+                return View(dbSetting);
+            }
+
             if (setting.LogoImage != null)
             {
                 if (!setting.LogoImage.CheckFileContentType("image/png"))
@@ -73,7 +91,8 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
             dbSetting.Address = setting.Address;
             dbSetting.Email1 = setting.Email1;
             dbSetting.Email2 = setting.Email2;
-            dbSetting.Phone1 = setting.Phone1;
+            dbSetting.SupportPhone = setting.SupportPhone;
+            dbSetting.SupportText = setting.SupportText;
             dbSetting.Phone2 = setting.Phone2;
             dbSetting.Facebook = setting.Facebook;
             dbSetting.Instagram = setting.Instagram;

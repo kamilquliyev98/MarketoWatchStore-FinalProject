@@ -15,7 +15,9 @@ namespace MarketoWatchStore.Models
         [StringLength(255)]
         public string Offer { get; set; }
         [StringLength(255), Required, DataType(DataType.PhoneNumber)]
-        public string Phone1 { get; set; }
+        public string SupportPhone { get; set; }
+        [StringLength(255)]
+        public string SupportText { get; set; }
         [StringLength(255), DataType(DataType.PhoneNumber)]
         public string Phone2 { get; set; }
         [StringLength(255), Required, DataType(DataType.EmailAddress)]

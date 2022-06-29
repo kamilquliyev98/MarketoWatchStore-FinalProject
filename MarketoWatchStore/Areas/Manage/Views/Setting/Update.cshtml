@@ -39,9 +39,14 @@
                                 <span asp-validation-for="Email2" class="text-danger"></span>
                             </div>
                             <div class="col-md-6">
-                                <label asp-for="Phone1" class="form-label">Phone *</label>
-                                <input asp-for="Phone1" class="form-control" required>
-                                <span asp-validation-for="Phone1" class="text-danger"></span>
+                                <label asp-for="SupportPhone" class="form-label">Support Phone *</label>
+                                <input asp-for="SupportPhone" class="form-control" required>
+                                <span asp-validation-for="SupportPhone" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="SupportText" class="form-label">Support Phone Info Text</label>
+                                <input asp-for="SupportText" class="form-control">
+                                <span asp-validation-for="SupportText" class="text-danger"></span>
                             </div>
                             <div class="col-md-6">
                                 <label asp-for="Phone2" class="form-label">Additional Phone (optional)</label>
@@ -53,7 +58,7 @@
                                 <input asp-for="Address" class="form-control" required>
                                 <span asp-validation-for="Address" class="text-danger"></span>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <label asp-for="Offer" class="form-label"></label>
                                 <input asp-for="Offer" class="form-control">
                                 <span asp-validation-for="Offer" class="text-danger"></span>
