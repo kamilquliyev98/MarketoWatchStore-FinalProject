@@ -61,6 +61,34 @@
 
                                 <h5 class="card-title">@Model.Title</h5>
 
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Created by:</div>
+                                    <div class="col-lg-9 col-md-8">@Model?.CreatedBy</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label ">Created at:</div>
+                                    <div class="col-lg-9 col-md-8">@Model.CreatedAt?.ToString("g")</div>
+                                </div>
+
+                                @if (Model.IsDeleted)
+                                {
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">Deleted at:</div>
+                                        <div class="col-lg-9 col-md-8">@Model.DeletedAt</div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    if (Model.UpdatedAt != null)
+                                    {
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-4 label">Last update:</div>
+                                            <div class="col-lg-9 col-md-8">@Model.UpdatedAt</div>
+                                        </div>
+                                    }
+                                }
+
                             </div>
 
                             <div class="tab-pane fade profile-edit pt-3" id="content">
