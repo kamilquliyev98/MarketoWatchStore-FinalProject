@@ -41,7 +41,7 @@
                             </div>
                             @if (productSlide.DiscountPrice != null)
                             {
-                                <h4>Discount</h4>
+                                <h4>New offer</h4>
                                 <div class="offer-box">
                                     @{var calculateDiscount = 100 - (double)productSlide.DiscountPrice * 100 / productSlide.Price;}
                                     <h6>@calculateDiscount.ToString("0.00")% off</h6>
@@ -65,6 +65,37 @@
 
                             <div class="bg-circle" style="background: #362319;"></div>
                             <img src="~/assets/images/slider/@productSlide.SlideImage" class="watch-1 img-fluid blur-up lazyload" alt="slider-image">
+                        </div>
+
+                        <div class="suggestion-product d-xl-block d-none">
+                            <h3>Suggestion Product</h3>
+
+                            <a asp-controller="shop" asp-action="product" asp-route-id="@productSlide.Id" class="slider-watch-image d-block" tabindex="0">
+                                <div class="relative-watches">
+                                    <img src="assets/images/products/@productSlide.MainImage" class="img-fluid blur-up lazyloaded" alt="product-image">
+                                    <div class="watch-price">
+                                        <h5>$@((productSlide.DiscountPrice != null) ? productSlide.DiscountPrice : productSlide.Price)</h5>
+                                        <h6>@(productSlide.Brand.Title + " " + productSlide.Title)</h6>
+                                        <ul class="rating d-flex justify-content-between">
+                                            <li>
+                                                <i class="fas fa-star theme-color"></i>
+                                            </li>
+                                            <li>
+                                                <i class="fas fa-star theme-color"></i>
+                                            </li>
+                                            <li>
+                                                <i class="fas fa-star theme-color"></i>
+                                            </li>
+                                            <li>
+                                                <i class="fas fa-star"></i>
+                                            </li>
+                                            <li>
+                                                <i class="fas fa-star"></i>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </a>
                         </div>
 
                         <div class="price-number">

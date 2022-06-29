@@ -6415,7 +6415,7 @@ header .main-navbar .nav-menu > li.mega-menu.home-menu .megamenu-image-title {
   position: absolute;
 }
 
-.banner-poster .sugestion-product {
+.banner-poster .suggestion-product {
   position: absolute;
   width: 20%;
   top: 60px;
@@ -6423,19 +6423,19 @@ header .main-navbar .nav-menu > li.mega-menu.home-menu .megamenu-image-title {
   padding: 15px 15px 0 15px;
 }
 
-.banner-poster .sugestion-product h3 {
+.banner-poster .suggestion-product h3 {
   font-weight: 900;
   font-size: 30px;
   color: #0163d2;
   margin-top: -6px;
 }
 
-.banner-poster .sugestion-product h6 {
+.banner-poster .suggestion-product h6 {
   font-size: 20px;
   color: #212529;
 }
 
-.banner-poster .sugestion-product .slider-watch-image {
+.banner-poster .suggestion-product .slider-watch-image {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
@@ -6444,7 +6444,7 @@ header .main-navbar .nav-menu > li.mega-menu.home-menu .megamenu-image-title {
   padding: 10px;
 }
 
-.banner-poster .sugestion-product .slider-watch-image .relative-watches {
+.banner-poster .suggestion-product .slider-watch-image .relative-watches {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -6453,22 +6453,22 @@ header .main-navbar .nav-menu > li.mega-menu.home-menu .megamenu-image-title {
           align-items: center;
 }
 
-.banner-poster .sugestion-product .slider-watch-image .relative-watches img {
+.banner-poster .suggestion-product .slider-watch-image .relative-watches img {
   width: 40%;
   margin-right: 10px;
   padding: 10px;
 }
 
-.banner-poster .sugestion-product .slider-watch-image .relative-watches .watch-price {
+.banner-poster .suggestion-product .slider-watch-image .relative-watches .watch-price {
   color: #0163d2;
 }
 
-.banner-poster .sugestion-product .slider-watch-image .relative-watches .watch-price h5 {
+.banner-poster .suggestion-product .slider-watch-image .relative-watches .watch-price h5 {
   font-size: calc(13px + (18 - 13) * ((100vw - 320px) / (1920 - 320)));
   margin-bottom: 4px;
 }
 
-.banner-poster .sugestion-product .slider-watch-image .relative-watches .watch-price h6 {
+.banner-poster .suggestion-product .slider-watch-image .relative-watches .watch-price h6 {
   color: #000;
 }
 
