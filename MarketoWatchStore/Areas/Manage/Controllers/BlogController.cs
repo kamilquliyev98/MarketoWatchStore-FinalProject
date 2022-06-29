@@ -61,6 +61,21 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         {
             return View(await PaginateAsync(status, page));
         }
+
+        public async Task<IActionResult> Detail(int? id, string status = "active", int page = 1)
+        {
+            if (id == null) return BadRequest();
+
+            Blog blog = await _context.Blogs
+                .FirstOrDefaultAsync(p => p.Id == id);
+
+            if (blog == null) return NotFound();
+
+            ViewBag.Status = status;
+            ViewBag.CurrentPage = page;
+
+            return View(blog);
+        }
         #endregion
     }
 }
