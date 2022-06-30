@@ -49,7 +49,7 @@ namespace MarketoWatchStore.Controllers
                 .ToListAsync(),
 
                 SpecialTypes = await _context.SpecialTypes
-                .Where(st => !st.IsDeleted && st.Products.Count() > 0)
+                .Where(st => !st.IsDeleted && st.Products.Where(p => !p.IsDeleted).Count() > 0)
                 .ToListAsync(),
 
                 LatestProducts = await _context.Products
