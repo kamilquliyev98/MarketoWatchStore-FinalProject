@@ -28,7 +28,7 @@ namespace MarketoWatchStore.Models
         [Column(TypeName = "money"), Required]
         public double ExTax { get; set; }
         public int Count { get; set; }
-        [Required]
+        [StringLength(1000), Required]
         public string Description { get; set; }
         public bool IsNewArrival { get; set; }
         public GenderType Gender { get; set; }

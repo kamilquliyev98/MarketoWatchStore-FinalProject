@@ -81,7 +81,7 @@
                             </div>
                             <div class="col-md-12">
                                 <label asp-for="Description" class="form-label">Description *</label>
-                                <textarea asp-for="Description" id="textEditor" class="form-control" required></textarea>
+                                <textarea asp-for="Description" rows="5" class="form-control" required></textarea>
                                 <span asp-validation-for="Description" class="text-danger"></span>
                             </div>
                             <div class="col-md-12">
@@ -202,6 +202,5 @@
 
 @section JS{
     <partial name="_ValidationFormScriptPartial">
-        <partial name="_CKEditorScriptPartial">
-            <script src="~/manage/assets/js/custom.js" asp-append-version="true"></script>
+        <script src="~/manage/assets/js/custom.js" asp-append-version="true"></script>
 }

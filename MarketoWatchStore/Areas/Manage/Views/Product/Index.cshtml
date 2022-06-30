@@ -80,7 +80,8 @@
                                         <th scope="col">Image</th>
                                         <th scope="col">Title</th>
                                         <th scope="col">Price</th>
-                                        <th scope="col">Discount Price</th>
+                                        <th scope="col">Slide image</th>
+                                        <th scope="col">Poster image</th>
                                         <th scope="col">Status</th>
                                         <th scope="col">Settings</th>
                                     </tr>
@@ -100,10 +101,39 @@
                                                 @(product.Brand.Title + " " + product.Title)
                                             </td>
                                             <td>
-                                                @product.Price
+                                                @if (product.DiscountPrice != null)
+                                                {
+                                                    <span>
+                                                        @product.DiscountPrice$
+                                                        (discounted)
+                                                    </span>
+                                                }
+                                                else
+                                                {
+                                                    <span>
+                                                        @product.Price$
+                                                    </span>
+                                                }
                                             </td>
                                             <td>
-                                                @product.DiscountPrice
+                                                @if (product.SlideImage == null)
+                                                {
+                                                    <span>No image</span>
+                                                }
+                                                else
+                                                {
+                                                    <span>Exist | @((product.ShareOnHomeSlide) ? "Shared" : "Not shared")</span>
+                                                }
+                                            </td>
+                                            <td>
+                                                @if (product.PosterImage == null)
+                                                {
+                                                    <span>No image</span>
+                                                }
+                                                else
+                                                {
+                                                    <span>Exist | @((product.ShareAsPoster) ? "Shared" : "Not shared")</span>
+                                                }
                                             </td>
                                             <td>
                                                 @if (product.IsDeleted)
