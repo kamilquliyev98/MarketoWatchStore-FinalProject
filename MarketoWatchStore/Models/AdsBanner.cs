@@ -16,6 +16,8 @@ namespace MarketoWatchStore.Models
         public string Title { get; set; }
         [StringLength(255), Required]
         public string Text { get; set; }
+        [StringLength(1000), DataType(DataType.Url)]
+        public string AdsUrl { get; set; }
         public bool IsShared { get; set; }
 
         [NotMapped]

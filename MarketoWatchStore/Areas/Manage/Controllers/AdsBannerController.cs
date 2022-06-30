@@ -177,6 +177,7 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
 
             dbAdsBanner.Title = adsBanner.Title;
             dbAdsBanner.Text = adsBanner.Text;
+            dbAdsBanner.AdsUrl = adsBanner.AdsUrl;
             dbAdsBanner.IsShared = adsBanner.IsShared;
 
             dbAdsBanner.UpdatedAt = DateTime.UtcNow.AddHours(4);

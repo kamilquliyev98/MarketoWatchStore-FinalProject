@@ -11,6 +11,7 @@
             <th scope="col">Image</th>
             <th scope="col">Title</th>
             <th scope="col">Text</th>
+            <th scope="col">URL</th>
             <th scope="col">Shared</th>
             <th scope="col">Status</th>
             <th scope="col">Settings</th>
@@ -30,6 +31,9 @@
                 </td>
                 <td>
                     @adsBanner.Text
+                </td>
+                <td>
+                    @adsBanner.AdsUrl
                 </td>
                 <td>
                     @(adsBanner.IsShared ? "Yes" : "No")

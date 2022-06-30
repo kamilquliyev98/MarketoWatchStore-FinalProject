@@ -225,18 +225,20 @@
                 @foreach (AdsBanner adsBanner in Model.AdsBanners)
                 {
                     <div class="banner-deatils">
-                        <div class="banner-image">
-                            <img src="~/assets/images/banner/@adsBanner.Image" class="img-fluid bg-img blur-up lazyload" alt="banner-image">
-                            <div class="banner-content">
-                                <div>
-                                    <h3>@adsBanner.Title</h3>
-                                    <p>@adsBanner.Text</p>
+                        <a href="@((adsBanner.AdsUrl != null) ? adsBanner.AdsUrl : "javascript:void(0)")" target="@((adsBanner.AdsUrl != null) ? "_blank" : "_self")">
+                            <div class="banner-image">
+                                <img src="~/assets/images/banner/@adsBanner.Image" class="img-fluid bg-img blur-up lazyload" alt="banner-image">
+                                <div class="banner-content">
+                                    <div>
+                                        <h3>@adsBanner.Title</h3>
+                                        <p>@adsBanner.Text</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="banner-contain mt-3 mb-5">
-                            <p class="font-light"> </p>
-                        </div>
+                            <div class="banner-contain mt-3 mb-5">
+                                <p class="font-light"> </p>
+                            </div>
+                        </a>
                     </div>
                 }
 
