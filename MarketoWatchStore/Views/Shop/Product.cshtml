@@ -173,71 +173,27 @@
                 <div class="cloth-review">
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                            <button class="nav-link active" id="nav-speci-tab" data-bs-toggle="tab" data-bs-target="#speci" type="button">
+
+                            <button class="nav-link active" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#review" type="button">
+                                Reviews
+                            </button>
+
+                            <button class="nav-link" id="nav-speci-tab" data-bs-toggle="tab" data-bs-target="#speci" type="button">
                                 Specifications
                             </button>
 
-                            <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#review" type="button">
-                                Review
-                            </button>
                         </div>
                     </nav>
 
                     <div class="tab-content" id="nav-tabContent">
-                        <div class="tab-pane fade show active" id="speci">
-                            <div class="pro mb-4">
-                                @Html.Raw(Model.Description)
 
-                                <div class="table-responsive">
-                                    <table class="table table-part">
-                                        <tr>
-                                            <th>Brand</th>
-                                            <td>@Model.Brand.Title</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Price</th>
-                                            <td>5 April 2021</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Tax</th>
-                                            <td>Aditya Birla Fashion and Retail Limited</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Gender</th>
-                                            <td>B06Y28LCDN</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Display</th>
-                                            <td>AMKP317G04244</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Power source</th>
-                                            <td>Men</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Special type</th>
-                                            <td>250 G</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Features</th>
-                                            <td>15 x 15 x 3 Centimeters</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Tags</th>
-                                            <td>1 U</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="tab-pane fade" id="review">
+                        <div class="tab-pane fade show active" id="review">
                             <div class="row g-4">
                                 <div class="col-lg-4">
                                     <div class="customer-rating">
                                         <h2>Customer reviews</h2>
                                         <div class="star-ratings" style="font-size: 30px;">
-                                            <div class="fill-ratings" style="width: 70px;">
+                                            <div class="fill-ratings" style="width: 70%;">
                                                 <span>★★★★★</span>
                                             </div>
                                             <div class="empty-ratings">
@@ -496,23 +452,14 @@
 
                                             <div class="customer-details">
                                                 <h5>Mike K</h5>
-                                                <ul class="rating my-2 d-inline-block">
-                                                    <li>
-                                                        <i class="fas fa-star theme-color"></i>
-                                                    </li>
-                                                    <li>
-                                                        <i class="fas fa-star theme-color"></i>
-                                                    </li>
-                                                    <li>
-                                                        <i class="fas fa-star theme-color"></i>
-                                                    </li>
-                                                    <li>
-                                                        <i class="fas fa-star"></i>
-                                                    </li>
-                                                    <li>
-                                                        <i class="fas fa-star"></i>
-                                                    </li>
-                                                </ul>
+                                                <div class="star-ratings" style="max-width: 100px;">
+                                                    <div class="fill-ratings" style="width: 100%;">
+                                                        <span>★★★★★</span>
+                                                    </div>
+                                                    <div class="empty-ratings">
+                                                        <span>★★★★★</span>
+                                                    </div>
+                                                </div>
                                                 <p class="font-light">
                                                     I purchased my Tab S2 at Best Buy but I
                                                     wanted
@@ -541,23 +488,14 @@
 
                                             <div class="customer-details">
                                                 <h5>Norwalker</h5>
-                                                <ul class="rating my-2 d-inline-block">
-                                                    <li>
-                                                        <i class="fas fa-star theme-color"></i>
-                                                    </li>
-                                                    <li>
-                                                        <i class="fas fa-star theme-color"></i>
-                                                    </li>
-                                                    <li>
-                                                        <i class="fas fa-star theme-color"></i>
-                                                    </li>
-                                                    <li>
-                                                        <i class="fas fa-star"></i>
-                                                    </li>
-                                                    <li>
-                                                        <i class="fas fa-star"></i>
-                                                    </li>
-                                                </ul>
+                                                <div class="star-ratings" style="max-width: 100px;">
+                                                    <div class="fill-ratings" style="width: 40%;">
+                                                        <span>★★★★★</span>
+                                                    </div>
+                                                    <div class="empty-ratings">
+                                                        <span>★★★★★</span>
+                                                    </div>
+                                                </div>
                                                 <p class="font-light">
                                                     Pros: Nice large(9.7") screen. Bright
                                                     colors.
@@ -581,23 +519,14 @@
 
                                             <div class="customer-details">
                                                 <h5>B. Perdue</h5>
-                                                <ul class="rating my-2 d-inline-block">
-                                                    <li>
-                                                        <i class="fas fa-star theme-color"></i>
-                                                    </li>
-                                                    <li>
-                                                        <i class="fas fa-star theme-color"></i>
-                                                    </li>
-                                                    <li>
-                                                        <i class="fas fa-star theme-color"></i>
-                                                    </li>
-                                                    <li>
-                                                        <i class="fas fa-star"></i>
-                                                    </li>
-                                                    <li>
-                                                        <i class="fas fa-star"></i>
-                                                    </li>
-                                                </ul>
+                                                <div class="star-ratings" style="max-width: 100px;">
+                                                    <div class="fill-ratings" style="width: 80%;">
+                                                        <span>★★★★★</span>
+                                                    </div>
+                                                    <div class="empty-ratings">
+                                                        <span>★★★★★</span>
+                                                    </div>
+                                                </div>
                                                 <p class="font-light">
                                                     Love the processor speed and the
                                                     sensitivity
@@ -617,23 +546,14 @@
 
                                             <div class="customer-details">
                                                 <h5>MSL</h5>
-                                                <ul class="rating my-2 d-inline-block">
-                                                    <li>
-                                                        <i class="fas fa-star theme-color"></i>
-                                                    </li>
-                                                    <li>
-                                                        <i class="fas fa-star theme-color"></i>
-                                                    </li>
-                                                    <li>
-                                                        <i class="fas fa-star theme-color"></i>
-                                                    </li>
-                                                    <li>
-                                                        <i class="fas fa-star"></i>
-                                                    </li>
-                                                    <li>
-                                                        <i class="fas fa-star"></i>
-                                                    </li>
-                                                </ul>
+                                                <div class="star-ratings" style="max-width: 100px;">
+                                                    <div class="fill-ratings" style="width: 60%;">
+                                                        <span>★★★★★</span>
+                                                    </div>
+                                                    <div class="empty-ratings">
+                                                        <span>★★★★★</span>
+                                                    </div>
+                                                </div>
                                                 <p class="font-light">
                                                     I purchased the Tablet May 2017 and now
                                                     April
@@ -653,6 +573,50 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="tab-pane fade" id="speci">
+                            <div class="pro mb-4">
+                                @Html.Raw(Model.Description)
+
+                                <div class="table-responsive">
+                                    <table class="table table-part">
+                                        <tr>
+                                            <th>Brand</th>
+                                            <td>@Model.Brand.Title</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Tax</th>
+                                            <td>@Model.ExTax</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Gender</th>
+                                            <td>@Model.Gender</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Display</th>
+                                            <td>@Model.Display.Title</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Power source</th>
+                                            <td>@Model.PowerSource.Title</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Special type</th>
+                                            <td>@Model.SpecialType?.Title</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Features</th>
+                                            <td>15 x 15 x 3 Centimeters</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Tags</th>
+                                            <td>1 U</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

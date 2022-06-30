@@ -689,8 +689,8 @@ $(document).ready(function () {
 
     
     /* Rating Stars JS */
-    var star_rating_width = $('.fill-ratings span').css("width");
-    $('.star-ratings').css("width", star_rating_width);
+    var star_rating_width = $('.fill-ratings span').width();
+    $('.star-ratings').width(star_rating_width);
 });
 
 
