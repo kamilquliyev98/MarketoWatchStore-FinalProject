@@ -56,6 +56,10 @@
                 $(this).toggleClass("selected").siblings("li").removeClass("selected");
             });
 
+            /* Rating Stars JS */
+            var star_rating_width = $('.fill-ratings span').width();
+            $('.star-ratings').width(star_rating_width);
+
             $("#quick-view").modal("show");
 
         });

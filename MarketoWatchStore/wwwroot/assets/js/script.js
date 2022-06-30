@@ -25,25 +25,25 @@ $(document).ready(function () {
         $("#darkButton").html(moonIcon);
 
         if (mainCSS.toLowerCase().indexOf("dark") >= 0) {
-            $("#mainCSS").attr("href", "/assets/css/style.css");
+            $("#mainCSS").attr("href", "assets/css/style.css");
         }
     } else {
         $("body").addClass("dark");
         $("#darkButton").html(sunIcon);
 
         if (mainCSS.toLowerCase().indexOf("dark") < 0) {
-            $("#mainCSS").attr("href", "/assets/css/style_dark.css");
+            $("#mainCSS").attr("href", "assets/css/style_dark.css");
         }
     }
 
     $("#darkButton").on("click", function () {
         if ($("#mainCSS").attr("href").toLowerCase().indexOf("dark") >= 0) {
-            $("#mainCSS").attr("href", "/assets/css/style.css");
+            $("#mainCSS").attr("href", "assets/css/style.css");
             $("body").removeClass("dark");
             $(this).html(moonIcon);
             localStorage.removeItem("dark_mode");
         } else {
-            $("#mainCSS").attr("href", "/assets/css/style_dark.css");
+            $("#mainCSS").attr("href", "assets/css/style_dark.css");
             $("body").addClass("dark");
             $(this).html(sunIcon);
             localStorage.setItem("dark_mode", "1");
@@ -684,6 +684,13 @@ $(document).ready(function () {
         }
     });
 
+
+
+
+    
+    /* Rating Stars JS */
+    var star_rating_width = $('.fill-ratings span').width();
+    $('.star-ratings').width(star_rating_width);
 });
 
 

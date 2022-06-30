@@ -76,23 +76,14 @@
                                     <div class="watch-price">
                                         <h5>$@((productSlide.DiscountPrice != null) ? productSlide.DiscountPrice : productSlide.Price)</h5>
                                         <h6>@(productSlide.Brand.Title + " " + productSlide.Title)</h6>
-                                        <ul class="rating d-flex justify-content-between">
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star"></i>
-                                            </li>
-                                        </ul>
+                                        <div class="star-ratings mx-auto">
+                                            <div class="fill-ratings" style="width: 50%;">
+                                                <span>★★★★★</span>
+                                            </div>
+                                            <div class="empty-ratings">
+                                                <span>★★★★★</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </a>
@@ -253,23 +244,14 @@
                                     <a asp-controller="shop" asp-action="product" asp-route-id="@product.Id" class="font-default">
                                         <h5>@(product.Brand.Title + " " + product.Title)</h5>
                                     </a>
-                                    <ul class="rating mt-1">
-                                        <li>
-                                            <i class="fas fa-star theme-color"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-star theme-color"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-star"></i>
-                                        </li>
-                                    </ul>
+                                    <div class="star-ratings mx-auto">
+                                        <div class="fill-ratings" style="width: 50%;">
+                                            <span>★★★★★</span>
+                                        </div>
+                                        <div class="empty-ratings">
+                                            <span>★★★★★</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -374,23 +356,14 @@
                                     <a asp-controller="shop" asp-action="product" asp-route-id="@product.Id" class="font-default">
                                         <h5>@(product.Brand.Title + " " + product.Title)</h5>
                                     </a>
-                                    <ul class="rating mt-1">
-                                        <li>
-                                            <i class="fas fa-star theme-color"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-star theme-color"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-star"></i>
-                                        </li>
-                                    </ul>
+                                    <div class="star-ratings mx-auto">
+                                        <div class="fill-ratings" style="width: 50%;">
+                                            <span>★★★★★</span>
+                                        </div>
+                                        <div class="empty-ratings">
+                                            <span>★★★★★</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

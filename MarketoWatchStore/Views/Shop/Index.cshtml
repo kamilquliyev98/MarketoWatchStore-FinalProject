@@ -321,23 +321,14 @@
                                                 }
                                             }
                                         </span>
-                                        <ul class="rating mt-0">
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star theme-color"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star"></i>
-                                            </li>
-                                            <li>
-                                                <i class="fas fa-star"></i>
-                                            </li>
-                                        </ul>
+                                        <div class="star-ratings">
+                                            <div class="fill-ratings" style="width: 50%;">
+                                                <span>★★★★★</span>
+                                            </div>
+                                            <div class="empty-ratings">
+                                                <span>★★★★★</span>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="main-price">
                                         <a asp-controller="shop" asp-action="product" asp-route-id="@product.Id" class="font-default">

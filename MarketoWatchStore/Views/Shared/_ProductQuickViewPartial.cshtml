@@ -32,24 +32,14 @@
             <div class="col-lg-6">
                 <div class="product-right">
                     <h2 class="mb-2">@(Model.Brand.Title + " " + Model.Title)</h2>
-                    <ul class="rating mt-1">
-                        <li>
-                            <i class="fas fa-star theme-color"></i>
-                        </li>
-                        <li>
-                            <i class="fas fa-star theme-color"></i>
-                        </li>
-                        <li>
-                            <i class="fas fa-star theme-color"></i>
-                        </li>
-                        <li>
-                            <i class="fas fa-star"></i>
-                        </li>
-                        <li>
-                            <i class="fas fa-star"></i>
-                        </li>
-                        <li class="font-light">(@((Model.Count > 0) ? "In stock" : "Out of stock"))</li>
-                    </ul>
+                    <div class="star-ratings">
+                        <div class="fill-ratings" style="width: 55%;">
+                            <span>★★★★★</span>
+                        </div>
+                        <div class="empty-ratings">
+                            <span>★★★★★</span>
+                        </div>
+                    </div>
                     <div class="price mt-3">
                         @if (Model.DiscountPrice != null)
                         {
