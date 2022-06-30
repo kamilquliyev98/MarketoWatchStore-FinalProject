@@ -187,5 +187,42 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
             return RedirectToAction("index", new { status = status, page = page });
         }
         #endregion
+
+        #region Delete
+        public async Task<IActionResult> Delete(int? id, string status = "all", int page = 1)
+        {
+            if (id == null) return BadRequest();
+
+            AdsBanner dbAdsBanner = await _context.AdsBanners.FirstOrDefaultAsync(b => b.Id == id && !b.IsDeleted);
+
+            if (dbAdsBanner == null) return NotFound();
+
+            dbAdsBanner.IsDeleted = true;
+            dbAdsBanner.IsShared = false;
+            dbAdsBanner.DeletedAt = DateTime.UtcNow.AddHours(4);
+
+            await _context.SaveChangesAsync();
+
+            return PartialView("_AdsBannersTablePartial", await PaginateAsync(status, page));
+        }
+        #endregion
+
+        #region Restore
+        public async Task<IActionResult> Restore(int? id, string status = "all", int page = 1)
+        {
+            if (id == null) return BadRequest();
+
+            AdsBanner dbAdsBanner = await _context.AdsBanners.FirstOrDefaultAsync(b => b.Id == id && b.IsDeleted);
+
+            if (dbAdsBanner == null) return NotFound();
+
+            dbAdsBanner.IsDeleted = false;
+            dbAdsBanner.RestoredAt = DateTime.UtcNow.AddHours(4);
+
+            await _context.SaveChangesAsync();
+
+            return PartialView("_AdsBannersTablePartial", await PaginateAsync(status, page));
+        }
+        #endregion
     }
 }
