@@ -28,5 +28,6 @@ namespace MarketoWatchStore.DAL
         public DbSet<ServicePolicy> ServicePolicies { get; set; }
         public DbSet<FAQ> FAQs { get; set; }
         public DbSet<Blog> Blogs { get; set; }
+        public DbSet<AdsBanner> AdsBanners { get; set; }
     }
 }

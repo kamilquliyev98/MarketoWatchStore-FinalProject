@@ -68,7 +68,7 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         {
             if (id == null) return BadRequest();
 
-            Blog blog = await _context.Blogs.FirstOrDefaultAsync(p => p.Id == id);
+            Blog blog = await _context.Blogs.FirstOrDefaultAsync(b => b.Id == id);
 
             if (blog == null) return NotFound();
 
@@ -148,7 +148,7 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
 
             if (blog.Id != id) return BadRequest();
 
-            Blog dbBlog = await _context.Blogs.FirstOrDefaultAsync(p => p.Id == id && !p.IsDeleted);
+            Blog dbBlog = await _context.Blogs.FirstOrDefaultAsync(b => b.Id == id && !b.IsDeleted);
 
             if (dbBlog == null) return NotFound();
 
@@ -194,7 +194,7 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         {
             if (id == null) return BadRequest();
 
-            Blog blog = await _context.Blogs.FirstOrDefaultAsync(p => p.Id == id);
+            Blog blog = await _context.Blogs.FirstOrDefaultAsync(b => b.Id == id);
 
             if (blog == null) return NotFound();
 
@@ -211,7 +211,7 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         {
             if (id == null) return BadRequest();
 
-            Blog blog = await _context.Blogs.FirstOrDefaultAsync(p => p.Id == id);
+            Blog blog = await _context.Blogs.FirstOrDefaultAsync(b => b.Id == id);
 
             if (blog == null) return NotFound();
 
@@ -229,7 +229,7 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         {
             if (id == null) return BadRequest();
 
-            Blog blog = await _context.Blogs.FirstOrDefaultAsync(p => p.Id == id);
+            Blog blog = await _context.Blogs.FirstOrDefaultAsync(b => b.Id == id);
 
             if (blog == null) return NotFound();
 

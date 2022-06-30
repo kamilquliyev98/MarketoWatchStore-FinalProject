@@ -222,24 +222,24 @@
             </div>
 
             <div class="col-lg-9 col-12 ratio_30">
-                <div class="banner-deatils">
-                    <div class="banner-image">
-                        <img src="~/assets/images/banner/banner.jpg" class="img-fluid bg-img blur-up lazyload" alt="banner-image">
-                        <div class="banner-content">
-                            <div>
-                                <h3>CASIO G-Shock Octagon Series</h3>
-                                <p>
-                                    Marketo is an authorized store of Casio, all Casio watches is supplied with:
-                                    Official Casio presentation box, Official Casio 2 year guarantee, Instruction
-                                    manual (where applicable)
-                                </p>
+                @foreach (AdsBanner adsBanner in Model.AdsBanners)
+                {
+                    <div class="banner-deatils">
+                        <div class="banner-image">
+                            <img src="~/assets/images/banner/@adsBanner.Image" class="img-fluid bg-img blur-up lazyload" alt="banner-image">
+                            <div class="banner-content">
+                                <div>
+                                    <h3>@adsBanner.Title</h3>
+                                    <p>@adsBanner.Text</p>
+                                </div>
                             </div>
                         </div>
+                        <div class="banner-contain mt-3 mb-5">
+                            <p class="font-light"> </p>
+                        </div>
                     </div>
-                    <div class="banner-contain mt-3 mb-5">
-                        <p class="font-light"> </p>
-                    </div>
-                </div>
+                }
+
                 <div class="row g-4">
 
                     <!-- filter button -->
@@ -338,7 +338,7 @@
                                         </ul>
                                     </div>
                                     <div class="main-price">
-                                        <a asp-controller="shop" asp-action="product" class="font-default">
+                                        <a asp-controller="shop" asp-action="product" asp-route-id="@product.Id" class="font-default">
                                             <h5 class="ms-0">@product.Title</h5>
                                         </a>
                                         <h3 class="theme-color">$78.00</h3>

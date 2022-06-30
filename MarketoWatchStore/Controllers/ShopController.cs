@@ -61,6 +61,11 @@ namespace MarketoWatchStore.Controllers
                 .Include(ps => ps.Products)
                 .Where(ps => ps.Products.Where(p => !p.IsDeleted).Count() > 0)
                 .OrderBy(f => f.Title)
+                .ToListAsync(),
+
+                AdsBanners = await _context.AdsBanners
+                .Where(b => !b.IsDeleted && b.IsShared)
+                .OrderByDescending(b => b.Id)
                 .ToListAsync()
             };
 

@@ -17,6 +17,8 @@
     <Compile Remove="Migrations\20220625144700_check.Designer.cs" />
     <Compile Remove="Migrations\20220628112243_check.cs" />
     <Compile Remove="Migrations\20220628112243_check.Designer.cs" />
+    <Compile Remove="Migrations\20220629163741_AddedAdsBannerTable.cs" />
+    <Compile Remove="Migrations\20220629163741_AddedAdsBannerTable.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

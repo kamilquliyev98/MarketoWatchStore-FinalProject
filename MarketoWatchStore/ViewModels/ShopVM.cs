@@ -15,5 +15,6 @@ namespace MarketoWatchStore.ViewModels
         public IEnumerable<GenderType> Genders { get; set; }
         public IEnumerable<Feature> Features { get; set; }
         public IEnumerable<PowerSource> PowerSources { get; set; }
+        public IEnumerable<AdsBanner> AdsBanners { get; set; }
     }
 }
