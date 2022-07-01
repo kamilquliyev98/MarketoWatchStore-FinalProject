@@ -1,0 +1,236 @@
+﻿@model IEnumerable<Product>
+@{
+    ViewBag.Title = "Search Results | Marketo";
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+<!-- Breadcrumb section start -->
+<section class="breadcrumb-section section-b-space">
+    <ul class="circles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h3>Search</h3>
+                <nav>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="index.html">
+                                <i class="fas fa-home"></i>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">Search</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb section end -->
+<!-- Search bar section start -->
+<section class="search-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="title title1 text-center">
+                    <h2>Search For Products</h2>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <div class="search-bar">
+                    <form method="get" asp-controller="search" asp-action="index" autocomplete="off" class="input-group search-bar w-100 mb-2">
+                        <input name="key" id="key" type="search" class="form-control" placeholder="Search here..." value="@ViewBag.Key">
+                        <button type="submit" class="input-group-text" id="basic-addon3">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Search bar section end -->
+<!-- Result setion -->
+<section class="section-b-space">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-12 col-12 ratio_30">
+
+                <!-- Prodcut setion -->
+                <div class="row g-sm-4 g-3 row-cols-lg-4 row-cols-md-3 row-cols-2 mt-1 custom-gy-5 product-style-2 ratio_asos product-list-section">
+
+                    @foreach (Product product in Model)
+                    {
+                        <div>
+                            <div class="product-box">
+                                <div class="img-wrapper">
+                                    <div class="front">
+                                        <a asp-controller="shop" asp-action="product" asp-route-id="@product.Id">
+                                            <img src="~/assets/images/products/@product.MainImage" class="bg-img blur-up lazyload" alt="product">
+                                        </a>
+                                    </div>
+                                    <div class="label-block">
+                                        @if (product.IsNewArrival)
+                                        {
+                                            <span class="label label-black">New</span>
+                                        }
+                                        @if (product.DiscountPrice != null)
+                                        {
+                                            var calculateDiscount = 100 - (double)product.DiscountPrice * 100 / product.Price;
+
+                                            <span class="label label-theme">@(calculateDiscount.ToString("0.00"))% Off</span>
+                                        }
+                                    </div>
+                                    <div class="cart-wrap">
+                                        <ul>
+                                            <li>
+                                                <a href="javascript:void(0)" class="addtocart-btn">
+                                                    <i data-feather="shopping-bag"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a asp-controller="shop" asp-action="quickview" asp-route-id="@product.Id" id="quickViewBtn" data-bs-toggle="modal" data-bs-target="#quick-view">
+                                                    <i data-feather="eye"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)" class="addtocompare-btn">
+                                                    <i data-feather="refresh-cw"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)" class="wishlist addtowishlist-btn">
+                                                    <i data-feather="heart"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="product-details">
+                                    <div class="rating-details">
+                                        <span class="font-light grid-content">
+                                            @if (product.SpecialTypeId != null)
+                                            {
+                                                @product.SpecialType.Title
+                                            }
+                                            else
+                                            {
+                                                if (product.IsNewArrival == true)
+                                                {
+                                                    @("New arrival")
+                                                }
+                                                else
+                                                {
+                                                    @("Our collection")
+                                                }
+                                            }
+                                        </span>
+                                        <div class="star-ratings">
+                                            <div class="fill-ratings" style="width: 50%;">
+                                                <span>★★★★★</span>
+                                            </div>
+                                            <div class="empty-ratings">
+                                                <span>★★★★★</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="main-price">
+                                        <a asp-controller="shop" asp-action="product" asp-route-id="@product.Id" class="font-default">
+                                            <h5 class="ms-0">@product.Title</h5>
+                                        </a>
+                                        <h3 class="theme-color">$@((product.DiscountPrice is null) ? product.Price : product.DiscountPrice)</h3>
+                                        <a href="#" class="btn listing-content">Add To Cart</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+                <!-- Prodcut setion -->
+
+            </div>
+
+            <div class="col-12">
+                <nav class="page-section">
+                    <ul class="pagination">
+
+                        <li class="page-item @(ViewBag.CurrentPage <= 1 ? "disabled" : "")">
+                            <a class="page-link" asp-controller="@controller" asp-action="index" asp-route-page="@(ViewBag.CurrentPage - 1)" asp-route-key="@ViewBag.Key">
+                                <span aria-hidden="true">
+                                    <i class="fas fa-chevron-left"></i>
+                                </span>
+                            </a>
+                        </li>
+
+                        @if (ViewBag.CurrentPage == ViewBag.PageCount && ViewBag.CurrentPage > 2)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" asp-controller="@controller" asp-action="index" asp-route-page="@(ViewBag.CurrentPage - 2)" asp-route-key="@ViewBag.Key">
+                                    @(ViewBag.CurrentPage - 2)
+                                </a>
+                            </li>
+                        }
+                        @if (ViewBag.CurrentPage > 1)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" asp-controller="@controller" asp-action="index" asp-route-page="@(ViewBag.CurrentPage - 1)" asp-route-key="@ViewBag.Key">
+                                    @(ViewBag.CurrentPage - 1)
+                                </a>
+                            </li>
+                        }
+
+                        <li class="page-item active">
+                            <a class="page-link" asp-controller="@controller" asp-action="index" asp-route-page="@(ViewBag.CurrentPage)" asp-route-key="@ViewBag.Key">
+                                @(ViewBag.CurrentPage)
+                            </a>
+                        </li>
+
+                        @if (ViewBag.CurrentPage < ViewBag.PageCount)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" asp-controller="@controller" asp-action="index" asp-route-page="@(ViewBag.CurrentPage + 1)" asp-route-key="@ViewBag.Key">
+                                    @(ViewBag.CurrentPage + 1)
+                                </a>
+                            </li>
+                        }
+                        @if (ViewBag.CurrentPage == 1 && (ViewBag.CurrentPage + 2) <= ViewBag.PageCount)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" asp-controller="@controller" asp-action="index" asp-route-page="@(ViewBag.CurrentPage + 2)" asp-route-key="@ViewBag.Key">
+                                    @(ViewBag.CurrentPage + 2)
+                                </a>
+                            </li>
+                        }
+
+                        <li class="page-item @(ViewBag.CurrentPage >= ViewBag.PageCount ? "disabled" : "")">
+                            <a class="page-link" asp-controller="@controller" asp-action="index" asp-route-page="@(ViewBag.CurrentPage + 1)" asp-route-key="@ViewBag.Key">
+                                <span aria-hidden="true">
+                                    <i class="fas fa-chevron-right"></i>
+                                </span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </nav>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- Prodcut setion -->
+
+@section JS{
+    <script src="~/assets/js/custom.js"></script>
+}

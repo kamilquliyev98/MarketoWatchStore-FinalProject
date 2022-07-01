@@ -334,7 +334,7 @@
                                         <a asp-controller="shop" asp-action="product" asp-route-id="@product.Id" class="font-default">
                                             <h5 class="ms-0">@product.Title</h5>
                                         </a>
-                                        <h3 class="theme-color">$78.00</h3>
+                                        <h3 class="theme-color">$@((product.DiscountPrice is null) ? product.Price : product.DiscountPrice)</h3>
                                         <a href="#" class="btn listing-content">Add To Cart</a>
                                     </div>
                                 </div>
