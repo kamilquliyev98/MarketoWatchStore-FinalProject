@@ -19,13 +19,13 @@ namespace MarketoWatchStore.Controllers
 
         public async Task<IActionResult> Index(string key, int page = 1)
         {
-            if (key != null)
+            if (key is null)
             {
-                key = key.ToLower().Trim();
+                return BadRequest();
             }
             else
             {
-                return BadRequest();
+                key = key.ToLower().Trim();
             }
 
             ViewBag.CurrentPage = page;
@@ -56,6 +56,7 @@ namespace MarketoWatchStore.Controllers
                 .OrderByDescending(b => b.Id)
                 .ToListAsync();
 
+            ViewBag.ProductCount = products.Count();
             ViewBag.PageCount = Math.Ceiling((double)products.Count() / 8);
 
             return View(products.Skip((page - 1) * 8).Take(8));

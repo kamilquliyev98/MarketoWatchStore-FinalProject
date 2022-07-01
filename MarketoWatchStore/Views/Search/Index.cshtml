@@ -43,7 +43,18 @@
         <div class="row">
             <div class="col-12">
                 <div class="title title1 text-center">
-                    <h2>Search For Products</h2>
+                    @if (ViewBag.ProductCount > 1)
+                    {
+                        <h2>Result: @ViewBag.ProductCount Products</h2>
+                    }
+                    else if (ViewBag.ProductCount == 1)
+                    {
+                        <h2>Result: 1 Product</h2>
+                    }
+                    else
+                    {
+                        <h2>Product not found</h2>
+                    }
                 </div>
             </div>
             <div class="col-lg-6 col-md-8 mx-auto">
@@ -162,74 +173,78 @@
 
             </div>
 
-            <div class="col-12">
-                <nav class="page-section">
-                    <ul class="pagination">
+            @if (ViewBag.ProductCount > 0)
+            {
+                <div class="col-12">
+                    <nav class="page-section">
+                        <ul class="pagination">
 
-                        <li class="page-item @(ViewBag.CurrentPage <= 1 ? "disabled" : "")">
-                            <a class="page-link" asp-controller="@controller" asp-action="index" asp-route-page="@(ViewBag.CurrentPage - 1)" asp-route-key="@ViewBag.Key">
-                                <span aria-hidden="true">
-                                    <i class="fas fa-chevron-left"></i>
-                                </span>
-                            </a>
-                        </li>
-
-                        @if (ViewBag.CurrentPage == ViewBag.PageCount && ViewBag.CurrentPage > 2)
-                        {
-                            <li class="page-item">
-                                <a class="page-link" asp-controller="@controller" asp-action="index" asp-route-page="@(ViewBag.CurrentPage - 2)" asp-route-key="@ViewBag.Key">
-                                    @(ViewBag.CurrentPage - 2)
-                                </a>
-                            </li>
-                        }
-                        @if (ViewBag.CurrentPage > 1)
-                        {
-                            <li class="page-item">
+                            <li class="page-item @(ViewBag.CurrentPage <= 1 ? "disabled" : "")">
                                 <a class="page-link" asp-controller="@controller" asp-action="index" asp-route-page="@(ViewBag.CurrentPage - 1)" asp-route-key="@ViewBag.Key">
-                                    @(ViewBag.CurrentPage - 1)
+                                    <span aria-hidden="true">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
                                 </a>
                             </li>
-                        }
 
-                        <li class="page-item active">
-                            <a class="page-link" asp-controller="@controller" asp-action="index" asp-route-page="@(ViewBag.CurrentPage)" asp-route-key="@ViewBag.Key">
-                                @(ViewBag.CurrentPage)
-                            </a>
-                        </li>
+                            @if (ViewBag.CurrentPage == ViewBag.PageCount && ViewBag.CurrentPage > 2)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" asp-controller="@controller" asp-action="index" asp-route-page="@(ViewBag.CurrentPage - 2)" asp-route-key="@ViewBag.Key">
+                                        @(ViewBag.CurrentPage - 2)
+                                    </a>
+                                </li>
+                            }
+                            @if (ViewBag.CurrentPage > 1)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" asp-controller="@controller" asp-action="index" asp-route-page="@(ViewBag.CurrentPage - 1)" asp-route-key="@ViewBag.Key">
+                                        @(ViewBag.CurrentPage - 1)
+                                    </a>
+                                </li>
+                            }
 
-                        @if (ViewBag.CurrentPage < ViewBag.PageCount)
-                        {
-                            <li class="page-item">
+                            <li class="page-item active">
+                                <a class="page-link" asp-controller="@controller" asp-action="index" asp-route-page="@(ViewBag.CurrentPage)" asp-route-key="@ViewBag.Key">
+                                    @(ViewBag.CurrentPage)
+                                </a>
+                            </li>
+
+                            @if (ViewBag.CurrentPage < ViewBag.PageCount)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" asp-controller="@controller" asp-action="index" asp-route-page="@(ViewBag.CurrentPage + 1)" asp-route-key="@ViewBag.Key">
+                                        @(ViewBag.CurrentPage + 1)
+                                    </a>
+                                </li>
+                            }
+                            @if (ViewBag.CurrentPage == 1 && (ViewBag.CurrentPage + 2) <= ViewBag.PageCount)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" asp-controller="@controller" asp-action="index" asp-route-page="@(ViewBag.CurrentPage + 2)" asp-route-key="@ViewBag.Key">
+                                        @(ViewBag.CurrentPage + 2)
+                                    </a>
+                                </li>
+                            }
+
+                            <li class="page-item @(ViewBag.CurrentPage >= ViewBag.PageCount ? "disabled" : "")">
                                 <a class="page-link" asp-controller="@controller" asp-action="index" asp-route-page="@(ViewBag.CurrentPage + 1)" asp-route-key="@ViewBag.Key">
-                                    @(ViewBag.CurrentPage + 1)
+                                    <span aria-hidden="true">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
                                 </a>
                             </li>
-                        }
-                        @if (ViewBag.CurrentPage == 1 && (ViewBag.CurrentPage + 2) <= ViewBag.PageCount)
-                        {
-                            <li class="page-item">
-                                <a class="page-link" asp-controller="@controller" asp-action="index" asp-route-page="@(ViewBag.CurrentPage + 2)" asp-route-key="@ViewBag.Key">
-                                    @(ViewBag.CurrentPage + 2)
-                                </a>
-                            </li>
-                        }
 
-                        <li class="page-item @(ViewBag.CurrentPage >= ViewBag.PageCount ? "disabled" : "")">
-                            <a class="page-link" asp-controller="@controller" asp-action="index" asp-route-page="@(ViewBag.CurrentPage + 1)" asp-route-key="@ViewBag.Key">
-                                <span aria-hidden="true">
-                                    <i class="fas fa-chevron-right"></i>
-                                </span>
-                            </a>
-                        </li>
+                        </ul>
+                    </nav>
+                </div>
 
-                    </ul>
-                </nav>
-            </div>
+            }
 
         </div>
     </div>
 </section>
-<!-- Prodcut setion -->
+<!-- Result setion -->
 
 @section JS{
     <script src="~/assets/js/custom.js"></script>
