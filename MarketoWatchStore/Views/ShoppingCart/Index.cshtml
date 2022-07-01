@@ -1,6 +1,7 @@
 ﻿@model List<ShoppingCartVM>
 @{
-    ViewBag.Title = "Marketo | Shopping Cart";
+    ViewBag.Title = "Shopping Cart | Marketo";
+    double total = Model.Sum(x => x.Price * x.Count);
 }
 
 <!-- Breadcrumb section start -->
@@ -30,6 +31,7 @@
     </div>
 </section>
 <!-- Breadcrumb section end -->
+
 <!-- Cart Section Start -->
 <section class="cart-section section-b-space">
     <div class="container">
@@ -67,7 +69,7 @@
                                             </div>
                                         </div>
                                         <div class="col">
-                                            <h2>$@shoppingCartVM.Price</h2>
+                                            <h2>$@shoppingCartVM.Price.ToString("0.00")</h2>
                                         </div>
                                         <div class="col">
                                             <h2 class="td-color">
@@ -79,7 +81,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <h2>$63.00</h2>
+                                    <h2>$@shoppingCartVM.Price.ToString("0.00")</h2>
                                 </td>
                                 <td>
                                     <div class="qty-box">
@@ -89,7 +91,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <h2 class="td-color">$3648.00</h2>
+                                    <h2 class="td-color">$@((shoppingCartVM.Price * shoppingCartVM.Count).ToString("0.00"))</h2>
                                 </td>
                                 <td>
                                     <a href="javascript:void(0)">
@@ -132,9 +134,9 @@
                                 <div class="total-details">
                                     <div class="top-details">
                                         <h3>Cart Totals</h3>
-                                        <h6>Quantity of products <span>3</span></h6>
+                                        <h6>Quantity of products <span>@Model.Count()</span></h6>
                                         <h6>Delivery <span>$0.00</span></h6>
-                                        <h6><strong>Total price <span>$369.00</span></strong></h6>
+                                        <h6><strong>Total price <span>$@total.ToString("0.00")</span></strong></h6>
                                     </div>
                                     <div class="bottom-details">
                                         <a asp-controller="shoppingcart" asp-action="checkout">Process Checkout</a>
