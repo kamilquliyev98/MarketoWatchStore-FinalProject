@@ -19,7 +19,7 @@ namespace MarketoWatchStore.Controllers
 
         public async Task<IActionResult> Index(string key, int page = 1)
         {
-            if (key is null)
+            if (string.IsNullOrEmpty(key))
             {
                 return BadRequest();
             }

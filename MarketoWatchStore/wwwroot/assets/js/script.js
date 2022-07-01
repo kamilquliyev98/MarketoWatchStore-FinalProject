@@ -417,11 +417,11 @@ $(document).ready(function () {
                 oX = parseInt($(this).offset().left),
                 oY = parseInt($(this).offset().top);
             $(".x-" + oX + ".y-" + oY + "").animate({
-                    width: "500px",
-                    height: "500px",
-                    top: "-250px",
-                    left: "-250px",
-                },
+                width: "500px",
+                height: "500px",
+                top: "-250px",
+                left: "-250px",
+            },
                 600
             );
             $("button", this).addClass("active");
@@ -442,9 +442,9 @@ $(document).ready(function () {
                 }, 600);
 
                 $(this).animate({
-                        width: "140px",
-                        height: "140px",
-                    },
+                    width: "140px",
+                    height: "140px",
+                },
                     500,
                     function () {
                         $(".box").removeClass("back");
@@ -517,29 +517,56 @@ $(document).ready(function () {
 
 
 
-    /* Added to cart Toastr */
+    /* Add to cart with Toastr */
     $(document).on("click", ".addtocart-btn", function (e) {
         e.preventDefault();
 
-        toastr.options = {
-            "closeButton": false,
-            "debug": false,
-            "newestOnTop": true,
-            "progressBar": true,
-            "positionClass": "toast-top-right",
-            "preventDuplicates": false,
-            "onclick": null,
-            "showDuration": "300",
-            "hideDuration": "1000",
-            "timeOut": "5000",
-            "extendedTimeOut": "1000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut"
-        };
+        var url = $(this).attr("href");
+        let url2 = "/ShoppingCart/GetCartTotalAmount";
 
-        toastr.success("Item successfully added to your cart!");
+        fetch(url).then(response => response.text())
+            .then(data => {
+                $(".mini-cart").html(data);
+
+                feather.replace();
+
+                $(".cart-dropdown .cart-media, .cart-dropdown > button").on("click", function () {
+                    $(".cart-dropdown").addClass("show");
+                    $("body").addClass("o-hidden");
+                });
+
+                $(".back-cart").on("click", function () {
+                    $(".cart-dropdown").removeClass("show");
+                    $("body").removeClass("o-hidden");
+                });
+            })
+            .then(data => {
+                fetch(url2).then(response => response.text()).then(data => {
+                    data.toString();
+                    $("#total-amount").html(data)
+                });
+            })
+            .then(data => {
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+                toastr.success("Item successfully added to your cart!");
+            });
     });
 
 
@@ -687,7 +714,77 @@ $(document).ready(function () {
 
 
 
-    
+
+    $(document).on("click", "#quickViewBtn", function (e) {
+        e.preventDefault();
+
+        let url = $(this).attr("href");
+
+        fetch(url).then(response => response.text()).then(data => {
+
+            $(".modal-content").html(data);
+
+            /* Modal JS */
+            $(".quick-view-slider").each(function (key, item) {
+                var sliderIdName = "slider" + key;
+                var sliderNavIdName = "sliderNav" + key;
+
+                this.id = sliderIdName;
+                $(".quick-nav")[key].id = sliderNavIdName;
+
+                var sliderId = "#" + sliderIdName;
+                var sliderNavId = "#" + sliderNavIdName;
+
+                $(sliderId).slick({
+                    dots: false,
+                    infinite: true,
+                    speed: 1500,
+                    fade: true,
+                    arrows: false,
+                    autoplay: true,
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    asNavFor: sliderNavId,
+                });
+
+                $(sliderNavId).slick({
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                    asNavFor: sliderId,
+                    swipe: false,
+                    vertical: true,
+                    verticalScrolling: true,
+                    arrows: false,
+                    dots: false,
+                    focusOnSelect: true,
+                });
+            });
+
+            $("#quick-view").on("show.bs.modal", function (event) {
+                $(window).trigger("resize");
+                $(".quick-view-slider").slick("slickNext");
+                $(".quick-nav").slick("slickNext");
+            });
+
+            /* Color Select JS */
+            $(".color-variant li").on("click", function () {
+                $(this).toggleClass("selected").siblings("li").removeClass("selected");
+            });
+
+            /* Rating Stars JS */
+            var star_rating_width = $('.fill-ratings span').width();
+            $('.star-ratings').width(star_rating_width);
+
+            $("#quick-view").modal("show");
+
+        });
+
+    });
+
+
+
+
+
     /* Rating Stars JS */
     var star_rating_width = $('.fill-ratings span').width();
     $('.star-ratings').width(star_rating_width);

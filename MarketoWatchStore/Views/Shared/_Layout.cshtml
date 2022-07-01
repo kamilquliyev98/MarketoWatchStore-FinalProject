@@ -1,6 +1,7 @@
 ﻿@inject LayoutService layoutService
 @{
     Setting setting = await layoutService.GetSetting();
+    List<ShoppingCartVM> shoppingCartVMs = await layoutService.GetCart();
 }
 
 <!DOCTYPE html>
@@ -319,80 +320,10 @@
                                     <li class="onhover-dropdown cart-dropdown">
                                         <button type="button" class="btn btn-solid-default btn-spacing">
                                             <i data-feather="shopping-cart" class="pe-2"></i>
-                                            <span>$25.00</span>
+                                            <span>$<span id="total-amount">0</span></span>
                                         </button>
-                                        <div class="onhover-div">
-                                            @*<a asp-controller="shop" asp-action="index">
-                                                    <div class="wislist-empty">
-                                                        <i class="fa-solid fa-cart-arrow-down"></i>
-                                                        <h6 class="mb-1">
-                                                            Your shopping cart is empty! Click here to go to
-                                                            shop! :)
-                                                        </h6>
-                                                    </div>
-                                                </a>*@
-                                            <div class="cart-menu">
-                                                <div class="cart-title">
-                                                    <h6>
-                                                        <i data-feather="shopping-bag"></i>
-                                                        <span class="label label-theme rounded-pill">5</span>
-                                                        <h4>Shopping Cart</h4>
-                                                    </h6>
-                                                    <span class="d-md-none d-block">
-                                                        <i class="fas fa-arrow-right back-cart"></i>
-                                                    </span>
-                                                </div>
-                                                <ul class="custom-scroll">
-                                                    <li>
-                                                        <div class="media">
-                                                            <img src="~/assets/images/products/2.jpg"
-                                                                 class="img-fluid blur-up lazyload" alt="product">
-                                                            <div class="media-body">
-                                                                <h6>Slim Fit Plastic Coat</h6>
-                                                                <div class="qty-with-price">
-                                                                    <span>$78.00</span>
-                                                                    <span>
-                                                                        <input type="number" class="form-control"
-                                                                               value="1">
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                            <button type="button" class="btn-close d-block d-md-none"
-                                                                    aria-label="Close">
-                                                                <i class="fas fa-times"></i>
-                                                            </button>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="media">
-                                                            <img src="~/assets/images/products/3.jpg"
-                                                                 class="img-fluid blur-up lazyload" alt="product">
-                                                            <div class="media-body">
-                                                                <h6>Womens Stylish Jacket</h6>
-                                                                <div class="qty-with-price">
-                                                                    <span>$24.00</span>
-                                                                    <span>
-                                                                        <input type="number" class="form-control"
-                                                                               value="1">
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                            <button type="button" class="btn-close d-block d-md-none"
-                                                                    aria-label="Close">
-                                                                <i class="fas fa-times"></i>
-                                                            </button>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="cart-btn">
-                                                <h6 class="cart-total">
-                                                    <span class="font-light">Total:</span> $542.00
-                                                </h6>
-                                                <a asp-controller="shoppingcart" asp-action="index" class="btn btn-solid-default btn-block">
-                                                    Proceed to payment
-                                                </a>
-                                            </div>
+                                        <div class="mini-cart">
+                                            @await Html.PartialAsync("_MiniCartPartial", await layoutService.GetCart())
                                         </div>
                                     </li>
                                 </ul>

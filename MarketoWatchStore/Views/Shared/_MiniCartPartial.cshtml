@@ -1,0 +1,65 @@
+﻿@model IEnumerable<ShoppingCartVM>
+@{
+    double total = 0;
+}
+
+<div class="onhover-div">
+    @if (Model.Count() == 0)
+    {
+        <a asp-controller="shop" asp-action="index">
+            <div class="wislist-empty">
+                <i class="fa-solid fa-cart-arrow-down"></i>
+                <h6 class="mb-1">Your shopping cart is empty! Click here to go to shop! :)</h6>
+            </div>
+        </a>
+    }
+    else
+    {
+        <div class="cart-menu">
+
+            <div class="cart-title">
+                <h6>
+                    <i data-feather="shopping-bag"></i>
+                    <span class="label label-theme rounded-pill">@Model.Count()</span>
+                    <h4>Shopping Cart</h4>
+                </h6>
+                <span class="d-md-none d-block">
+                    <i class="fas fa-arrow-right back-cart"></i>
+                </span>
+            </div>
+            <ul class="custom-scroll">
+                @foreach (ShoppingCartVM shoppingCartVM in Model)
+                {
+                    <li>
+                        <div class="media">
+                            <img src="~/assets/images/products/@shoppingCartVM.MainImage" class="img-fluid blur-up lazyload" alt="product">
+                            <div class="media-body">
+                                <h6>@shoppingCartVM.Title</h6>
+                                <div class="qty-with-price">
+                                    <span>$@shoppingCartVM.Price.ToString("0.00")</span>
+                                    <span>
+                                        <input type="number" class="form-control" value="@shoppingCartVM.Count" min="1">
+                                    </span>
+                                </div>
+                            </div>
+                            <button type="button" class="btn-close d-block d-md-none" aria-label="Close">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </li>
+
+                    total += shoppingCartVM.Count * shoppingCartVM.Price;
+                }
+            </ul>
+        </div>
+        <div class="cart-btn">
+            <h6 class="cart-total">
+                <span class="font-light">Total:</span> $@total.ToString("0.00")
+            </h6>
+            <a asp-controller="shoppingcart" asp-action="index" class="btn btn-solid-default btn-block">
+                Proceed to payment
+            </a>
+        </div>
+    }
+
+</div>

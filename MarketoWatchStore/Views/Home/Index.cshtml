@@ -206,7 +206,7 @@
                                     <div class="cart-wrap">
                                         <ul>
                                             <li>
-                                                <a href="javascript:void(0)" class="addtocart-btn">
+                                                <a asp-controller="shoppingcart" asp-action="addtocart" asp-route-id="@product.Id" class="addtocart-btn">
                                                     <i data-feather="shopping-bag"></i>
                                                 </a>
                                             </li>
@@ -318,7 +318,7 @@
                                     <div class="cart-wrap">
                                         <ul>
                                             <li>
-                                                <a href="javascript:void(0)" class="addtocart-btn">
+                                                <a asp-controller="shoppingcart" asp-action="addtocart" asp-route-id="@product.Id" class="addtocart-btn">
                                                     <i data-feather="shopping-bag"></i>
                                                 </a>
                                             </li>
@@ -406,7 +406,3 @@
     </div>
 </section>
 <!-- Brand Section end -->
-
-@section JS{
-    <script src="~/assets/js/custom.js" asp-append-version="true"></script>
-}
