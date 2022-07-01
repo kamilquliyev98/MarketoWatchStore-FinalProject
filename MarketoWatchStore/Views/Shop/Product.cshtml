@@ -1,6 +1,10 @@
 ﻿@model Product
 @{
     ViewData["Title"] = Model.Brand.Title + " " + Model.Title + " | Marketo";
+    int featuresCount = Model.ProductFeatures.Count();
+    int countF = 0;
+    int tagsCount = Model.ProductTags.Count();
+    int countT = 0;
 }
 
 <!-- Breadcrumb section start -->
@@ -600,18 +604,39 @@
                                             <th>Power source</th>
                                             <td>@Model.PowerSource.Title</td>
                                         </tr>
-                                        <tr>
-                                            <th>Special type</th>
-                                            <td>@Model.SpecialType?.Title</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Features</th>
-                                            <td>15 x 15 x 3 Centimeters</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Tags</th>
-                                            <td>1 U</td>
-                                        </tr>
+                                        @if (Model.SpecialTypeId != null)
+                                        {
+                                            <tr>
+                                                <th>Special type</th>
+                                                <td>@Model.SpecialType.Title</td>
+                                            </tr>
+                                        }
+                                        @if (Model.ProductFeatures.Where(pf => pf.ProductId == Model.Id) != null && Model.ProductFeatures.Where(pf => pf.ProductId == Model.Id).Count() > 0)
+                                        {
+                                            <tr>
+                                                <th>Features</th>
+                                                <td>
+                                                    @foreach (ProductFeature productFeature in Model.ProductFeatures.Where(pf => pf.ProductId == Model.Id))
+                                                    {
+                                                        countF++;
+                                                        @(productFeature.Feature.Title + ((featuresCount == countF) ? "" : ", "));
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
+                                        @if (Model.ProductTags.Where(pt => pt.ProductId == Model.Id) != null && Model.ProductTags.Where(pt => pt.ProductId == Model.Id).Count() > 0)
+                                        {
+                                            <tr>
+                                                <th>Tags</th>
+                                                <td>
+                                                    @foreach (ProductTag productTag in Model.ProductTags.Where(pt => pt.ProductId == Model.Id))
+                                                    {
+                                                        countT++;
+                                                        @("#" + productTag.Tag.Title + ((tagsCount == countT) ? "" : ", "));
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
                                     </table>
                                 </div>
                             </div>
