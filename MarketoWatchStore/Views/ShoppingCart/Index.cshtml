@@ -1,4 +1,5 @@
-﻿@{ 
+﻿@model List<ShoppingCartVM>
+@{
     ViewBag.Title = "Marketo | Shopping Cart";
 }
 
@@ -47,158 +48,56 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>
-                                <a href="product-left-sidebar.html">
-                                    <img src="assets/images/products/1.jpg" class=" blur-up lazyload" alt="product">
-                                </a>
-                            </td>
-                            <td>
-                                <a href="product-left-sidebar.html">Yellow Jacket</a>
-                                <div class="mobile-cart-content row">
-                                    <div class="col">
-                                        <div class="qty-box">
-                                            <div class="input-group">
-                                                <input type="text" name="quantity" class="form-control input-number"
-                                                       value="1">
+                        @foreach (ShoppingCartVM shoppingCartVM in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <a asp-controller="shop" asp-action="product" asp-route-id="@shoppingCartVM.ProductId">
+                                        <img src="assets/images/products/@shoppingCartVM.MainImage" class=" blur-up lazyload" alt="product">
+                                    </a>
+                                </td>
+                                <td>
+                                    <a asp-controller="shop" asp-action="product" asp-route-id="@shoppingCartVM.ProductId">@shoppingCartVM.Title</a>
+                                    <div class="mobile-cart-content row">
+                                        <div class="col">
+                                            <div class="qty-box">
+                                                <div class="input-group">
+                                                    <input type="text" name="quantity" class="form-control input-number" value="@shoppingCartVM.Count" min="1">
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col">
-                                        <h2>$63.00</h2>
-                                    </div>
-                                    <div class="col">
-                                        <h2 class="td-color">
-                                            <a href="javascript:void(0)">
-                                                <i class="fas fa-times"></i>
-                                            </a>
-                                        </h2>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <h2>$63.00</h2>
-                            </td>
-                            <td>
-                                <div class="qty-box">
-                                    <div class="input-group">
-                                        <input type="number" name="quantity" class="form-control input-number"
-                                               value="1" min="1">
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <h2 class="td-color">$3648.00</h2>
-                            </td>
-                            <td>
-                                <a href="javascript:void(0)">
-                                    <i class="fas fa-times"></i>
-                                </a>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <a href="product-left-sidebar.html">
-                                    <img src="assets/images/products/9.jpg" class=" blur-up lazyload" alt="product">
-                                </a>
-                            </td>
-                            <td>
-                                <a href="product-left-sidebar.html">Blue Jeans Color Jacket</a>
-                                <div class="mobile-cart-content row">
-                                    <div class="col">
-                                        <div class="qty-box">
-                                            <div class="input-group">
-                                                <input type="number" name="quantity"
-                                                       class="form-control input-number" value="1" min="1">
-                                            </div>
+                                        <div class="col">
+                                            <h2>$@shoppingCartVM.Price</h2>
+                                        </div>
+                                        <div class="col">
+                                            <h2 class="td-color">
+                                                <a href="javascript:void(0)">
+                                                    <i class="fas fa-times"></i>
+                                                </a>
+                                            </h2>
                                         </div>
                                     </div>
-                                    <div class="col">
-                                        <h2>$69.00</h2>
-                                    </div>
-                                    <div class="col">
-                                        <h2 class="td-color">
-                                            <a href="javascript:void(0)">
-                                                <i class="fas fa-times"></i>
-                                            </a>
-                                        </h2>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <h2>$69.00</h2>
-                            </td>
-                            <td>
-                                <div class="qty-box">
-                                    <div class="input-group">
-                                        <input type="number" name="quantity" class="form-control input-number"
-                                               value="1" min="1">
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <h2 class="td-color">$3219.00</h2>
-                            </td>
-                            <td>
-                                <a href="javascript:void(0)">
-                                    <i class="fas fa-times"></i>
-                                </a>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <a href="product-left-sidebar.html">
-                                    <img src="assets/images/products/8.jpg" class="blur-up lazyload"
-                                         alt="product">
-                                </a>
-                            </td>
-                            <td>
-                                <a href="product-left-sidebar.html">Dawnbreaker Jacket</a>
-                                <div class="mobile-cart-content row">
-                                    <div class="col">
-                                        <div class="qty-box">
-                                            <div class="input-group">
-                                                <input type="number" name="quantity"
-                                                       class="form-control input-number" value="1" min="1">
-                                            </div>
+                                </td>
+                                <td>
+                                    <h2>$63.00</h2>
+                                </td>
+                                <td>
+                                    <div class="qty-box">
+                                        <div class="input-group">
+                                            <input type="number" name="quantity" class="form-control input-number" value="@shoppingCartVM.Count" min="1">
                                         </div>
                                     </div>
-                                    <div class="col">
-                                        <h2>$69.00</h2>
-                                    </div>
-                                    <div class="col">
-                                        <h2 class="td-color">
-                                            <a href="javascript:void(0)">
-                                                <i class="fas fa-times"></i>
-                                            </a>
-                                        </h2>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <h2>$69.00</h2>
-                            </td>
-                            <td>
-                                <div class="qty-box">
-                                    <div class="input-group">
-                                        <input type="number" name="quantity" class="form-control input-number"
-                                               value="1" min="1">
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <h2 class="td-color">$4215.00</h2>
-                            </td>
-                            <td>
-                                <a href="javascript:void(0)">
-                                    <i class="fas fa-times"></i>
-                                </a>
-                            </td>
-                        </tr>
+                                </td>
+                                <td>
+                                    <h2 class="td-color">$3648.00</h2>
+                                </td>
+                                <td>
+                                    <a href="javascript:void(0)">
+                                        <i class="fas fa-times"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>
@@ -216,7 +115,7 @@
                     </div>
                     <div class="col-sm-5 col-7">
                         <div class="left-side-button float-start">
-                            <a href="shop.html" class="btn btn-solid-default btn fw-bold mb-0 ms-0">
+                            <a asp-controller="shop" asp-action="index" class="btn btn-solid-default btn fw-bold mb-0 ms-0">
                                 <i class="fas fa-arrow-left"></i> Continue Shopping
                             </a>
                         </div>
@@ -238,7 +137,7 @@
                                         <h6><strong>Total price <span>$369.00</span></strong></h6>
                                     </div>
                                     <div class="bottom-details">
-                                        <a href="checkout.html">Process Checkout</a>
+                                        <a asp-controller="shoppingcart" asp-action="checkout">Process Checkout</a>
                                     </div>
                                 </div>
                             </div>

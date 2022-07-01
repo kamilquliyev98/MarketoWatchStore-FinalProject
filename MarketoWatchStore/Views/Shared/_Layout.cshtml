@@ -318,13 +318,7 @@
                                         </div>
                                     </li>
                                     <li class="onhover-dropdown cart-dropdown">
-                                        <button type="button" class="btn btn-solid-default btn-spacing">
-                                            <i data-feather="shopping-cart" class="pe-2"></i>
-                                            <span>$<span id="total-amount">0</span></span>
-                                        </button>
-                                        <div class="mini-cart">
-                                            @await Html.PartialAsync("_MiniCartPartial", await layoutService.GetCart())
-                                        </div>
+                                        @await Html.PartialAsync("_MiniCartPartial",await layoutService.GetCart())
                                     </li>
                                 </ul>
                             </div>

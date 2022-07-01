@@ -97,26 +97,9 @@ namespace MarketoWatchStore.Controllers
             return PartialView("_MiniCartPartial", shoppingCartVMs);
         }
 
-        public double GetCartTotalAmount()
+        public IActionResult Checkout()
         {
-            List<ShoppingCartVM> shoppingCartVMs = new List<ShoppingCartVM>();
-            double totalPrice = 0;
-
-            string cookieCart = HttpContext.Request.Cookies["cart"];
-
-            if (!string.IsNullOrEmpty(cookieCart))
-            {
-                shoppingCartVMs = JsonConvert.DeserializeObject<List<ShoppingCartVM>>(cookieCart);
-
-                foreach (ShoppingCartVM shoppingCartVM in shoppingCartVMs)
-                {
-                    totalPrice += shoppingCartVM.Price;
-                }
-
-                return totalPrice;
-            }
-
-            return 0;
+            return View();
         }
     }
 }

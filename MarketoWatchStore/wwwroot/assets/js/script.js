@@ -522,11 +522,11 @@ $(document).ready(function () {
         e.preventDefault();
 
         var url = $(this).attr("href");
-        let url2 = "/ShoppingCart/GetCartTotalAmount";
+        //let url2 = "/ShoppingCart/GetCartTotalAmount";
 
         fetch(url).then(response => response.text())
             .then(data => {
-                $(".mini-cart").html(data);
+                $(".cart-dropdown").html(data);
 
                 feather.replace();
 
@@ -539,14 +539,7 @@ $(document).ready(function () {
                     $(".cart-dropdown").removeClass("show");
                     $("body").removeClass("o-hidden");
                 });
-            })
-            .then(data => {
-                fetch(url2).then(response => response.text()).then(data => {
-                    data.toString();
-                    $("#total-amount").html(data)
-                });
-            })
-            .then(data => {
+
                 toastr.options = {
                     "closeButton": true,
                     "debug": false,
@@ -566,7 +559,7 @@ $(document).ready(function () {
                 };
 
                 toastr.success("Item successfully added to your cart!");
-            });
+            })
     });
 
 
