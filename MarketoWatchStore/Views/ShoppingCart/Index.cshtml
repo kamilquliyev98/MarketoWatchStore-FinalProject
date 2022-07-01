@@ -156,13 +156,29 @@
         else
         {
             <div class="row gx-md-2 gx-0 gy-md-0 gy-3">
+
                 <div class="col-md-8 mx-auto">
-                    <div class="col-md-8 m-auto">
-                        <div class="page-image">
-                            <img src="~/assets/images/inner-page/empty-cart.jpg" class="img-fluid blur-up lazyload" alt="cart">
+                    <div class="page-image">
+                        <img src="~/assets/images/inner-page/empty-cart.jpg" class="img-fluid blur-up lazyload d-block mx-auto" alt="cart">
+                    </div>
+                </div>
+
+                <div class="col-md-8 mx-auto mt-md-5 mt-3">
+                    <div class="page-container pass-forgot">
+                        <div class="d-flex justify-content-center">
+                            <a href="javascript:history.back();" class="btn btn-outline-info m-1">
+                                <i class="fa-solid fa-arrow-left"></i>&nbsp;&nbsp;&nbsp;Go Back
+                            </a>
+                            <a asp-controller="home" asp-action="index" class="btn btn-outline-info m-1">
+                                <i class="fa-solid fa-house"></i>&nbsp;&nbsp;&nbsp;Home Page
+                            </a>
+                            <a asp-controller="shop" asp-action="index" class="btn btn-outline-info m-1">
+                                <i class="fa-solid fa-bag-shopping"></i>&nbsp;&nbsp;&nbsp;Shop Page
+                            </a>
                         </div>
                     </div>
                 </div>
+
             </div>
         }
 
