@@ -88,7 +88,7 @@ namespace MarketoWatchStore.Controllers
                 .Include(p => p.ProductFeatures).ThenInclude(p => p.Feature)
                 .FirstOrDefaultAsync(p => !p.IsDeleted && p.Id == id);
 
-            if (product is null) return NotFound();
+            if (product is null) return RedirectToAction("error404", "home");
 
             return PartialView("_ProductQuickViewPartial", product);
         }
@@ -109,7 +109,7 @@ namespace MarketoWatchStore.Controllers
                 .Include(p => p.ProductFeatures).ThenInclude(p => p.Feature)
                 .FirstOrDefaultAsync(p => !p.IsDeleted && p.Id == id);
 
-            if (product is null) return NotFound();
+            if (product is null) return RedirectToAction("error404", "home");
 
             return View(product);
         }

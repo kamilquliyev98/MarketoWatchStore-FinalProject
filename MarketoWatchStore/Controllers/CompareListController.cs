@@ -73,7 +73,7 @@ namespace MarketoWatchStore.Controllers
                 .Include(p => p.ProductFeatures).ThenInclude(p => p.Feature)
                 .FirstOrDefaultAsync(p => p.Id == id && !p.IsDeleted);
 
-            if (product is null) return NotFound();
+            if (product is null) return RedirectToAction("error404", "home");
 
             string cookieCompare = HttpContext.Request.Cookies["compare"];
 
@@ -141,7 +141,7 @@ namespace MarketoWatchStore.Controllers
 
             Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
 
-            if (product is null) return NotFound();
+            if (product is null) return RedirectToAction("error404", "home");
 
             string cookieCompare = HttpContext.Request.Cookies["compare"];
 
@@ -153,7 +153,7 @@ namespace MarketoWatchStore.Controllers
 
                 CompareListVM compareListVM = compareListVMs.FirstOrDefault(p => p.ProductId == id);
 
-                if (compareListVM is null) return NotFound();
+                if (compareListVM is null) return RedirectToAction("error404", "home");
 
                 compareListVMs.Remove(compareListVM);
             }

@@ -48,7 +48,7 @@ namespace MarketoWatchStore.Controllers
 
             Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id && !p.IsDeleted);
 
-            if (product is null) return NotFound();
+            if (product is null) return RedirectToAction("error404", "home");
 
             string cookieCart = HttpContext.Request.Cookies["cart"];
 
@@ -103,7 +103,7 @@ namespace MarketoWatchStore.Controllers
 
             Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
 
-            if (product is null) return NotFound();
+            if (product is null) return RedirectToAction("error404", "home");
 
             string cookieCart = HttpContext.Request.Cookies["cart"];
 
@@ -115,7 +115,7 @@ namespace MarketoWatchStore.Controllers
 
                 ShoppingCartVM shoppingCartVM = shoppingCartVMs.FirstOrDefault(p => p.ProductId == id);
 
-                if (shoppingCartVM is null) return NotFound();
+                if (shoppingCartVM is null) return RedirectToAction("error404", "home");
 
                 shoppingCartVMs.Remove(shoppingCartVM);
             }

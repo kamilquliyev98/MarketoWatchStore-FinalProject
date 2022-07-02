@@ -1,4 +1,4 @@
-﻿@model RegisterVM
+﻿@model LoginVM
 @{
     Layout = null;
 }
@@ -11,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Register | Marketo</title>
+    <title>Login | Marketo</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="~/assets/images/favicon/favicon.ico" type="image/x-icon">
@@ -58,12 +58,12 @@
         <div class="materialContainer">
             <div class="box">
                 <div class="login-title">
-                    <h2>Register</h2>
+                    <h2>Login</h2>
                 </div>
 
-                @await Html.PartialAsync("_RegisterPartial")
+                @await Html.PartialAsync("_LoginPartial")
 
-                <p><a asp-controller="account" asp-action="login" class="theme-color">Already have an account?</a></p>
+                <p>Not a member? <a asp-controller="account" asp-action="register" class="theme-color">Sign up now</a></p>
             </div>
         </div>
     </div>

@@ -1,33 +1,33 @@
 ﻿@model RegisterVM
 
-<form method="post">
+<form method="post" autocomplete="off">
     <div class="input">
         <label asp-for="Fullname">Fullname</label>
-        <input asp-for="Fullname">
+        <input asp-for="Fullname" required>
         <span class="spin"></span>
     </div>
 
     <div class="input">
         <label asp-for="Email">Email Address</label>
-        <input asp-for="Email">
+        <input asp-for="Email" required>
         <span class="spin"></span>
     </div>
 
     <div class="input">
         <label asp-for="Username">Username</label>
-        <input asp-for="Username">
+        <input asp-for="Username" required>
         <span class="spin"></span>
     </div>
 
     <div class="input">
         <label asp-for="Password">Password</label>
-        <input asp-for="Password">
+        <input asp-for="Password" required>
         <span class="spin"></span>
     </div>
 
     <div class="input">
         <label asp-for="ConfirmPassword">Confirm Password</label>
-        <input asp-for="ConfirmPassword">
+        <input asp-for="ConfirmPassword" required>
         <span class="spin"></span>
     </div>
 

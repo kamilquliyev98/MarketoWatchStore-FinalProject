@@ -44,7 +44,7 @@ namespace MarketoWatchStore.Controllers
 
             Blog blog = await _context.Blogs.FirstOrDefaultAsync(b => b.Id == id && !b.IsDeleted);
 
-            if (blog is null) return NotFound();
+            if (blog is null) return RedirectToAction("error404", "home");
 
             return View(blog);
         }

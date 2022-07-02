@@ -61,6 +61,11 @@ namespace MarketoWatchStore
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error404");
+                app.UseHsts();
+            }
 
             app.UseRouting();
             app.UseStaticFiles();
