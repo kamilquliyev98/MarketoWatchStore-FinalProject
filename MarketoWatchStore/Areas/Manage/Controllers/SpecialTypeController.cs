@@ -114,11 +114,11 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         #region Update
         public async Task<IActionResult> Update(int? id)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             SpecialType specialType = await _context.SpecialTypes.FirstOrDefaultAsync(b => b.Id == id && !b.IsDeleted);
 
-            if (specialType == null) return NotFound();
+            if (specialType is null) return NotFound();
 
             return View(specialType);
         }
@@ -127,12 +127,12 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(int? id, SpecialType specialType, string status = "all", int page = 1)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             if (id != specialType.Id) return BadRequest();
 
             SpecialType dbSpecialType = await _context.SpecialTypes.FirstOrDefaultAsync(b => b.Id == id && !b.IsDeleted);
-            if (dbSpecialType == null) return NotFound();
+            if (dbSpecialType is null) return NotFound();
 
             if (!ModelState.IsValid) return View(dbSpecialType);
 
@@ -168,11 +168,11 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         #region Delete
         public async Task<IActionResult> Delete(int? id, string status = "all", int page = 1)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             SpecialType dbSpecialType = await _context.SpecialTypes.FirstOrDefaultAsync(b => b.Id == id && !b.IsDeleted);
 
-            if (dbSpecialType == null) return NotFound();
+            if (dbSpecialType is null) return NotFound();
 
             dbSpecialType.IsDeleted = true;
             dbSpecialType.IsShared = false;
@@ -187,11 +187,11 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         #region Restore
         public async Task<IActionResult> Restore(int? id, string status = "all", int page = 1)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             SpecialType dbSpecialType = await _context.SpecialTypes.FirstOrDefaultAsync(b => b.Id == id && b.IsDeleted);
 
-            if (dbSpecialType == null) return NotFound();
+            if (dbSpecialType is null) return NotFound();
 
             dbSpecialType.IsDeleted = false;
             dbSpecialType.RestoredAt = DateTime.UtcNow.AddHours(4);

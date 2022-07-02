@@ -96,11 +96,11 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         #region Update
         public async Task<IActionResult> Update(int? id)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             Feature feature = await _context.Features.FirstOrDefaultAsync(f => f.Id == id && !f.IsDeleted);
 
-            if (feature == null) return NotFound();
+            if (feature is null) return NotFound();
 
             return View(feature);
         }
@@ -109,12 +109,12 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(int? id, Feature feature, string status = "all", int page = 1)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             if (id != feature.Id) return BadRequest();
 
             Feature dbFeature = await _context.Features.FirstOrDefaultAsync(f => f.Id == id && !f.IsDeleted);
-            if (dbFeature == null) return NotFound();
+            if (dbFeature is null) return NotFound();
 
             if (!ModelState.IsValid) return View(feature);
 
@@ -137,11 +137,11 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         #region Delete
         public async Task<IActionResult> Delete(int? id, string status = "all", int page = 1)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             Feature dbFeature = await _context.Features.FirstOrDefaultAsync(f => f.Id == id && !f.IsDeleted);
 
-            if (dbFeature == null) return NotFound();
+            if (dbFeature is null) return NotFound();
 
             dbFeature.IsDeleted = true;
             dbFeature.DeletedAt = DateTime.UtcNow.AddHours(4);
@@ -155,11 +155,11 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         #region Restore
         public async Task<IActionResult> Restore(int? id, string status = "all", int page = 1)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             Feature dbFeature = await _context.Features.FirstOrDefaultAsync(f => f.Id == id && f.IsDeleted);
 
-            if (dbFeature == null) return NotFound();
+            if (dbFeature is null) return NotFound();
 
             dbFeature.IsDeleted = false;
             dbFeature.RestoredAt = DateTime.UtcNow.AddHours(4);

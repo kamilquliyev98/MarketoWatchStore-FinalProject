@@ -2,6 +2,7 @@
 @{
     Setting setting = await layoutService.GetSetting();
     List<ShoppingCartVM> shoppingCartVMs = await layoutService.GetCart();
+    List<CompareListVM> compareListVMs = await layoutService.GetCompare();
 }
 
 <!DOCTYPE html>
@@ -241,74 +242,8 @@
                                             </div>
                                         </div>
                                     </li>
-                                    <li class="onhover-dropdown wislist-dropdown">
-                                        <div class="cart-media">
-                                            <div class="cart-icon">
-                                                <i data-feather="refresh-cw"></i>
-                                                <span class="label label-theme rounded-pill">0</span>
-                                            </div>
-                                        </div>
-                                        <div class="onhover-div">
-                                            <!-- <a asp-controller="comparelist" asp-action="index">
-                                                <div class="wislist-empty">
-                                                    <i class="fa-solid fa-code-compare"></i>
-                                                    <h6 class="mb-1">Your compare list is empty!</h6>
-                                                </div>
-                                            </a> -->
-                                            <div class="cart-menu">
-                                                <div class="cart-title">
-                                                    <h6>
-                                                        <i data-feather="refresh-cw"></i>
-                                                        <span class="label label-theme rounded-pill">5</span>
-                                                        <h4>Compare List</h4>
-                                                    </h6>
-                                                    <span class="d-md-none d-block">
-                                                        <i class="fas fa-arrow-right back-cart"></i>
-                                                    </span>
-                                                </div>
-                                                <ul class="custom-scroll">
-                                                    <li>
-                                                        <div class="media">
-                                                            <img src="~/assets/images/products/3.jpg"
-                                                                 class="img-fluid blur-up lazyload" alt="product">
-                                                            <div class="media-body">
-                                                                <h6>Slim Fit Plastic Coat</h6>
-                                                                <div class="qty-with-price">
-                                                                    <span>$78.00</span>
-                                                                </div>
-                                                            </div>
-                                                            <button type="button" class="btn-close d-block d-md-none"
-                                                                    aria-label="Close">
-                                                                <i class="fas fa-times"></i>
-                                                            </button>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="media">
-                                                            <img src="~/assets/images/products/2.jpg" class="img-fluid blur-up lazyload" alt="product">
-                                                            <div class="media-body">
-                                                                <h6>Womens Stylish Jacket</h6>
-                                                                <div class="qty-with-price">
-                                                                    <span>$24.00</span>
-                                                                </div>
-                                                            </div>
-                                                            <button type="button" class="btn-close d-block d-md-none"
-                                                                    aria-label="Close">
-                                                                <i class="fas fa-times"></i>
-                                                            </button>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="cart-btn">
-                                                <h6 class="cart-total">
-                                                    <span class="font-light">Total:</span> $542.00
-                                                </h6>
-                                                <a asp-controller="comparelist" asp-action="index" class="btn btn-solid-default btn-block">
-                                                    Go to compare list
-                                                </a>
-                                            </div>
-                                        </div>
+                                    <li class="onhover-dropdown wislist-dropdown compare-dropdown">
+                                        @await Html.PartialAsync("_MiniComparePartial", await layoutService.GetCompare())
                                     </li>
                                     <li>
                                         <div class="">
@@ -318,7 +253,7 @@
                                         </div>
                                     </li>
                                     <li class="onhover-dropdown cart-dropdown">
-                                        @await Html.PartialAsync("_MiniCartPartial",await layoutService.GetCart())
+                                        @await Html.PartialAsync("_MiniCartPartial", await layoutService.GetCart())
                                     </li>
                                 </ul>
                             </div>

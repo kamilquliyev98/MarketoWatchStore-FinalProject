@@ -123,11 +123,11 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         #region Update
         public async Task<IActionResult> Update(int? id)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             AdsBanner adsBanner = await _context.AdsBanners.FirstOrDefaultAsync(b => b.Id == id && !b.IsDeleted);
 
-            if (adsBanner == null) return NotFound();
+            if (adsBanner is null) return NotFound();
 
             return View(adsBanner);
         }
@@ -136,12 +136,12 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(int? id, AdsBanner adsBanner, string status = "all", int page = 1)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             if (id != adsBanner.Id) return BadRequest();
 
             AdsBanner dbAdsBanner = await _context.AdsBanners.FirstOrDefaultAsync(b => b.Id == id && !b.IsDeleted);
-            if (dbAdsBanner == null) return NotFound();
+            if (dbAdsBanner is null) return NotFound();
 
             if (!ModelState.IsValid) return View(dbAdsBanner);
 
@@ -191,11 +191,11 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         #region Delete
         public async Task<IActionResult> Delete(int? id, string status = "all", int page = 1)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             AdsBanner dbAdsBanner = await _context.AdsBanners.FirstOrDefaultAsync(b => b.Id == id && !b.IsDeleted);
 
-            if (dbAdsBanner == null) return NotFound();
+            if (dbAdsBanner is null) return NotFound();
 
             dbAdsBanner.IsDeleted = true;
             dbAdsBanner.IsShared = false;
@@ -210,11 +210,11 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         #region Restore
         public async Task<IActionResult> Restore(int? id, string status = "all", int page = 1)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             AdsBanner dbAdsBanner = await _context.AdsBanners.FirstOrDefaultAsync(b => b.Id == id && b.IsDeleted);
 
-            if (dbAdsBanner == null) return NotFound();
+            if (dbAdsBanner is null) return NotFound();
 
             dbAdsBanner.IsDeleted = false;
             dbAdsBanner.RestoredAt = DateTime.UtcNow.AddHours(4);

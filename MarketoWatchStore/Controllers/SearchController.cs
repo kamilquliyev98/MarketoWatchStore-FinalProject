@@ -17,6 +17,8 @@ namespace MarketoWatchStore.Controllers
             _context = context;
         }
 
+        [HttpGet]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(string key, int page = 1)
         {
             if (string.IsNullOrEmpty(key))

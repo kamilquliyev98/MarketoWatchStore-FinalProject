@@ -1,0 +1,153 @@
+﻿@model IEnumerable<CompareListVM>
+
+@if (Model.Count() > 0)
+{
+    <div class="row">
+        <div class="col-12">
+            <div class="comparemodal-body">
+                <div class="table-wrapper table-responsive ratio_asos">
+                    <table class="table table-striped-1">
+                        <tbody>
+                            <tr class="table-product-details">
+                                <td></td>
+
+                                @foreach (CompareListVM compareListVM in Model)
+                                {
+                                    <td>
+                                        <div class="product-box">
+                                            <div class="product-image">
+                                                <a class="w-100 blur-up lazyload" href="javascript:void(0)">
+                                                    <img src="~/assets/images/products/@compareListVM.MainImage" class="img-fluid bg-img blur-up lazyload" alt="product">
+                                                </a>
+                                            </div>
+                                            <div class="product-details">
+                                                <div>
+                                                    <a asp-controller="shop" asp-action="product" asp-route-id="@compareListVM.ProductId">
+                                                        <h6 class="fw-bold">@compareListVM.Title</h6>
+                                                    </a>
+                                                </div>
+
+                                                <div class="price-details mt-2">
+                                                    <h6 class="font-green">$@compareListVM.Price</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                }
+
+                            </tr>
+
+                            <tr class="table-cart-button">
+                                <td></td>
+
+                                @foreach (CompareListVM compareListVM in Model)
+                                {
+                                    <td>
+                                        <a asp-controller="shoppingcart" asp-action="addtocart" asp-route-id="@compareListVM.ProductId" class="btn btn-solid-blue addtocart-btn">+ Add to cart</a>
+                                        <a asp-controller="comparelist" asp-action="removeitem" asp-route-id="@compareListVM.ProductId" class="btn btn-solid-blue mt-2 remove-compare-item">- Remove compare item</a>
+                                    </td>
+                                }
+                            </tr>
+
+                            <tr>
+                                <td>Customer Rating</td>
+                                @foreach (CompareListVM compareListVM in Model)
+                                {
+                                    <td>
+                                        <div class="d-flex align-items-center my0">
+                                            <div class="star-ratings mx-auto" style="max-width: 100px;">
+                                                <div class="fill-ratings" style="width: 60%;">
+                                                    <span>★★★★★</span>
+                                                </div>
+                                                <div class="empty-ratings">
+                                                    <span>★★★★★</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                }
+                            </tr>
+
+                            <tr>
+                                <td>BRAND</td>
+                                @foreach (CompareListVM compareListVM in Model)
+                                {
+                                    <td>@compareListVM.Brand</td>
+                                }
+                            </tr>
+
+                            <tr>
+                                <td>Generic Name</td>
+                                <td>T-Shirt</td>
+                                <td>Shirt</td>
+                                <td>Jackets</td>
+                                <td>Blazers</td>
+                            </tr>
+
+                            <tr>
+                                <td>Department</td>
+                                <td>Men</td>
+                                <td>Men</td>
+                                <td>Men</td>
+                                <td>Men</td>
+                            </tr>
+
+                            <tr>
+                                <td>Manufacturer</td>
+                                <td>PAGE INDUSTRIES LIMITED</td>
+                                <td>PAGE INDUSTRIES LIMITED</td>
+                                <td>Shreenath Lifestyle Pvt. Ltd.</td>
+                                <td>Shreenath Lifestyle Pvt. Ltd.</td>
+                            </tr>
+
+                            <tr>
+                                <td>color</td>
+                                <td>Black, Yellow, Marron</td>
+                                <td>Blue, Cream, Black</td>
+                                <td>Military Color</td>
+                                <td>Black, Gold</td>
+                            </tr>
+
+                            <tr>
+                                <td>Date First Available</td>
+                                <td>28 July 2015</td>
+                                <td>25 March 2021</td>
+                                <td>25 February 2017</td>
+                                <td>27 April 2021</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="row gx-md-2 gx-0 gy-md-0 gy-3">
+
+        <div class="col-md-8 mx-auto">
+            <div class="page-image">
+                <img src="~/assets/images/inner-page/empty-compare.jpg" class="img-fluid blur-up lazyload d-block mx-auto" alt="compare">
+            </div>
+        </div>
+
+        <div class="col-md-8 mx-auto mt-md-5 mt-3">
+            <div class="page-container pass-forgot">
+                <div class="d-flex justify-content-center">
+                    <a href="javascript:history.back();" class="btn btn-outline-info m-1">
+                        <i class="fa-solid fa-arrow-left"></i>&nbsp;&nbsp;&nbsp;Go Back
+                    </a>
+                    <a asp-controller="home" asp-action="index" class="btn btn-outline-info m-1">
+                        <i class="fa-solid fa-house"></i>&nbsp;&nbsp;&nbsp;Home Page
+                    </a>
+                    <a asp-controller="shop" asp-action="index" class="btn btn-outline-info m-1">
+                        <i class="fa-solid fa-bag-shopping"></i>&nbsp;&nbsp;&nbsp;Shop Page
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+}

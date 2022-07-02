@@ -117,11 +117,11 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         #region Update
         public async Task<IActionResult> Update(int? id)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             Brand brand = await _context.Brands.FirstOrDefaultAsync(b => b.Id == id && !b.IsDeleted);
 
-            if (brand == null) return NotFound();
+            if (brand is null) return NotFound();
 
             return View(brand);
         }
@@ -130,12 +130,12 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(int? id, Brand brand, string status = "all", int page = 1)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             if (id != brand.Id) return BadRequest();
 
             Brand dbBrand = await _context.Brands.FirstOrDefaultAsync(b => b.Id == id && !b.IsDeleted);
-            if (dbBrand == null) return NotFound();
+            if (dbBrand is null) return NotFound();
 
             if (!ModelState.IsValid) return View(dbBrand);
 
@@ -161,7 +161,7 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
                 dbBrand.Logo = brand.ImageFile.CreateFile(_env, "assets", "images", "brand");
             }
 
-            if (dbBrand.Logo == null && brand.Logo == null && brand.IsShared == true)
+            if (dbBrand.Logo is null && brand.Logo is null && brand.IsShared == true)
             {
                 ModelState.AddModelError("IsShared", "You can't share without image.");
                 return View(dbBrand);
@@ -182,11 +182,11 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         #region Delete
         public async Task<IActionResult> Delete(int? id, string status = "all", int page = 1)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             Brand dbBrand = await _context.Brands.FirstOrDefaultAsync(b => b.Id == id && !b.IsDeleted);
 
-            if (dbBrand == null) return NotFound();
+            if (dbBrand is null) return NotFound();
 
             dbBrand.IsDeleted = true;
             dbBrand.IsShared = false;
@@ -201,11 +201,11 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         #region Restore
         public async Task<IActionResult> Restore(int? id, string status = "all", int page = 1)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             Brand dbBrand = await _context.Brands.FirstOrDefaultAsync(b => b.Id == id && b.IsDeleted);
 
-            if (dbBrand == null) return NotFound();
+            if (dbBrand is null) return NotFound();
 
             dbBrand.IsDeleted = false;
             dbBrand.RestoredAt = DateTime.UtcNow.AddHours(4);

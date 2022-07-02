@@ -561,7 +561,7 @@ $(document).ready(function () {
             })
     });
 
-    /* Remove item from Shopping Cart */
+    /* Remove item from cart */
     $(document).on("click", ".remove-cart-item", function (e) {
         e.preventDefault();
 
@@ -619,7 +619,79 @@ $(document).ready(function () {
 
 
 
-    /* Added to wishlist Toastr */
+
+
+    /* Add to compare list with Toastr */
+    $(document).on("click", ".addtocompare-btn", function (e) {
+        e.preventDefault();
+
+        var url = $(this).attr("href");
+
+        fetch(url).then(response => response.text())
+            .then(data => {
+                $(".compare-dropdown").html(data);
+
+                feather.replace();
+
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "1000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+                toastr.success("Item successfully added to your compare list!");
+            });
+    });
+
+    /* Remove item from compare */
+    $(document).on("click", ".remove-compare-item", function (e) {
+        e.preventDefault();
+
+        var url = $(this).attr("href");
+
+        fetch(url).then(response => response.text())
+            .then(data => {
+                $("#comparelist-table").html(data);
+
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "1000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+                toastr.success("Item successfully removed from your cart!");
+            });
+    });
+
+
+
+
+
+    /* Add to wishlist with Toastr */
     $(document).on("click", ".addtowishlist-btn", function (e) {
         e.preventDefault();
 
@@ -645,31 +717,6 @@ $(document).ready(function () {
     });
 
 
-
-    /* Added to compare list Toastr */
-    $(document).on("click", ".addtocompare-btn", function (e) {
-        e.preventDefault();
-
-        toastr.options = {
-            "closeButton": false,
-            "debug": false,
-            "newestOnTop": true,
-            "progressBar": true,
-            "positionClass": "toast-top-right",
-            "preventDuplicates": false,
-            "onclick": null,
-            "showDuration": "300",
-            "hideDuration": "1000",
-            "timeOut": "5000",
-            "extendedTimeOut": "1000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut"
-        };
-
-        toastr.success("Item successfully added to your compare list!");
-    });
 
 
 

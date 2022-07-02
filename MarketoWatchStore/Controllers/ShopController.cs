@@ -74,7 +74,7 @@ namespace MarketoWatchStore.Controllers
 
         public async Task<IActionResult> QuickView(int? id)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             Product product = await _context.Products
                 .Include(p => p.Brand)
@@ -88,14 +88,14 @@ namespace MarketoWatchStore.Controllers
                 .Include(p => p.ProductFeatures).ThenInclude(p => p.Feature)
                 .FirstOrDefaultAsync(p => !p.IsDeleted && p.Id == id);
 
-            if (product == null) return NotFound();
+            if (product is null) return NotFound();
 
             return PartialView("_ProductQuickViewPartial", product);
         }
 
         public async Task<IActionResult> Product(int? id)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             Product product = await _context.Products
                 .Include(p => p.Brand)
@@ -109,7 +109,7 @@ namespace MarketoWatchStore.Controllers
                 .Include(p => p.ProductFeatures).ThenInclude(p => p.Feature)
                 .FirstOrDefaultAsync(p => !p.IsDeleted && p.Id == id);
 
-            if (product == null) return NotFound();
+            if (product is null) return NotFound();
 
             return View(product);
         }

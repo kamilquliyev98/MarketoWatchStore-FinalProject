@@ -87,11 +87,11 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         #region Update
         public async Task<IActionResult> Update(int? id)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             FAQ faq = await _context.FAQs.FirstOrDefaultAsync(f => f.Id == id && !f.IsDeleted);
 
-            if (faq == null) return NotFound();
+            if (faq is null) return NotFound();
 
             return View(faq);
         }
@@ -100,12 +100,12 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(int? id, FAQ faq, string status = "all", int page = 1)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             if (id != faq.Id) return BadRequest();
 
             FAQ dbFaq = await _context.FAQs.FirstOrDefaultAsync(f => f.Id == id && !f.IsDeleted);
-            if (dbFaq == null) return NotFound();
+            if (dbFaq is null) return NotFound();
 
             if (!ModelState.IsValid) return View(faq);
 
@@ -124,11 +124,11 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         #region Delete
         public async Task<IActionResult> Delete(int? id, string status = "all", int page = 1)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             FAQ dbFaq = await _context.FAQs.FirstOrDefaultAsync(f => f.Id == id && !f.IsDeleted);
 
-            if (dbFaq == null) return NotFound();
+            if (dbFaq is null) return NotFound();
 
             dbFaq.IsDeleted = true;
             dbFaq.IsShared = false;
@@ -143,11 +143,11 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         #region Restore
         public async Task<IActionResult> Restore(int? id, string status = "all", int page = 1)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             FAQ dbFaq = await _context.FAQs.FirstOrDefaultAsync(f => f.Id == id && f.IsDeleted);
 
-            if (dbFaq == null) return NotFound();
+            if (dbFaq is null) return NotFound();
 
             dbFaq.IsDeleted = false;
             dbFaq.RestoredAt = DateTime.UtcNow.AddHours(4);

@@ -111,11 +111,11 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         #region Update
         public async Task<IActionResult> Update(int? id)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             ServicePolicy servicePolicy = await _context.ServicePolicies.FirstOrDefaultAsync(sp => sp.Id == id && !sp.IsDeleted);
 
-            if (servicePolicy == null) return NotFound();
+            if (servicePolicy is null) return NotFound();
 
             return View(servicePolicy);
         }
@@ -124,12 +124,12 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(int? id, ServicePolicy servicePolicy, string status = "all", int page = 1)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             if (id != servicePolicy.Id) return BadRequest();
 
             ServicePolicy dbServicePolicy = await _context.ServicePolicies.FirstOrDefaultAsync(sp => sp.Id == id && !sp.IsDeleted);
-            if (dbServicePolicy == null) return NotFound();
+            if (dbServicePolicy is null) return NotFound();
 
             if (!ModelState.IsValid) return View(dbServicePolicy);
 
@@ -165,11 +165,11 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         #region Delete
         public async Task<IActionResult> Delete(int? id, string status = "all", int page = 1)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             ServicePolicy dbServicePolicy = await _context.ServicePolicies.FirstOrDefaultAsync(sp => sp.Id == id && !sp.IsDeleted);
 
-            if (dbServicePolicy == null) return NotFound();
+            if (dbServicePolicy is null) return NotFound();
 
             dbServicePolicy.IsDeleted = true;
             dbServicePolicy.DeletedAt = DateTime.UtcNow.AddHours(4);
@@ -183,11 +183,11 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         #region Restore
         public async Task<IActionResult> Restore(int? id, string status = "all", int page = 1)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             ServicePolicy dbServicePolicy = await _context.ServicePolicies.FirstOrDefaultAsync(sp => sp.Id == id && sp.IsDeleted);
 
-            if (dbServicePolicy == null) return NotFound();
+            if (dbServicePolicy is null) return NotFound();
 
             dbServicePolicy.IsDeleted = false;
             dbServicePolicy.RestoredAt = DateTime.UtcNow.AddHours(4);

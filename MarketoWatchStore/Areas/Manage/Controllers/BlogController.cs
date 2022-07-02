@@ -66,11 +66,11 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
 
         public async Task<IActionResult> Detail(int? id, string status = "active", int page = 1)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             Blog blog = await _context.Blogs.FirstOrDefaultAsync(b => b.Id == id);
 
-            if (blog == null) return NotFound();
+            if (blog is null) return NotFound();
 
             ViewBag.Status = status;
             ViewBag.CurrentPage = page;
@@ -131,11 +131,11 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         #region Update
         public async Task<IActionResult> Update(int? id)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             Blog blog = await _context.Blogs.FirstOrDefaultAsync(b => b.Id == id && !b.IsDeleted);
 
-            if (blog == null) return NotFound();
+            if (blog is null) return NotFound();
 
             return View(blog);
         }
@@ -144,13 +144,13 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(Blog blog, int? id, string status = "active", int page = 1)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             if (blog.Id != id) return BadRequest();
 
             Blog dbBlog = await _context.Blogs.FirstOrDefaultAsync(b => b.Id == id && !b.IsDeleted);
 
-            if (dbBlog == null) return NotFound();
+            if (dbBlog is null) return NotFound();
 
             if (!ModelState.IsValid) return View(dbBlog);
 
@@ -192,11 +192,11 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         #region Delete and Restore mutual view
         public async Task<IActionResult> DeleteRestore(int? id, string status = "active", int page = 1)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             Blog blog = await _context.Blogs.FirstOrDefaultAsync(b => b.Id == id);
 
-            if (blog == null) return NotFound();
+            if (blog is null) return NotFound();
 
             ViewBag.Status = status;
             ViewBag.CurrentPage = page;
@@ -209,11 +209,11 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         #region Delete
         public async Task<IActionResult> Delete(int? id, string status = "active", int page = 1)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             Blog blog = await _context.Blogs.FirstOrDefaultAsync(b => b.Id == id);
 
-            if (blog == null) return NotFound();
+            if (blog is null) return NotFound();
 
             blog.IsDeleted = true;
             blog.DeletedAt = DateTime.UtcNow.AddHours(4);
@@ -227,11 +227,11 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         #region Restore
         public async Task<IActionResult> Restore(int? id, string status = "active", int page = 1)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             Blog blog = await _context.Blogs.FirstOrDefaultAsync(b => b.Id == id);
 
-            if (blog == null) return NotFound();
+            if (blog is null) return NotFound();
 
             blog.IsDeleted = false;
             blog.UpdatedAt = DateTime.UtcNow.AddHours(4);

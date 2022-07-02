@@ -25,7 +25,7 @@ namespace MarketoWatchStore.Controllers
 
             List<ShoppingCartVM> shoppingcartVMs = new List<ShoppingCartVM>();
 
-            if (!string.IsNullOrEmpty(cookieCart))
+            if (!string.IsNullOrWhiteSpace(cookieCart))
             {
                 shoppingcartVMs = JsonConvert.DeserializeObject<List<ShoppingCartVM>>(cookieCart);
 
@@ -44,17 +44,17 @@ namespace MarketoWatchStore.Controllers
 
         public async Task<IActionResult> AddToCart(int? id, int count = 1)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id && !p.IsDeleted);
 
-            if (product == null) return NotFound();
+            if (product is null) return NotFound();
 
             string cookieCart = HttpContext.Request.Cookies["cart"];
 
             List<ShoppingCartVM> shoppingCartVMs = null;
 
-            if (!string.IsNullOrEmpty(cookieCart))
+            if (!string.IsNullOrWhiteSpace(cookieCart))
             {
                 shoppingCartVMs = JsonConvert.DeserializeObject<List<ShoppingCartVM>>(cookieCart);
 
@@ -99,11 +99,11 @@ namespace MarketoWatchStore.Controllers
 
         public async Task<IActionResult> RemoveItem(int? id)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
 
-            if (product == null) return NotFound();
+            if (product is null) return NotFound();
 
             string cookieCart = HttpContext.Request.Cookies["cart"];
 
@@ -143,8 +143,6 @@ namespace MarketoWatchStore.Controllers
         {
             string cookieCart = HttpContext.Request.Cookies["cart"];
 
-            List<ShoppingCartVM> shoppingCartVMs = null;
-
             if (!string.IsNullOrWhiteSpace(cookieCart))
             {
                 HttpContext.Response.Cookies.Delete("cart");
@@ -154,7 +152,6 @@ namespace MarketoWatchStore.Controllers
                 return BadRequest();
             }
 
-            //return PartialView("_CartTablePartial", shoppingCartVMs);
             return RedirectToAction("index", "shoppingcart");
         }
 

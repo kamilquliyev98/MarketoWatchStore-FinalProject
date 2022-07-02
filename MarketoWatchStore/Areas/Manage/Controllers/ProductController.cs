@@ -102,7 +102,7 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
 
         public async Task<IActionResult> Detail(int? id, string status = "active", int page = 1)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             Product product = await _context.Products
                 .Include(p => p.Brand)
@@ -116,7 +116,7 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
                 .Include(p => p.ProductFeatures).ThenInclude(p => p.Feature)
                 .FirstOrDefaultAsync(p => p.Id == id);
 
-            if (product == null) return NotFound();
+            if (product is null) return NotFound();
 
             ViewBag.Status = status;
             ViewBag.CurrentPage = page;
@@ -165,10 +165,6 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
                 return View();
             }
 
-
-
-
-
             if (product.DiscountPrice >= product.Price)
             {
                 ModelState.AddModelError("DiscountPrice", "Discount price cannot be equal to or greater than price.");
@@ -181,19 +177,11 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
                 return View();
             }
 
-
-
-
-
             if (!await _context.Brands.AnyAsync(b => b.Id == product.BrandId && !b.IsDeleted))
             {
                 ModelState.AddModelError("BrandId", "Has been selected incorrect brand.");
                 return View();
             }
-
-
-
-
 
             if (!await _context.Displays.AnyAsync(d => d.Id == product.DisplayId && !d.IsDeleted))
             {
@@ -201,29 +189,17 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
                 return View();
             }
 
-
-
-
-
             if (!await _context.PowerSources.AnyAsync(ps => ps.Id == product.PowerSourceId && !ps.IsDeleted))
             {
                 ModelState.AddModelError("PowerSourceId", "Has been selected incorrect power source.");
                 return View();
             }
 
-
-
-
-
             if ((int)product.Gender < 1 || (int)product.Gender > 3)
             {
                 ModelState.AddModelError("Gender", "Has been selected incorrect gender.");
                 return View();
             }
-
-
-
-
 
             if (product.SpecialTypeId != null)
             {
@@ -233,10 +209,6 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
                     return View();
                 }
             }
-
-
-
-
 
             if (product.FeatureIds.Count > 0)
             {
@@ -262,10 +234,6 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
                 product.ProductFeatures = productFeatures;
             }
 
-
-
-
-
             if (product.TagIds.Count > 0)
             {
                 foreach (int tagId in product.TagIds)
@@ -289,10 +257,6 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
                 }
                 product.ProductTags = tags;
             }
-
-
-
-
 
             if (product.ColourIds.Count != product.Counts.Count)
             {
@@ -323,10 +287,6 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
             product.ProductColours = productColourCounts;
 
             product.Count = product.Counts.Sum();
-
-
-
-
 
             #region Images Checking & Saving
             if (product.ProductImagesFiles != null && product.ProductImagesFiles.Count() > 6)
@@ -443,10 +403,6 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
             }
             #endregion
 
-
-
-
-
             product.CreatedAt = DateTime.UtcNow.AddHours(4);
 
             await _context.Products.AddAsync(product);
@@ -459,7 +415,7 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         #region Update
         public async Task<IActionResult> Update(int? id)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             Product product = await _context.Products
                 .Include(p => p.ProductImages)
@@ -472,7 +428,7 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
                 .Include(p => p.ProductFeatures).ThenInclude(p => p.Feature)
                 .FirstOrDefaultAsync(p => p.Id == id && !p.IsDeleted);
 
-            if (product == null) return NotFound();
+            if (product is null) return NotFound();
 
             ViewBag.Brands = await _context.Brands.Where(b => !b.IsDeleted).OrderBy(b => b.Title).ToListAsync();
             ViewBag.Displays = await _context.Displays.Where(d => !d.IsDeleted).OrderBy(d => d.Title).ToListAsync();
@@ -492,7 +448,7 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(Product product, int? id, string status = "active", int page = 1)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             if (product.Id != id) return BadRequest();
 
@@ -515,7 +471,7 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
                 .Include(p => p.ProductFeatures).ThenInclude(p => p.Feature)
                 .FirstOrDefaultAsync(p => p.Id == id && !p.IsDeleted);
 
-            if (dbProduct == null) return NotFound();
+            if (dbProduct is null) return NotFound();
 
             if (!ModelState.IsValid) return View(dbProduct);
 
@@ -807,7 +763,7 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
             }
             else
             {
-                if (product.ShareOnHomeSlide == true && dbProduct.SlideImage == null)
+                if (product.ShareOnHomeSlide == true && dbProduct.SlideImage is null)
                 {
                     ModelState.AddModelError("ShareOnHomeSlide", "You have to upload an image for slide.");
                     return View(dbProduct);
@@ -836,7 +792,7 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
             }
             else
             {
-                if (product.ShareAsPoster == true && dbProduct.PosterImage == null)
+                if (product.ShareAsPoster == true && dbProduct.PosterImage is null)
                 {
                     ModelState.AddModelError("ShareAsPoster", "You have to upload an image for poster.");
                     return View(dbProduct);
@@ -875,13 +831,13 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
 
         public async Task<IActionResult> DeleteProductImage(int? id)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             Product product = await _context.Products
                 .Include(p => p.ProductImages)
                 .FirstOrDefaultAsync(p => p.ProductImages.Any(pi => pi.Id == id && !pi.IsDeleted));
 
-            if (product == null) return NotFound();
+            if (product is null) return NotFound();
 
             ViewBag.Brands = await _context.Brands.Where(b => !b.IsDeleted).OrderBy(b => b.Title).ToListAsync();
             ViewBag.Displays = await _context.Displays.Where(d => !d.IsDeleted).OrderBy(d => d.Title).ToListAsync();
@@ -902,13 +858,13 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
 
         public async Task<IActionResult> DeleteSlideImage(string slide)
         {
-            if (slide == null) return BadRequest();
+            if (slide is null) return BadRequest();
 
             Product product = await _context.Products
                 .Include(p => p.ProductImages)
                 .FirstOrDefaultAsync(p => p.SlideImage == slide && !p.IsDeleted);
 
-            if (product == null) return NotFound();
+            if (product is null) return NotFound();
 
             ViewBag.Brands = await _context.Brands.Where(b => !b.IsDeleted).OrderBy(b => b.Title).ToListAsync();
             ViewBag.Displays = await _context.Displays.Where(d => !d.IsDeleted).OrderBy(d => d.Title).ToListAsync();
@@ -930,13 +886,13 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
 
         public async Task<IActionResult> DeletePosterImage(string poster)
         {
-            if (poster == null) return BadRequest();
+            if (poster is null) return BadRequest();
 
             Product product = await _context.Products
                 .Include(p => p.ProductImages)
                 .FirstOrDefaultAsync(p => p.PosterImage == poster && !p.IsDeleted);
 
-            if (product == null) return NotFound();
+            if (product is null) return NotFound();
 
             ViewBag.Brands = await _context.Brands.Where(b => !b.IsDeleted).OrderBy(b => b.Title).ToListAsync();
             ViewBag.Displays = await _context.Displays.Where(d => !d.IsDeleted).OrderBy(d => d.Title).ToListAsync();
@@ -960,7 +916,7 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         #region Delete and Restore mutual view
         public async Task<IActionResult> DeleteRestore(int? id, string status = "active", int page = 1)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             Product product = await _context.Products
                 .Include(p => p.ProductImages)
@@ -973,7 +929,7 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
                 .Include(p => p.ProductFeatures).ThenInclude(p => p.Feature)
                 .FirstOrDefaultAsync(p => p.Id == id);
 
-            if (product == null) return NotFound();
+            if (product is null) return NotFound();
 
             ViewBag.Status = status;
             ViewBag.CurrentPage = page;
@@ -986,7 +942,7 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         #region Delete
         public async Task<IActionResult> Delete(int? id, string status = "active", int page = 1)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             Product product = await _context.Products
                 .Include(p => p.ProductImages)
@@ -999,7 +955,7 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
                 .Include(p => p.ProductFeatures).ThenInclude(p => p.Feature)
                 .FirstOrDefaultAsync(p => p.Id == id);
 
-            if (product == null) return NotFound();
+            if (product is null) return NotFound();
 
             product.IsDeleted = true;
             product.ShareAsPoster = false;
@@ -1015,7 +971,7 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         #region Restore
         public async Task<IActionResult> Restore(int? id, string status = "active", int page = 1)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             Product product = await _context.Products
                 .Include(p => p.ProductImages)
@@ -1028,7 +984,7 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
                 .Include(p => p.ProductFeatures).ThenInclude(p => p.Feature)
                 .FirstOrDefaultAsync(p => p.Id == id);
 
-            if (product == null) return NotFound();
+            if (product is null) return NotFound();
 
             product.IsDeleted = false;
             product.UpdatedAt = DateTime.UtcNow.AddHours(4);

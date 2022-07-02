@@ -40,11 +40,11 @@ namespace MarketoWatchStore.Controllers
 
         public async Task<IActionResult> Blog(int? id)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             Blog blog = await _context.Blogs.FirstOrDefaultAsync(b => b.Id == id && !b.IsDeleted);
 
-            if (blog == null) return NotFound();
+            if (blog is null) return NotFound();
 
             return View(blog);
         }

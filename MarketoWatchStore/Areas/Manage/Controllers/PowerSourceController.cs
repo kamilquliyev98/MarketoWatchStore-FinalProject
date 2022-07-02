@@ -96,11 +96,11 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         #region Update
         public async Task<IActionResult> Update(int? id)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             PowerSource powerSource = await _context.PowerSources.FirstOrDefaultAsync(ps => ps.Id == id && !ps.IsDeleted);
 
-            if (powerSource == null) return NotFound();
+            if (powerSource is null) return NotFound();
 
             return View(powerSource);
         }
@@ -109,12 +109,12 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(int? id, PowerSource powerSource, string status = "all", int page = 1)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             if (id != powerSource.Id) return BadRequest();
 
             PowerSource dbPowerSource = await _context.PowerSources.FirstOrDefaultAsync(ps => ps.Id == id && !ps.IsDeleted);
-            if (dbPowerSource == null) return NotFound();
+            if (dbPowerSource is null) return NotFound();
 
             if (!ModelState.IsValid) return View(powerSource);
 
@@ -137,11 +137,11 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         #region Delete
         public async Task<IActionResult> Delete(int? id, string status = "all", int page = 1)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             PowerSource dbPowerSource = await _context.PowerSources.FirstOrDefaultAsync(ps => ps.Id == id && !ps.IsDeleted);
 
-            if (dbPowerSource == null) return NotFound();
+            if (dbPowerSource is null) return NotFound();
 
             dbPowerSource.IsDeleted = true;
             dbPowerSource.DeletedAt = DateTime.UtcNow.AddHours(4);
@@ -155,11 +155,11 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         #region Restore
         public async Task<IActionResult> Restore(int? id, string status = "all", int page = 1)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             PowerSource dbPowerSource = await _context.PowerSources.FirstOrDefaultAsync(ps => ps.Id == id && ps.IsDeleted);
 
-            if (dbPowerSource == null) return NotFound();
+            if (dbPowerSource is null) return NotFound();
 
             dbPowerSource.IsDeleted = false;
             dbPowerSource.RestoredAt = DateTime.UtcNow.AddHours(4);

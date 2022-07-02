@@ -1,0 +1,58 @@
+﻿@model IEnumerable<CompareListVM>
+
+<div class="cart-media">
+    <div class="cart-icon">
+        <i data-feather="refresh-cw"></i>
+        <span class="label label-theme rounded-pill">@Model.Count()</span>
+    </div>
+</div>
+<div class="onhover-div">
+    @if (Model.Count() == 0)
+    {
+        <a asp-controller="comparelist" asp-action="index">
+            <div class="wislist-empty">
+                <i class="fa-solid fa-code-compare"></i>
+                <h6 class="mb-1">Your compare list is empty!</h6>
+            </div>
+        </a>
+    }
+    else
+    {
+        <div class="cart-menu">
+            <div class="cart-title">
+                <h6>
+                    <i data-feather="refresh-cw"></i>
+                    <span class="label label-theme rounded-pill">@Model.Count()</span>
+                    <h4><a asp-controller="comparelist" asp-action="index">Compare List</a></h4>
+                </h6>
+                <span class="d-md-none d-block">
+                    <i class="fas fa-arrow-right back-cart"></i>
+                </span>
+            </div>
+            <ul class="custom-scroll">
+                @foreach (CompareListVM compareListVM in Model)
+                {
+                    <li>
+                        <div class="media">
+                            <img src="~/assets/images/products/@compareListVM.MainImage" class="img-fluid blur-up lazyload" alt="product">
+                            <div class="media-body">
+                                <h6>@compareListVM.Title</h6>
+                                <div class="qty-with-price">
+                                    <span>$@compareListVM.Price</span>
+                                </div>
+                            </div>
+                            <button type="button" class="btn-close d-block d-md-none" aria-label="Close">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+        <div class="cart-btn">
+            <a asp-controller="comparelist" asp-action="index" class="btn btn-solid-default btn-block">
+                Go to compare list
+            </a>
+        </div>
+    }
+</div>

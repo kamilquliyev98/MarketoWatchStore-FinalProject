@@ -96,11 +96,11 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         #region Update
         public async Task<IActionResult> Update(int? id)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             Colour colour = await _context.Colours.FirstOrDefaultAsync(c => c.Id == id && !c.IsDeleted);
 
-            if (colour == null) return NotFound();
+            if (colour is null) return NotFound();
 
             return View(colour);
         }
@@ -109,12 +109,12 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(int? id, Colour colour, string status = "all", int page = 1)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             if (id != colour.Id) return BadRequest();
 
             Colour dbColour = await _context.Colours.FirstOrDefaultAsync(c => c.Id == id && !c.IsDeleted);
-            if (dbColour == null) return NotFound();
+            if (dbColour is null) return NotFound();
 
             if (!ModelState.IsValid) return View(colour);
 
@@ -137,11 +137,11 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         #region Delete
         public async Task<IActionResult> Delete(int? id, string status = "all", int page = 1)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             Colour dbColour = await _context.Colours.FirstOrDefaultAsync(c => c.Id == id && !c.IsDeleted);
 
-            if (dbColour == null) return NotFound();
+            if (dbColour is null) return NotFound();
 
             dbColour.IsDeleted = true;
             dbColour.DeletedAt = DateTime.UtcNow.AddHours(4);
@@ -155,11 +155,11 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         #region Restore
         public async Task<IActionResult> Restore(int? id, string status = "all", int page = 1)
         {
-            if (id == null) return BadRequest();
+            if (id is null) return BadRequest();
 
             Colour dbColour = await _context.Colours.FirstOrDefaultAsync(c => c.Id == id && c.IsDeleted);
 
-            if (dbColour == null) return NotFound();
+            if (dbColour is null) return NotFound();
 
             dbColour.IsDeleted = false;
             dbColour.RestoredAt = DateTime.UtcNow.AddHours(4);
