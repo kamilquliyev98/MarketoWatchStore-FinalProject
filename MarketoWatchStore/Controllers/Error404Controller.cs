@@ -8,9 +8,6 @@ namespace MarketoWatchStore.Controllers
 {
     public class Error404Controller : Controller
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
+        public IActionResult Index() => View();
     }
 }

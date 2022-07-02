@@ -140,15 +140,15 @@
                                     <div class="qty-box">
                                         <div class="input-group">
                                             <span class="input-group-prepend">
-                                                <button type="button" class="btn quantity-left-minus"
-                                                        data-type="minus" data-field="">
+                                                <button type="button" class="btn quantity-left-minus" data-type="minus" data-field="">
                                                     <i class="fas fa-minus"></i>
                                                 </button>
                                             </span>
-                                            <input type="text" name="quantity" class="form-control input-number" value="1">
+                                            <form style="border-radius: 0;">
+                                                <input type="text" name="count" class="form-control input-number" value="1">
+                                            </form>
                                             <span class="input-group-prepend">
-                                                <button type="button" class="btn quantity-right-plus"
-                                                        data-type="plus" data-field="">
+                                                <button type="button" class="btn quantity-right-plus" data-type="plus" data-field="">
                                                     <i class="fas fa-plus"></i>
                                                 </button>
                                             </span>
@@ -161,7 +161,7 @@
                                         <i class="fa fa-bookmark fz-16 me-2"></i>
                                         <span>Wishlist</span>
                                     </a>
-                                    <a href="javascript:void(0)" id="cartEffect" class="btn btn-solid hover-solid btn-animation">
+                                    <a asp-controller="shoppingcart" asp-action="addtocart" asp-route-id="@Model.Id" id="cartEffect" class="btn btn-solid hover-solid btn-animation addtocart-btn">
                                         <i class="fa fa-shopping-cart"></i>
                                         <span>Add To Cart</span>
                                     </a>
@@ -254,7 +254,7 @@
 
 
                                 <div class="col-lg-8">
-                                    <p class="d-inline-block me-2">Rating</p>
+                                    <p class="d-inline-block me-2">Rate product</p>
                                     <div class="rating-container">
                                         <div class="feedback">
                                             <div class="rating-star">
@@ -415,28 +415,24 @@
                                         </div>
                                     </div>
                                     <div class="review-box">
-                                        <form class="row g-4">
+                                        <form class="row g-4" autocomplete="off">
                                             <div class="col-12 col-md-6">
                                                 <label class="mb-1" for="name">Name</label>
-                                                <input type="text" class="form-control" id="name"
-                                                       placeholder="Enter your name" required>
+                                                <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
                                             </div>
 
                                             <div class="col-12 col-md-6">
                                                 <label class="mb-1" for="id">Email Address</label>
-                                                <input type="email" class="form-control" id="id"
-                                                       placeholder="Email Address" required>
+                                                <input type="email" class="form-control" id="id" placeholder="Email Address" required>
                                             </div>
 
                                             <div class="col-12">
                                                 <label class="mb-1" for="comments">Comments</label>
-                                                <textarea class="form-control" placeholder="Leave a comment here"
-                                                          id="comments" style="height: 100px" required></textarea>
+                                                <textarea class="form-control" placeholder="Leave a comment here" id="comments" style="height: 100px" required></textarea>
                                             </div>
 
                                             <div class="col-12">
-                                                <button type="submit"
-                                                        class="btn default-light-theme default-theme default-theme-2">
+                                                <button type="submit" class="btn default-light-theme default-theme default-theme-2">
                                                     Submit
                                                 </button>
                                             </div>
@@ -450,8 +446,7 @@
 
                                         <div class="customer-section">
                                             <div class="customer-profile">
-                                                <img src="~/assets/images/profile-pictures/1.jpg"
-                                                     class="img-fluid blur-up lazyload" alt="user-image">
+                                                <img src="~/assets/images/profile-pictures/1.jpg" class="img-fluid blur-up lazyload" alt="user-image">
                                             </div>
 
                                             <div class="customer-details">
@@ -486,8 +481,7 @@
 
                                         <div class="customer-section">
                                             <div class="customer-profile">
-                                                <img src="~/assets/images/profile-pictures/2.jpg"
-                                                     class="img-fluid blur-up lazyload" alt="user-image">
+                                                <img src="~/assets/images/profile-pictures/2.jpg" class="img-fluid blur-up lazyload" alt="user-image">
                                             </div>
 
                                             <div class="customer-details">
@@ -517,8 +511,7 @@
 
                                         <div class="customer-section">
                                             <div class="customer-profile">
-                                                <img src="~/assets/images/profile-pictures/3.jpg"
-                                                     class="img-fluid blur-up lazyload" alt="user-image">
+                                                <img src="~/assets/images/profile-pictures/3.jpg" class="img-fluid blur-up lazyload" alt="user-image">
                                             </div>
 
                                             <div class="customer-details">
@@ -544,8 +537,7 @@
 
                                         <div class="customer-section">
                                             <div class="customer-profile">
-                                                <img src="~/assets/images/profile-pictures/4.jpg"
-                                                     class="img-fluid blur-up lazyload" alt="user-image">
+                                                <img src="~/assets/images/profile-pictures/4.jpg" class="img-fluid blur-up lazyload" alt="user-image">
                                             </div>
 
                                             <div class="customer-details">
@@ -590,7 +582,7 @@
                                         </tr>
                                         <tr>
                                             <th>Tax</th>
-                                            <td>@Model.ExTax</td>
+                                            <td>$@Model.ExTax</td>
                                         </tr>
                                         <tr>
                                             <th>Gender</th>

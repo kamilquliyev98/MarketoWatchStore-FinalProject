@@ -522,7 +522,6 @@ $(document).ready(function () {
         e.preventDefault();
 
         var url = $(this).attr("href");
-        //let url2 = "/ShoppingCart/GetCartTotalAmount";
 
         fetch(url).then(response => response.text())
             .then(data => {
@@ -550,7 +549,7 @@ $(document).ready(function () {
                     "onclick": null,
                     "showDuration": "300",
                     "hideDuration": "1000",
-                    "timeOut": "5000",
+                    "timeOut": "1000",
                     "extendedTimeOut": "1000",
                     "showEasing": "swing",
                     "hideEasing": "linear",
@@ -560,6 +559,62 @@ $(document).ready(function () {
 
                 toastr.success("Item successfully added to your cart!");
             })
+    });
+
+    /* Remove item from Shopping Cart */
+    $(document).on("click", ".remove-cart-item", function (e) {
+        e.preventDefault();
+
+        var totalAmount = document.getElementById("total-amount");
+        var url = $(this).attr("href");
+        var id = $(this).attr("data-id");
+
+
+
+        fetch(url).then(response => response.text())
+            .then(data => {
+                $("#shoppingcart-table").html(data);
+
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "1000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+                toastr.success("Item successfully removed from your cart!");
+
+                var totalInTable = document.getElementById("total-in-table");
+                var totalPrice = 0;
+
+                if (totalInTable != null) {
+                    totalPrice = totalInTable.innerHTML;
+                    document.getElementById(id).remove();
+                }
+                else {
+                    document.getElementById("basket").innerHTML = `
+                        <a asp-controller="shop" asp-action="index">
+                            <div class="wislist-empty">
+                                <i class="fa-solid fa-cart-arrow-down"></i>
+                            <h6 class="mb-1">Your shopping cart is empty! Click here to go to shop! :)</h6>
+                            </div>
+                        </a>
+                    `
+                }
+
+                totalAmount.innerHTML = totalPrice;
+            });
     });
 
 

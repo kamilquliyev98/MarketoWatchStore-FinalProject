@@ -280,7 +280,7 @@
                                     <div class="cart-wrap">
                                         <ul>
                                             <li>
-                                                <a href="javascript:void(0)" class="addtocart-btn">
+                                                <a asp-controller="shoppingcart" asp-action="addtocart" asp-route-id="@product.Id" class="addtocart-btn">
                                                     <i data-feather="shopping-bag"></i>
                                                 </a>
                                             </li>
@@ -335,7 +335,7 @@
                                             <h5 class="ms-0">@product.Title</h5>
                                         </a>
                                         <h3 class="theme-color">$@((product.DiscountPrice is null) ? product.Price : product.DiscountPrice)</h3>
-                                        <a href="#" class="btn listing-content">Add To Cart</a>
+                                        <a asp-controller="shoppingcart" asp-action="addtocart" asp-route-id="@product.Id" class="addtocart-btn btn listing-content">Add To Cart</a>
                                     </div>
                                 </div>
                             </div>

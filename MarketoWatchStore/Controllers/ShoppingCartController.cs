@@ -97,6 +97,67 @@ namespace MarketoWatchStore.Controllers
             return PartialView("_MiniCartPartial", shoppingCartVMs);
         }
 
+        public async Task<IActionResult> RemoveItem(int? id)
+        {
+            if (id == null) return BadRequest();
+
+            Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
+
+            if (product == null) return NotFound();
+
+            string cookieCart = HttpContext.Request.Cookies["cart"];
+
+            List<ShoppingCartVM> shoppingCartVMs = null;
+
+            if (!string.IsNullOrWhiteSpace(cookieCart))
+            {
+                shoppingCartVMs = JsonConvert.DeserializeObject<List<ShoppingCartVM>>(cookieCart);
+
+                ShoppingCartVM shoppingCartVM = shoppingCartVMs.FirstOrDefault(p => p.ProductId == id);
+
+                if (shoppingCartVM is null) return NotFound();
+
+                shoppingCartVMs.Remove(shoppingCartVM);
+            }
+            else
+            {
+                return BadRequest();
+            }
+
+            cookieCart = JsonConvert.SerializeObject(shoppingCartVMs);
+            HttpContext.Response.Cookies.Append("cart", cookieCart);
+
+            foreach (ShoppingCartVM shoppingCartVM in shoppingCartVMs)
+            {
+                Product dbProduct = await _context.Products.FirstOrDefaultAsync(p => p.Id == shoppingCartVM.ProductId);
+
+                shoppingCartVM.Title = dbProduct.Title;
+                shoppingCartVM.MainImage = dbProduct.MainImage;
+                shoppingCartVM.Price = (dbProduct.DiscountPrice != null && dbProduct.DiscountPrice > 0) ? (double)dbProduct.DiscountPrice : dbProduct.Price;
+            }
+
+            return PartialView("_CartTablePartial", shoppingCartVMs);
+        }
+
+        public IActionResult ClearAllItems()
+        {
+            string cookieCart = HttpContext.Request.Cookies["cart"];
+
+            List<ShoppingCartVM> shoppingCartVMs = null;
+
+            if (!string.IsNullOrWhiteSpace(cookieCart))
+            {
+                HttpContext.Response.Cookies.Delete("cart");
+            }
+            else
+            {
+                return BadRequest();
+            }
+
+            //return PartialView("_CartTablePartial", shoppingCartVMs);
+            return RedirectToAction("index", "shoppingcart");
+        }
+
         public IActionResult Checkout()
         {
             return View();
