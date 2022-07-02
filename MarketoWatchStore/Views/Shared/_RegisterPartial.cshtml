@@ -1,0 +1,40 @@
+﻿@model RegisterVM
+
+<form method="post">
+    <div class="input">
+        <label asp-for="Fullname">Fullname</label>
+        <input asp-for="Fullname">
+        <span class="spin"></span>
+    </div>
+
+    <div class="input">
+        <label asp-for="Email">Email Address</label>
+        <input asp-for="Email">
+        <span class="spin"></span>
+    </div>
+
+    <div class="input">
+        <label asp-for="Username">Username</label>
+        <input asp-for="Username">
+        <span class="spin"></span>
+    </div>
+
+    <div class="input">
+        <label asp-for="Password">Password</label>
+        <input asp-for="Password">
+        <span class="spin"></span>
+    </div>
+
+    <div class="input">
+        <label asp-for="ConfirmPassword">Confirm Password</label>
+        <input asp-for="ConfirmPassword">
+        <span class="spin"></span>
+    </div>
+
+    <div class="button login">
+        <button type="submit">
+            <span>Sign Up</span>
+            <i class="fa fa-check"></i>
+        </button>
+    </div>
+</form>

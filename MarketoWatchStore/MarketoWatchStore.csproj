@@ -21,9 +21,12 @@
     <Compile Remove="Migrations\20220629163741_AddedAdsBannerTable.Designer.cs" />
     <Compile Remove="Migrations\20220630071618_check.cs" />
     <Compile Remove="Migrations\20220630071618_check.Designer.cs" />
+    <Compile Remove="Migrations\20220702165211_check.cs" />
+    <Compile Remove="Migrations\20220702165211_check.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.25" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.25" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.25" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.25">

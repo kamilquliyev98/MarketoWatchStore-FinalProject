@@ -1,4 +1,5 @@
 ﻿using MarketoWatchStore.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MarketoWatchStore.DAL
 {
-    public class MarketoDbContext : DbContext
+    public class MarketoDbContext : IdentityDbContext<AppUser>
     {
         public MarketoDbContext(DbContextOptions<MarketoDbContext> options) : base(options) { }
 
@@ -29,5 +30,9 @@ namespace MarketoWatchStore.DAL
         public DbSet<FAQ> FAQs { get; set; }
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<AdsBanner> AdsBanners { get; set; }
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
+        public DbSet<AppUser> AppUsers { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
     }
 }

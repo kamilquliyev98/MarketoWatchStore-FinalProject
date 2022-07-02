@@ -27,7 +27,8 @@ $(document).ready(function () {
         if (mainCSS.toLowerCase().indexOf("dark") >= 0) {
             $("#mainCSS").attr("href", "/assets/css/style.css");
         }
-    } else {
+    }
+    else {
         $("body").addClass("dark");
         $("#darkButton").html(sunIcon);
 
