@@ -1,6 +1,7 @@
 ﻿using MarketoWatchStore.DAL;
 using MarketoWatchStore.Models;
 using MarketoWatchStore.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -92,33 +93,106 @@ namespace MarketoWatchStore.Controllers
         }
         #endregion
 
+        #region Email Verification
+        public IActionResult EmailVerification() => View();
+
         public async Task<IActionResult> VerifyEmail(string id, string token)
         {
-            if (string.IsNullOrEmpty(id)) return NotFound();
+            if (string.IsNullOrEmpty(id)) return RedirectToAction("error404", "home");
 
             AppUser appUser = await _userManager.FindByIdAsync(id);
 
-            if (appUser is null) return NotFound();
+            if (appUser is null) return RedirectToAction("error404", "home");
 
-            if (appUser.EmailConfirmationToken != token) return BadRequest();
+            if (appUser.EmailConfirmationToken != token) return RedirectToAction("error400", "home");
 
             var emailConfirmationToken = await _userManager.GenerateEmailConfirmationTokenAsync(appUser);
 
             IdentityResult result = await _userManager.ConfirmEmailAsync(appUser, emailConfirmationToken);
 
-            if (!result.Succeeded) return BadRequest();
+            if (!result.Succeeded) return RedirectToAction("error400", "home");
 
             string newToken = Guid.NewGuid().ToString();
             appUser.EmailConfirmationToken = newToken;
             await _userManager.UpdateAsync(appUser);
+
             return View();
         }
+        #endregion
 
-        public IActionResult EmailVerification() => View();
+        #region Reset Password
+        public IActionResult ResetPassword() => View();
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ResetPassword(ResetPasswordVM reset)
+        {
+            if (string.IsNullOrWhiteSpace(reset.Email))
+            {
+                ModelState.AddModelError("Email", "Enter your email.");
+                return View();
+            }
+
+            AppUser appUser = await _userManager.FindByEmailAsync(reset.Email);
+
+            if (appUser is null)
+            {
+                ModelState.AddModelError("", "The email you entered is not registered.");
+                return View();
+            }
+
+            var link = Url.Action(nameof(NewPassword), "Account", new { id = appUser.Id, token = appUser.PasswordResetToken }, Request.Scheme, Request.Host.ToString());
+            EmailVM email = _config.GetSection("Email").Get<EmailVM>();
+            MailMessage mail = new MailMessage();
+            mail.From = new MailAddress(email.SenderEmail, email.SenderName);
+            mail.To.Add(reset.Email);
+            mail.Subject = "Reset Password";
+            mail.Body = $"<a href=\"{link}\">Click here to Reset Password</a>";
+            mail.IsBodyHtml = true;
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = email.Server;
+            smtp.Port = email.Port;
+            smtp.EnableSsl = true;
+            smtp.Credentials = new NetworkCredential(email.SenderEmail, email.Password);
+            smtp.Send(mail);
+
+            return RedirectToAction(nameof(EmailVerification));
+        }
+
+        public IActionResult NewPassword(ResetPasswordVM reset) => View(reset);
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ActionName("NewPassword")]
+        public async Task<IActionResult> NewPasswordPost(ResetPasswordVM reset)
+        {
+            if (!ModelState.IsValid) return View(reset);
+
+            if (reset.Id is null) return RedirectToAction("error404", "home");
+
+            AppUser appUser = await _userManager.FindByIdAsync(reset.Id);
+
+            if (appUser is null) return RedirectToAction("error404", "home");
+
+            if (appUser.PasswordResetToken != reset.Token) return RedirectToAction("error400", "home");
+
+            var resetToken = await _userManager.GeneratePasswordResetTokenAsync(appUser);
+            IdentityResult result = await _userManager.ResetPasswordAsync(appUser, resetToken, reset.Password);
+
+            if (!result.Succeeded) return RedirectToAction("error400", "home");
+
+            string passwordResetToken = Guid.NewGuid().ToString();
+            appUser.PasswordResetToken = passwordResetToken;
+            await _userManager.UpdateAsync(appUser);
+            return RedirectToAction("login", "account");
+        }
+        #endregion
 
         #region Login
         public IActionResult Login()
         {
+            if (User.Identity.IsAuthenticated) return RedirectToAction("index", "home");
+
             return View();
         }
 
@@ -136,17 +210,29 @@ namespace MarketoWatchStore.Controllers
                 return View();
             }
 
+            if (!await _userManager.IsEmailConfirmedAsync(appUser))
+            {
+                ModelState.AddModelError("", "Please verify your account first!");
+                return View();
+            }
+
             Microsoft.AspNetCore.Identity.SignInResult signInResult = await _signInManager.PasswordSignInAsync(appUser, loginVM.Password, loginVM.RememberMe, true);
 
             if (!signInResult.Succeeded)
             {
+                if (signInResult.IsLockedOut)
+                {
+                    ModelState.AddModelError("", "Your account has been temporarily blocked. Try again later.");
+                    return View();
+                }
+
                 ModelState.AddModelError("", "Email or Password is incorrect.");
                 return View();
             }
 
-            if (signInResult.IsLockedOut)
+            if (appUser.IsAdmin)
             {
-                ModelState.AddModelError("", "Account has been blocked. Try again later.");
+                ModelState.AddModelError("", "Email or Password is incorrect.");
                 return View();
             }
 
@@ -168,28 +254,51 @@ namespace MarketoWatchStore.Controllers
                     }
                     else
                     {
-                        //ShoppingCartVM shoppingCartVM = new ShoppingCartVM
-                        //{
-                        //    AppUserId = appUser.Id,
-                        //    ProductId = shoppingCartVM.ProductId,
-                        //    Count = shoppingCartVM.Count,
-                        //    CreatedAt = DateTime.UtcNow.AddHours(4)
-                        //};
+                        ShoppingCart shoppingCart = new ShoppingCart
+                        {
+                            AppUserId = appUser.Id,
+                            ProductId = shoppingCartVM.ProductId,
+                            Count = shoppingCartVM.Count,
+                            CreatedAt = DateTime.UtcNow.AddHours(4)
+                        };
 
-                        shoppingCartVMs.Add(shoppingCartVM);
+                        shoppingCarts.Add(shoppingCart);
                     }
-
-
                 }
 
-                if (shoppingCartVMs.Count > 0)
+                if (shoppingCarts.Count > 0)
                 {
-                    //await _context.ShoppingCarts.AddRangeAsync(shoppingCartVMs);
+                    await _context.ShoppingCarts.AddRangeAsync(shoppingCarts);
                     await _context.SaveChangesAsync();
                 }
             }
 
             return RedirectToAction("index", "home");
+        }
+        #endregion
+
+        #region Profile
+        [Authorize(Roles = "SuperAdmin, Admin, Customer")]
+        public async Task<IActionResult> Profile()
+        {
+            AppUser appUser = await _userManager.Users.FirstOrDefaultAsync(u => u.NormalizedUserName == User.Identity.Name.ToUpperInvariant() && !u.IsAdmin);
+            
+            if (appUser is null) return RedirectToAction("index", "home");
+
+            CustomerProfileVM customerProfileVM = new CustomerProfileVM
+            {
+                Customer = new CustomerUpdateVM
+                {
+                    Address = appUser.Address,
+                    City = appUser.City,
+                    FullName = appUser.FullName,
+                    PhoneNumber = appUser.PhoneNumber,
+                    UserName = appUser.UserName,
+                    Email = appUser.Email
+                }
+            };
+
+            return View(customerProfileVM);
         }
         #endregion
 

@@ -287,11 +287,11 @@
             {
                 <div>
                     <div class="category-wrap category-color">
-                        <a href="shop.html">
+                        <a asp-controller="shop" asp-action="index">
                             <img src="~/assets/images/special-types/@specialType.Image" class="img-fluid blur-up lazyload" alt="category image">
                             <div class="category-content category-text t-text">
                                 <h3>@specialType.Title.Split(' ')[0]</h3>
-                                <span>@specialType.Title.Split(' ')[1]</span>
+                                <span>@specialType.Title.Split(' ')[1].ToLower()</span>
                             </div>
                         </a>
                     </div>

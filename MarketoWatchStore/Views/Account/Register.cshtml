@@ -61,7 +61,51 @@
                     <h2>Register</h2>
                 </div>
 
-                @await Html.PartialAsync("_RegisterPartial")
+                <form method="post" autocomplete="off">
+                    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+
+                    <div class="input">
+                        <label asp-for="Fullname">Fullname</label>
+                        <input asp-for="Fullname" required>
+                        <span class="spin"></span>
+                        <span class="text-danger" asp-validation-for="Fullname"></span>
+                    </div>
+
+                    <div class="input">
+                        <label asp-for="Email">Email Address</label>
+                        <input asp-for="Email" required>
+                        <span class="spin"></span>
+                        <span class="text-danger" asp-validation-for="Email"></span>
+                    </div>
+
+                    <div class="input">
+                        <label asp-for="Username">Username</label>
+                        <input asp-for="Username" required>
+                        <span class="spin"></span>
+                        <span class="text-danger" asp-validation-for="Username"></span>
+                    </div>
+
+                    <div class="input">
+                        <label asp-for="Password">Password</label>
+                        <input asp-for="Password" required>
+                        <span class="spin"></span>
+                        <span class="text-danger" asp-validation-for="Password"></span>
+                    </div>
+
+                    <div class="input">
+                        <label asp-for="ConfirmPassword">Confirm Password</label>
+                        <input asp-for="ConfirmPassword" required>
+                        <span class="spin"></span>
+                        <span class="text-danger" asp-validation-for="ConfirmPassword"></span>
+                    </div>
+
+                    <div class="button login">
+                        <button type="submit">
+                            <span>Sign Up</span>
+                            <i class="fa fa-check"></i>
+                        </button>
+                    </div>
+                </form>
 
                 <p><a asp-controller="account" asp-action="login" class="theme-color">Already have an account?</a></p>
             </div>
@@ -85,6 +129,10 @@
 
     <!-- Lazyload JS -->
     <script src="~/assets/js/lazysizes.min.js"></script>
+
+    <!-- Validator JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js" integrity="sha512-o6XqxgrUsKmchwy9G5VRNWSSxTS4Urr4loO6/0hYdpWmFUfHqGzawGxeQGMDqYzxjY9sbktPbNlkIQJWagVZQg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!-- Script JS -->
     <script src="~/assets/js/script.js"></script>

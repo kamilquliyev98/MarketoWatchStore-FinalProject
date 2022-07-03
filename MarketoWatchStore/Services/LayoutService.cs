@@ -2,6 +2,7 @@
 using MarketoWatchStore.Models;
 using MarketoWatchStore.ViewModels;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
@@ -15,10 +16,12 @@ namespace MarketoWatchStore.Services
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly MarketoDbContext _context;
-        public LayoutService(IHttpContextAccessor httpContextAccessor, MarketoDbContext context)
+        private readonly UserManager<AppUser> _userManager;
+        public LayoutService(IHttpContextAccessor httpContextAccessor, MarketoDbContext context, UserManager<AppUser> userManager)
         {
             _httpContextAccessor = httpContextAccessor;
             _context = context;
+            _userManager = userManager;
         }
 
         public async Task<Setting> GetSetting()
