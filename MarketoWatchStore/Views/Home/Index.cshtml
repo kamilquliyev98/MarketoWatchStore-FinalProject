@@ -16,27 +16,33 @@
                         <div class="slider-right-detail">
                             <div class="labels">
                                 <ul class="label-15">
-                                    <li>
-                                        <a href="https://www.facebook.com/" target="_blank">
-                                            <img src="~/assets/images/social-icon/1.png" class="img-fluid blur-up lazyload"
-                                                 alt="facebook">
-                                            <h5 class="d-lg-block d-none">Facebook</h5>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.instagram.com/" target="_blank">
-                                            <img src="~/assets/images/social-icon/2.png" class="img-fluid blur-up lazyload"
-                                                 alt="Instagram">
-                                            <h5 class="d-lg-block d-none">Instagram</h5>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://twitter.com/" target="_blank">
-                                            <img src="~/assets/images/social-icon/3.png" class="img-fluid blur-up lazyload"
-                                                 alt="Twitter">
-                                            <h5 class="d-lg-block d-none">Twitter</h5>
-                                        </a>
-                                    </li>
+                                    @if (Model.Setting.Facebook != null)
+                                    {
+                                        <li>
+                                            <a href="@Model.Setting.Facebook" target="_blank">
+                                                <img src="~/assets/images/social-icon/1.png" class="img-fluid blur-up lazyload" alt="facebook">
+                                                <h5 class="d-lg-block d-none">Facebook</h5>
+                                            </a>
+                                        </li>
+                                    }
+                                    @if (Model.Setting.Instagram != null)
+                                    {
+                                        <li>
+                                            <a href="@Model.Setting.Instagram" target="_blank">
+                                                <img src="~/assets/images/social-icon/2.png" class="img-fluid blur-up lazyload" alt="Instagram">
+                                                <h5 class="d-lg-block d-none">Instagram</h5>
+                                            </a>
+                                        </li>
+                                    }
+                                    @if (Model.Setting.Twitter != null)
+                                    {
+                                        <li>
+                                            <a href="@Model.Setting.Twitter" target="_blank">
+                                                <img src="~/assets/images/social-icon/3.png" class="img-fluid blur-up lazyload" alt="Twitter">
+                                                <h5 class="d-lg-block d-none">Twitter</h5>
+                                            </a>
+                                        </li>
+                                    }
                                 </ul>
                             </div>
                             @if (productSlide.DiscountPrice != null)

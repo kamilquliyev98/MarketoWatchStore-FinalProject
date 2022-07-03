@@ -9,6 +9,7 @@ namespace MarketoWatchStore.ViewModels
     public class HomeVM
     {
         public IEnumerable<Product> Slides { get; set; }
+        public Setting Setting { get; set; }
         public IEnumerable<ServicePolicy> ServicePolicies { get; set; }
         public IEnumerable<Product> Posters { get; set; }
         public IEnumerable<Product> NewArrival { get; set; }

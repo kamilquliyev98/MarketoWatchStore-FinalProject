@@ -26,6 +26,8 @@ namespace MarketoWatchStore.Controllers
                 .Where(p => !p.IsDeleted && p.SlideImage != null && p.ShareOnHomeSlide)
                 .ToListAsync(),
 
+                Setting = await _context.Settings.FirstOrDefaultAsync(),
+
                 ServicePolicies = await _context.ServicePolicies
                 .Where(sp => !sp.IsDeleted)
                 .ToListAsync(),
