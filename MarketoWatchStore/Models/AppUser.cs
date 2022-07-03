@@ -22,8 +22,12 @@ namespace MarketoWatchStore.Models
         public string State { get; set; }
         [StringLength(255)]
         public string ZipCode { get; set; }
+        public string EmailConfirmationToken { get; set; }
+        public string PasswordResetToken { get; set; }
 
         public IEnumerable<ShoppingCart> ShoppingCarts { get; set; }
         public IEnumerable<Order> Orders { get; set; }
+        public IEnumerable<CompareList> CompareLists { get; set; }
+        public IEnumerable<Wishlist> Wishlists { get; set; }
     }
 }

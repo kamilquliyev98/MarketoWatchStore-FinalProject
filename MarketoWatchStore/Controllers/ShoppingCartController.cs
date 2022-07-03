@@ -44,7 +44,7 @@ namespace MarketoWatchStore.Controllers
 
         public async Task<IActionResult> AddToCart(int? id, int count = 1)
         {
-            if (id is null) return BadRequest();
+            if (id is null) return RedirectToAction("error400", "home");
 
             Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id && !p.IsDeleted);
 
@@ -99,7 +99,7 @@ namespace MarketoWatchStore.Controllers
 
         public async Task<IActionResult> RemoveItem(int? id)
         {
-            if (id is null) return BadRequest();
+            if (id is null) return RedirectToAction("error400", "home");
 
             Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
 
@@ -121,7 +121,7 @@ namespace MarketoWatchStore.Controllers
             }
             else
             {
-                return BadRequest();
+                return RedirectToAction("error400", "home");
             }
 
             cookieCart = JsonConvert.SerializeObject(shoppingCartVMs);
@@ -149,7 +149,7 @@ namespace MarketoWatchStore.Controllers
             }
             else
             {
-                return BadRequest();
+                return RedirectToAction("error400", "home");
             }
 
             return RedirectToAction("index", "shoppingcart");

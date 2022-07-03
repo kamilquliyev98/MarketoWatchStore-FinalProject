@@ -31,6 +31,8 @@ namespace MarketoWatchStore.DAL
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<AdsBanner> AdsBanners { get; set; }
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
+        public DbSet<CompareList> CompareLists { get; set; }
+        public DbSet<Wishlist> Wishlists { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }

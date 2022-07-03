@@ -76,5 +76,7 @@ namespace MarketoWatchStore.Controllers
         }
 
         public IActionResult Error404() => View();
+
+        public IActionResult Error400() => View();
     }
 }

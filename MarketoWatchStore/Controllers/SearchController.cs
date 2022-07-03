@@ -18,12 +18,12 @@ namespace MarketoWatchStore.Controllers
         }
 
         [HttpGet]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(string key, int page = 1)
         {
-            if (string.IsNullOrEmpty(key))
+            if (string.IsNullOrWhiteSpace(key))
             {
-                return BadRequest();
+                return RedirectToAction("error400", "home");
             }
             else
             {

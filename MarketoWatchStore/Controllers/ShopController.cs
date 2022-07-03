@@ -74,7 +74,7 @@ namespace MarketoWatchStore.Controllers
 
         public async Task<IActionResult> QuickView(int? id)
         {
-            if (id is null) return BadRequest();
+            if (id is null) return RedirectToAction("error400", "home");
 
             Product product = await _context.Products
                 .Include(p => p.Brand)
@@ -95,7 +95,7 @@ namespace MarketoWatchStore.Controllers
 
         public async Task<IActionResult> Product(int? id)
         {
-            if (id is null) return BadRequest();
+            if (id is null) return RedirectToAction("error400", "home");
 
             Product product = await _context.Products
                 .Include(p => p.Brand)

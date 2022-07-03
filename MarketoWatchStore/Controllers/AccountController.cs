@@ -62,8 +62,6 @@ namespace MarketoWatchStore.Controllers
 
             await _signInManager.SignInAsync(appUser, true);
 
-            //return Json(new { status = 200 });
-
             return RedirectToAction("index", "home");
         }
         #endregion

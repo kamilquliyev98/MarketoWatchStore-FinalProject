@@ -59,7 +59,7 @@ namespace MarketoWatchStore.Controllers
 
         public async Task<IActionResult> AddToCompare(int? id)
         {
-            if (id is null) return BadRequest();
+            if (id is null) return RedirectToAction("error400", "home");
 
             Product product = await _context.Products
                 .Include(p => p.Brand)
@@ -137,7 +137,7 @@ namespace MarketoWatchStore.Controllers
 
         public async Task<IActionResult> RemoveItem(int? id)
         {
-            if (id is null) return BadRequest();
+            if (id is null) return RedirectToAction("error400", "home");
 
             Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
 
@@ -159,7 +159,7 @@ namespace MarketoWatchStore.Controllers
             }
             else
             {
-                return BadRequest();
+                return RedirectToAction("error400", "home");
             }
 
             cookieCompare = JsonConvert.SerializeObject(compareListVMs);

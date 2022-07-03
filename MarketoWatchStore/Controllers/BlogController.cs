@@ -40,7 +40,7 @@ namespace MarketoWatchStore.Controllers
 
         public async Task<IActionResult> Blog(int? id)
         {
-            if (id is null) return BadRequest();
+            if (id is null) return RedirectToAction("error400", "home");
 
             Blog blog = await _context.Blogs.FirstOrDefaultAsync(b => b.Id == id && !b.IsDeleted);
 
