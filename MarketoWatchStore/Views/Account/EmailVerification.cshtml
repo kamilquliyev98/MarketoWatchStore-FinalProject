@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Error 400 | Marketo";
+    ViewBag.Title = "Email Confirmation | Marketo";
 }
 
 <!-- Breadcrumb section start -->
@@ -13,33 +13,29 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h3>Bad Request - ERROR 400</h3>
+                <h3>Email Confirmation</h3>
             </div>
         </div>
     </div>
 </section>
 <!-- Breadcrumb section end -->
-
-<!-- 400 Section Start -->
+<!-- Confirm Section Start -->
 <section class="page-not-found section-b-space">
     <div class="container">
         <div class="row gx-md-2 gx-0 gy-md-0 gy-3">
             <div class="col-md-8 m-auto">
                 <div class="page-image">
-                    <img src="~/assets/images/inner-page/400.jpg" class="img-fluid blur-up lazyload" alt="400">
+                    <img src="~/assets/images/inner-page/confirm-email.jpg" class="img-fluid blur-up lazyload" alt="email">
                 </div>
             </div>
 
             <div class="col-md-8 mx-auto mt-md-5 mt-3">
                 <div class="page-container pass-forgot">
                     <div>
-                        <h2>Bad Request</h2>
+                        <h2 style="text-transform: none;">Confirmation email has been sent! Please, confirm first to log in.</h2>
                         <p></p>
-                        <a href="javascript:history.back();" class="btn btn-outline-info">
-                            <i class="fa-solid fa-arrow-left"></i>&nbsp;&nbsp;&nbsp;Go Back
-                        </a>
-                        <a asp-controller="home" asp-action="index" class="btn btn-outline-info m-1">
-                            <i class="fa-solid fa-house"></i>&nbsp;&nbsp;&nbsp;Home Page
+                        <a asp-controller="account" asp-action="login" class="btn btn-outline-info">
+                            <i class="fa-solid fa-user"></i>&nbsp;&nbsp;&nbsp;Login
                         </a>
                     </div>
                 </div>
@@ -47,4 +43,4 @@
         </div>
     </div>
 </section>
-<!-- 400 Section End -->
+<!-- Confirm Section End -->

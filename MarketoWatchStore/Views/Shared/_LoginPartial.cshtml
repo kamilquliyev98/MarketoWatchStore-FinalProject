@@ -1,6 +1,8 @@
 ﻿@model LoginVM
 
 <form method="post" autocomplete="off">
+    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+
     <div class="input">
         <label asp-for="Email">Email address</label>
         <input asp-for="Email" required>

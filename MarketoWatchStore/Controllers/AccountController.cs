@@ -4,10 +4,14 @@ using MarketoWatchStore.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 
 namespace MarketoWatchStore.Controllers
@@ -17,20 +21,19 @@ namespace MarketoWatchStore.Controllers
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly IConfiguration _config;
         private readonly MarketoDbContext _context;
-        public AccountController(RoleManager<IdentityRole> roleManager, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, MarketoDbContext context)
+        public AccountController(RoleManager<IdentityRole> roleManager, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IConfiguration config, MarketoDbContext context)
         {
             _roleManager = roleManager;
             _userManager = userManager;
             _signInManager = signInManager;
+            _config = config;
             _context = context;
         }
 
         #region Register
-        public IActionResult Register()
-        {
-            return View();
-        }
+        public IActionResult Register() => View();
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -43,8 +46,11 @@ namespace MarketoWatchStore.Controllers
                 FullName = registerVM.Fullname,
                 Email = registerVM.Email,
                 UserName = registerVM.Username,
-                IsAdmin = true
+                IsAdmin = false
             };
+
+            string token = Guid.NewGuid().ToString();
+            appUser.EmailConfirmationToken = token;
 
             IdentityResult identityResult = await _userManager.CreateAsync(appUser, registerVM.Password);
 
@@ -60,11 +66,55 @@ namespace MarketoWatchStore.Controllers
 
             await _userManager.AddToRoleAsync(appUser, "Customer");
 
-            await _signInManager.SignInAsync(appUser, true);
+            var link = Url.Action(nameof(VerifyEmail), "Account", new { id = appUser.Id, token }, Request.Scheme, Request.Host.ToString());
 
-            return RedirectToAction("index", "home");
+            EmailVM email = _config.GetSection("Email").Get<EmailVM>();
+            MailMessage mail = new MailMessage();
+            mail.From = new MailAddress(email.SenderEmail, email.SenderName);
+            mail.To.Add(appUser.Email);
+            mail.Subject = "Verify Email";
+            string body = string.Empty;
+            using (StreamReader reader = new StreamReader("wwwroot/assets/templates/verifyemail.html"))
+            {
+                body = reader.ReadToEnd();
+            }
+            mail.Body = body.Replace("{link}", link);
+            mail.IsBodyHtml = true;
+
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = email.Server;
+            smtp.Port = email.Port;
+            smtp.EnableSsl = true;
+            smtp.Credentials = new NetworkCredential(email.SenderEmail, email.Password);
+            smtp.Send(mail);
+
+            return RedirectToAction(nameof(EmailVerification));
         }
         #endregion
+
+        public async Task<IActionResult> VerifyEmail(string id, string token)
+        {
+            if (string.IsNullOrEmpty(id)) return NotFound();
+
+            AppUser appUser = await _userManager.FindByIdAsync(id);
+
+            if (appUser is null) return NotFound();
+
+            if (appUser.EmailConfirmationToken != token) return BadRequest();
+
+            var emailConfirmationToken = await _userManager.GenerateEmailConfirmationTokenAsync(appUser);
+
+            IdentityResult result = await _userManager.ConfirmEmailAsync(appUser, emailConfirmationToken);
+
+            if (!result.Succeeded) return BadRequest();
+
+            string newToken = Guid.NewGuid().ToString();
+            appUser.EmailConfirmationToken = newToken;
+            await _userManager.UpdateAsync(appUser);
+            return View();
+        }
+
+        public IActionResult EmailVerification() => View();
 
         #region Login
         public IActionResult Login()
