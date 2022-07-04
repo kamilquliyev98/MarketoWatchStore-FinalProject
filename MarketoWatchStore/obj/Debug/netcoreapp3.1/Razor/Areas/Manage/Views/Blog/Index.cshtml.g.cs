@@ -26,8 +26,15 @@ using MarketoWatchStore.Enums;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 4 "C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\Areas\Manage\Views\_ViewImports.cshtml"
+using MarketoWatchStore.ViewModels;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"303351511e5120f763fdf931991ead6d2b5c6e9b", @"/Areas/Manage/Views/Blog/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"7bae956963a663587de8a1d28408088a1171d100", @"/Areas/Manage/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"49f8b823e20b472374e15ce34cb164c2b97899cc", @"/Areas/Manage/Views/_ViewImports.cshtml")]
     public class Areas_Manage_Views_Blog_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<IEnumerable<Blog>>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-area", "manage", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -105,7 +112,7 @@ using MarketoWatchStore.Enums;
                 <nav>
                     <ol class=""breadcrumb"">
                         <li class=""breadcrumb-item"">");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "303351511e5120f763fdf931991ead6d2b5c6e9b13520", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "303351511e5120f763fdf931991ead6d2b5c6e9b13740", async() => {
                 WriteLiteral("Dashboard");
             }
             );
@@ -125,7 +132,7 @@ using MarketoWatchStore.Enums;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("</li>\r\n                        <li class=\"breadcrumb-item active\">Blogs</li>\r\n                    </ol>\r\n                </nav>\r\n            </div>\r\n            <!-- End Page Title -->\r\n        </div>\r\n        <div class=\"col-md-3\">\r\n            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "303351511e5120f763fdf931991ead6d2b5c6e9b15347", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "303351511e5120f763fdf931991ead6d2b5c6e9b15567", async() => {
                 WriteLiteral(@"
                 <div class=""row g-3 align-items-center"">
                     <div class=""col-auto"">
@@ -144,7 +151,7 @@ using MarketoWatchStore.Enums;
 #line hidden
 #nullable disable
                 WriteLiteral("                                    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "303351511e5120f763fdf931991ead6d2b5c6e9b16340", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "303351511e5120f763fdf931991ead6d2b5c6e9b16560", async() => {
                     WriteLiteral("All");
                 }
                 );
@@ -163,7 +170,7 @@ using MarketoWatchStore.Enums;
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n                                    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "303351511e5120f763fdf931991ead6d2b5c6e9b17920", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "303351511e5120f763fdf931991ead6d2b5c6e9b18140", async() => {
                     WriteLiteral("Active");
                 }
                 );
@@ -179,7 +186,7 @@ using MarketoWatchStore.Enums;
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n                                    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "303351511e5120f763fdf931991ead6d2b5c6e9b19180", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "303351511e5120f763fdf931991ead6d2b5c6e9b19400", async() => {
                     WriteLiteral("Deleted");
                 }
                 );
@@ -204,7 +211,7 @@ using MarketoWatchStore.Enums;
 #line hidden
 #nullable disable
                 WriteLiteral("                                    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "303351511e5120f763fdf931991ead6d2b5c6e9b20751", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "303351511e5120f763fdf931991ead6d2b5c6e9b20971", async() => {
                     WriteLiteral("All");
                 }
                 );
@@ -220,7 +227,7 @@ using MarketoWatchStore.Enums;
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n                                    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "303351511e5120f763fdf931991ead6d2b5c6e9b22008", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "303351511e5120f763fdf931991ead6d2b5c6e9b22228", async() => {
                     WriteLiteral("Active");
                 }
                 );
@@ -236,7 +243,7 @@ using MarketoWatchStore.Enums;
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n                                    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "303351511e5120f763fdf931991ead6d2b5c6e9b23268", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "303351511e5120f763fdf931991ead6d2b5c6e9b23488", async() => {
                     WriteLiteral("Deleted");
                 }
                 );
@@ -264,7 +271,7 @@ using MarketoWatchStore.Enums;
 #line hidden
 #nullable disable
                 WriteLiteral("                                    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "303351511e5120f763fdf931991ead6d2b5c6e9b25155", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "303351511e5120f763fdf931991ead6d2b5c6e9b25375", async() => {
                     WriteLiteral("All");
                 }
                 );
@@ -280,7 +287,7 @@ using MarketoWatchStore.Enums;
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n                                    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "303351511e5120f763fdf931991ead6d2b5c6e9b26412", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "303351511e5120f763fdf931991ead6d2b5c6e9b26632", async() => {
                     WriteLiteral("Active");
                 }
                 );
@@ -299,7 +306,7 @@ using MarketoWatchStore.Enums;
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n                                    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "303351511e5120f763fdf931991ead6d2b5c6e9b27995", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "303351511e5120f763fdf931991ead6d2b5c6e9b28215", async() => {
                     WriteLiteral("Deleted");
                 }
                 );
@@ -346,7 +353,7 @@ using MarketoWatchStore.Enums;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n        </div>\r\n        <div class=\"col-md-2\">\r\n            <div class=\"d-grid\">\r\n                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "303351511e5120f763fdf931991ead6d2b5c6e9b30940", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "303351511e5120f763fdf931991ead6d2b5c6e9b31160", async() => {
                 WriteLiteral("Create");
             }
             );
@@ -448,7 +455,7 @@ using MarketoWatchStore.Enums;
 #line hidden
 #nullable disable
             WriteLiteral("</th>\r\n                                            <td>\r\n                                                <div style=\"max-width: 50%; margin: 0 auto;\">\r\n                                                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "303351511e5120f763fdf931991ead6d2b5c6e9b37174", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "303351511e5120f763fdf931991ead6d2b5c6e9b37394", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -509,7 +516,7 @@ AddHtmlAttributeValue("", 4412, blog.Image, 4412, 11, false);
 #line hidden
 #nullable disable
             WriteLiteral("                                            </td>\r\n                                            <td>\r\n                                                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "303351511e5120f763fdf931991ead6d2b5c6e9b40923", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "303351511e5120f763fdf931991ead6d2b5c6e9b41143", async() => {
                 WriteLiteral("\r\n                                                    <i class=\"bi bi-eye\"></i>\r\n                                                ");
             }
             );
@@ -590,7 +597,7 @@ AddHtmlAttributeValue("", 4412, blog.Image, 4412, 11, false);
 #line hidden
 #nullable disable
             WriteLiteral("                                                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "303351511e5120f763fdf931991ead6d2b5c6e9b46870", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "303351511e5120f763fdf931991ead6d2b5c6e9b47090", async() => {
                 WriteLiteral("\r\n                                                        <i class=\"bi bi-recycle\"></i>\r\n                                                    ");
             }
             );
@@ -672,7 +679,7 @@ AddHtmlAttributeValue("", 4412, blog.Image, 4412, 11, false);
 #line hidden
 #nullable disable
             WriteLiteral("                                                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "303351511e5120f763fdf931991ead6d2b5c6e9b52901", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "303351511e5120f763fdf931991ead6d2b5c6e9b53121", async() => {
                 WriteLiteral("\r\n                                                        <i class=\"bi bi-pencil-square\"></i>\r\n                                                    ");
             }
             );
@@ -744,7 +751,7 @@ AddHtmlAttributeValue("", 4412, blog.Image, 4412, 11, false);
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                                                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "303351511e5120f763fdf931991ead6d2b5c6e9b58547", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "303351511e5120f763fdf931991ead6d2b5c6e9b58767", async() => {
                 WriteLiteral("\r\n                                                        <i class=\"bi bi-trash\"></i>\r\n                                                    ");
             }
             );

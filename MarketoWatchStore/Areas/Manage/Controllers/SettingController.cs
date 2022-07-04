@@ -9,10 +9,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MarketoWatchStore.Areas.Manage.Controllers
 {
     [Area("manage")]
+    [Authorize(Roles = "SuperAdmin, Admin")]
     public class SettingController : Controller
     {
         private readonly MarketoDbContext _context;

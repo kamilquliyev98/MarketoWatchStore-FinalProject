@@ -3,6 +3,7 @@ using MarketoWatchStore.Enums;
 using MarketoWatchStore.Extensions;
 using MarketoWatchStore.Helpers;
 using MarketoWatchStore.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,6 +16,7 @@ using System.Threading.Tasks;
 namespace MarketoWatchStore.Areas.Manage.Controllers
 {
     [Area("manage")]
+    [Authorize(Roles = "SuperAdmin, Admin")]
     public class ProductController : Controller
     {
         private readonly MarketoDbContext _context;

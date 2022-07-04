@@ -26,8 +26,15 @@ using MarketoWatchStore.Enums;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 4 "C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\Areas\Manage\Views\_ViewImports.cshtml"
+using MarketoWatchStore.ViewModels;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"179d4e9578fef9416fac0b469bcd2e895af2d6a0", @"/Areas/Manage/Views/Shared/_PaginationPartial.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"7bae956963a663587de8a1d28408088a1171d100", @"/Areas/Manage/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"49f8b823e20b472374e15ce34cb164c2b97899cc", @"/Areas/Manage/Views/_ViewImports.cshtml")]
     public class Areas_Manage_Views_Shared__PaginationPartial : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("class", new global::Microsoft.AspNetCore.Html.HtmlString("page-link"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -90,7 +97,7 @@ WriteAttributeValue(" ", 182, ViewBag.CurrentPage <= 1 ? "disabled" : "", 183, 4
 #nullable disable
             EndWriteAttribute();
             WriteLiteral(">\r\n            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "179d4e9578fef9416fac0b469bcd2e895af2d6a09746", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "179d4e9578fef9416fac0b469bcd2e895af2d6a09966", async() => {
                 WriteLiteral("\r\n                <span aria-hidden=\"true\">&laquo;</span>\r\n            ");
             }
             );
@@ -155,7 +162,7 @@ WriteAttributeValue(" ", 601, ViewBag.CurrentPage <= 1 ? "disabled" : "", 602, 4
 #nullable disable
             EndWriteAttribute();
             WriteLiteral(">\r\n            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "179d4e9578fef9416fac0b469bcd2e895af2d6a014368", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "179d4e9578fef9416fac0b469bcd2e895af2d6a014588", async() => {
                 WriteLiteral("\r\n                <span aria-hidden=\"true\">&lsaquo;</span>\r\n            ");
             }
             );
@@ -223,7 +230,7 @@ WriteAttributeValue(" ", 601, ViewBag.CurrentPage <= 1 ? "disabled" : "", 602, 4
 #line hidden
 #nullable disable
             WriteLiteral("            <li class=\"page-item\">");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "179d4e9578fef9416fac0b469bcd2e895af2d6a019141", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "179d4e9578fef9416fac0b469bcd2e895af2d6a019361", async() => {
 #nullable restore
 #line 20 "C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\Areas\Manage\Views\Shared\_PaginationPartial.cshtml"
                                                                                                                                                                                   Write(ViewBag.CurrentPage - 2);
@@ -299,7 +306,7 @@ WriteAttributeValue(" ", 601, ViewBag.CurrentPage <= 1 ? "disabled" : "", 602, 4
 #line hidden
 #nullable disable
             WriteLiteral("            <li class=\"page-item\">");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "179d4e9578fef9416fac0b469bcd2e895af2d6a024007", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "179d4e9578fef9416fac0b469bcd2e895af2d6a024227", async() => {
 #nullable restore
 #line 24 "C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\Areas\Manage\Views\Shared\_PaginationPartial.cshtml"
                                                                                                                                                                                   Write(ViewBag.CurrentPage - 1);
@@ -367,7 +374,7 @@ WriteAttributeValue(" ", 601, ViewBag.CurrentPage <= 1 ? "disabled" : "", 602, 4
 #line hidden
 #nullable disable
             WriteLiteral("\r\n        <li class=\"page-item active\" aria-current=\"page\">");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "179d4e9578fef9416fac0b469bcd2e895af2d6a028655", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "179d4e9578fef9416fac0b469bcd2e895af2d6a028875", async() => {
 #nullable restore
 #line 27 "C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\Areas\Manage\Views\Shared\_PaginationPartial.cshtml"
                                                                                                                                                                                                      Write(ViewBag.CurrentPage);
@@ -436,7 +443,7 @@ WriteAttributeValue(" ", 601, ViewBag.CurrentPage <= 1 ? "disabled" : "", 602, 4
 #line hidden
 #nullable disable
             WriteLiteral("            <li class=\"page-item\">");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "179d4e9578fef9416fac0b469bcd2e895af2d6a033409", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "179d4e9578fef9416fac0b469bcd2e895af2d6a033629", async() => {
 #nullable restore
 #line 31 "C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\Areas\Manage\Views\Shared\_PaginationPartial.cshtml"
                                                                                                                                                                                   Write(ViewBag.CurrentPage + 1);
@@ -512,7 +519,7 @@ WriteAttributeValue(" ", 601, ViewBag.CurrentPage <= 1 ? "disabled" : "", 602, 4
 #line hidden
 #nullable disable
             WriteLiteral("            <li class=\"page-item\">");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "179d4e9578fef9416fac0b469bcd2e895af2d6a038326", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "179d4e9578fef9416fac0b469bcd2e895af2d6a038546", async() => {
 #nullable restore
 #line 35 "C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\Areas\Manage\Views\Shared\_PaginationPartial.cshtml"
                                                                                                                                                                                   Write(ViewBag.CurrentPage + 2);
@@ -591,7 +598,7 @@ WriteAttributeValue(" ", 2519, ViewBag.CurrentPage >= ViewBag.PageCount ? "disab
 #nullable disable
             EndWriteAttribute();
             WriteLiteral(">\r\n            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "179d4e9578fef9416fac0b469bcd2e895af2d6a043462", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "179d4e9578fef9416fac0b469bcd2e895af2d6a043682", async() => {
                 WriteLiteral("\r\n                <span aria-hidden=\"true\">&rsaquo;</span>\r\n            ");
             }
             );
@@ -661,7 +668,7 @@ WriteAttributeValue(" ", 2972, ViewBag.CurrentPage >= ViewBag.PageCount ? "disab
 #nullable disable
             EndWriteAttribute();
             WriteLiteral(">\r\n            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "179d4e9578fef9416fac0b469bcd2e895af2d6a048423", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "179d4e9578fef9416fac0b469bcd2e895af2d6a048643", async() => {
                 WriteLiteral("\r\n                <span aria-hidden=\"true\">&raquo;</span>\r\n            ");
             }
             );

@@ -26,8 +26,15 @@ using MarketoWatchStore.Enums;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 4 "C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\Areas\Manage\Views\_ViewImports.cshtml"
+using MarketoWatchStore.ViewModels;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"c0e2fea82e39ed266c43bd76ea449a2e65145f3c", @"/Areas/Manage/Views/Colour/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"7bae956963a663587de8a1d28408088a1171d100", @"/Areas/Manage/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"49f8b823e20b472374e15ce34cb164c2b97899cc", @"/Areas/Manage/Views/_ViewImports.cshtml")]
     public class Areas_Manage_Views_Colour_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<IEnumerable<Colour>>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-area", "manage", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -89,7 +96,7 @@ using MarketoWatchStore.Enums;
                 <nav>
                     <ol class=""breadcrumb"">
                         <li class=""breadcrumb-item"">");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c0e2fea82e39ed266c43bd76ea449a2e65145f3c8045", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c0e2fea82e39ed266c43bd76ea449a2e65145f3c8265", async() => {
                 WriteLiteral("Dashboard");
             }
             );
@@ -109,7 +116,7 @@ using MarketoWatchStore.Enums;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("</li>\r\n                        <li class=\"breadcrumb-item active\">Colours</li>\r\n                    </ol>\r\n                </nav>\r\n            </div>\r\n            <!-- End Page Title -->\r\n        </div>\r\n        <div class=\"col-md-3\">\r\n            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c0e2fea82e39ed266c43bd76ea449a2e65145f3c9873", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c0e2fea82e39ed266c43bd76ea449a2e65145f3c10093", async() => {
                 WriteLiteral(@"
                 <div class=""row g-3 align-items-center"">
                     <div class=""col-auto"">
@@ -128,7 +135,7 @@ using MarketoWatchStore.Enums;
 #line hidden
 #nullable disable
                 WriteLiteral("                                    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c0e2fea82e39ed266c43bd76ea449a2e65145f3c10870", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c0e2fea82e39ed266c43bd76ea449a2e65145f3c11091", async() => {
                     WriteLiteral("All");
                 }
                 );
@@ -144,7 +151,7 @@ using MarketoWatchStore.Enums;
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n                                    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c0e2fea82e39ed266c43bd76ea449a2e65145f3c12127", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c0e2fea82e39ed266c43bd76ea449a2e65145f3c12348", async() => {
                     WriteLiteral("Active");
                 }
                 );
@@ -163,7 +170,7 @@ using MarketoWatchStore.Enums;
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n                                    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c0e2fea82e39ed266c43bd76ea449a2e65145f3c13710", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c0e2fea82e39ed266c43bd76ea449a2e65145f3c13931", async() => {
                     WriteLiteral("Deleted");
                 }
                 );
@@ -188,7 +195,7 @@ using MarketoWatchStore.Enums;
 #line hidden
 #nullable disable
                 WriteLiteral("                                    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c0e2fea82e39ed266c43bd76ea449a2e65145f3c15283", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c0e2fea82e39ed266c43bd76ea449a2e65145f3c15504", async() => {
                     WriteLiteral("All");
                 }
                 );
@@ -204,7 +211,7 @@ using MarketoWatchStore.Enums;
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n                                    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c0e2fea82e39ed266c43bd76ea449a2e65145f3c16540", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c0e2fea82e39ed266c43bd76ea449a2e65145f3c16761", async() => {
                     WriteLiteral("Active");
                 }
                 );
@@ -220,7 +227,7 @@ using MarketoWatchStore.Enums;
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n                                    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c0e2fea82e39ed266c43bd76ea449a2e65145f3c17800", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c0e2fea82e39ed266c43bd76ea449a2e65145f3c18021", async() => {
                     WriteLiteral("Deleted");
                 }
                 );
@@ -248,7 +255,7 @@ using MarketoWatchStore.Enums;
 #line hidden
 #nullable disable
                 WriteLiteral("                                    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c0e2fea82e39ed266c43bd76ea449a2e65145f3c19689", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c0e2fea82e39ed266c43bd76ea449a2e65145f3c19910", async() => {
                     WriteLiteral("All");
                 }
                 );
@@ -267,7 +274,7 @@ using MarketoWatchStore.Enums;
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n                                    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c0e2fea82e39ed266c43bd76ea449a2e65145f3c21269", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c0e2fea82e39ed266c43bd76ea449a2e65145f3c21490", async() => {
                     WriteLiteral("Active");
                 }
                 );
@@ -283,7 +290,7 @@ using MarketoWatchStore.Enums;
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n                                    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c0e2fea82e39ed266c43bd76ea449a2e65145f3c22529", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c0e2fea82e39ed266c43bd76ea449a2e65145f3c22750", async() => {
                     WriteLiteral("Deleted");
                 }
                 );
@@ -330,7 +337,7 @@ using MarketoWatchStore.Enums;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n        </div>\r\n        <div class=\"col-md-2\">\r\n            <div class=\"d-grid\">\r\n                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c0e2fea82e39ed266c43bd76ea449a2e65145f3c25476", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c0e2fea82e39ed266c43bd76ea449a2e65145f3c25697", async() => {
                 WriteLiteral("Create");
             }
             );
@@ -426,7 +433,7 @@ using MarketoWatchStore.Enums;
             WriteLiteral("\r\n");
             DefineSection("JS", async() => {
                 WriteLiteral("\r\n    <script src=\"//cdn.jsdelivr.net/npm/sweetalert2@11\"></script>\r\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js\"></script>\r\n    ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c0e2fea82e39ed266c43bd76ea449a2e65145f3c31591", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c0e2fea82e39ed266c43bd76ea449a2e65145f3c31812", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();

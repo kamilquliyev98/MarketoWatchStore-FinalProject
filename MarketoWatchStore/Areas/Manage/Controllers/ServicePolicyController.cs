@@ -2,6 +2,7 @@
 using MarketoWatchStore.Extensions;
 using MarketoWatchStore.Helpers;
 using MarketoWatchStore.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,7 @@ using System.Threading.Tasks;
 namespace MarketoWatchStore.Areas.Manage.Controllers
 {
     [Area("manage")]
+    [Authorize(Roles = "SuperAdmin, Admin")]
     public class ServicePolicyController : Controller
     {
         private readonly MarketoDbContext _context;
