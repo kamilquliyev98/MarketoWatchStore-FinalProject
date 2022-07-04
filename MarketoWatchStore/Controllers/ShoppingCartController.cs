@@ -1,6 +1,7 @@
 ﻿using MarketoWatchStore.DAL;
 using MarketoWatchStore.Models;
 using MarketoWatchStore.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -14,9 +15,11 @@ namespace MarketoWatchStore.Controllers
     public class ShoppingCartController : Controller
     {
         private readonly MarketoDbContext _context;
-        public ShoppingCartController(MarketoDbContext context)
+        private readonly UserManager<AppUser> _userManager;
+        public ShoppingCartController(MarketoDbContext context, UserManager<AppUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         public async Task<IActionResult> Index()
@@ -28,15 +31,19 @@ namespace MarketoWatchStore.Controllers
             if (!string.IsNullOrWhiteSpace(cookieCart))
             {
                 shoppingcartVMs = JsonConvert.DeserializeObject<List<ShoppingCartVM>>(cookieCart);
+            }
+            else
+            {
+                shoppingcartVMs = new List<ShoppingCartVM>();
+            }
 
-                foreach (ShoppingCartVM shoppingcartVM in shoppingcartVMs)
-                {
-                    Product dbProduct = await _context.Products.FirstOrDefaultAsync(p => p.Id == shoppingcartVM.ProductId);
+            foreach (ShoppingCartVM shoppingcartVM in shoppingcartVMs)
+            {
+                Product dbProduct = await _context.Products.FirstOrDefaultAsync(p => p.Id == shoppingcartVM.ProductId);
 
-                    shoppingcartVM.MainImage = dbProduct.MainImage;
-                    shoppingcartVM.Title = dbProduct.Title;
-                    shoppingcartVM.Price = (dbProduct.DiscountPrice != null && dbProduct.DiscountPrice > 0) ? (double)dbProduct.DiscountPrice : dbProduct.Price;
-                }
+                shoppingcartVM.MainImage = dbProduct.MainImage;
+                shoppingcartVM.Title = dbProduct.Title;
+                shoppingcartVM.Price = (dbProduct.DiscountPrice != null && dbProduct.DiscountPrice > 0) ? (double)dbProduct.DiscountPrice : dbProduct.Price;
             }
 
             return View(shoppingcartVMs);
@@ -49,6 +56,34 @@ namespace MarketoWatchStore.Controllers
             Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id && !p.IsDeleted);
 
             if (product is null) return RedirectToAction("error404", "home");
+
+            AppUser appUser = await _userManager.GetUserAsync(User);
+
+            if (appUser != null)
+            {
+                List<ShoppingCart> existShoppingCart = await _context.ShoppingCarts
+                    .Where(b => b.AppUserId == appUser.Id)
+                    .ToListAsync();
+
+                if (existShoppingCart.Any(c => c.ProductId == product.Id))
+                {
+                    existShoppingCart.FirstOrDefault(c => c.ProductId == product.Id).Count += count;
+                }
+                else
+                {
+                    ShoppingCart shoppingCart = new ShoppingCart
+                    {
+                        AppUserId = appUser.Id,
+                        ProductId = product.Id,
+                        Count = count,
+                        CreatedAt = DateTime.UtcNow.AddHours(4)
+                    };
+
+                    await _context.ShoppingCarts.AddAsync(shoppingCart);
+                }
+
+                await _context.SaveChangesAsync();
+            }
 
             string cookieCart = HttpContext.Request.Cookies["cart"];
 
@@ -105,15 +140,28 @@ namespace MarketoWatchStore.Controllers
 
             if (product is null) return RedirectToAction("error404", "home");
 
+            AppUser appUser = await _userManager.GetUserAsync(User);
+
             string cookieCart = HttpContext.Request.Cookies["cart"];
 
             List<ShoppingCartVM> shoppingCartVMs = null;
+
+            if (appUser != null)
+            {
+                ShoppingCart cartItem = await _context.ShoppingCarts
+                    .FirstOrDefaultAsync(b => b.AppUserId == appUser.Id && b.ProductId == product.Id);
+
+                if (cartItem is null) return RedirectToAction("error404", "home");
+
+                _context.ShoppingCarts.Remove(cartItem);
+                await _context.SaveChangesAsync();
+            }
 
             if (!string.IsNullOrWhiteSpace(cookieCart))
             {
                 shoppingCartVMs = JsonConvert.DeserializeObject<List<ShoppingCartVM>>(cookieCart);
 
-                ShoppingCartVM shoppingCartVM = shoppingCartVMs.FirstOrDefault(p => p.ProductId == id);
+                ShoppingCartVM shoppingCartVM = shoppingCartVMs.FirstOrDefault(b => b.ProductId == id);
 
                 if (shoppingCartVM is null) return RedirectToAction("error404", "home");
 
@@ -139,8 +187,23 @@ namespace MarketoWatchStore.Controllers
             return PartialView("_CartTablePartial", shoppingCartVMs);
         }
 
-        public IActionResult ClearAllItems()
+        public async Task<IActionResult> ClearAllItems()
         {
+            AppUser appUser = await _userManager.GetUserAsync(User);
+
+            if (appUser != null)
+            {
+                List<ShoppingCart> existShoppingCart = await _context.ShoppingCarts
+                    .Where(b => b.AppUserId == appUser.Id)
+                    .ToListAsync();
+
+                if (existShoppingCart.Count > 0)
+                {
+                    _context.ShoppingCarts.RemoveRange(existShoppingCart);
+                    await _context.SaveChangesAsync();
+                }
+            }
+
             string cookieCart = HttpContext.Request.Cookies["cart"];
 
             if (!string.IsNullOrWhiteSpace(cookieCart))
@@ -155,8 +218,15 @@ namespace MarketoWatchStore.Controllers
             return RedirectToAction("index", "shoppingcart");
         }
 
-        public IActionResult Checkout()
+        public async Task<IActionResult> Checkout()
         {
+            AppUser appUser = await _userManager.GetUserAsync(User);
+
+            if (appUser is null)
+            {
+                return RedirectToAction("login", "account");
+            }
+
             return View();
         }
     }

@@ -3,5 +3,464 @@
     ViewData["Title"] = Model.Customer.FullName + " | Marketo";
 }
 
-<h1>Profile</h1>
+<!-- Breadcrumb section start -->
+<section class="breadcrumb-section section-b-space">
+    <ul class="circles">
+        @for (int i = 1; i <= 10; i++)
+        {
+            <li></li>
+        }
+    </ul>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h3>My account</h3>
+                <nav>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a asp-controller="home" asp-action="index">
+                                <i class="fas fa-home"></i>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">My account</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb section end -->
+<!-- User dashboard section start -->
+<section class="section-b-space">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <ul class="nav nav-tabs custom-nav-tabs flex-column category-option" id="myTab">
+                    <li class="nav-item mb-2">
+                        <button class="nav-link font-light active" id="tab" data-bs-toggle="tab" data-bs-target="#dash" type="button">
+                            <i class="fas fa-angle-right"></i>Dashboard
+                        </button>
+                    </li>
 
+                    <li class="nav-item mb-2">
+                        <button class="nav-link font-light" id="1-tab" data-bs-toggle="tab" data-bs-target="#order" type="button">
+                            <i class="fas fa-angle-right"></i>My orders
+                        </button>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-lg-9">
+                <div class="filter-button dash-filter dashboard">
+                    <button class="btn btn-solid-default btn-sm fw-bold filter-btn">Show Menu</button>
+                </div>
+
+                <div class="tab-content" id="myTabContent">
+
+                    <div class="tab-pane fade show active" id="dash">
+                        <div class="dashboard-right">
+                            <div class="dashboard">
+                                <div class="page-title title title1 title-effect">
+                                    <h2>My Dashboard</h2>
+                                </div>
+                                <div class="welcome-msg">
+                                    <h6 class="font-light">Hello, <span>@Model.Customer.FullName !</span></h6>
+                                    <p class="font-light"></p>
+                                </div>
+
+                                <div class="order-box-contain my-4">
+                                    <div class="row g-4">
+                                        <div class="col-lg-4 col-sm-6">
+                                            <div class="order-box">
+                                                <div class="order-box-image">
+                                                    <img src="~/assets/images/svg/box.png" class="img-fluid blur-up lazyload" alt="box">
+                                                </div>
+                                                <div class="order-box-contain">
+                                                    <img src="~/assets/images/svg/box1.png" class="img-fluid blur-up lazyload" alt="box">
+                                                    <div>
+                                                        <h5 class="font-light">Pending orders</h5>
+                                                        <h3>3648</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-sm-6">
+                                            <div class="order-box">
+                                                <div class="order-box-image">
+                                                    <img src="~/assets/images/svg/sent.png" class="img-fluid blur-up lazyload" alt="sent">
+                                                </div>
+                                                <div class="order-box-contain">
+                                                    <img src="~/assets/images/svg/sent1.png" class="img-fluid blur-up lazyload" alt="sent">
+                                                    <div>
+                                                        <h5 class="font-light">Total orders</h5>
+                                                        <h3>215</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-sm-6">
+                                            <div class="order-box">
+                                                <div class="order-box-image">
+                                                    <img src="~/assets/images/svg/wishlist.png" class="img-fluid blur-up lazyload" alt="wishlist">
+                                                </div>
+                                                <div class="order-box-contain">
+                                                    <img src="~/assets/images/svg/wishlist1.png" class="img-fluid blur-up lazyload" alt="wishlist">
+                                                    <div>
+                                                        <h5 class="font-light">wishlist</h5>
+                                                        <h3>63874</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade table-dashboard dashboard wish-list-section" id="order">
+
+                        <div class="box-head mb-3">
+                            <h3>My Orders</h3>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table cart-table accordion-table">
+                                <thead>
+                                    <tr class="table-head">
+                                        <th scope="col">#</th>
+                                        <th scope="col">Order Id</th>
+                                        <th scope="col">Order Date</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Total Price</th>
+                                        <th scope="col">View</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr class="header-level">
+                                        <td>
+                                            <p class="mt-0"><strong>1</strong></p>
+                                        </td>
+                                        <td>
+                                            <p class="mt-0">#9980919</p>
+                                        </td>
+                                        <td>
+                                            <p class="mt-0">11.11.2021</p>
+                                        </td>
+                                        <td>
+                                            <p class="btn-status primary-button btn btn-sm">Pending</p>
+                                        </td>
+                                        <td>
+                                            <p class="theme-color fs-6">$49.54</p>
+                                        </td>
+                                        <td>
+                                            <i class="far fa-eye expand"></i>
+                                        </td>
+                                    </tr>
+                                    <tr class="sub-level">
+                                        <td colspan="6">
+                                            <table class="table cart-table">
+                                                <thead>
+                                                    <tr class="table-head">
+                                                        <th scope="col">Image</th>
+                                                        <th scope="col">Product name</th>
+                                                        <th scope="col">Price</th>
+                                                        <th scope="col">Quantity</th>
+                                                        <th scope="col">Subtotal</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <a href="product.html">
+                                                                <img src="~/assets/images/products/9.jpg"
+                                                                     class="blur-up lazyload" alt="product">
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <p class="fs-6 m-0">
+                                                                CASIO G-Shock Rubiks Cube
+                                                                Limited Edition
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <p class="fs-6 m-0">$49.54</p>
+                                                        </td>
+                                                        <td>
+                                                            <p class="fs-6 m-0">1</p>
+                                                        </td>
+                                                        <td>
+                                                            <p class="theme-color fs-6">$49.54</p>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>
+                                                            <a href="product.html">
+                                                                <img src="~/assets/images/products/8.jpg"
+                                                                     class="blur-up lazyload" alt="product">
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <p class="fs-6 m-0">
+                                                                CASIO G-Shock Rubiks Cube
+                                                                Limited Edition
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <p class="fs-6 m-0">$49.54</p>
+                                                        </td>
+                                                        <td>
+                                                            <p class="fs-6 m-0">1</p>
+                                                        </td>
+                                                        <td>
+                                                            <p class="theme-color fs-6">$49.54</p>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>
+                                                            <a href="product.html">
+                                                                <img src="~/assets/images/products/1.jpg"
+                                                                     class="blur-up lazyload" alt="product">
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <p class="fs-6 m-0">
+                                                                CASIO G-Shock Rubiks Cube
+                                                                Limited Edition
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <p class="fs-6 m-0">$49.54</p>
+                                                        </td>
+                                                        <td>
+                                                            <p class="fs-6 m-0">1</p>
+                                                        </td>
+                                                        <td>
+                                                            <p class="theme-color fs-6">$49.54</p>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>
+                                                            <a href="product.html">
+                                                                <img src="~/assets/images/products/8.jpg"
+                                                                     class="blur-up lazyload" alt="product">
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <p class="fs-6 m-0">
+                                                                CASIO G-Shock Rubiks Cube
+                                                                Limited Edition
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <p class="fs-6 m-0">$49.54</p>
+                                                        </td>
+                                                        <td>
+                                                            <p class="fs-6 m-0">1</p>
+                                                        </td>
+                                                        <td>
+                                                            <p class="theme-color fs-6">$49.54</p>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </tbody>
+
+                                <tbody>
+                                    <tr class="header-level">
+                                        <td>
+                                            <p class="mt-0"><strong>2</strong></p>
+                                        </td>
+                                        <td>
+                                            <p class="mt-0">#3330386</p>
+                                        </td>
+                                        <td>
+                                            <p class="mt-0">19.09.2020</p>
+                                        </td>
+                                        <td>
+                                            <p class="btn-status success-button btn btn-sm">Delivered</p>
+                                        </td>
+                                        <td>
+                                            <p class="theme-color fs-6">$55.00</p>
+                                        </td>
+                                        <td>
+                                            <i class="far fa-eye expand"></i>
+                                        </td>
+                                    </tr>
+                                    <tr class="sub-level">
+                                        <td colspan="6">
+                                            <table class="table cart-table">
+                                                <thead>
+                                                    <tr class="table-head">
+                                                        <th scope="col">Image</th>
+                                                        <th scope="col">Product name</th>
+                                                        <th scope="col">Price</th>
+                                                        <th scope="col">Quantity</th>
+                                                        <th scope="col">Subtotal</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <a href="product.html">
+                                                                <img src="~/assets/images/products/9.jpg"
+                                                                     class="blur-up lazyload" alt="product">
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <p class="fs-6 m-0">
+                                                                CASIO G-Shock Rubiks Cube
+                                                                Limited Edition
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <p class="fs-6 m-0">$49.54</p>
+                                                        </td>
+                                                        <td>
+                                                            <p class="fs-6 m-0">1</p>
+                                                        </td>
+                                                        <td>
+                                                            <p class="theme-color fs-6">$49.54</p>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>
+                                                            <a href="product.html">
+                                                                <img src="~/assets/images/products/8.jpg"
+                                                                     class="blur-up lazyload" alt="product">
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <p class="fs-6 m-0">
+                                                                CASIO G-Shock Rubiks Cube
+                                                                Limited Edition
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <p class="fs-6 m-0">$49.54</p>
+                                                        </td>
+                                                        <td>
+                                                            <p class="fs-6 m-0">1</p>
+                                                        </td>
+                                                        <td>
+                                                            <p class="theme-color fs-6">$49.54</p>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </tbody>
+
+                                <tbody>
+                                    <tr class="header-level">
+                                        <td>
+                                            <p class="mt-0"><strong>2</strong></p>
+                                        </td>
+                                        <td>
+                                            <p class="mt-0">#3330333</p>
+                                        </td>
+                                        <td>
+                                            <p class="mt-0">19.09.2020</p>
+                                        </td>
+                                        <td>
+                                            <p class="btn-status danger-button btn btn-sm">Rejected</p>
+                                        </td>
+                                        <td>
+                                            <p class="theme-color fs-6">$55.00</p>
+                                        </td>
+                                        <td>
+                                            <i class="far fa-eye expand"></i>
+                                        </td>
+                                    </tr>
+                                    <tr class="sub-level">
+                                        <td colspan="6">
+                                            <table class="table cart-table">
+                                                <thead>
+                                                    <tr class="table-head">
+                                                        <th scope="col">Image</th>
+                                                        <th scope="col">Product name</th>
+                                                        <th scope="col">Price</th>
+                                                        <th scope="col">Quantity</th>
+                                                        <th scope="col">Subtotal</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <a href="product.html">
+                                                                <img src="~/assets/images/products/8.jpg"
+                                                                     class="blur-up lazyload" alt="product">
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <p class="fs-6 m-0">
+                                                                CASIO G-Shock Rubiks Cube
+                                                                Limited Edition
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <p class="fs-6 m-0">$49.54</p>
+                                                        </td>
+                                                        <td>
+                                                            <p class="fs-6 m-0">1</p>
+                                                        </td>
+                                                        <td>
+                                                            <p class="theme-color fs-6">$49.54</p>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="row g-4">
+                            <div class="col-12">
+                                <nav class="page-section">
+                                    <ul class="pagination">
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:void(0)">
+                                                <span aria-hidden="true">
+                                                    <i class="fas fa-chevron-left"></i>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="page-item active">
+                                            <a class="page-link" href="javascript:void(0)">1</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link">
+                                                <span aria-hidden="true">
+                                                    <i class="fas fa-chevron-right"></i>
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+<!-- User dashboard section end -->
+
+@section JS{
+    <script src="~/assets/js/nested-table.js"></script>
+}
