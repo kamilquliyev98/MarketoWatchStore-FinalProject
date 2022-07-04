@@ -67,7 +67,5 @@ namespace MarketoWatchStore.Models
         public List<int> ColourIds { get; set; } = new List<int>();
         [NotMapped]
         public List<int> Counts { get; set; } = new List<int>();
-        //[NotMapped]
-        //public List<int> ProductColourCounts { get; set; } = new List<int>();
     }
 }
