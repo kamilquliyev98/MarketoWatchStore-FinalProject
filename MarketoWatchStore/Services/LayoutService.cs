@@ -37,8 +37,9 @@ namespace MarketoWatchStore.Services
             {
                 AppUser appUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
 
-                List<ShoppingCart> shoppingCarts = await _context
-                    .ShoppingCarts.Where(c => c.AppUserId == appUser.Id)
+                List<ShoppingCart> shoppingCarts = await _context.ShoppingCarts
+                    .Include(c => c.Product)
+                    .Where(c => c.AppUserId == appUser.Id)
                     .ToListAsync();
 
                 foreach (ShoppingCart shoppingCart in shoppingCarts)
