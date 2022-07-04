@@ -1,5 +1,6 @@
-﻿@{
-    ViewBag.Title = "Marketo | Contact";
+﻿@model ContactVM
+@{
+    ViewBag.Title = "Contact | Marketo";
 }
 
 <!-- Breadcrumb section start -->
@@ -39,10 +40,6 @@
                     <div class="material-details">
                         <div class="title title1 title-effect mb-1 title-left">
                             <h2>Contact Us</h2>
-                            <p class="ms-0 w-100">
-                                Your email address will not be published. Required fields are
-                                marked *
-                            </p>
                         </div>
                     </div>
                     <div class="row g-4 mt-md-1 mt-2">
@@ -86,7 +83,7 @@
                             </div>
                             <div class="contact-title">
                                 <h4>Address</h4>
-                                <p>1418 Riverwood Drive, Suite 3245 Cottonwood, CA 96052, United States</p>
+                                <p>@Model.Setting.Address</p>
                             </div>
                         </div>
 
@@ -96,8 +93,11 @@
                             </div>
                             <div class="contact-title">
                                 <h4>Phone Number</h4>
-                                <p>+ 185659635</p>
-                                <p>+ 658651167</p>
+                                <p>@Model.Setting.SupportPhone</p>
+                                @if (Model.Setting.Phone2 != null)
+                                {
+                                    <p>@Model.Setting.Phone2</p>
+                                }
                             </div>
                         </div>
 
@@ -107,8 +107,11 @@
                             </div>
                             <div class="contact-title">
                                 <h4>Email Address</h4>
-                                <p>admin@marketo.com</p>
-                                <p>marketo@gmail.com</p>
+                                <p>@Model.Setting.Email1</p>
+                                @if (Model.Setting.Email2 != null)
+                                {
+                                    <p>@Model.Setting.Email2</p>
+                                }
                             </div>
                         </div>
                     </div>

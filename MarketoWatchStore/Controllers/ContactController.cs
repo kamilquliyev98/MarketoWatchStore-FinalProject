@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MarketoWatchStore.DAL;
+using MarketoWatchStore.ViewModels;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +11,20 @@ namespace MarketoWatchStore.Controllers
 {
     public class ContactController : Controller
     {
-        public IActionResult Index()
+        private readonly MarketoDbContext _context;
+        public ContactController(MarketoDbContext context)
         {
-            return View();
+            _context = context;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            ContactVM contactVM = new ContactVM
+            {
+                Setting = await _context.Settings.FirstOrDefaultAsync()
+            };
+
+            return View(contactVM);
         }
     }
 }
