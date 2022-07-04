@@ -31,28 +31,45 @@ namespace MarketoWatchStore.Services
 
         public async Task<List<ShoppingCartVM>> GetCart()
         {
-            string cookieCart = _httpContextAccessor.HttpContext.Request.Cookies["cart"];
+            List<ShoppingCartVM> shoppingCartVMs = new List<ShoppingCartVM>();
 
-            List<ShoppingCartVM> shoppingCartVMs = null;
-            double totalPrice = 0;
-
-            if (!string.IsNullOrWhiteSpace(cookieCart))
+            if (_httpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
             {
-                shoppingCartVMs = JsonConvert.DeserializeObject<List<ShoppingCartVM>>(cookieCart);
+                AppUser appUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
 
-                foreach (ShoppingCartVM shoppingCartVM in shoppingCartVMs)
+                List<ShoppingCart> shoppingCarts = await _context
+                    .ShoppingCarts.Where(c => c.AppUserId == appUser.Id)
+                    .ToListAsync();
+
+                foreach (ShoppingCart shoppingCart in shoppingCarts)
                 {
-                    Product dbProduct = await _context.Products.FirstOrDefaultAsync(p => p.Id == shoppingCartVM.ProductId);
-
-                    shoppingCartVM.Title = dbProduct.Title;
-                    shoppingCartVM.MainImage = dbProduct.MainImage;
-                    shoppingCartVM.Price = (dbProduct.DiscountPrice != null && dbProduct.DiscountPrice > 0) ? (double)dbProduct.DiscountPrice : dbProduct.Price;
-                    totalPrice = totalPrice + shoppingCartVM.Price;
+                    ShoppingCartVM shoppingCartVM = new ShoppingCartVM
+                    {
+                        Title = shoppingCart.Product.Title,
+                        MainImage = shoppingCart.Product.MainImage,
+                        Price = (shoppingCart.Product.DiscountPrice != null && shoppingCart.Product.DiscountPrice > 0) ? (double)shoppingCart.Product.DiscountPrice : shoppingCart.Product.Price,
+                        Count = shoppingCart.Count
+                    };
+                    shoppingCartVMs.Add(shoppingCartVM);
                 }
             }
             else
             {
-                shoppingCartVMs = new List<ShoppingCartVM>();
+                string cookieCart = _httpContextAccessor.HttpContext.Request.Cookies["cart"];
+
+                if (!string.IsNullOrWhiteSpace(cookieCart))
+                {
+                    shoppingCartVMs = JsonConvert.DeserializeObject<List<ShoppingCartVM>>(cookieCart);
+
+                    foreach (ShoppingCartVM shoppingCartVM in shoppingCartVMs)
+                    {
+                        Product dbProduct = await _context.Products.FirstOrDefaultAsync(p => p.Id == shoppingCartVM.ProductId);
+
+                        shoppingCartVM.Title = dbProduct.Title;
+                        shoppingCartVM.MainImage = dbProduct.MainImage;
+                        shoppingCartVM.Price = (dbProduct.DiscountPrice != null && dbProduct.DiscountPrice > 0) ? (double)dbProduct.DiscountPrice : dbProduct.Price;
+                    }
+                }
             }
 
             return shoppingCartVMs;

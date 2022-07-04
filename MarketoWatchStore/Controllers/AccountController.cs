@@ -184,6 +184,7 @@ namespace MarketoWatchStore.Controllers
             string passwordResetToken = Guid.NewGuid().ToString();
             appUser.PasswordResetToken = passwordResetToken;
             await _userManager.UpdateAsync(appUser);
+
             return RedirectToAction("login", "account");
         }
         #endregion
