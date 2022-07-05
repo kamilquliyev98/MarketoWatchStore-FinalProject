@@ -25,7 +25,7 @@ namespace MarketoWatchStore.Controllers
 
         public async Task<IActionResult> Index()
         {
-            List<ShoppingCartVM> shoppingcartVMs = new List<ShoppingCartVM>();
+            List<ShoppingCartVM> shoppingCartVMs = new List<ShoppingCartVM>();
 
             AppUser appUser = await _userManager.GetUserAsync(User);
 
@@ -33,24 +33,20 @@ namespace MarketoWatchStore.Controllers
             {
                 string cookieCart = HttpContext.Request.Cookies["cart"];
 
-                if (string.IsNullOrWhiteSpace(cookieCart))
+                if (!string.IsNullOrWhiteSpace(cookieCart) && cookieCart != "")
                 {
-                    shoppingcartVMs = new List<ShoppingCartVM>();
-                }
-                else
-                {
-                    shoppingcartVMs = JsonConvert.DeserializeObject<List<ShoppingCartVM>>(cookieCart);
+                    shoppingCartVMs = JsonConvert.DeserializeObject<List<ShoppingCartVM>>(cookieCart);
 
-                    foreach (ShoppingCartVM shoppingcartVM in shoppingcartVMs)
+                    foreach (ShoppingCartVM shoppingcartVM in shoppingCartVMs)
                     {
                         Product dbProduct = await _context.Products
                             .Include(p => p.ProductColours).ThenInclude(p => p.Colour)
                             .FirstOrDefaultAsync(p => p.Id == shoppingcartVM.ProductId);
 
+                        shoppingcartVM.ProductId = dbProduct.Id;
                         shoppingcartVM.MainImage = dbProduct.MainImage;
                         shoppingcartVM.Title = dbProduct.Title;
                         shoppingcartVM.Price = (dbProduct.DiscountPrice != null && dbProduct.DiscountPrice > 0) ? (double)dbProduct.DiscountPrice : dbProduct.Price;
-                        //shoppingcartVM.ColourId = dbProduct.ProductColours.Where(p => p.ProductId == dbProduct.Id).ToList();
                     }
                 }
             }
@@ -63,18 +59,29 @@ namespace MarketoWatchStore.Controllers
 
                 if (existShoppingCart != null && existShoppingCart.Count() > 0)
                 {
-
+                    foreach (ShoppingCart shoppingCart in existShoppingCart)
+                    {
+                        ShoppingCartVM shoppingCartVM = new ShoppingCartVM
+                        {
+                            ProductId = shoppingCart.Product.Id,
+                            Title = shoppingCart.Product.Title,
+                            MainImage = shoppingCart.Product.MainImage,
+                            Price = (shoppingCart.Product.DiscountPrice != null && shoppingCart.Product.DiscountPrice > 0) ? (double)shoppingCart.Product.DiscountPrice : shoppingCart.Product.Price,
+                            Count = shoppingCart.Count
+                        };
+                        shoppingCartVMs.Add(shoppingCartVM);
+                    }
                 }
             }
 
-            return View(shoppingcartVMs);
+            return View(shoppingCartVMs);
         }
 
-        public async Task<IActionResult> AddToCart(int? id, int? colourid, int count = 1)
+        public async Task<IActionResult> AddToCart(int? id, int count = 1)
         {
-            if (id is null || colourid is null) return RedirectToAction("error400", "home");
+            if (id is null) return RedirectToAction("error400", "home");
 
-            if (!await _context.Colours.AnyAsync(c => c.Id == colourid && !c.IsDeleted)) return RedirectToAction("error404", "home");
+            if (!await _context.Colours.AnyAsync(c => !c.IsDeleted)) return RedirectToAction("error404", "home");
 
             Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id && !p.IsDeleted);
 
@@ -82,11 +89,13 @@ namespace MarketoWatchStore.Controllers
 
             ProductColour productColour = _context.ProductColours
                 .Include(p => p.Colour)
-                .FirstOrDefault(p => p.ProductId == product.Id && p.ColourId == colourid);
+                .FirstOrDefault(p => p.ProductId == product.Id);
 
             if (productColour is null) return RedirectToAction("error404", "home");
 
             AppUser appUser = await _userManager.GetUserAsync(User);
+
+            List<ShoppingCartVM> shoppingCartVMs = null;
 
             if (appUser != null)
             {
@@ -113,50 +122,49 @@ namespace MarketoWatchStore.Controllers
 
                 await _context.SaveChangesAsync();
             }
-
-            string cookieCart = HttpContext.Request.Cookies["cart"];
-
-            List<ShoppingCartVM> shoppingCartVMs = null;
-
-            if (!string.IsNullOrWhiteSpace(cookieCart))
+            else
             {
-                shoppingCartVMs = JsonConvert.DeserializeObject<List<ShoppingCartVM>>(cookieCart);
+                string cookieCart = HttpContext.Request.Cookies["cart"];
 
-                if (shoppingCartVMs.Any(b => b.ProductId == id))
+                if (!string.IsNullOrWhiteSpace(cookieCart) && cookieCart != "")
                 {
-                    shoppingCartVMs.Find(b => b.ProductId == id).Count += count;
+                    shoppingCartVMs = JsonConvert.DeserializeObject<List<ShoppingCartVM>>(cookieCart);
+
+                    if (shoppingCartVMs.Any(b => b.ProductId == id))
+                    {
+                        shoppingCartVMs.Find(b => b.ProductId == id).Count += count;
+                    }
+                    else
+                    {
+                        shoppingCartVMs.Add(new ShoppingCartVM
+                        {
+                            ProductId = (int)id,
+                            Count = count
+                        });
+                    }
                 }
                 else
                 {
+                    shoppingCartVMs = new List<ShoppingCartVM>();
+
                     shoppingCartVMs.Add(new ShoppingCartVM
                     {
                         ProductId = (int)id,
-                        ColourId = (int)colourid,
                         Count = count
                     });
                 }
-            }
-            else
-            {
-                shoppingCartVMs = new List<ShoppingCartVM>();
 
-                shoppingCartVMs.Add(new ShoppingCartVM
+                cookieCart = JsonConvert.SerializeObject(shoppingCartVMs);
+                HttpContext.Response.Cookies.Append("cart", cookieCart);
+
+                foreach (ShoppingCartVM shoppingCartVM in shoppingCartVMs)
                 {
-                    ProductId = (int)id,
-                    Count = count
-                });
-            }
+                    Product dbProduct = await _context.Products.FirstOrDefaultAsync(p => p.Id == shoppingCartVM.ProductId);
 
-            cookieCart = JsonConvert.SerializeObject(shoppingCartVMs);
-            HttpContext.Response.Cookies.Append("cart", cookieCart);
-
-            foreach (ShoppingCartVM shoppingCartVM in shoppingCartVMs)
-            {
-                Product dbProduct = await _context.Products.FirstOrDefaultAsync(p => p.Id == shoppingCartVM.ProductId);
-
-                shoppingCartVM.Title = dbProduct.Title;
-                shoppingCartVM.MainImage = dbProduct.MainImage;
-                shoppingCartVM.Price = (dbProduct.DiscountPrice != null && dbProduct.DiscountPrice > 0) ? (double)dbProduct.DiscountPrice : dbProduct.Price;
+                    shoppingCartVM.Title = dbProduct.Title;
+                    shoppingCartVM.MainImage = dbProduct.MainImage;
+                    shoppingCartVM.Price = (dbProduct.DiscountPrice != null && dbProduct.DiscountPrice > 0) ? (double)dbProduct.DiscountPrice : dbProduct.Price;
+                }
             }
 
             return PartialView("_MiniCartPartial", shoppingCartVMs);
@@ -164,15 +172,13 @@ namespace MarketoWatchStore.Controllers
 
         public async Task<IActionResult> RemoveItem(int? id)
         {
-            if (id is null) return RedirectToAction("error400", "home");
+            if (id is null) return RedirectToAction("error404", "home");
 
             Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
 
             if (product is null) return RedirectToAction("error404", "home");
 
             AppUser appUser = await _userManager.GetUserAsync(User);
-
-            string cookieCart = HttpContext.Request.Cookies["cart"];
 
             List<ShoppingCartVM> shoppingCartVMs = null;
 
@@ -186,32 +192,37 @@ namespace MarketoWatchStore.Controllers
                 _context.ShoppingCarts.Remove(cartItem);
                 await _context.SaveChangesAsync();
             }
-
-            if (!string.IsNullOrWhiteSpace(cookieCart))
-            {
-                shoppingCartVMs = JsonConvert.DeserializeObject<List<ShoppingCartVM>>(cookieCart);
-
-                ShoppingCartVM shoppingCartVM = shoppingCartVMs.FirstOrDefault(b => b.ProductId == id);
-
-                if (shoppingCartVM is null) return RedirectToAction("error404", "home");
-
-                shoppingCartVMs.Remove(shoppingCartVM);
-            }
             else
             {
-                return RedirectToAction("error400", "home");
-            }
+                string cookieCart = HttpContext.Request.Cookies["cart"];
 
-            cookieCart = JsonConvert.SerializeObject(shoppingCartVMs);
-            HttpContext.Response.Cookies.Append("cart", cookieCart);
+                if (!string.IsNullOrWhiteSpace(cookieCart) && cookieCart != "")
+                {
+                    shoppingCartVMs = JsonConvert.DeserializeObject<List<ShoppingCartVM>>(cookieCart);
 
-            foreach (ShoppingCartVM shoppingCartVM in shoppingCartVMs)
-            {
-                Product dbProduct = await _context.Products.FirstOrDefaultAsync(p => p.Id == shoppingCartVM.ProductId);
+                    ShoppingCartVM shoppingCartVM = shoppingCartVMs.FirstOrDefault(b => b.ProductId == id);
 
-                shoppingCartVM.Title = dbProduct.Title;
-                shoppingCartVM.MainImage = dbProduct.MainImage;
-                shoppingCartVM.Price = (dbProduct.DiscountPrice != null && dbProduct.DiscountPrice > 0) ? (double)dbProduct.DiscountPrice : dbProduct.Price;
+                    if (shoppingCartVM is null) return RedirectToAction("error404", "home");
+
+                    shoppingCartVMs.Remove(shoppingCartVM);
+                }
+                else
+                {
+                    return RedirectToAction("error400", "home");
+                }
+
+                cookieCart = JsonConvert.SerializeObject(shoppingCartVMs);
+                HttpContext.Response.Cookies.Append("cart", cookieCart);
+
+                foreach (ShoppingCartVM shoppingCartVM in shoppingCartVMs)
+                {
+                    Product dbProduct = await _context.Products.FirstOrDefaultAsync(p => p.Id == shoppingCartVM.ProductId);
+
+                    shoppingCartVM.ProductId = dbProduct.Id;
+                    shoppingCartVM.Title = dbProduct.Title;
+                    shoppingCartVM.MainImage = dbProduct.MainImage;
+                    shoppingCartVM.Price = (dbProduct.DiscountPrice != null && dbProduct.DiscountPrice > 0) ? (double)dbProduct.DiscountPrice : dbProduct.Price;
+                }
             }
 
             return PartialView("_CartTablePartial", shoppingCartVMs);
@@ -227,36 +238,36 @@ namespace MarketoWatchStore.Controllers
                     .Where(b => b.AppUserId == appUser.Id)
                     .ToListAsync();
 
-                if (existShoppingCart.Count > 0)
+                if (existShoppingCart != null && existShoppingCart.Count() > 0)
                 {
                     _context.ShoppingCarts.RemoveRange(existShoppingCart);
                     await _context.SaveChangesAsync();
                 }
-            }
-
-            string cookieCart = HttpContext.Request.Cookies["cart"];
-
-            if (!string.IsNullOrWhiteSpace(cookieCart))
-            {
-                HttpContext.Response.Cookies.Delete("cart");
+                else
+                {
+                    return RedirectToAction("error400", "home");
+                }
             }
             else
             {
-                return RedirectToAction("error400", "home");
+                string cookieCart = HttpContext.Request.Cookies["cart"];
+
+                if (!string.IsNullOrWhiteSpace(cookieCart) && cookieCart != "")
+                {
+                    HttpContext.Response.Cookies.Delete("cart");
+                }
+                else
+                {
+                    return RedirectToAction("error400", "home");
+                }
             }
 
             return RedirectToAction("index", "shoppingcart");
         }
 
-        public async Task<IActionResult> Checkout()
+        [Authorize(Roles = "Customer")]
+        public IActionResult Checkout()
         {
-            AppUser appUser = await _userManager.GetUserAsync(User);
-
-            if (appUser is null)
-            {
-                return RedirectToAction("login", "account");
-            }
-
             return View();
         }
     }

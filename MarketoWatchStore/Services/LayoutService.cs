@@ -38,7 +38,7 @@ namespace MarketoWatchStore.Services
                 AppUser appUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
 
                 List<ShoppingCart> shoppingCarts = await _context.ShoppingCarts
-                    .Include(c => c.Product)
+                    .Include(c => c.Product).ThenInclude(c => c.ProductColours)
                     .Where(c => c.AppUserId == appUser.Id)
                     .ToListAsync();
 
@@ -58,7 +58,7 @@ namespace MarketoWatchStore.Services
             {
                 string cookieCart = _httpContextAccessor.HttpContext.Request.Cookies["cart"];
 
-                if (!string.IsNullOrWhiteSpace(cookieCart))
+                if (!string.IsNullOrWhiteSpace(cookieCart) && cookieCart != "")
                 {
                     shoppingCartVMs = JsonConvert.DeserializeObject<List<ShoppingCartVM>>(cookieCart);
 

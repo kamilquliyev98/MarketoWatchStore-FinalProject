@@ -237,43 +237,6 @@ namespace MarketoWatchStore.Controllers
                 return View();
             }
 
-            string cookieCart = HttpContext.Request.Cookies["cart"];
-
-            if (!string.IsNullOrWhiteSpace(cookieCart))
-            {
-                List<ShoppingCartVM> shoppingCartVMs = JsonConvert.DeserializeObject<List<ShoppingCartVM>>(cookieCart);
-
-                List<ShoppingCart> shoppingCarts = new List<ShoppingCart>();
-
-                List<ShoppingCart> existShoppingCart = await _context.ShoppingCarts.Where(b => b.AppUserId == appUser.Id).ToListAsync();
-
-                foreach (ShoppingCartVM shoppingCartVM in shoppingCartVMs)
-                {
-                    if (existShoppingCart.Any(b => b.ProductId == shoppingCartVM.ProductId))
-                    {
-                        existShoppingCart.Find(b => b.ProductId == shoppingCartVM.ProductId).Count = shoppingCartVM.Count;
-                    }
-                    else
-                    {
-                        ShoppingCart shoppingCart = new ShoppingCart
-                        {
-                            AppUserId = appUser.Id,
-                            ProductId = shoppingCartVM.ProductId,
-                            Count = shoppingCartVM.Count,
-                            CreatedAt = DateTime.UtcNow.AddHours(4)
-                        };
-
-                        shoppingCarts.Add(shoppingCart);
-                    }
-                }
-
-                if (shoppingCarts.Count > 0)
-                {
-                    await _context.ShoppingCarts.AddRangeAsync(shoppingCarts);
-                    await _context.SaveChangesAsync();
-                }
-            }
-
             return RedirectToAction("index", "home");
         }
         #endregion
