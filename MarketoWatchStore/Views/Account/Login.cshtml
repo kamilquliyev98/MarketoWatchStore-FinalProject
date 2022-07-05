@@ -78,6 +78,11 @@
                         <span class="text-bg-danger" asp-validation-for="Password"></span>
                     </div>
 
+                    <div class="pass-forgot">
+                        <input asp-for="RememberMe" class="checkbox_animated check-it" type="checkbox">
+                        <label class="form-check-label" asp-for="RememberMe">Remember me</label>
+                    </div>
+
                     <a asp-controller="account" asp-action="resetpassword" class="pass-forgot">Forgot your password?</a>
 
                     <div class="button login">

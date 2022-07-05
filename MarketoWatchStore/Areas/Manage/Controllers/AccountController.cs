@@ -21,6 +21,7 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
             _signInManager = signInManager;
         }
 
+        #region Login
         public IActionResult Login()
         {
             return View();
@@ -50,5 +51,14 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
 
             return RedirectToAction("index", "dashboard", new { area = "manage" });
         }
+        #endregion
+
+        #region Logout
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("login", "account", new { area = "manage" });
+        }
+        #endregion
     }
 }
