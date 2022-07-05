@@ -81,31 +81,24 @@ namespace MarketoWatchStore.Controllers
         {
             if (id is null) return RedirectToAction("error400", "home");
 
-            if (!await _context.Colours.AnyAsync(c => !c.IsDeleted)) return RedirectToAction("error404", "home");
-
-            Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id && !p.IsDeleted);
+            Product product = await _context.Products
+                .Include(x => x.ProductColours).ThenInclude(x => x.Colour)
+                .FirstOrDefaultAsync(p => p.Id == id && !p.IsDeleted);
 
             if (product is null) return RedirectToAction("error404", "home");
 
-            ProductColour productColour = _context.ProductColours
-                .Include(p => p.Colour)
-                .FirstOrDefault(p => p.ProductId == product.Id);
+            List<ShoppingCartVM> shoppingCartVMs = new List<ShoppingCartVM>();
 
-            if (productColour is null) return RedirectToAction("error404", "home");
-
-            AppUser appUser = await _userManager.GetUserAsync(User);
-
-            List<ShoppingCartVM> shoppingCartVMs = null;
-
-            if (appUser != null)
+            if (User.Identity.IsAuthenticated)
             {
-                List<ShoppingCart> existShoppingCart = await _context.ShoppingCarts
-                    .Where(b => b.AppUserId == appUser.Id)
-                    .ToListAsync();
+                AppUser appUser = await _userManager.FindByNameAsync(User.Identity.Name);
+                ShoppingCart existShoppingCart = await _context.ShoppingCarts
+                    .Include(sc => sc.Product).ThenInclude(x => x.ProductColours).ThenInclude(x => x.Colour)
+                    .FirstOrDefaultAsync(b => b.AppUserId == appUser.Id && b.ProductId == id);
 
-                if (existShoppingCart.Any(c => c.ProductId == product.Id))
+                if (existShoppingCart != null)
                 {
-                    existShoppingCart.FirstOrDefault(c => c.ProductId == product.Id).Count += count;
+                    existShoppingCart.Count += count;
                 }
                 else
                 {
@@ -121,6 +114,19 @@ namespace MarketoWatchStore.Controllers
                 }
 
                 await _context.SaveChangesAsync();
+                List<ShoppingCart> shoppingCarts = _context.ShoppingCarts.Include(x => x.Product).ThenInclude(x => x.ProductColours).ThenInclude(x => x.Colour).ToList();
+                foreach (var item in shoppingCarts)
+                {
+                    ShoppingCartVM shopping = new ShoppingCartVM
+                    {
+                        MainImage = item.Product.MainImage,
+                        Count = item.Count,
+                        Price = item.Product.Price,
+                        StockCount = item.Product.Count,
+                        Title = item.Product.Title
+                    };
+                    shoppingCartVMs.Add(shopping);
+                }
             }
             else
             {

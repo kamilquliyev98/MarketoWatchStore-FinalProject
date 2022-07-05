@@ -46,6 +46,7 @@ namespace MarketoWatchStore.Services
                 {
                     ShoppingCartVM shoppingCartVM = new ShoppingCartVM
                     {
+                        ProductId = shoppingCart.Product.Id,
                         Title = shoppingCart.Product.Title,
                         MainImage = shoppingCart.Product.MainImage,
                         Price = (shoppingCart.Product.DiscountPrice != null && shoppingCart.Product.DiscountPrice > 0) ? (double)shoppingCart.Product.DiscountPrice : shoppingCart.Product.Price,
@@ -66,6 +67,7 @@ namespace MarketoWatchStore.Services
                     {
                         Product dbProduct = await _context.Products.FirstOrDefaultAsync(p => p.Id == shoppingCartVM.ProductId);
 
+                        shoppingCartVM.ProductId = dbProduct.Id;
                         shoppingCartVM.Title = dbProduct.Title;
                         shoppingCartVM.MainImage = dbProduct.MainImage;
                         shoppingCartVM.Price = (dbProduct.DiscountPrice != null && dbProduct.DiscountPrice > 0) ? (double)dbProduct.DiscountPrice : dbProduct.Price;
