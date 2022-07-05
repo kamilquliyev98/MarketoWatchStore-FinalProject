@@ -524,6 +524,16 @@ $(document).ready(function () {
 
         var url = $(this).attr("href");
 
+        var quantity = $("#quantity").val();
+        if (quantity == null || quantity.isNaN) {
+            quantity = 1;
+        }
+
+        var colourid = $("ul.color-variant li.selected").attr("data-id");
+        if (colourid == null) {
+
+        }
+
         fetch(url).then(response => response.text())
             .then(data => {
                 $(".cart-dropdown").html(data);
