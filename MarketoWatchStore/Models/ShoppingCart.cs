@@ -11,6 +11,8 @@ namespace MarketoWatchStore.Models
         public AppUser AppUser { get; set; }
         public Nullable<int> ProductId { get; set; }
         public Product Product { get; set; }
+        public Nullable<int> ColourId { get; set; }
+        public Colour Colour { get; set; }
         public int Count { get; set; }
     }
 }

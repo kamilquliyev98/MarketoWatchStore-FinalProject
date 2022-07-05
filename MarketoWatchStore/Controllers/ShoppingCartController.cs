@@ -25,38 +25,66 @@ namespace MarketoWatchStore.Controllers
 
         public async Task<IActionResult> Index()
         {
-            string cookieCart = HttpContext.Request.Cookies["cart"];
-
             List<ShoppingCartVM> shoppingcartVMs = new List<ShoppingCartVM>();
 
-            if (!string.IsNullOrWhiteSpace(cookieCart))
+            AppUser appUser = await _userManager.GetUserAsync(User);
+
+            if (appUser is null)
             {
-                shoppingcartVMs = JsonConvert.DeserializeObject<List<ShoppingCartVM>>(cookieCart);
+                string cookieCart = HttpContext.Request.Cookies["cart"];
+
+                if (string.IsNullOrWhiteSpace(cookieCart))
+                {
+                    shoppingcartVMs = new List<ShoppingCartVM>();
+                }
+                else
+                {
+                    shoppingcartVMs = JsonConvert.DeserializeObject<List<ShoppingCartVM>>(cookieCart);
+
+                    foreach (ShoppingCartVM shoppingcartVM in shoppingcartVMs)
+                    {
+                        Product dbProduct = await _context.Products
+                            .Include(p => p.ProductColours).ThenInclude(p => p.Colour)
+                            .FirstOrDefaultAsync(p => p.Id == shoppingcartVM.ProductId);
+
+                        shoppingcartVM.MainImage = dbProduct.MainImage;
+                        shoppingcartVM.Title = dbProduct.Title;
+                        shoppingcartVM.Price = (dbProduct.DiscountPrice != null && dbProduct.DiscountPrice > 0) ? (double)dbProduct.DiscountPrice : dbProduct.Price;
+                        //shoppingcartVM.ColourId = dbProduct.ProductColours.Where(p => p.ProductId == dbProduct.Id).ToList();
+                    }
+                }
             }
             else
             {
-                shoppingcartVMs = new List<ShoppingCartVM>();
-            }
+                List<ShoppingCart> existShoppingCart = await _context.ShoppingCarts
+                    .Include(b => b.Product).ThenInclude(b => b.ProductColours).ThenInclude(b => b.Colour)
+                    .Where(b => b.AppUserId == appUser.Id)
+                    .ToListAsync();
 
-            foreach (ShoppingCartVM shoppingcartVM in shoppingcartVMs)
-            {
-                Product dbProduct = await _context.Products.FirstOrDefaultAsync(p => p.Id == shoppingcartVM.ProductId);
+                if (existShoppingCart != null && existShoppingCart.Count() > 0)
+                {
 
-                shoppingcartVM.MainImage = dbProduct.MainImage;
-                shoppingcartVM.Title = dbProduct.Title;
-                shoppingcartVM.Price = (dbProduct.DiscountPrice != null && dbProduct.DiscountPrice > 0) ? (double)dbProduct.DiscountPrice : dbProduct.Price;
+                }
             }
 
             return View(shoppingcartVMs);
         }
 
-        public async Task<IActionResult> AddToCart(int? id, int count = 1)
+        public async Task<IActionResult> AddToCart(int? id, int? colourid, int count = 1)
         {
-            if (id is null) return RedirectToAction("error400", "home");
+            if (id is null || colourid is null) return RedirectToAction("error400", "home");
+
+            if (!await _context.Colours.AnyAsync(c => c.Id == colourid && !c.IsDeleted)) return RedirectToAction("error404", "home");
 
             Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id && !p.IsDeleted);
 
             if (product is null) return RedirectToAction("error404", "home");
+
+            ProductColour productColour = _context.ProductColours
+                .Include(p => p.Colour)
+                .FirstOrDefault(p => p.ProductId == product.Id && p.ColourId == colourid);
+
+            if (productColour is null) return RedirectToAction("error404", "home");
 
             AppUser appUser = await _userManager.GetUserAsync(User);
 
@@ -103,6 +131,7 @@ namespace MarketoWatchStore.Controllers
                     shoppingCartVMs.Add(new ShoppingCartVM
                     {
                         ProductId = (int)id,
+                        ColourId = (int)colourid,
                         Count = count
                     });
                 }
