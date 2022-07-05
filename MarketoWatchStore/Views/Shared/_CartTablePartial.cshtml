@@ -104,7 +104,7 @@
                                     <h3>Cart Totals</h3>
                                     <h6>Quantity of products <span>@Model.Count()</span></h6>
                                     <h6>Delivery <span>$0.00</span></h6>
-                                    <h6><strong>Total price <span id="total-in-table">@("$" + total.ToString("0.00"))</span></strong></h6>
+                                    <h6><strong>Total price <span>$<span id="total-in-table">@total.ToString("0.00")</span></span></strong></h6>
                                 </div>
                                 <div class="bottom-details">
                                     <a asp-controller="shoppingcart" asp-action="checkout">Process Checkout</a>

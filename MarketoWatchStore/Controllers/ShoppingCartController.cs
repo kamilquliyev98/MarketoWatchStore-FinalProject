@@ -47,6 +47,7 @@ namespace MarketoWatchStore.Controllers
                         shoppingcartVM.MainImage = dbProduct.MainImage;
                         shoppingcartVM.Title = dbProduct.Title;
                         shoppingcartVM.Price = (dbProduct.DiscountPrice != null && dbProduct.DiscountPrice > 0) ? (double)dbProduct.DiscountPrice : dbProduct.Price;
+                        shoppingcartVM.StockCount = dbProduct.Count;
                     }
                 }
             }
@@ -67,7 +68,8 @@ namespace MarketoWatchStore.Controllers
                             Title = shoppingCart.Product.Title,
                             MainImage = shoppingCart.Product.MainImage,
                             Price = (shoppingCart.Product.DiscountPrice != null && shoppingCart.Product.DiscountPrice > 0) ? (double)shoppingCart.Product.DiscountPrice : shoppingCart.Product.Price,
-                            Count = shoppingCart.Count
+                            Count = shoppingCart.Count,
+                            StockCount = shoppingCart.Product.Count
                         };
                         shoppingCartVMs.Add(shoppingCartVM);
                     }
@@ -117,13 +119,13 @@ namespace MarketoWatchStore.Controllers
                 List<ShoppingCart> shoppingCarts = await _context.ShoppingCarts
                     .Include(x => x.Product).ThenInclude(x => x.ProductColours).ThenInclude(x => x.Colour)
                     .ToListAsync();
-                foreach (var item in shoppingCarts)
+                foreach (ShoppingCart item in shoppingCarts)
                 {
                     ShoppingCartVM shopping = new ShoppingCartVM
                     {
                         MainImage = item.Product.MainImage,
                         Count = item.Count,
-                        Price = item.Product.Price,
+                        Price = (item.Product.DiscountPrice != null && item.Product.DiscountPrice > 0) ? (double)item.Product.DiscountPrice : item.Product.Price,
                         StockCount = item.Product.Count,
                         Title = item.Product.Title
                     };
@@ -197,19 +199,20 @@ namespace MarketoWatchStore.Controllers
                 if (!_context.ShoppingCarts.Any(x => x.AppUserId == appUser.Id && x.ProductId == id)) return RedirectToAction("error404", "home");
 
 
-                List<ShoppingCart> shoppingCarts = await _context.ShoppingCarts
-                    .Include(x => x.Product).ThenInclude(x => x.ProductColours).ThenInclude(x => x.Colour).Where(x => x.AppUserId == appUser.Id)
+                List<ShoppingCart> existShoppingCarts = await _context.ShoppingCarts
+                    .Include(x => x.Product).ThenInclude(x => x.ProductColours).ThenInclude(x => x.Colour)
+                    .Where(x => x.AppUserId == appUser.Id)
                     .ToListAsync();
 
-                ShoppingCart cartItem = shoppingCarts.Find(x => x.ProductId == id);
+                ShoppingCart cartItem = existShoppingCarts.Find(x => x.ProductId == id);
 
                 if (cartItem == null) return RedirectToAction("error404", "home");
 
-                shoppingCarts.Remove(cartItem);
+                existShoppingCarts.Remove(cartItem);
                 _context.ShoppingCarts.Remove(cartItem);
                 await _context.SaveChangesAsync();
 
-                foreach (ShoppingCart shoppingCart in shoppingCarts)
+                foreach (ShoppingCart shoppingCart in existShoppingCarts)
                 {
                     ShoppingCartVM shopping = new ShoppingCartVM
                     {
@@ -217,7 +220,7 @@ namespace MarketoWatchStore.Controllers
                         Title = shoppingCart.Product.Title,
                         MainImage = shoppingCart.Product.MainImage,
                         Count = shoppingCart.Count,
-                        Price = shoppingCart.Product.Price,
+                        Price = (shoppingCart.Product.DiscountPrice != null && shoppingCart.Product.DiscountPrice > 0) ? (double)shoppingCart.Product.DiscountPrice : shoppingCart.Product.Price,
                         StockCount = shoppingCart.Product.Count
                     };
                     shoppingCartVMs.Add(shopping);
@@ -252,6 +255,7 @@ namespace MarketoWatchStore.Controllers
                     shoppingCartVM.Title = dbProduct.Title;
                     shoppingCartVM.MainImage = dbProduct.MainImage;
                     shoppingCartVM.Price = (dbProduct.DiscountPrice != null && dbProduct.DiscountPrice > 0) ? (double)dbProduct.DiscountPrice : dbProduct.Price;
+                    shoppingCartVM.StockCount = dbProduct.Count;
                 }
             }
 
@@ -260,17 +264,18 @@ namespace MarketoWatchStore.Controllers
 
         public async Task<IActionResult> ClearAllItems()
         {
-            AppUser appUser = await _userManager.GetUserAsync(User);
-
-            if (appUser != null)
+            if (User.Identity.IsAuthenticated)
             {
-                List<ShoppingCart> existShoppingCart = await _context.ShoppingCarts
-                    .Where(b => b.AppUserId == appUser.Id)
+                AppUser appUser = await _userManager.FindByNameAsync(User.Identity.Name);
+
+                List<ShoppingCart> existShoppingCarts = await _context.ShoppingCarts
+                    .Include(x => x.Product).ThenInclude(x => x.ProductColours).ThenInclude(x => x.Colour)
+                    .Where(x => x.AppUserId == appUser.Id)
                     .ToListAsync();
 
-                if (existShoppingCart != null && existShoppingCart.Count() > 0)
+                if (existShoppingCarts != null && existShoppingCarts.Count() > 0)
                 {
-                    _context.ShoppingCarts.RemoveRange(existShoppingCart);
+                    _context.ShoppingCarts.RemoveRange(existShoppingCarts);
                     await _context.SaveChangesAsync();
                 }
                 else
