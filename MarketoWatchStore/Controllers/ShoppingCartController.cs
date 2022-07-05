@@ -114,7 +114,9 @@ namespace MarketoWatchStore.Controllers
                 }
 
                 await _context.SaveChangesAsync();
-                List<ShoppingCart> shoppingCarts = _context.ShoppingCarts.Include(x => x.Product).ThenInclude(x => x.ProductColours).ThenInclude(x => x.Colour).ToList();
+                List<ShoppingCart> shoppingCarts = await _context.ShoppingCarts
+                    .Include(x => x.Product).ThenInclude(x => x.ProductColours).ThenInclude(x => x.Colour)
+                    .ToListAsync();
                 foreach (var item in shoppingCarts)
                 {
                     ShoppingCartVM shopping = new ShoppingCartVM
@@ -178,25 +180,48 @@ namespace MarketoWatchStore.Controllers
 
         public async Task<IActionResult> RemoveItem(int? id)
         {
-            if (id is null) return RedirectToAction("error404", "home");
+            if (id is null) return RedirectToAction("error400", "home");
 
-            Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
+            Product product = await _context.Products
+                .Include(x => x.ProductColours).ThenInclude(x => x.Colour)
+                .FirstOrDefaultAsync(p => p.Id == id);
 
             if (product is null) return RedirectToAction("error404", "home");
 
-            AppUser appUser = await _userManager.GetUserAsync(User);
+            List<ShoppingCartVM> shoppingCartVMs = new List<ShoppingCartVM>();
 
-            List<ShoppingCartVM> shoppingCartVMs = null;
-
-            if (appUser != null)
+            if (User.Identity.IsAuthenticated)
             {
-                ShoppingCart cartItem = await _context.ShoppingCarts
-                    .FirstOrDefaultAsync(b => b.AppUserId == appUser.Id && b.ProductId == product.Id);
+                AppUser appUser = await _userManager.FindByNameAsync(User.Identity.Name);
 
-                if (cartItem is null) return RedirectToAction("error404", "home");
+                if (!_context.ShoppingCarts.Any(x => x.AppUserId == appUser.Id && x.ProductId == id)) return RedirectToAction("error404", "home");
 
+
+                List<ShoppingCart> shoppingCarts = await _context.ShoppingCarts
+                    .Include(x => x.Product).ThenInclude(x => x.ProductColours).ThenInclude(x => x.Colour).Where(x => x.AppUserId == appUser.Id)
+                    .ToListAsync();
+
+                ShoppingCart cartItem = shoppingCarts.Find(x => x.ProductId == id);
+
+                if (cartItem == null) return RedirectToAction("error404", "home");
+
+                shoppingCarts.Remove(cartItem);
                 _context.ShoppingCarts.Remove(cartItem);
                 await _context.SaveChangesAsync();
+
+                foreach (ShoppingCart shoppingCart in shoppingCarts)
+                {
+                    ShoppingCartVM shopping = new ShoppingCartVM
+                    {
+                        ProductId = shoppingCart.Product.Id,
+                        Title = shoppingCart.Product.Title,
+                        MainImage = shoppingCart.Product.MainImage,
+                        Count = shoppingCart.Count,
+                        Price = shoppingCart.Product.Price,
+                        StockCount = shoppingCart.Product.Count
+                    };
+                    shoppingCartVMs.Add(shopping);
+                }
             }
             else
             {
@@ -223,7 +248,6 @@ namespace MarketoWatchStore.Controllers
                 foreach (ShoppingCartVM shoppingCartVM in shoppingCartVMs)
                 {
                     Product dbProduct = await _context.Products.FirstOrDefaultAsync(p => p.Id == shoppingCartVM.ProductId);
-
                     shoppingCartVM.ProductId = dbProduct.Id;
                     shoppingCartVM.Title = dbProduct.Title;
                     shoppingCartVM.MainImage = dbProduct.MainImage;
