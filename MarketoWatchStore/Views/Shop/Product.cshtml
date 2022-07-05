@@ -128,7 +128,7 @@
                                         <ul class="color-variant">
                                             @foreach (ProductColour productColour in Model.ProductColours)
                                             {
-                                                <li data-id="@productColour.Id" style="background-color: @productColour.Colour.Title;"></li>
+                                                <li data-id="@productColour.Colour.Id" style="background-color: @productColour.Colour.Title;"></li>
                                             }
                                         </ul>
                                     </div>
@@ -159,10 +159,10 @@
                                         <i class="fa fa-bookmark fz-16 me-2"></i>
                                         <span>Wishlist</span>
                                     </a>
-                                    @*<form asp-controller="shoppingcart" asp-action="addtocart" asp-route-id="@Model.Id" method="post" class="d-none">
-                                        <input type="hidden" name="colorid" value="" />
-                                        <input type="hidden" name="quantity" value="" />
-                                    </form>*@
+                                    <form asp-controller="shoppingcart" asp-action="addtocart" asp-route-id="@Model.Id" method="post" class="d-none">
+                                        <input type="hidden" name="colorid" value="@Model.ProductColours.ElementAt(0).ColourId" />
+                                        <input type="hidden" name="quantity" value="1" />
+                                    </form>
                                     <a asp-controller="shoppingcart" asp-action="addtocart" asp-route-id="@Model.Id" asp-route-colourid="@Model.ProductColours.ElementAt(0).ColourId" id="cartEffect" class="btn btn-solid hover-solid btn-animation addtocart-btn">
                                         <i class="fa fa-shopping-cart"></i>
                                         <span>Add To Cart</span>

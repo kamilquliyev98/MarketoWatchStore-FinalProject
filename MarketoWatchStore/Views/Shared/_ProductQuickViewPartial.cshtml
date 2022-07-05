@@ -61,7 +61,7 @@
                     <ul class="color-variant mb-0">
                         @foreach (ProductColour productColour in Model.ProductColours)
                         {
-                            <li style="background-color: @productColour.Colour.Title;"></li>
+                            <li data-id="@productColour.Colour.Id" style="background-color: @productColour.Colour.Title;"></li>
                         }
                     </ul>
                 </div>
