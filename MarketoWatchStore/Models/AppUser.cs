@@ -19,8 +19,6 @@ namespace MarketoWatchStore.Models
         [StringLength(255)]
         public string City { get; set; }
         [StringLength(255)]
-        public string State { get; set; }
-        [StringLength(255)]
         public string ZipCode { get; set; }
         public string EmailConfirmationToken { get; set; }
         public string PasswordResetToken { get; set; }
