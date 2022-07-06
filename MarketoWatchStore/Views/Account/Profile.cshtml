@@ -2,7 +2,6 @@
 @{
     ViewData["Title"] = Model.Customer.FullName + " | Marketo";
     int orderCount = 0;
-    int orderItemCount = 0;
     double totalOrderItem = 0;
     foreach (Order order in Model.Orders)
     {
@@ -84,21 +83,6 @@
                                         <div class="col-lg-4 col-sm-6">
                                             <div class="order-box">
                                                 <div class="order-box-image">
-                                                    <img src="~/assets/images/svg/sent.png" class="img-fluid blur-up lazyload" alt="sent">
-                                                </div>
-                                                <div class="order-box-contain">
-                                                    <img src="~/assets/images/svg/sent1.png" class="img-fluid blur-up lazyload" alt="sent">
-                                                    <div>
-                                                        <h5 class="font-light">Total orders</h5>
-                                                        <h3>@Model.Orders.Count()</h3>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-4 col-sm-6">
-                                            <div class="order-box">
-                                                <div class="order-box-image">
                                                     <img src="~/assets/images/svg/box.png" class="img-fluid blur-up lazyload" alt="box">
                                                 </div>
                                                 <div class="order-box-contain">
@@ -114,13 +98,30 @@
                                         <div class="col-lg-4 col-sm-6">
                                             <div class="order-box">
                                                 <div class="order-box-image">
+                                                    <img src="~/assets/images/svg/sent.png" class="img-fluid blur-up lazyload" alt="sent">
+                                                </div>
+                                                <div class="order-box-contain">
+                                                    <img src="~/assets/images/svg/sent1.png" class="img-fluid blur-up lazyload" alt="sent">
+                                                    <div>
+                                                        <h5 class="font-light">Delivered orders</h5>
+                                                        <h3>@Model.Orders.Where(o => (int)o.Status == 3).Count()</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="col-lg-4 col-sm-6">
+                                            <div class="order-box">
+                                                <div class="order-box-image">
                                                     <img src="~/assets/images/svg/wishlist.png" class="img-fluid blur-up lazyload" alt="wishlist">
                                                 </div>
                                                 <div class="order-box-contain">
                                                     <img src="~/assets/images/svg/wishlist1.png" class="img-fluid blur-up lazyload" alt="wishlist">
                                                     <div>
-                                                        <h5 class="font-light">Delivered orders</h5>
-                                                        <h3>@Model.Orders.Where(o => (int)o.Status == 3).Count()</h3>
+                                                        <h5 class="font-light">All orders</h5>
+                                                        <h3>@Model.Orders.Count()</h3>
                                                     </div>
                                                 </div>
                                             </div>
@@ -215,9 +216,7 @@
                                                                     </a>
                                                                 </td>
                                                                 <td>
-                                                                    <p class="fs-6 m-0">
-                                                                        @orderItem.Product.Title
-                                                                    </p>
+                                                                    <p class="fs-6 m-0">@orderItem.Product.Title</p>
                                                                 </td>
                                                                 <td>
                                                                     <p class="fs-6 m-0">$@orderItem.Price</p>

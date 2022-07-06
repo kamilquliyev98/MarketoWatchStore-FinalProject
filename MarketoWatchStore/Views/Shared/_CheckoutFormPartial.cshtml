@@ -9,13 +9,11 @@
             <input asp-for="FullName" class="form-control">
             <span asp-validation-for="FullName" class="text-danger"></span>
         </div>
-
         <div class="col-md-6">
             <label asp-for="Email" class="form-label">Email address</label>
             <input asp-for="Email" class="form-control">
             <span asp-validation-for="Email" class="text-danger"></span>
         </div>
-
         <div class="col-md-12">
             <label asp-for="Address" class="form-label">Address</label>
             <input asp-for="Address" class="form-control">
@@ -78,7 +76,5 @@
         </div>
     </div>
 
-    <button class="btn btn-solid-default mt-4" type="submit">
-        Submit checkout
-    </button>
+    <button class="btn btn-solid-default mt-4" type="submit">Place order</button>
 </form>
