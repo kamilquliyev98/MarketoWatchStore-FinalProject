@@ -40,7 +40,6 @@
     </div>
 </section>
 <!-- Breadcrumb section end -->
-
 <!-- User dashboard section start -->
 <section class="section-b-space">
     <div class="container">
@@ -81,20 +80,6 @@
 
                                 <div class="order-box-contain my-4">
                                     <div class="row g-4">
-                                        <div class="col-lg-4 col-sm-6">
-                                            <div class="order-box">
-                                                <div class="order-box-image">
-                                                    <img src="~/assets/images/svg/box.png" class="img-fluid blur-up lazyload" alt="box">
-                                                </div>
-                                                <div class="order-box-contain">
-                                                    <img src="~/assets/images/svg/box1.png" class="img-fluid blur-up lazyload" alt="box">
-                                                    <div>
-                                                        <h5 class="font-light">Pending orders</h5>
-                                                        <h3>3648</h3>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
 
                                         <div class="col-lg-4 col-sm-6">
                                             <div class="order-box">
@@ -105,7 +90,22 @@
                                                     <img src="~/assets/images/svg/sent1.png" class="img-fluid blur-up lazyload" alt="sent">
                                                     <div>
                                                         <h5 class="font-light">Total orders</h5>
-                                                        <h3>215</h3>
+                                                        <h3>@Model.Orders.Count()</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-sm-6">
+                                            <div class="order-box">
+                                                <div class="order-box-image">
+                                                    <img src="~/assets/images/svg/box.png" class="img-fluid blur-up lazyload" alt="box">
+                                                </div>
+                                                <div class="order-box-contain">
+                                                    <img src="~/assets/images/svg/box1.png" class="img-fluid blur-up lazyload" alt="box">
+                                                    <div>
+                                                        <h5 class="font-light">Pending orders</h5>
+                                                        <h3>@Model.Orders.Where(o => (int)o.Status == 0).Count()</h3>
                                                     </div>
                                                 </div>
                                             </div>
@@ -119,8 +119,8 @@
                                                 <div class="order-box-contain">
                                                     <img src="~/assets/images/svg/wishlist1.png" class="img-fluid blur-up lazyload" alt="wishlist">
                                                     <div>
-                                                        <h5 class="font-light">wishlist</h5>
-                                                        <h3>63874</h3>
+                                                        <h5 class="font-light">Delivered orders</h5>
+                                                        <h3>@Model.Orders.Where(o => (int)o.Status == 3).Count()</h3>
                                                     </div>
                                                 </div>
                                             </div>
@@ -139,11 +139,12 @@
                         </div>
 
                         <div class="table-responsive">
+
                             <table class="table cart-table accordion-table">
                                 <thead>
                                     <tr class="table-head">
                                         <th scope="col">#</th>
-                                        <th scope="col">Order Id</th>
+                                        <th scope="col">Ordered by</th>
                                         <th scope="col">Order Date</th>
                                         <th scope="col">Status</th>
                                         <th scope="col">Total Price</th>
@@ -151,290 +152,92 @@
                                     </tr>
                                 </thead>
 
-                                <tbody>
-                                    <tr class="header-level">
-                                        <td>
-                                            <p class="mt-0"><strong>1</strong></p>
-                                        </td>
-                                        <td>
-                                            <p class="mt-0">#9980919</p>
-                                        </td>
-                                        <td>
-                                            <p class="mt-0">11.11.2021</p>
-                                        </td>
-                                        <td>
-                                            <p class="btn-status primary-button btn btn-sm">Pending</p>
-                                        </td>
-                                        <td>
-                                            <p class="theme-color fs-6">$49.54</p>
-                                        </td>
-                                        <td>
-                                            <i class="far fa-eye expand"></i>
-                                        </td>
-                                    </tr>
-                                    <tr class="sub-level">
-                                        <td colspan="6">
-                                            <table class="table cart-table">
-                                                <thead>
-                                                    <tr class="table-head">
-                                                        <th scope="col">Image</th>
-                                                        <th scope="col">Product name</th>
-                                                        <th scope="col">Price</th>
-                                                        <th scope="col">Quantity</th>
-                                                        <th scope="col">Subtotal</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <a href="product.html">
-                                                                <img src="~/assets/images/products/9.jpg"
-                                                                     class="blur-up lazyload" alt="product">
-                                                            </a>
-                                                        </td>
-                                                        <td>
-                                                            <p class="fs-6 m-0">
-                                                                CASIO G-Shock Rubiks Cube
-                                                                Limited Edition
-                                                            </p>
-                                                        </td>
-                                                        <td>
-                                                            <p class="fs-6 m-0">$49.54</p>
-                                                        </td>
-                                                        <td>
-                                                            <p class="fs-6 m-0">1</p>
-                                                        </td>
-                                                        <td>
-                                                            <p class="theme-color fs-6">$49.54</p>
-                                                        </td>
-                                                    </tr>
+                                @foreach (Order order in Model.Orders)
+                                {
+                                    orderCount++;
+                                    <tbody>
+                                        <tr class="header-level">
+                                            <td>
+                                                <p class="mt-0"><strong>@orderCount</strong></p>
+                                            </td>
+                                            <td>
+                                                <p class="mt-0">@order.AppUser.FullName</p>
+                                            </td>
+                                            <td>
+                                                <p class="mt-0">@order.CreatedAt.ToString()</p>
+                                            </td>
+                                            <td>
+                                                @switch (order.Status)
+                                                {
+                                                    case MarketoWatchStore.Enums.OrderStatus.Pending:
+                                                        <p class="btn-status primary-button btn btn-sm">Pending</p>
+                                                        break;
+                                                    case MarketoWatchStore.Enums.OrderStatus.Accepted:
+                                                        <p class="btn-status success-button btn btn-sm">Delivered</p>
+                                                        break;
+                                                    case MarketoWatchStore.Enums.OrderStatus.Rejected:
+                                                        <p class="btn-status danger-button btn btn-sm">Rejected</p>
+                                                        break;
+                                                    case MarketoWatchStore.Enums.OrderStatus.Delivered:
+                                                        <p class="btn-status success-button btn btn-sm">Delivered</p>
+                                                        break;
+                                                    default:
+                                                        break;
+                                                }
+                                            </td>
+                                            <td>
+                                                <p class="theme-color fs-6">$@order.OrderItems.Sum(o => o.Price * o.Count)</p>
+                                            </td>
+                                            <td>
+                                                <i class="far fa-eye expand"></i>
+                                            </td>
+                                        </tr>
+                                        <tr class="sub-level">
+                                            <td colspan="6">
+                                                <table class="table cart-table">
+                                                    <thead>
+                                                        <tr class="table-head">
+                                                            <th scope="col">Image</th>
+                                                            <th scope="col">Product name</th>
+                                                            <th scope="col">Price</th>
+                                                            <th scope="col">Quantity</th>
+                                                            <th scope="col">Subtotal</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
 
-                                                    <tr>
-                                                        <td>
-                                                            <a href="product.html">
-                                                                <img src="~/assets/images/products/8.jpg"
-                                                                     class="blur-up lazyload" alt="product">
-                                                            </a>
-                                                        </td>
-                                                        <td>
-                                                            <p class="fs-6 m-0">
-                                                                CASIO G-Shock Rubiks Cube
-                                                                Limited Edition
-                                                            </p>
-                                                        </td>
-                                                        <td>
-                                                            <p class="fs-6 m-0">$49.54</p>
-                                                        </td>
-                                                        <td>
-                                                            <p class="fs-6 m-0">1</p>
-                                                        </td>
-                                                        <td>
-                                                            <p class="theme-color fs-6">$49.54</p>
-                                                        </td>
-                                                    </tr>
+                                                        @foreach (OrderItem orderItem in order.OrderItems)
+                                                        {
+                                                            <tr>
+                                                                <td>
+                                                                    <a href="product.html">
+                                                                        <img src="~/assets/images/products/@orderItem.Product.MainImage" class="blur-up lazyload" alt="product">
+                                                                    </a>
+                                                                </td>
+                                                                <td>
+                                                                    <p class="fs-6 m-0">
+                                                                        @orderItem.Product.Title
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <p class="fs-6 m-0">$@orderItem.Price</p>
+                                                                </td>
+                                                                <td>
+                                                                    <p class="fs-6 m-0">@orderItem.Count</p>
+                                                                </td>
+                                                                <td>
+                                                                    <p class="theme-color fs-6">$@(orderItem.Price * orderItem.Count)</p>
+                                                                </td>
+                                                            </tr>
+                                                        }
 
-                                                    <tr>
-                                                        <td>
-                                                            <a href="product.html">
-                                                                <img src="~/assets/images/products/1.jpg"
-                                                                     class="blur-up lazyload" alt="product">
-                                                            </a>
-                                                        </td>
-                                                        <td>
-                                                            <p class="fs-6 m-0">
-                                                                CASIO G-Shock Rubiks Cube
-                                                                Limited Edition
-                                                            </p>
-                                                        </td>
-                                                        <td>
-                                                            <p class="fs-6 m-0">$49.54</p>
-                                                        </td>
-                                                        <td>
-                                                            <p class="fs-6 m-0">1</p>
-                                                        </td>
-                                                        <td>
-                                                            <p class="theme-color fs-6">$49.54</p>
-                                                        </td>
-                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                }
 
-                                                    <tr>
-                                                        <td>
-                                                            <a href="product.html">
-                                                                <img src="~/assets/images/products/8.jpg"
-                                                                     class="blur-up lazyload" alt="product">
-                                                            </a>
-                                                        </td>
-                                                        <td>
-                                                            <p class="fs-6 m-0">
-                                                                CASIO G-Shock Rubiks Cube
-                                                                Limited Edition
-                                                            </p>
-                                                        </td>
-                                                        <td>
-                                                            <p class="fs-6 m-0">$49.54</p>
-                                                        </td>
-                                                        <td>
-                                                            <p class="fs-6 m-0">1</p>
-                                                        </td>
-                                                        <td>
-                                                            <p class="theme-color fs-6">$49.54</p>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </tbody>
-
-                                <tbody>
-                                    <tr class="header-level">
-                                        <td>
-                                            <p class="mt-0"><strong>2</strong></p>
-                                        </td>
-                                        <td>
-                                            <p class="mt-0">#3330386</p>
-                                        </td>
-                                        <td>
-                                            <p class="mt-0">19.09.2020</p>
-                                        </td>
-                                        <td>
-                                            <p class="btn-status success-button btn btn-sm">Delivered</p>
-                                        </td>
-                                        <td>
-                                            <p class="theme-color fs-6">$55.00</p>
-                                        </td>
-                                        <td>
-                                            <i class="far fa-eye expand"></i>
-                                        </td>
-                                    </tr>
-                                    <tr class="sub-level">
-                                        <td colspan="6">
-                                            <table class="table cart-table">
-                                                <thead>
-                                                    <tr class="table-head">
-                                                        <th scope="col">Image</th>
-                                                        <th scope="col">Product name</th>
-                                                        <th scope="col">Price</th>
-                                                        <th scope="col">Quantity</th>
-                                                        <th scope="col">Subtotal</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <a href="product.html">
-                                                                <img src="~/assets/images/products/9.jpg"
-                                                                     class="blur-up lazyload" alt="product">
-                                                            </a>
-                                                        </td>
-                                                        <td>
-                                                            <p class="fs-6 m-0">
-                                                                CASIO G-Shock Rubiks Cube
-                                                                Limited Edition
-                                                            </p>
-                                                        </td>
-                                                        <td>
-                                                            <p class="fs-6 m-0">$49.54</p>
-                                                        </td>
-                                                        <td>
-                                                            <p class="fs-6 m-0">1</p>
-                                                        </td>
-                                                        <td>
-                                                            <p class="theme-color fs-6">$49.54</p>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>
-                                                            <a href="product.html">
-                                                                <img src="~/assets/images/products/8.jpg"
-                                                                     class="blur-up lazyload" alt="product">
-                                                            </a>
-                                                        </td>
-                                                        <td>
-                                                            <p class="fs-6 m-0">
-                                                                CASIO G-Shock Rubiks Cube
-                                                                Limited Edition
-                                                            </p>
-                                                        </td>
-                                                        <td>
-                                                            <p class="fs-6 m-0">$49.54</p>
-                                                        </td>
-                                                        <td>
-                                                            <p class="fs-6 m-0">1</p>
-                                                        </td>
-                                                        <td>
-                                                            <p class="theme-color fs-6">$49.54</p>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </tbody>
-
-                                <tbody>
-                                    <tr class="header-level">
-                                        <td>
-                                            <p class="mt-0"><strong>2</strong></p>
-                                        </td>
-                                        <td>
-                                            <p class="mt-0">#3330333</p>
-                                        </td>
-                                        <td>
-                                            <p class="mt-0">19.09.2020</p>
-                                        </td>
-                                        <td>
-                                            <p class="btn-status danger-button btn btn-sm">Rejected</p>
-                                        </td>
-                                        <td>
-                                            <p class="theme-color fs-6">$55.00</p>
-                                        </td>
-                                        <td>
-                                            <i class="far fa-eye expand"></i>
-                                        </td>
-                                    </tr>
-                                    <tr class="sub-level">
-                                        <td colspan="6">
-                                            <table class="table cart-table">
-                                                <thead>
-                                                    <tr class="table-head">
-                                                        <th scope="col">Image</th>
-                                                        <th scope="col">Product name</th>
-                                                        <th scope="col">Price</th>
-                                                        <th scope="col">Quantity</th>
-                                                        <th scope="col">Subtotal</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <a href="product.html">
-                                                                <img src="~/assets/images/products/8.jpg"
-                                                                     class="blur-up lazyload" alt="product">
-                                                            </a>
-                                                        </td>
-                                                        <td>
-                                                            <p class="fs-6 m-0">
-                                                                CASIO G-Shock Rubiks Cube
-                                                                Limited Edition
-                                                            </p>
-                                                        </td>
-                                                        <td>
-                                                            <p class="fs-6 m-0">$49.54</p>
-                                                        </td>
-                                                        <td>
-                                                            <p class="fs-6 m-0">1</p>
-                                                        </td>
-                                                        <td>
-                                                            <p class="theme-color fs-6">$49.54</p>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </tbody>
                             </table>
                         </div>
 
@@ -463,7 +266,7 @@
                                 </nav>
                             </div>
                         </div>
-                    
+
                     </div>
                 </div>
             </div>
