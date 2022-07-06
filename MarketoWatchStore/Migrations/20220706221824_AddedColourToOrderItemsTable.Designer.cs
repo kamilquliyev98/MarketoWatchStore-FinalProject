@@ -4,14 +4,16 @@ using MarketoWatchStore.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MarketoWatchStore.Migrations
 {
     [DbContext(typeof(MarketoDbContext))]
-    partial class MarketoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220706221824_AddedColourToOrderItemsTable")]
+    partial class AddedColourToOrderItemsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -485,7 +487,8 @@ namespace MarketoWatchStore.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Colour")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(255)")
+                        .HasMaxLength(255);
 
                     b.Property<int>("Count")
                         .HasColumnType("int");

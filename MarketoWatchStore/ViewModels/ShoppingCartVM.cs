@@ -9,6 +9,7 @@ namespace MarketoWatchStore.ViewModels
     {
         public int ProductId { get; set; }
         public int ColourId { get; set; }
+        public string ColourName { get; set; }
         public int Count { get; set; }
         public int StockCount { get; set; }
 

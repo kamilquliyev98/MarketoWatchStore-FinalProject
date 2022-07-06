@@ -14,6 +14,7 @@
                         <th scope="col">Image</th>
                         <th scope="col">Product name</th>
                         <th scope="col">Price</th>
+                        <th scope="col">Colour</th>
                         <th scope="col">Quantity</th>
                         <th scope="col">Total</th>
                         <th scope="col">Remove</th>
@@ -54,11 +55,12 @@
                                 <h2>$@shoppingCartVM.Price.ToString("0.00")</h2>
                             </td>
                             <td>
-                                <div class="qty-box">
-                                    <div class="input-group">
-                                        <input type="number" name="quantity" class="form-control input-number" value="@shoppingCartVM.Count" min="1">
-                                    </div>
-                                </div>
+                                <a asp-controller="shop" asp-action="product" asp-route-id="@shoppingCartVM.ProductId">
+                                    @shoppingCartVM.ColourName
+                                </a>
+                            </td>
+                            <td>
+                                @shoppingCartVM.Count
                             </td>
                             <td>
                                 <h2 class="td-color">$@((shoppingCartVM.Price * shoppingCartVM.Count).ToString("0.00"))</h2>

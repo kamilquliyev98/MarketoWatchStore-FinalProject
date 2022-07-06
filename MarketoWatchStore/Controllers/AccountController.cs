@@ -247,14 +247,18 @@ namespace MarketoWatchStore.Controllers
         {
             AppUser appUser = await _userManager.Users.FirstOrDefaultAsync(u => u.NormalizedUserName == User.Identity.Name.ToUpperInvariant() && !u.IsAdmin);
 
-            if (appUser is null) return RedirectToAction("index", "home");
+            if (appUser is null) return RedirectToAction("login", "account");
+
+            ViewBag.AppUser = appUser;
 
             CustomerProfileVM customerProfileVM = new CustomerProfileVM
             {
                 Customer = new CustomerUpdateVM
                 {
-                    Address = appUser.Address,
+                    Country = appUser.Country,
                     City = appUser.City,
+                    Address = appUser.Address,
+                    ZipCode = appUser.ZipCode,
                     FullName = appUser.FullName,
                     PhoneNumber = appUser.PhoneNumber,
                     UserName = appUser.UserName,
@@ -263,9 +267,9 @@ namespace MarketoWatchStore.Controllers
 
                 Orders = await _context.Orders
                 .Include(o => o.OrderItems).ThenInclude(oi => oi.Product)
+                .ThenInclude(p => p.ProductColours).ThenInclude(p => p.Colour)
                 .Include(o => o.AppUser)
-                .Where(o => !o.IsDeleted && o.AppUserId == appUser.Id)
-                .ToListAsync()
+                .Where(o => !o.IsDeleted && o.AppUserId == appUser.Id).ToListAsync()
             };
 
             return View(customerProfileVM);

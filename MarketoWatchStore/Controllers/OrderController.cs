@@ -33,7 +33,7 @@ namespace MarketoWatchStore.Controllers
             double total = 0;
 
             List<ShoppingCart> shoppingCarts = await _context.ShoppingCarts
-                .Include(b => b.Product)
+                .Include(b => b.Product).ThenInclude(p => p.ProductColours).ThenInclude(c => c.Colour)
                 .Where(b => b.AppUserId == appUser.Id)
                 .ToListAsync();
 
@@ -74,7 +74,7 @@ namespace MarketoWatchStore.Controllers
             double total = 0;
 
             List<ShoppingCart> shoppingCarts = await _context.ShoppingCarts
-                .Include(b => b.Product)
+                .Include(b => b.Product).ThenInclude(p => p.ProductColours).ThenInclude(c => c.Colour)
                 .Where(b => b.AppUserId == appUser.Id)
                 .ToListAsync();
 
@@ -102,6 +102,7 @@ namespace MarketoWatchStore.Controllers
                     Count = shoppingCart.Count,
                     Price = ((double)(shoppingCart.Product.DiscountPrice > 0 ? shoppingCart.Product.DiscountPrice : shoppingCart.Product.Price)),
                     ProductId = shoppingCart.ProductId,
+                    Colour = shoppingCart.Colour.Title,
                     TotalPrice = ((double)(shoppingCart.Count * (shoppingCart.Product.DiscountPrice > 0 ? shoppingCart.Product.DiscountPrice : shoppingCart.Product.Price))),
                     CreatedAt = DateTime.UtcNow.AddHours(4)
                 };

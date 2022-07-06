@@ -67,6 +67,7 @@ namespace MarketoWatchStore.Controllers
                             ProductId = shoppingCart.Product.Id,
                             Title = shoppingCart.Product.Title,
                             MainImage = shoppingCart.Product.MainImage,
+                            ColourName = shoppingCart.Colour.Title,
                             Price = (shoppingCart.Product.DiscountPrice != null && shoppingCart.Product.DiscountPrice > 0) ? (double)shoppingCart.Product.DiscountPrice : shoppingCart.Product.Price,
                             Count = shoppingCart.Count,
                             StockCount = shoppingCart.Product.Count
@@ -83,15 +84,19 @@ namespace MarketoWatchStore.Controllers
         {
             if (id is null || colourid is null) return RedirectToAction("error400", "home");
 
-            if (!await _context.Colours.AnyAsync(p => p.Id == colourid && !p.IsDeleted)) return RedirectToAction("error404", "home");
-
-            //ProductColour productColour = await _context.ProductColours
+            if (!await _context.Colours.AnyAsync(c => c.Id == colourid && !c.IsDeleted)) return RedirectToAction("error404", "home");
 
             Product product = await _context.Products
                 .Include(x => x.ProductColours).ThenInclude(x => x.Colour)
                 .FirstOrDefaultAsync(p => p.Id == id && !p.IsDeleted);
 
             if (product is null) return RedirectToAction("error404", "home");
+
+            ProductColour productColour = _context.ProductColours
+                .Include(c => c.Colour)
+                .FirstOrDefault(p => p.ProductId == product.Id && p.ColourId == colourid);
+
+            if (productColour is null) return RedirectToAction("error404", "home");
 
             List<ShoppingCartVM> shoppingCartVMs = new List<ShoppingCartVM>();
 
@@ -100,7 +105,7 @@ namespace MarketoWatchStore.Controllers
                 AppUser appUser = await _userManager.FindByNameAsync(User.Identity.Name);
                 ShoppingCart existShoppingCart = await _context.ShoppingCarts
                     .Include(sc => sc.Product).ThenInclude(x => x.ProductColours).ThenInclude(x => x.Colour)
-                    .FirstOrDefaultAsync(b => b.AppUserId == appUser.Id && b.ProductId == id);
+                    .FirstOrDefaultAsync(b => b.AppUserId == appUser.Id && b.ProductId == id && b.ColourId == colourid);
 
                 if (existShoppingCart != null)
                 {
@@ -112,6 +117,7 @@ namespace MarketoWatchStore.Controllers
                     {
                         AppUserId = appUser.Id,
                         ProductId = product.Id,
+                        ColourId = colourid,
                         Count = count,
                         CreatedAt = DateTime.UtcNow.AddHours(4)
                     };
@@ -120,20 +126,23 @@ namespace MarketoWatchStore.Controllers
                 }
 
                 await _context.SaveChangesAsync();
+
                 List<ShoppingCart> shoppingCarts = await _context.ShoppingCarts
                     .Include(x => x.Product).ThenInclude(x => x.ProductColours).ThenInclude(x => x.Colour)
                     .ToListAsync();
-                foreach (ShoppingCart item in shoppingCarts)
+
+                foreach (ShoppingCart shoppingCart in shoppingCarts)
                 {
-                    ShoppingCartVM shopping = new ShoppingCartVM
+                    ShoppingCartVM shoppingCartVM = new ShoppingCartVM
                     {
-                        MainImage = item.Product.MainImage,
-                        Count = item.Count,
-                        Price = (item.Product.DiscountPrice != null && item.Product.DiscountPrice > 0) ? (double)item.Product.DiscountPrice : item.Product.Price,
-                        StockCount = item.Product.Count,
-                        Title = item.Product.Title
+                        MainImage = shoppingCart.Product.MainImage,
+                        ColourName = shoppingCart.Colour.Title,
+                        Count = shoppingCart.Count,
+                        Price = (shoppingCart.Product.DiscountPrice != null && shoppingCart.Product.DiscountPrice > 0) ? (double)shoppingCart.Product.DiscountPrice : shoppingCart.Product.Price,
+                        StockCount = shoppingCart.Product.Count,
+                        Title = shoppingCart.Product.Title
                     };
-                    shoppingCartVMs.Add(shopping);
+                    shoppingCartVMs.Add(shoppingCartVM);
                 }
             }
             else
@@ -144,16 +153,22 @@ namespace MarketoWatchStore.Controllers
                 {
                     shoppingCartVMs = JsonConvert.DeserializeObject<List<ShoppingCartVM>>(cookieCart);
 
-                    if (shoppingCartVMs.Any(b => b.ProductId == id))
+                    if (shoppingCartVMs.Any(b => b.ProductId == id && b.ColourId == colourid))
                     {
-                        shoppingCartVMs.Find(b => b.ProductId == id).Count += count;
+                        shoppingCartVMs.Find(b => b.ProductId == id && b.ColourId == colourid).Count += count;
                     }
                     else
                     {
                         shoppingCartVMs.Add(new ShoppingCartVM
                         {
                             ProductId = (int)id,
-                            Count = count
+                            ColourId = (int)colourid,
+                            ColourName = productColour.Colour.Title,
+                            Count = count,
+                            StockCount = product.Count,
+                            Title = product.Title,
+                            MainImage = product.MainImage,
+                            Price = (product.DiscountPrice != null && product.DiscountPrice > 0) ? (double)product.DiscountPrice : product.Price,
                         });
                     }
                 }
@@ -164,7 +179,13 @@ namespace MarketoWatchStore.Controllers
                     shoppingCartVMs.Add(new ShoppingCartVM
                     {
                         ProductId = (int)id,
-                        Count = count
+                        ColourId = (int)colourid,
+                        ColourName = productColour.Colour.Title,
+                        Title = product.Title,
+                        MainImage = product.MainImage,
+                        Price = (product.DiscountPrice != null && product.DiscountPrice > 0) ? (double)product.DiscountPrice : product.Price,
+                        Count = count,
+                        StockCount = product.Count
                     });
                 }
 
@@ -202,7 +223,6 @@ namespace MarketoWatchStore.Controllers
 
                 if (!_context.ShoppingCarts.Any(x => x.AppUserId == appUser.Id && x.ProductId == id)) return RedirectToAction("error404", "home");
 
-
                 List<ShoppingCart> existShoppingCarts = await _context.ShoppingCarts
                     .Include(x => x.Product).ThenInclude(x => x.ProductColours).ThenInclude(x => x.Colour)
                     .Where(x => x.AppUserId == appUser.Id)
@@ -210,7 +230,7 @@ namespace MarketoWatchStore.Controllers
 
                 ShoppingCart cartItem = existShoppingCarts.Find(x => x.ProductId == id);
 
-                if (cartItem == null) return RedirectToAction("error404", "home");
+                if (cartItem is null) return RedirectToAction("error404", "home");
 
                 existShoppingCarts.Remove(cartItem);
                 _context.ShoppingCarts.Remove(cartItem);
@@ -223,6 +243,7 @@ namespace MarketoWatchStore.Controllers
                         ProductId = shoppingCart.Product.Id,
                         Title = shoppingCart.Product.Title,
                         MainImage = shoppingCart.Product.MainImage,
+                        ColourName = shoppingCart.Colour.Title,
                         Count = shoppingCart.Count,
                         Price = (shoppingCart.Product.DiscountPrice != null && shoppingCart.Product.DiscountPrice > 0) ? (double)shoppingCart.Product.DiscountPrice : shoppingCart.Product.Price,
                         StockCount = shoppingCart.Product.Count

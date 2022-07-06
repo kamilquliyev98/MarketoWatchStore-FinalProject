@@ -139,134 +139,127 @@
                             <h3>My Orders</h3>
                         </div>
 
-                        <div class="table-responsive">
+                        @if (Model.Orders.Count() > 0)
+                        {
+                            <div class="table-responsive">
 
-                            <table class="table cart-table accordion-table">
-                                <thead>
-                                    <tr class="table-head">
-                                        <th scope="col">#</th>
-                                        <th scope="col">Ordered by</th>
-                                        <th scope="col">Order Date</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">Total Price</th>
-                                        <th scope="col">View</th>
-                                    </tr>
-                                </thead>
-
-                                @foreach (Order order in Model.Orders)
-                                {
-                                    orderCount++;
-                                    <tbody>
-                                        <tr class="header-level">
-                                            <td>
-                                                <p class="mt-0"><strong>@orderCount</strong></p>
-                                            </td>
-                                            <td>
-                                                <p class="mt-0">@order.AppUser.FullName</p>
-                                            </td>
-                                            <td>
-                                                <p class="mt-0">@order.CreatedAt.ToString()</p>
-                                            </td>
-                                            <td>
-                                                @switch (order.Status)
-                                                {
-                                                    case MarketoWatchStore.Enums.OrderStatus.Pending:
-                                                        <p class="btn-status primary-button btn btn-sm">Pending</p>
-                                                        break;
-                                                    case MarketoWatchStore.Enums.OrderStatus.Accepted:
-                                                        <p class="btn-status success-button btn btn-sm">Delivered</p>
-                                                        break;
-                                                    case MarketoWatchStore.Enums.OrderStatus.Rejected:
-                                                        <p class="btn-status danger-button btn btn-sm">Rejected</p>
-                                                        break;
-                                                    case MarketoWatchStore.Enums.OrderStatus.Delivered:
-                                                        <p class="btn-status success-button btn btn-sm">Delivered</p>
-                                                        break;
-                                                    default:
-                                                        break;
-                                                }
-                                            </td>
-                                            <td>
-                                                <p class="theme-color fs-6">$@order.OrderItems.Sum(o => o.Price * o.Count)</p>
-                                            </td>
-                                            <td>
-                                                <i class="far fa-eye expand"></i>
-                                            </td>
+                                <table class="table cart-table accordion-table">
+                                    <thead>
+                                        <tr class="table-head">
+                                            <th scope="col">#</th>
+                                            <th scope="col">Ordered by</th>
+                                            <th scope="col">Order Date</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Total Price</th>
+                                            <th scope="col">View</th>
                                         </tr>
-                                        <tr class="sub-level">
-                                            <td colspan="6">
-                                                <table class="table cart-table">
-                                                    <thead>
-                                                        <tr class="table-head">
-                                                            <th scope="col">Image</th>
-                                                            <th scope="col">Product name</th>
-                                                            <th scope="col">Price</th>
-                                                            <th scope="col">Quantity</th>
-                                                            <th scope="col">Subtotal</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
+                                    </thead>
 
-                                                        @foreach (OrderItem orderItem in order.OrderItems)
-                                                        {
-                                                            <tr>
-                                                                <td>
-                                                                    <a href="product.html">
-                                                                        <img src="~/assets/images/products/@orderItem.Product.MainImage" class="blur-up lazyload" alt="product">
-                                                                    </a>
-                                                                </td>
-                                                                <td>
-                                                                    <p class="fs-6 m-0">@orderItem.Product.Title</p>
-                                                                </td>
-                                                                <td>
-                                                                    <p class="fs-6 m-0">$@orderItem.Price</p>
-                                                                </td>
-                                                                <td>
-                                                                    <p class="fs-6 m-0">@orderItem.Count</p>
-                                                                </td>
-                                                                <td>
-                                                                    <p class="theme-color fs-6">$@(orderItem.Price * orderItem.Count)</p>
-                                                                </td>
+                                    @foreach (Order order in Model.Orders)
+                                    {
+                                        orderCount++;
+                                        <tbody>
+                                            <tr class="header-level">
+                                                <td>
+                                                    <p class="mt-0"><strong>@orderCount</strong></p>
+                                                </td>
+                                                <td>
+                                                    <p class="mt-0">@order.AppUser.FullName</p>
+                                                </td>
+                                                <td>
+                                                    <p class="mt-0">@order.CreatedAt?.ToString("g")</p>
+                                                </td>
+                                                <td>
+                                                    @switch (order.Status)
+                                                    {
+                                                        case MarketoWatchStore.Enums.OrderStatus.Pending:
+                                                            <p class="btn-status primary-button btn btn-sm">Pending</p>
+                                                            break;
+                                                        case MarketoWatchStore.Enums.OrderStatus.Accepted:
+                                                            <p class="btn-status success-button btn btn-sm">Accepted</p>
+                                                            break;
+                                                        case MarketoWatchStore.Enums.OrderStatus.Rejected:
+                                                            <p class="btn-status danger-button btn btn-sm">Rejected</p>
+                                                            break;
+                                                        case MarketoWatchStore.Enums.OrderStatus.Delivered:
+                                                            <p class="btn-status success-button btn btn-sm">Delivered</p>
+                                                            break;
+                                                        default:
+                                                            break;
+                                                    }
+                                                </td>
+                                                <td>
+                                                    <p class="theme-color fs-6">$@order.OrderItems.Sum(o => o.Price * o.Count)</p>
+                                                </td>
+                                                <td>
+                                                    <i class="far fa-eye expand"></i>
+                                                </td>
+                                            </tr>
+                                            <tr class="sub-level">
+                                                <td colspan="6">
+                                                    <table class="table cart-table">
+                                                        <thead>
+                                                            <tr class="table-head">
+                                                                <th scope="col">Image</th>
+                                                                <th scope="col">Product name</th>
+                                                                <th scope="col">Price</th>
+                                                                <th scope="col">Colour</th>
+                                                                <th scope="col">Quantity</th>
+                                                                <th scope="col">Subtotal</th>
                                                             </tr>
-                                                        }
+                                                        </thead>
+                                                        <tbody>
 
-                                                    </tbody>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                }
+                                                            @foreach (OrderItem orderItem in order.OrderItems)
+                                                            {
+                                                                <tr>
+                                                                    <td>
+                                                                        <a href="product.html">
+                                                                            <img src="~/assets/images/products/@orderItem.Product.MainImage" class="blur-up lazyload" alt="product">
+                                                                        </a>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p class="fs-6 m-0">@orderItem.Product.Title</p>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p class="fs-6 m-0">$@orderItem.Price</p>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p class="fs-6 m-0">@orderItem.Colour</p>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p class="fs-6 m-0">@orderItem.Count</p>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p class="theme-color fs-6">$@(orderItem.Price * orderItem.Count)</p>
+                                                                    </td>
+                                                                </tr>
+                                                            }
 
-                            </table>
-                        </div>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    }
 
-                        <div class="row g-4">
-                            <div class="col-12">
-                                <nav class="page-section">
-                                    <ul class="pagination">
-                                        <li class="page-item">
-                                            <a class="page-link" href="javascript:void(0)">
-                                                <span aria-hidden="true">
-                                                    <i class="fas fa-chevron-left"></i>
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li class="page-item active">
-                                            <a class="page-link" href="javascript:void(0)">1</a>
-                                        </li>
-                                        <li class="page-item">
-                                            <a class="page-link">
-                                                <span aria-hidden="true">
-                                                    <i class="fas fa-chevron-right"></i>
-                                                </span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </nav>
+                                </table>
                             </div>
-                        </div>
+
+                        }
+                        else
+                        {
+                            <div class="row g-4">
+                                <div class="col-12">
+                                    <img src="~/assets/images/inner-page/empty-order.jpg" />
+                                </div>
+                            </div>
+                        }
+
+
 
                     </div>
+
                 </div>
             </div>
         </div>
@@ -275,5 +268,6 @@
 <!-- User dashboard section end -->
 
 @section JS{
+    <script src="~/assets/js/filter.js"></script>
     <script src="~/assets/js/nested-table.js"></script>
 }
