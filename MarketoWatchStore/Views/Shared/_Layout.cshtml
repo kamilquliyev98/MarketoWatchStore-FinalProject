@@ -91,13 +91,22 @@
                                 <li>
                                     <div class="dropdown">
                                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown">
-                                            <span>@appUser?.FullName</span>
+                                            <span>@((appUser is null) ? "Admin" : appUser.FullName)</span>
                                             <i class="fas fa-chevron-down"></i>
                                         </a>
                                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
-                                            <li class="w-100">
-                                                <a asp-controller="account" asp-action="profile" class="dropdown-item">My account</a>
-                                            </li>
+                                            @if (appUser is null)
+                                            {
+                                                <li class="w-100">
+                                                    <a asp-area="manage" asp-controller="dashboard" asp-action="index" class="dropdown-item">Admin Dashboard</a>
+                                                </li>
+                                            }
+                                            else
+                                            {
+                                                <li class="w-100">
+                                                    <a asp-controller="account" asp-action="profile" class="dropdown-item">My account</a>
+                                                </li>
+                                            }
                                             <li class="w-100">
                                                 <a asp-controller="account" asp-action="logout" class="dropdown-item">Log out</a>
                                             </li>
