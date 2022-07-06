@@ -305,15 +305,15 @@
   /**
    * Autoresize echart charts
    */
-  const mainContainer = select('#main');
-  if (mainContainer) {
-    setTimeout(() => {
-      new ResizeObserver(function() {
-        select('.echart', true).forEach(getEchart => {
-          echarts.getInstanceByDom(getEchart).resize();
-        })
-      }).observe(mainContainer);
-    }, 200);
-  }
+  //const mainContainer = select('#main');
+  //if (mainContainer) {
+  //  setTimeout(() => {
+  //    new ResizeObserver(function() {
+  //      select('.echart', true).forEach(getEchart => {
+  //        echarts.getInstanceByDom(getEchart).resize();
+  //      })
+  //    }).observe(mainContainer);
+  //  }, 200);
+  //}
 
 })();
