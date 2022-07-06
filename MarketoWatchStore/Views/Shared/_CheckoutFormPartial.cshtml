@@ -1,0 +1,84 @@
+﻿@model OrderVM
+
+<form class="needs-validation" method="post">
+    <div class="row g-4">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="col-md-6">
+            <label asp-for="FullName" class="form-label">Fullname</label>
+            <input asp-for="FullName" class="form-control">
+            <span asp-validation-for="FullName" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6">
+            <label asp-for="Email" class="form-label">Email address</label>
+            <input asp-for="Email" class="form-control">
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-12">
+            <label asp-for="Address" class="form-label">Address</label>
+            <input asp-for="Address" class="form-control">
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+        <div class="col-md-5">
+            <label asp-for="Country" class="form-label"></label>
+            <input asp-for="Country" class="form-control">
+            <span asp-validation-for="Country" class="text-danger"></span>
+        </div>
+        <div class="col-md-4">
+            <label asp-for="City" class="form-label"></label>
+            <input asp-for="City" class="form-control">
+            <span asp-validation-for="City" class="text-danger"></span>
+        </div>
+        <div class="col-md-3">
+            <label asp-for="ZipCode" class="form-label">Zip</label>
+            <input asp-for="ZipCode" class="form-control">
+            <span asp-validation-for="ZipCode" class="text-danger"></span>
+        </div>
+    </div>
+
+    <hr class="my-lg-5 my-4">
+
+    <h3 class="mb-3">Payment</h3>
+
+    <div class="d-block my-3">
+        <div class="form-check custom-radio-box">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="credit">
+            <label class="form-check-label" for="credit">Credit card</label>
+        </div>
+
+        <div class="form-check custom-radio-box">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="debit">
+            <label class="form-check-label" for="debit">Debit card</label>
+        </div>
+
+        <div class="form-check custom-radio-box">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="paypal">
+            <label class="form-check-label" for="paypal">PayPal</label>
+        </div>
+    </div>
+    <div class="row g-4">
+        <div class="col-md-6">
+            <label for="cc-name" class="form-label">Name on card</label>
+            <input type="text" class="form-control" id="cc-name">
+            <div id="emailHelp" class="form-text">Full name as displayed on card</div>
+        </div>
+        <div class="col-md-6">
+            <label for="cc-number" class="form-label">Credit card number</label>
+            <input type="text" class="form-control" id="cc-number">
+        </div>
+        <div class="col-md-3">
+            <label for="expiration" class="form-label">Expiration</label>
+            <input type="text" class="form-control" id="expiration">
+        </div>
+        <div class="col-md-3">
+            <label for="cc-cvv" class="form-label">CVV</label>
+            <input type="text" class="form-control" id="cc-cvv">
+        </div>
+    </div>
+
+    <button class="btn btn-solid-default mt-4" type="submit">
+        Submit checkout
+    </button>
+</form>

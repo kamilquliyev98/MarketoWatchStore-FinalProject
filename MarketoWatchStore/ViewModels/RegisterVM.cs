@@ -9,7 +9,7 @@ namespace MarketoWatchStore.ViewModels
     public class RegisterVM
     {
         [StringLength(255), Required]
-        public string Fullname { get; set; }
+        public string FullName { get; set; }
         [StringLength(255), Required]
         public string Username { get; set; }
         [Required, DataType(DataType.EmailAddress)]

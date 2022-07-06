@@ -299,15 +299,5 @@ namespace MarketoWatchStore.Controllers
 
             return RedirectToAction("index", "shoppingcart");
         }
-
-        public IActionResult Checkout()
-        {
-            if (!User.Identity.IsAuthenticated || !User.IsInRole("Customer"))
-            {
-                return RedirectToAction("login", "account");
-            }
-
-            return View();
-        }
     }
 }

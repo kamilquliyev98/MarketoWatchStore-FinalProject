@@ -1,6 +1,16 @@
 ﻿@model CustomerProfileVM
 @{
     ViewData["Title"] = Model.Customer.FullName + " | Marketo";
+    int orderCount = 0;
+    int orderItemCount = 0;
+    double totalOrderItem = 0;
+    foreach (Order order in Model.Orders)
+    {
+        foreach (OrderItem orderItem in order.OrderItems)
+        {
+            totalOrderItem = orderItem.TotalPrice;
+        }
+    }
 }
 
 <!-- Breadcrumb section start -->
@@ -30,6 +40,7 @@
     </div>
 </section>
 <!-- Breadcrumb section end -->
+
 <!-- User dashboard section start -->
 <section class="section-b-space">
     <div class="container">
@@ -452,11 +463,11 @@
                                 </nav>
                             </div>
                         </div>
+                    
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </section>
 <!-- User dashboard section end -->

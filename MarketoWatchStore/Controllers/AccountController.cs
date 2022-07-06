@@ -44,7 +44,7 @@ namespace MarketoWatchStore.Controllers
 
             AppUser appUser = new AppUser
             {
-                FullName = registerVM.Fullname,
+                FullName = registerVM.FullName,
                 Email = registerVM.Email,
                 UserName = registerVM.Username,
                 IsAdmin = false
@@ -242,11 +242,11 @@ namespace MarketoWatchStore.Controllers
         #endregion
 
         #region Profile
-        [Authorize(Roles = "SuperAdmin, Admin, Customer")]
+        [Authorize(Roles = "Customer")]
         public async Task<IActionResult> Profile()
         {
             AppUser appUser = await _userManager.Users.FirstOrDefaultAsync(u => u.NormalizedUserName == User.Identity.Name.ToUpperInvariant() && !u.IsAdmin);
-            
+
             if (appUser is null) return RedirectToAction("index", "home");
 
             CustomerProfileVM customerProfileVM = new CustomerProfileVM
@@ -259,7 +259,13 @@ namespace MarketoWatchStore.Controllers
                     PhoneNumber = appUser.PhoneNumber,
                     UserName = appUser.UserName,
                     Email = appUser.Email
-                }
+                },
+
+                Orders = await _context.Orders
+                .Include(o => o.OrderItems).ThenInclude(oi => oi.Product)
+                .Include(o => o.AppUser)
+                .Where(o => !o.IsDeleted && o.AppUserId == appUser.Id)
+                .ToListAsync()
             };
 
             return View(customerProfileVM);
