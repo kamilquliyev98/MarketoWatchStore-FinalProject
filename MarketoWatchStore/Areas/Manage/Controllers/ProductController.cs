@@ -440,6 +440,8 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
             ViewBag.Colours = await _context.Colours.Where(c => !c.IsDeleted).OrderBy(c => c.Title).ToListAsync();
             ViewBag.Features = await _context.Features.Where(f => !f.IsDeleted).OrderBy(f => f.Title).ToListAsync();
 
+            product.TagIds = product.ProductTags.Select(pt => pt.Tag.Id).ToList();
+            product.FeatureIds = product.ProductFeatures.Select(pf => pf.Feature.Id).ToList();
             product.ColourIds = product.ProductColours.Select(c => c.Colour.Id).ToList();
             product.Counts = product.ProductColours.Select(c => c.Count).ToList();
 
@@ -733,7 +735,7 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
 
                     ProductImage productImage = new ProductImage
                     {
-                        Image = file.CreateFile(_env, "assets", "img", "product"),
+                        Image = file.CreateFile(_env, "assets", "images", "products"),
                         CreatedAt = DateTime.UtcNow.AddHours(4)
                     };
 
@@ -837,6 +839,13 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
 
             Product product = await _context.Products
                 .Include(p => p.ProductImages)
+                .Include(p => p.Brand)
+                .Include(p => p.Display)
+                .Include(p => p.PowerSource)
+                .Include(p => p.SpecialType)
+                .Include(p => p.ProductTags).ThenInclude(p => p.Tag)
+                .Include(p => p.ProductColours).ThenInclude(p => p.Colour)
+                .Include(p => p.ProductFeatures).ThenInclude(p => p.Feature)
                 .FirstOrDefaultAsync(p => p.ProductImages.Any(pi => pi.Id == id && !pi.IsDeleted));
 
             if (product is null) return NotFound();
@@ -848,6 +857,11 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
             ViewBag.Tags = await _context.Tags.Where(t => !t.IsDeleted).OrderBy(t => t.Title).ToListAsync();
             ViewBag.Colours = await _context.Colours.Where(c => !c.IsDeleted).OrderBy(c => c.Title).ToListAsync();
             ViewBag.Features = await _context.Features.Where(f => !f.IsDeleted).OrderBy(f => f.Title).ToListAsync();
+
+            product.TagIds = product.ProductTags.Select(pt => pt.Tag.Id).ToList();
+            product.FeatureIds = product.ProductFeatures.Select(pf => pf.Feature.Id).ToList();
+            product.ColourIds = product.ProductColours.Select(c => c.Colour.Id).ToList();
+            product.Counts = product.ProductColours.Select(c => c.Count).ToList();
 
             ProductImage productImage = product.ProductImages.FirstOrDefault(p => p.Id == id);
             productImage.IsDeleted = true;
@@ -864,6 +878,13 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
 
             Product product = await _context.Products
                 .Include(p => p.ProductImages)
+                .Include(p => p.Brand)
+                .Include(p => p.Display)
+                .Include(p => p.PowerSource)
+                .Include(p => p.SpecialType)
+                .Include(p => p.ProductTags).ThenInclude(p => p.Tag)
+                .Include(p => p.ProductColours).ThenInclude(p => p.Colour)
+                .Include(p => p.ProductFeatures).ThenInclude(p => p.Feature)
                 .FirstOrDefaultAsync(p => p.SlideImage == slide && !p.IsDeleted);
 
             if (product is null) return NotFound();
@@ -875,6 +896,11 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
             ViewBag.Tags = await _context.Tags.Where(t => !t.IsDeleted).OrderBy(t => t.Title).ToListAsync();
             ViewBag.Colours = await _context.Colours.Where(c => !c.IsDeleted).OrderBy(c => c.Title).ToListAsync();
             ViewBag.Features = await _context.Features.Where(f => !f.IsDeleted).OrderBy(f => f.Title).ToListAsync();
+
+            product.TagIds = product.ProductTags.Select(pt => pt.Tag.Id).ToList();
+            product.FeatureIds = product.ProductFeatures.Select(pf => pf.Feature.Id).ToList();
+            product.ColourIds = product.ProductColours.Select(c => c.Colour.Id).ToList();
+            product.Counts = product.ProductColours.Select(c => c.Count).ToList();
 
             Helper.DeleteFile(_env, product.SlideImage, "assets", "images", "slider");
 
@@ -892,6 +918,13 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
 
             Product product = await _context.Products
                 .Include(p => p.ProductImages)
+                .Include(p => p.Brand)
+                .Include(p => p.Display)
+                .Include(p => p.PowerSource)
+                .Include(p => p.SpecialType)
+                .Include(p => p.ProductTags).ThenInclude(p => p.Tag)
+                .Include(p => p.ProductColours).ThenInclude(p => p.Colour)
+                .Include(p => p.ProductFeatures).ThenInclude(p => p.Feature)
                 .FirstOrDefaultAsync(p => p.PosterImage == poster && !p.IsDeleted);
 
             if (product is null) return NotFound();
@@ -903,6 +936,11 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
             ViewBag.Tags = await _context.Tags.Where(t => !t.IsDeleted).OrderBy(t => t.Title).ToListAsync();
             ViewBag.Colours = await _context.Colours.Where(c => !c.IsDeleted).OrderBy(c => c.Title).ToListAsync();
             ViewBag.Features = await _context.Features.Where(f => !f.IsDeleted).OrderBy(f => f.Title).ToListAsync();
+
+            product.TagIds = product.ProductTags.Select(pt => pt.Tag.Id).ToList();
+            product.FeatureIds = product.ProductFeatures.Select(pf => pf.Feature.Id).ToList();
+            product.ColourIds = product.ProductColours.Select(c => c.Colour.Id).ToList();
+            product.Counts = product.ProductColours.Select(c => c.Count).ToList();
 
             Helper.DeleteFile(_env, product.PosterImage, "assets", "images", "poster");
 

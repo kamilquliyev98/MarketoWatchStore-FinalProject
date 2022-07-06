@@ -52,6 +52,7 @@ namespace MarketoWatchStore.Services
                         Price = (shoppingCart.Product.DiscountPrice != null && shoppingCart.Product.DiscountPrice > 0) ? (double)shoppingCart.Product.DiscountPrice : shoppingCart.Product.Price,
                         Count = shoppingCart.Count
                     };
+
                     shoppingCartVMs.Add(shoppingCartVM);
                 }
             }

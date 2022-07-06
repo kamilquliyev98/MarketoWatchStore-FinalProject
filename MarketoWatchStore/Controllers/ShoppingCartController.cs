@@ -300,9 +300,13 @@ namespace MarketoWatchStore.Controllers
             return RedirectToAction("index", "shoppingcart");
         }
 
-        [Authorize(Roles = "Customer")]
         public IActionResult Checkout()
         {
+            if (!User.Identity.IsAuthenticated || !User.IsInRole("Customer"))
+            {
+                return RedirectToAction("login", "account");
+            }
+
             return View();
         }
     }

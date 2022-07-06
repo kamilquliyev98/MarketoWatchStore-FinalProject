@@ -1,8 +1,15 @@
 ﻿@inject LayoutService layoutService
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<AppUser> userManager
 @{
     Setting setting = await layoutService.GetSetting();
     List<ShoppingCartVM> shoppingCartVMs = await layoutService.GetCart();
     List<CompareListVM> compareListVMs = await layoutService.GetCompare();
+    AppUser appUser = null;
+    if (User.Identity.IsAuthenticated)
+    {
+        appUser = userManager.Users.FirstOrDefault(u => u.UserName == User.Identity.Name && !u.IsAdmin);
+    }
 }
 
 <!DOCTYPE html>
@@ -84,7 +91,7 @@
                                 <li>
                                     <div class="dropdown">
                                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown">
-                                            <span>@User.Identity.Name</span>
+                                            <span>@appUser?.FullName</span>
                                             <i class="fas fa-chevron-down"></i>
                                         </a>
                                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">

@@ -1,6 +1,7 @@
 ﻿@model Product
 @{
-    int emptySpace4Images = 6 - Model.ProductImages.Where(pi => !pi.IsDeleted).Count();
+    int currentCount = Model.ProductImages.Where(pi => !pi.IsDeleted).Count();
+    int emptySpace4Images = 6 - currentCount;
     string controller = this.ViewContext.RouteData.Values["controller"].ToString();
 }
 
@@ -51,9 +52,12 @@
                         {
                             <div class="col-md-2">
                                 <img class="img-thumbnail" src="~/assets/images/products/@productImage.Image" />
-                                <div class="d-grid">
-                                    <a asp-controller="@controller" asp-action="deleteproductimage" asp-route-id="@productImage.Id" class="btn btn-sm btn-outline-danger btn-delete">Delete image</a>
-                                </div>
+                                @if (currentCount != 1)
+                                {
+                                    <div class="d-grid">
+                                        <a asp-controller="@controller" asp-action="deleteproductimage" asp-route-id="@productImage.Id" class="btn btn-sm btn-outline-danger btn-delete">Delete image</a>
+                                    </div>
+                                }
                             </div>
                         }
                     }
@@ -192,38 +196,15 @@
         </select>
         <span asp-validation-for="SpecialTypeId" class="text-danger"></span>
     </div>
-
-    @*@if (Model.ProductFeatures.Count() > 0)
-    {
-        for (int i = 0; i < Model.ProductColours.Count(); i++)
-        {
-            <div class="col-md-12">
-                <label asp-for="FeatureIds" class="form-label">Features</label>
-                <select asp-for="FeatureIds" asp-items="@new SelectList(ViewBag.Features, nameof(Feature.Id), nameof(Feature.Title), Model.ProductFeatures.ElementAt(i).Feature.Id)" class="form-select">
-                </select>
-                <span asp-validation-for="FeatureIds" class="text-danger"></span>
-            </div>
-        }
-    }
-    else
-    {
-        <div class="col-md-12">
-            <label asp-for="FeatureIds" class="form-label">Features</label>
-            <select asp-for="FeatureIds" asp-items="@new SelectList(ViewBag.Features, nameof(Feature.Id), nameof(Feature.Title))" class="form-select">
-            </select>
-            <span asp-validation-for="FeatureIds" class="text-danger"></span>
-        </div>
-    }*@
-
     <div class="col-md-12">
         <label asp-for="FeatureIds" class="form-label">Features</label>
-        <select asp-for="FeatureIds" asp-items="@new SelectList(ViewBag.Features, nameof(Feature.Id), nameof(Feature.Title))" class="form-select">
+        <select asp-for="FeatureIds" asp-items="@(new SelectList(ViewBag.Features, nameof(Feature.Id), nameof(Feature.Title)))" class="form-select">
         </select>
         <span asp-validation-for="FeatureIds" class="text-danger"></span>
     </div>
     <div class="col-md-12">
         <label asp-for="TagIds" class="form-label">Tags</label>
-        <select asp-for="TagIds" asp-items="@new SelectList(ViewBag.Tags, nameof(Tag.Id), nameof(Tag.Title))" class="form-select">
+        <select asp-for="TagIds" asp-items="@(new SelectList(ViewBag.Tags, nameof(Tag.Id), nameof(Tag.Title)))" class="form-select">
         </select>
         <span asp-validation-for="TagIds" class="text-danger"></span>
     </div>
