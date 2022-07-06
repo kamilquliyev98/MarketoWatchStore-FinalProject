@@ -6669,6 +6669,8 @@ header .main-navbar .nav-menu > li.mega-menu.home-menu .megamenu-image-title {
   position: relative;
   z-index: 1;
   line-height: 0.8;
+  color: #efefef;
+  border: none;
 }
 
 .product-box .cart-wrap button::after {

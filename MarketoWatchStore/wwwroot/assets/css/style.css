@@ -7471,7 +7471,8 @@ header .main-navbar .nav-menu > li.mega-menu.home-menu .megamenu-image-title {
   background-color: #fff;
   position: relative;
   z-index: 1;
-  line-height: 0.8;
+  color: #232323;
+  border: none;
 }
 
 .product-box .cart-wrap button::after {

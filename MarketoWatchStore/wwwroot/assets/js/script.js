@@ -256,6 +256,13 @@ $(document).ready(function () {
         $(this).toggleClass("selected").siblings("li").removeClass("selected");
     });
 
+    var colorVariant = $(".color-variant li");
+
+    colorVariant.click(function () {
+        var colorId = $(this).data('id');
+        $("#shoppingCartForm input#colourid").val(colorId);
+    });
+
 
 
     /* Modal JS */
@@ -499,12 +506,19 @@ $(document).ready(function () {
 
 
 
+
+
     /* Product Page Quantity Counter */
+    function changeCartProductCount(count) {
+        $("#shoppingCartForm #productCount").val(count);
+    }
+
     $(".qty-box .quantity-right-plus").on("click", function () {
         var $qty = $(".qty-box .input-number");
         var currentVal = parseInt($qty.val(), 10);
         if (!isNaN(currentVal)) {
             $qty.val(currentVal + 1);
+            changeCartProductCount($qty.val());
         }
     });
 
@@ -513,28 +527,22 @@ $(document).ready(function () {
         var currentVal = parseInt($qty.val(), 10);
         if (!isNaN(currentVal) && currentVal > 1) {
             $qty.val(currentVal - 1);
+            changeCartProductCount($qty.val());
         }
     });
 
 
 
+
     /* Add to cart with Toastr */
-    $(document).on("click", ".addtocart-btn", function (e) {
+    $(document).on("submit", "form#shoppingCartForm", function (e) {
         e.preventDefault();
 
-        var url = $(this).attr("href");
+        var url = $(this).attr("action");
 
-        var quantity = $("#quantity").val();
-        if (quantity == null || quantity.isNaN) {
-            quantity = 1;
-        }
+        var formData = $(this).serialize();
 
-        var colourid = $("ul.color-variant li.selected").attr("data-id");
-        if (colourid == null) {
-
-        }
-
-        fetch(url).then(response => response.text())
+        fetch(`${url}?${formData}`).then(response => response.text())
             .then(data => {
                 $(".cart-dropdown").html(data);
 
@@ -579,8 +587,6 @@ $(document).ready(function () {
         var totalAmount = document.getElementById("total-amount");
         var url = $(this).attr("href");
         var id = $(this).attr("data-id");
-
-
 
         fetch(url).then(response => response.text())
             .then(data => {
@@ -875,6 +881,13 @@ $(document).ready(function () {
             /* Color Select JS */
             $(".color-variant li").on("click", function () {
                 $(this).toggleClass("selected").siblings("li").removeClass("selected");
+            });
+
+            var colorVariant = $(".color-variant li");
+
+            colorVariant.click(function () {
+                var colorId = $(this).data('id');
+                $("#shoppingCartForm input#colourid").val(colorId);
             });
 
             /* Rating Stars JS */

@@ -79,9 +79,13 @@ namespace MarketoWatchStore.Controllers
             return View(shoppingCartVMs);
         }
 
-        public async Task<IActionResult> AddToCart(int? id, int count = 1)
+        public async Task<IActionResult> AddToCart(int? id, int? colourid, int count = 1)
         {
-            if (id is null) return RedirectToAction("error400", "home");
+            if (id is null || colourid is null) return RedirectToAction("error400", "home");
+
+            if (!await _context.Colours.AnyAsync(p => p.Id == colourid && !p.IsDeleted)) return RedirectToAction("error404", "home");
+
+            //ProductColour productColour = await _context.ProductColours
 
             Product product = await _context.Products
                 .Include(x => x.ProductColours).ThenInclude(x => x.Colour)

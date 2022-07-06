@@ -5930,6 +5930,8 @@ header {
             position: relative;
             z-index: 1;
             line-height: 0.8;
+            color: #efefef;
+            border: none;
 
             &::after {
                 content: "";

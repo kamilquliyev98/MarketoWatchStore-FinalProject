@@ -6594,7 +6594,8 @@ header {
             background-color: #fff;
             position: relative;
             z-index: 1;
-            line-height: 0.8;
+            color: #232323;
+            border: none;
 
             &::after {
                 content: "";

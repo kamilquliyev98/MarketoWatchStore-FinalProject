@@ -105,7 +105,15 @@
                     </ul>
                 </div>
                 <div class="product-btns">
-                    <a asp-controller="shoppingcart" asp-action="addtocart" asp-route-id="@Model.Id" class="btn btn-solid-default btn-sm addtocart-btn">Add to cart</a>
+                    <form id="shoppingCartForm" asp-controller="shoppingcart" asp-action="addtocart" asp-route-id="@Model.Id" method="get" style="display: inline-block;">
+                        <input type="hidden" name="count" value="1" id="productCount" />
+                        <input type="hidden" name="colourid" value="@Model.ProductColours.ElementAt(0).ColourId" id="colourid" />
+
+                        <button type="submit" class="btn btn-solid-default btn-sm addtocart-btn">
+                            Add to cart
+                        </button>
+                    </form>
+                    @*<a asp-controller="shoppingcart" asp-action="addtocart" asp-route-id="@Model.Id" asp-route-count="1" asp-route-colourid="@Model.ProductColours.ElementAt(0).ColourId" class="btn btn-solid-default btn-sm addtocart-btn">Add to cart</a>*@
                     <a asp-controller="shop" asp-action="product" asp-route-id="@Model.Id" class="btn btn-solid-default btn-sm">View details</a>
                 </div>
             </div>
