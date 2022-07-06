@@ -19,8 +19,6 @@ namespace MarketoWatchStore.Models
         [StringLength(255), Required]
         public string City { get; set; }
         [StringLength(255), Required]
-        public string State { get; set; }
-        [StringLength(255), Required]
         public string ZipCode { get; set; }
         public OrderStatus Status { get; set; }
         public IEnumerable<OrderItem> OrderItems { get; set; }

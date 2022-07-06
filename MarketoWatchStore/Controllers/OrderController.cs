@@ -28,7 +28,7 @@ namespace MarketoWatchStore.Controllers
 
             AppUser appUser = await _userManager.Users.FirstOrDefaultAsync(u => u.UserName == User.Identity.Name && !u.IsAdmin);
 
-            if (appUser is null) return RedirectToAction("login", "Account");
+            if (appUser is null) return RedirectToAction("login", "account");
 
             double total = 0;
 
