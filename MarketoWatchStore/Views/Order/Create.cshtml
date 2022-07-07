@@ -34,45 +34,10 @@
 <!-- Cart Section Start -->
 <section class="section-b-space">
     <div class="container">
-        <div class="row g-4">
+        <div class="row justify-content-center g-4">
             <div class="col-lg-8">
                 <h3 class="mb-3">Billing address</h3>
                 @await Html.PartialAsync("_CheckoutFormPartial", Model)
-            </div>
-
-            <div class="col-lg-4">
-                <div class="your-cart-box">
-                    <h3 class="mb-3 d-flex text-capitalize">
-                        Your cart<span class="badge bg-theme new-badge rounded-pill ms-auto bg-dark">3</span>
-                    </h3>
-                    <ul class="list-group mb-3">
-                        <li class="list-group-item d-flex justify-content-between lh-condensed">
-                            <div>
-                                <h6 class="my-0">Product name</h6>
-                                <small>Brief description</small>
-                            </div>
-                            <span>$12</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between lh-condensed">
-                            <div>
-                                <h6 class="my-0">Second product</h6>
-                                <small>Brief description</small>
-                            </div>
-                            <span>$8</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between lh-condensed">
-                            <div>
-                                <h6 class="my-0">Third item</h6>
-                                <small>Brief description</small>
-                            </div>
-                            <span>$5</span>
-                        </li>
-                        <li class="list-group-item d-flex lh-condensed justify-content-between">
-                            <span class="fw-bold">Total (USD)</span>
-                            <strong>$25</strong>
-                        </li>
-                    </ul>
-                </div>
             </div>
         </div>
     </div>

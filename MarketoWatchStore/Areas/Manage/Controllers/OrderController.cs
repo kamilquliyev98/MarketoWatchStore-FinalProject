@@ -1,4 +1,5 @@
 ﻿using MarketoWatchStore.DAL;
+using MarketoWatchStore.Enums;
 using MarketoWatchStore.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -78,9 +79,55 @@ namespace MarketoWatchStore.Areas.Manage.Controllers
         }
         #endregion
 
-        public async Task<IActionResult> Index(string status = "pending", int page = 1)
+        #region Read
+        public async Task<IActionResult> Index(string status = "all", int page = 1)
         {
             return View(await PaginateAsync(status, page));
         }
+        #endregion
+
+        #region Update
+        public async Task<IActionResult> Update(int? id)
+        {
+            if (id is null) return BadRequest();
+
+            Order order = await _context.Orders
+                .Include(o => o.AppUser)
+                .Include(o => o.OrderItems).ThenInclude(oi => oi.Product)
+                .FirstOrDefaultAsync(o => o.Id == id && !o.IsDeleted);
+
+            if (order is null) return NotFound();
+
+            return View(order);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Update(int? id, int orderStatus)
+        {
+            if (id is null) return BadRequest();
+
+            Order order = await _context.Orders
+                .Include(o => o.AppUser)
+                .Include(o => o.OrderItems).ThenInclude(oi => oi.Product)
+                .FirstOrDefaultAsync(o => o.Id == id && !o.IsDeleted);
+
+            if (order is null) return NotFound();
+
+            if (order.Status != OrderStatus.Accepted && orderStatus == 1)
+            {
+                foreach (OrderItem orderItem in order.OrderItems)
+                {
+                    orderItem.Product.Count -= orderItem.Count;
+                }
+            }
+
+            order.Status = (OrderStatus)orderStatus;
+            order.UpdatedAt = DateTime.UtcNow.AddHours(4);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("index");
+        }
+        #endregion
     }
 }

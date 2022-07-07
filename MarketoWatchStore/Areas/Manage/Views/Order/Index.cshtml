@@ -83,7 +83,7 @@
 
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Messages</h5>
+                        <h5 class="card-title"></h5>
 
                         <!-- Orders Table -->
                         <div class="table-responsive">
@@ -133,21 +133,9 @@
                                                 }
                                             </td>
                                             <td>
-                                                <a asp-area="manage" asp-controller="@controller" asp-action="detail" asp-route-id="@order.Id" asp-route-page="@ViewBag.CurrentPage" asp-route-status="@ViewBag.Status" class="btn btn-info" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Detail">
-                                                    <i class="bi bi-eye"></i>
+                                                <a asp-area="manage" asp-controller="@controller" asp-action="update" asp-route-id="@order.Id" asp-route-page="@ViewBag.CurrentPage" asp-route-status="@ViewBag.Status" class="btn btn-warning" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Edit">
+                                                    <i class="bi bi-pencil-square"></i>
                                                 </a>
-                                                @if (order.IsDeleted)
-                                                {
-                                                    <a asp-area="manage" asp-controller="@controller" asp-action="deleterestore" asp-route-id="@order.Id" asp-route-page="@ViewBag.CurrentPage" asp-route-status="@ViewBag.Status" class="btn btn-primary" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Restore">
-                                                        <i class="bi bi-recycle"></i>
-                                                    </a>
-                                                }
-                                                else
-                                                {
-                                                    <a asp-area="manage" asp-controller="@controller" asp-action="deleterestore" asp-route-id="@order.Id" asp-route-page="@ViewBag.CurrentPage" asp-route-status="@ViewBag.Status" class="btn btn-danger" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Delete">
-                                                        <i class="bi bi-trash"></i>
-                                                    </a>
-                                                }
                                             </td>
                                         </tr>
                                     }
