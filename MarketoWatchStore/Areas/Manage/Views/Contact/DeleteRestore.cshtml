@@ -1,0 +1,107 @@
+﻿@model Contact
+@{
+    string sender = Model.FirstName + " " + Model.LastName;
+    ViewData["Title"] = "Message from " + sender;
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Contacts</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-area="manage" asp-controller="dashboard" asp-action="index">Dashboard</a></li>
+                <li class="breadcrumb-item"><a asp-area="manage" asp-controller="@controller" asp-action="index">Contacts</a></li>
+                <li class="breadcrumb-item active">Detail</li>
+            </ol>
+        </nav>
+    </div>
+    <!-- End Page Title -->
+
+    <section class="section profile">
+        <div class="row">
+
+            <div class="col-xl-12">
+
+                <div class="card">
+                    <div class="card-body pt-3">
+                        <!-- Bordered Tabs -->
+                        <ul class="nav nav-tabs nav-tabs-bordered">
+
+                            <li class="nav-item">
+                                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#overview">Overview</button>
+                            </li>
+
+                            <li class="nav-item">
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#content">Content</button>
+                            </li>
+
+                        </ul>
+                        <div class="tab-content pt-2">
+
+                            <div class="tab-pane fade show active profile-overview" id="overview">
+
+                                <h5 class="card-title"></h5>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">First name:</div>
+                                    <div class="col-lg-9 col-md-8">@Model.FirstName</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Last name:</div>
+                                    <div class="col-lg-9 col-md-8">@Model.LastName</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Email:</div>
+                                    <div class="col-lg-9 col-md-8">@Model.Email</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label ">Date:</div>
+                                    <div class="col-lg-9 col-md-8">@Model.CreatedAt?.ToString("g")</div>
+                                </div>
+
+                                @if (Model.IsDeleted)
+                                {
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">Deleted at:</div>
+                                        <div class="col-lg-9 col-md-8">@Model.DeletedAt?.ToString("g")</div>
+                                    </div>
+                                }
+
+                            </div>
+
+                            <div class="tab-pane fade profile-edit pt-3" id="content">
+
+                                <h5 class="card-title">Message</h5>
+                                <p>@Model.Message</p>
+
+                            </div>
+
+                        </div>
+                        <!-- End Bordered Tabs -->
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-xl-12 d-grid mt-3">
+                @if (Model.IsDeleted)
+                {
+                    <a asp-area="manage" asp-controller="@controller" asp-action="restore" asp-route-id="@ViewBag.BlogId" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.CurrentPage" class="btn btn-primary">Restore</a>
+                }
+                else
+                {
+                    <a asp-area="manage" asp-controller="@controller" asp-action="delete" asp-route-id="@ViewBag.BlogId" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.CurrentPage" class="btn btn-danger">Delete</a>
+                }
+                <a asp-area="manage" asp-controller="@controller" asp-action="index" asp-route-status="@ViewBag.Status" asp-route-page="@ViewBag.CurrentPage" class="btn btn-info">Go back</a>
+            </div>
+        </div>
+    </section>
+
+</main>
+<!-- End #main -->

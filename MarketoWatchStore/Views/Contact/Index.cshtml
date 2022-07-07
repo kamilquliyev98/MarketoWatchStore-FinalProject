@@ -30,7 +30,6 @@
     </div>
 </section>
 <!-- Breadcrumb section end -->
-
 <!-- Contact Section Start -->
 <section class="contact-section">
     <div class="container">
@@ -42,33 +41,9 @@
                             <h2>Contact Us</h2>
                         </div>
                     </div>
-                    <div class="row g-4 mt-md-1 mt-2">
-                        <div class="col-md-6">
-                            <label for="first" class="form-label">First Name</label>
-                            <input type="text" class="form-control" id="first" placeholder="Enter Your First Name"
-                                   required>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="last" class="form-label">Last Name</label>
-                            <input type="text" class="form-control" id="last" placeholder="Enter Your Last Name"
-                                   required>
-                        </div>
 
-                        <div class="col-md-12">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email"
-                                   placeholder="Enter Your Email Address" required>
-                        </div>
+                    @await Html.PartialAsync("_ContactFormPartial", Model.Contact)
 
-                        <div class="col-12">
-                            <label for="comment" class="form-label">Comment</label>
-                            <textarea class="form-control" id="comment" rows="5" required></textarea>
-                        </div>
-
-                        <div class="col-auto">
-                            <button class="btn btn-solid-default" type="submit">Submit</button>
-                        </div>
-                    </div>
                 </div>
             </div>
 
@@ -121,7 +96,6 @@
     </div>
 </section>
 <!-- Contact Section End -->
-
 <!-- Map Section start -->
 <section class="contact-section">
     <div class="container-fluid">

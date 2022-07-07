@@ -9,5 +9,6 @@ namespace MarketoWatchStore.ViewModels
     public class ContactVM
     {
         public Setting Setting { get; set; }
+        public Contact Contact { get; set; }
     }
 }

@@ -36,5 +36,6 @@ namespace MarketoWatchStore.DAL
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
     }
 }
