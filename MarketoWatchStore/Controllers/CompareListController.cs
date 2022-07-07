@@ -79,7 +79,7 @@ namespace MarketoWatchStore.Controllers
 
             List<CompareListVM> compareListVMs = null;
 
-            if (!string.IsNullOrWhiteSpace(cookieCompare))
+            if (!string.IsNullOrWhiteSpace(cookieCompare) && cookieCompare != "")
             {
                 compareListVMs = JsonConvert.DeserializeObject<List<CompareListVM>>(cookieCompare);
 

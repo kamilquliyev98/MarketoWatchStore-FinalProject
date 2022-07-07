@@ -36,12 +36,13 @@
 <section id="portfolio" class="left-sidebar-section masonary-blog-section section-b-space">
     <div class="container">
         <div class="row g-4">
-            <div class="col-lg-9 col-md-7 order-md-1 ratio3_2">
+            @*<div class="col-lg-9 col-md-7 order-md-1 ratio3_2">*@
+            <div class="col-lg-12 col-md-12 order-md-1 ratio3_2">
                 <div class="row g-4">
 
                     @foreach (Blog blog in Model)
                     {
-                        <div class="col-lg-4 col-md-6">
+                        <div class="col-lg-3 col-md-4">
                             <div class="card blog-categority">
                                 <a asp-controller="blog" asp-action="blog" asp-route-id="@blog.Id" class="blog-img">
                                     <img src="assets/images/blog/@blog.Image" alt="blog-image" class="card-img-top blur-up lazyload bg-img">
@@ -126,20 +127,20 @@
                     </nav>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-5">
-                <div class="left-side">
-                    <!-- Search Bar Start -->
-                    <div class="search-section">
-                        <div class="input-group search-bar">
-                            <input type="search" class="form-control search-input" placeholder="Search">
-                            <button class="input-group-text search-button" id="basic-addon2">
-                                <i class="fas fa-search text-color"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <!-- Search Bar End -->
-                </div>
-            </div>
+            <!--<div class="col-lg-3 col-md-5">
+        <div class="left-side">-->
+            <!-- Search Bar Start -->
+            <!--<div class="search-section">
+        <div class="input-group search-bar">
+            <input type="search" class="form-control search-input" placeholder="Search">
+            <button class="input-group-text search-button" id="basic-addon2">
+                <i class="fas fa-search text-color"></i>
+            </button>
+        </div>
+    </div>-->
+            <!-- Search Bar End -->
+            <!--</div>
+    </div>-->
         </div>
     </div>
 </section>

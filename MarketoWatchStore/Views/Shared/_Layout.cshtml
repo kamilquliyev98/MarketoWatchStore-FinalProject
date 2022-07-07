@@ -183,21 +183,21 @@
                                             <i data-feather="search"></i>
                                         </div>
                                     </li>
-                                    <li class="onhover-dropdown wislist-dropdown">
+                                    <!--<li class="onhover-dropdown wislist-dropdown">
                                         <div class="cart-media">
                                             <div class="cart-icon">
                                                 <i data-feather="heart"></i>
                                                 <span class="label label-theme rounded-pill">0</span>
                                             </div>
                                         </div>
-                                        <div class="onhover-div">
-                                            <!-- <a asp-controller="wishlist" asp-action="index">
-                                                <div class="wislist-empty">
-                                                    <i class="fa-solid fa-heart"></i>
-                                                    <h6 class="mb-1">Your wishlist is empty!</h6>
-                                                </div>
-                                            </a> -->
-                                            <div class="cart-menu">
+                                        <div class="onhover-div">-->
+                                    <!-- <a asp-controller="wishlist" asp-action="index">
+                                        <div class="wislist-empty">
+                                            <i class="fa-solid fa-heart"></i>
+                                            <h6 class="mb-1">Your wishlist is empty!</h6>
+                                        </div>
+                                    </a> -->
+                                    <!--<div class="cart-menu">
                                                 <div class="cart-title">
                                                     <h6>
                                                         <i data-feather="heart"></i>
@@ -255,7 +255,7 @@
                                     </li>
                                     <li class="onhover-dropdown wislist-dropdown compare-dropdown">
                                         @await Html.PartialAsync("_MiniComparePartial", await layoutService.GetCompare())
-                                    </li>
+                                    </li>-->
                                     <li>
                                         <div class="">
                                             <button id="darkButton" class="btn btn-sm dark-buttton">
@@ -310,10 +310,16 @@
                     <span>Cart</span>
                 </a>
             </li>
-            <li>
+            @*<li>
                 <a asp-controller="wishlist" asp-action="index">
                     <i data-feather="heart"></i>
                     <span>Wishlist</span>
+                </a>
+            </li>*@
+            <li>
+                <a asp-controller="blog" asp-action="index">
+                    <i data-feather="globe"></i>
+                    <span>Blog</span>
                 </a>
             </li>
             @if (User.Identity.IsAuthenticated)
