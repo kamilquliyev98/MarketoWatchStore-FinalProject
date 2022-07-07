@@ -2,6 +2,7 @@
 using MarketoWatchStore.Enums;
 using MarketoWatchStore.Models;
 using MarketoWatchStore.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -14,9 +15,11 @@ namespace MarketoWatchStore.Controllers
     public class ShopController : Controller
     {
         private readonly MarketoDbContext _context;
-        public ShopController(MarketoDbContext context)
+        private readonly UserManager<AppUser> _userManager;
+        public ShopController(MarketoDbContext context, UserManager<AppUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         public async Task<IActionResult> Index()
@@ -112,6 +115,44 @@ namespace MarketoWatchStore.Controllers
             if (product is null) return RedirectToAction("error404", "home");
 
             return View(product);
+        }
+
+        public async Task<IActionResult> AddProductReview(int? id, int? star, string comment)
+        {
+            if (!User.Identity.IsAuthenticated) return RedirectToAction("login", "account");
+
+            if (id is null || star is null || star <= 0 || star > 5) return View();
+
+            Review review = new Review();
+
+            AppUser appUser = await _userManager.Users.FirstOrDefaultAsync(u => u.UserName == User.Identity.Name && !u.IsAdmin);
+            review.Email = appUser.Email;
+            review.Name = appUser.UserName;
+            review.Star = (int)star;
+
+            ProductVM productVM = new ProductVM()
+            {
+                Product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id && !p.IsDeleted),
+                Reviews = await _context.Reviews.Where(p => p.ProductId == id && !p.IsDeleted).ToListAsync()
+            };
+
+            if (string.IsNullOrWhiteSpace(comment) || string.IsNullOrEmpty(comment) || comment.Length > 1000)
+                return PartialView("_AddReviewForProductPartial", productVM);
+
+            review.Comment = comment.Trim();
+            review.ProductId = (int)id;
+            review.CreatedAt = DateTime.UtcNow.AddHours(4);
+
+            await _context.Reviews.AddAsync(review);
+            await _context.SaveChangesAsync();
+
+            productVM = new ProductVM()
+            {
+                Product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id),
+                Reviews = await _context.Reviews.Where(p => p.ProductId == id && !p.IsDeleted).ToListAsync()
+            };
+
+            return PartialView("_AddReviewForProductPartial", productVM);
         }
     }
 }

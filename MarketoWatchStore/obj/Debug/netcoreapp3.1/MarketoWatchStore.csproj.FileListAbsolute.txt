@@ -244,4 +244,4 @@ C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcor
 C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcoreapp3.1\Razor\Views\Home\MaintenanceMode.cshtml.g.cs
 C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Order\Index.cshtml.g.cs
 C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Order\Update.cshtml.g.cs
-C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcoreapp3.1\MarketoWatchStore.csproj.AssemblyReference.cache
+C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_AddReviewForProductPartial.cshtml.g.cs
