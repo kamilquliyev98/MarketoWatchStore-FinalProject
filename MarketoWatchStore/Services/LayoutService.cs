@@ -79,46 +79,46 @@ namespace MarketoWatchStore.Services
             return shoppingCartVMs;
         }
 
-        public async Task<List<CompareListVM>> GetCompare()
-        {
-            string cookieCompare = _httpContextAccessor.HttpContext.Request.Cookies["compare"];
+        //public async Task<List<CompareListVM>> GetCompare()
+        //{
+        //    string cookieCompare = _httpContextAccessor.HttpContext.Request.Cookies["compare"];
 
-            List<CompareListVM> compareListVMs = null;
+        //    List<CompareListVM> compareListVMs = null;
 
-            if (!string.IsNullOrWhiteSpace(cookieCompare))
-            {
-                compareListVMs = JsonConvert.DeserializeObject<List<CompareListVM>>(cookieCompare);
+        //    if (!string.IsNullOrWhiteSpace(cookieCompare))
+        //    {
+        //        compareListVMs = JsonConvert.DeserializeObject<List<CompareListVM>>(cookieCompare);
 
-                foreach (CompareListVM compareListVM in compareListVMs)
-                {
-                    Product dbProduct = await _context.Products
-                        .Include(p => p.Brand)
-                        .Include(p => p.Display)
-                        .Include(p => p.PowerSource)
-                        .Include(p => p.SpecialType)
-                        .Include(p => p.ProductImages)
-                        .Include(p => p.Reviews)
-                        .Include(p => p.ProductTags).ThenInclude(p => p.Tag)
-                        .Include(p => p.ProductColours).ThenInclude(p => p.Colour)
-                        .Include(p => p.ProductFeatures).ThenInclude(p => p.Feature)
-                        .FirstOrDefaultAsync(p => p.Id == compareListVM.ProductId);
+        //        foreach (CompareListVM compareListVM in compareListVMs)
+        //        {
+        //            Product dbProduct = await _context.Products
+        //                .Include(p => p.Brand)
+        //                .Include(p => p.Display)
+        //                .Include(p => p.PowerSource)
+        //                .Include(p => p.SpecialType)
+        //                .Include(p => p.ProductImages)
+        //                .Include(p => p.Reviews)
+        //                .Include(p => p.ProductTags).ThenInclude(p => p.Tag)
+        //                .Include(p => p.ProductColours).ThenInclude(p => p.Colour)
+        //                .Include(p => p.ProductFeatures).ThenInclude(p => p.Feature)
+        //                .FirstOrDefaultAsync(p => p.Id == compareListVM.ProductId);
 
-                    compareListVM.Title = dbProduct.Title;
-                    compareListVM.MainImage = dbProduct.MainImage;
-                    compareListVM.Price = (dbProduct.DiscountPrice != null && dbProduct.DiscountPrice > 0) ? (double)dbProduct.DiscountPrice : dbProduct.Price;
-                    compareListVM.Gender = dbProduct.Gender;
-                    compareListVM.Brand = dbProduct.Brand.Title;
-                    compareListVM.Display = dbProduct.Display.Title;
-                    compareListVM.PowerSource = dbProduct.PowerSource.Title;
-                    compareListVM.SpecialType = dbProduct.SpecialType.Title;
-                }
-            }
-            else
-            {
-                compareListVMs = new List<CompareListVM>();
-            }
+        //            compareListVM.Title = dbProduct.Title;
+        //            compareListVM.MainImage = dbProduct.MainImage;
+        //            compareListVM.Price = (dbProduct.DiscountPrice != null && dbProduct.DiscountPrice > 0) ? (double)dbProduct.DiscountPrice : dbProduct.Price;
+        //            compareListVM.Gender = dbProduct.Gender;
+        //            compareListVM.Brand = dbProduct.Brand.Title;
+        //            compareListVM.Display = dbProduct.Display.Title;
+        //            compareListVM.PowerSource = dbProduct.PowerSource.Title;
+        //            compareListVM.SpecialType = dbProduct.SpecialType.Title;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        compareListVMs = new List<CompareListVM>();
+        //    }
 
-            return compareListVMs;
-        }
+        //    return compareListVMs;
+        //}
     }
 }

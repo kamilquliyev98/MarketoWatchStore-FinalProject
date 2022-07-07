@@ -1,0 +1,170 @@
+﻿@model IEnumerable<Order>
+@{
+    ViewData["Title"] = "Orders";
+    int tableRow = (ViewBag.CurrentPage - 1) * 5;
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+<main id="main" class="main">
+
+    <div class="row justify-content-between align-items-center">
+        <div class="col-md-3">
+            <div class="pagetitle">
+                <h1>Orders</h1>
+                <nav>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-area="manage" asp-controller="dashboard" asp-action="index">Dashboard</a></li>
+                        <li class="breadcrumb-item active">Orders</li>
+                    </ol>
+                </nav>
+            </div>
+            <!-- End Page Title -->
+        </div>
+        <div class="col-md-3">
+            <form class="form-group">
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <label for="status" class="col-form-label">Show:</label>
+                    </div>
+                    <div class="col-auto">
+                        <select class="form-select" id="status" name="status">
+                            @switch (ViewBag.Status)
+                            {
+                                case "pending":
+                                    <option value="all">All</option>
+                                    <option value="pending" selected>Pending</option>
+                                    <option value="accepted">Accepted</option>
+                                    <option value="rejected">Rejected</option>
+                                    <option value="delivered">Delivered</option>
+                                    break;
+                                case "accepted":
+                                    <option value="all">All</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="accepted" selected>Accepted</option>
+                                    <option value="rejected">Rejected</option>
+                                    <option value="delivered">Delivered</option>
+                                    break;
+                                case "rejected":
+                                    <option value="all">All</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="accepted">Accepted</option>
+                                    <option value="rejected" selected>Rejected</option>
+                                    <option value="delivered">Delivered</option>
+                                    break;
+                                case "delivered":
+                                    <option value="all">All</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="accepted">Accepted</option>
+                                    <option value="rejected">Rejected</option>
+                                    <option value="delivered" selected>Delivered</option>
+                                    break;
+                                default:
+                                    <option value="all" selected>All</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="accepted">Accepted</option>
+                                    <option value="rejected">Rejected</option>
+                                    <option value="delivered">Delivered</option>
+                                    break;
+                            }
+
+                        </select>
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-info">Filter</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <section class="section">
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Messages</h5>
+
+                        <!-- Orders Table -->
+                        <div class="table-responsive">
+                            <table class="table table-hover table-bordered align-middle">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Fullname</th>
+                                        <th scope="col">Order price</th>
+                                        <th scope="col">Date &amp; Time</th>
+                                        <th scope="col">Order status</th>
+                                        <th scope="col">Settings</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (Order order in Model)
+                                    {
+                                        tableRow++;
+                                        <tr>
+                                            <th scope="row">@tableRow</th>
+                                            <td>
+                                                @order.AppUser.FullName
+                                            </td>
+                                            <td>
+                                                $@order.OrderItems.Sum(o => o.TotalPrice)
+                                            </td>
+                                            <td>
+                                                @order.CreatedAt?.ToString("g")
+                                            </td>
+                                            <td>
+                                                @switch (order.Status)
+                                                {
+                                                    case OrderStatus.Pending:
+                                                        <span class="text-primary">Pending</span>
+                                                        break;
+                                                    case OrderStatus.Accepted:
+                                                        <span class="text-success">Accepted</span>
+                                                        break;
+                                                    case OrderStatus.Rejected:
+                                                        <span class="text-danger">Rejected</span>
+                                                        break;
+                                                    case OrderStatus.Delivered:
+                                                        <span class="text-success">Delivered</span>
+                                                        break;
+                                                    default:
+                                                        break;
+                                                }
+                                            </td>
+                                            <td>
+                                                <a asp-area="manage" asp-controller="@controller" asp-action="detail" asp-route-id="@order.Id" asp-route-page="@ViewBag.CurrentPage" asp-route-status="@ViewBag.Status" class="btn btn-info" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Detail">
+                                                    <i class="bi bi-eye"></i>
+                                                </a>
+                                                @if (order.IsDeleted)
+                                                {
+                                                    <a asp-area="manage" asp-controller="@controller" asp-action="deleterestore" asp-route-id="@order.Id" asp-route-page="@ViewBag.CurrentPage" asp-route-status="@ViewBag.Status" class="btn btn-primary" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Restore">
+                                                        <i class="bi bi-recycle"></i>
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <a asp-area="manage" asp-controller="@controller" asp-action="deleterestore" asp-route-id="@order.Id" asp-route-page="@ViewBag.CurrentPage" asp-route-status="@ViewBag.Status" class="btn btn-danger" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Delete">
+                                                        <i class="bi bi-trash"></i>
+                                                    </a>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- End Table -->
+                        <!-- Pagination -->
+                        @await Html.PartialAsync("_PaginationPartial")
+                        <!-- End Pagination -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main>
+<!-- End #main -->

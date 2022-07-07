@@ -4,7 +4,7 @@
 @{
     Setting setting = await layoutService.GetSetting();
     List<ShoppingCartVM> shoppingCartVMs = await layoutService.GetCart();
-    List<CompareListVM> compareListVMs = await layoutService.GetCompare();
+    //List<CompareListVM> compareListVMs = await layoutService.GetCompare();
     AppUser appUser = null;
     if (User.Identity.IsAuthenticated)
     {
@@ -253,9 +253,9 @@
                                             </div>
                                         </div>
                                     </li>
-                                    <li class="onhover-dropdown wislist-dropdown compare-dropdown">
-                                        @await Html.PartialAsync("_MiniComparePartial", await layoutService.GetCompare())
-                                    </li>-->
+                                    <li class="onhover-dropdown wislist-dropdown compare-dropdown">-->
+                                        @*@await Html.PartialAsync("_MiniComparePartial", await layoutService.GetCompare())*@
+                                    <!--</li>-->
                                     <li>
                                         <div class="">
                                             <button id="darkButton" class="btn btn-sm dark-buttton">
