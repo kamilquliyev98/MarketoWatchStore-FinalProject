@@ -100,7 +100,9 @@ namespace MarketoWatchStore.Controllers
         {
             if (id is null) return RedirectToAction("error400", "home");
 
-            Product product = await _context.Products
+            ReviewVM shopVM = new ReviewVM
+            {
+                Product = await _context.Products
                 .Include(p => p.Brand)
                 .Include(p => p.Display)
                 .Include(p => p.PowerSource)
@@ -110,13 +112,16 @@ namespace MarketoWatchStore.Controllers
                 .Include(p => p.ProductTags).ThenInclude(p => p.Tag)
                 .Include(p => p.ProductColours).ThenInclude(p => p.Colour)
                 .Include(p => p.ProductFeatures).ThenInclude(p => p.Feature)
-                .FirstOrDefaultAsync(p => !p.IsDeleted && p.Id == id);
+                .FirstOrDefaultAsync(p => !p.IsDeleted && p.Id == id)
+            };
 
-            if (product is null) return RedirectToAction("error404", "home");
+            if (shopVM is null) return RedirectToAction("error404", "home");
 
-            return View(product);
+            return View(shopVM);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddProductReview(int? id, int? star, string comment)
         {
             if (!User.Identity.IsAuthenticated) return RedirectToAction("login", "account");
@@ -152,7 +157,7 @@ namespace MarketoWatchStore.Controllers
                 Reviews = await _context.Reviews.Where(p => p.ProductId == id && !p.IsDeleted).ToListAsync()
             };
 
-            return PartialView("_AddReviewForProductPartial", productVM);
+            return RedirectToAction(nameof(Product), new { id });
         }
     }
 }
