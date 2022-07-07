@@ -21,6 +21,9 @@ namespace MarketoWatchStore.Controllers
 
         public async Task<IActionResult> Index()
         {
+            // Temporarily
+            return RedirectToAction("maintenancemode", "home");
+
             string cookieCompare = HttpContext.Request.Cookies["compare"];
 
             List<CompareListVM> compareListVMs = new List<CompareListVM>();
@@ -59,6 +62,9 @@ namespace MarketoWatchStore.Controllers
 
         public async Task<IActionResult> AddToCompare(int? id)
         {
+            // Temporarily
+            return RedirectToAction("maintenancemode", "home");
+
             if (id is null) return RedirectToAction("error400", "home");
 
             Product product = await _context.Products
@@ -137,6 +143,9 @@ namespace MarketoWatchStore.Controllers
 
         public async Task<IActionResult> RemoveItem(int? id)
         {
+            // Temporarily
+            return RedirectToAction("maintenancemode", "home");
+
             if (id is null) return RedirectToAction("error400", "home");
 
             Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);

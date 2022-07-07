@@ -10,6 +10,9 @@ namespace MarketoWatchStore.Controllers
     {
         public IActionResult Index()
         {
+            // Temporarily
+            return RedirectToAction("maintenancemode", "home");
+
             return View();
         }
     }
