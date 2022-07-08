@@ -131,6 +131,11 @@ namespace MarketoWatchStore.Controllers
             Review review = new Review();
 
             AppUser appUser = await _userManager.Users.FirstOrDefaultAsync(u => u.UserName == User.Identity.Name && !u.IsAdmin);
+
+            if (_context.Reviews.Any(x => x.ProductId == id && x.AppUserId == appUser.Id))
+                return RedirectToAction(nameof(Product), new { id });
+
+            review.AppUserId = appUser.Id;
             review.Email = appUser.Email;
             review.Name = appUser.UserName;
             review.Star = (int)star;
@@ -142,7 +147,7 @@ namespace MarketoWatchStore.Controllers
             };
 
             if (string.IsNullOrWhiteSpace(comment) || string.IsNullOrEmpty(comment) || comment.Length > 1000)
-                return PartialView("_AddReviewForProductPartial", productVM);
+                return RedirectToAction(nameof(Product), new { id });
 
             review.Comment = comment.Trim();
             review.ProductId = (int)id;

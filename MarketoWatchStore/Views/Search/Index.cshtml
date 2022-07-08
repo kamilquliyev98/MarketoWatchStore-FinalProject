@@ -31,6 +31,7 @@
     </div>
 </section>
 <!-- Breadcrumb section end -->
+
 <!-- Search bar section start -->
 <section class="search-section">
     <div class="container">
@@ -65,6 +66,7 @@
     </div>
 </section>
 <!-- Search bar section end -->
+
 <!-- Result setion -->
 <section class="section-b-space">
     <div class="container">
@@ -109,7 +111,7 @@
                                                     <i data-feather="eye"></i>
                                                 </a>
                                             </li>
-                                            <li>
+                                            @*<li>
                                                 <a href="javascript:void(0)" class="addtocompare-btn">
                                                     <i data-feather="refresh-cw"></i>
                                                 </a>
@@ -118,7 +120,7 @@
                                                 <a href="javascript:void(0)" class="wishlist addtowishlist-btn">
                                                     <i data-feather="heart"></i>
                                                 </a>
-                                            </li>
+                                            </li>*@
                                         </ul>
                                     </div>
                                 </div>
@@ -142,7 +144,8 @@
                                             }
                                         </span>
                                         <div class="star-ratings">
-                                            <div class="fill-ratings" style="width: 50%;">
+                                            @{ double avgstar = product.Reviews.Count() > 0 ? (product.Reviews.Sum(s => s.Star) / (double)product.Reviews.Count()) : 0; }
+                                            <div class="fill-ratings" style="width: @((avgstar * 20).ToString("0"))%;">
                                                 <span>★★★★★</span>
                                             </div>
                                             <div class="empty-ratings">
