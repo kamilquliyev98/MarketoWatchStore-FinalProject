@@ -23,6 +23,7 @@ namespace MarketoWatchStore.Controllers
             {
                 Slides = await _context.Products
                 .Include(p => p.Brand)
+                .Include(p => p.Reviews)
                 .Where(p => !p.IsDeleted && p.SlideImage != null && p.ShareOnHomeSlide)
                 .ToListAsync(),
 

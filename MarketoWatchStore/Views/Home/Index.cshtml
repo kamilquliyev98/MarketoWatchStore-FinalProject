@@ -1,127 +1,113 @@
 ﻿@model HomeVM
-@{
-    ViewBag.Title = "Marketo | Watch Store";
-}
+@{ ViewBag.Title = "Marketo | Watch Store"; }
 
 <!-- Home Slider start -->
 @if (Model.Slides != null && Model.Slides.Count() > 0)
 {
-    <section class="pt-0 overflow-hidden">
-        <div>
-            <div class="banner-slider box-arrow">
-                @foreach (Product productSlide in Model.Slides)
-                {
-                    <!-- Slider Start -->
-                    <div class="banner-poster">
-                        <div class="slider-right-detail">
-                            <div class="labels">
-                                <ul class="label-15">
-                                    @if (Model.Setting.Facebook != null)
-                                    {
-                                        <li>
-                                            <a href="@Model.Setting.Facebook" target="_blank">
-                                                <img src="~/assets/images/social-icon/1.png" class="img-fluid blur-up lazyload" alt="facebook">
-                                                <h5 class="d-lg-block d-none">Facebook</h5>
-                                            </a>
-                                        </li>
-                                    }
-                                    @if (Model.Setting.Instagram != null)
-                                    {
-                                        <li>
-                                            <a href="@Model.Setting.Instagram" target="_blank">
-                                                <img src="~/assets/images/social-icon/2.png" class="img-fluid blur-up lazyload" alt="Instagram">
-                                                <h5 class="d-lg-block d-none">Instagram</h5>
-                                            </a>
-                                        </li>
-                                    }
-                                    @if (Model.Setting.Twitter != null)
-                                    {
-                                        <li>
-                                            <a href="@Model.Setting.Twitter" target="_blank">
-                                                <img src="~/assets/images/social-icon/3.png" class="img-fluid blur-up lazyload" alt="Twitter">
-                                                <h5 class="d-lg-block d-none">Twitter</h5>
-                                            </a>
-                                        </li>
-                                    }
-                                </ul>
-                            </div>
-                            @if (productSlide.DiscountPrice != null)
-                            {
-                                <h4>New offer</h4>
-                                <div class="offer-box">
-                                    @{var calculateDiscount = 100 - (double)productSlide.DiscountPrice * 100 / productSlide.Price;}
-                                    <h6>@calculateDiscount.ToString("0.00")% off</h6>
-                                </div>
-                            }
-                        </div>
-
-                        <div class="slider-bg">
-                            <div class="bg-text">
-                                <span>
-                                    @if (productSlide.Brand.Title.Length > 7)
-                                    {
-                                        @("Marketo")
-                                    }
-                                    else
-                                    {
-                                        @productSlide.Brand.Title
-                                    }
-                                </span>
-                            </div>
-
-                            <div class="bg-circle" style="background: #362319;"></div>
-                            <img src="~/assets/images/slider/@productSlide.SlideImage" class="watch-1 img-fluid blur-up lazyload" alt="slider-image">
-                        </div>
-
-                        <div class="suggestion-product d-xl-block d-none">
-                            <h3>Suggestion Product</h3>
-
-                            <a asp-controller="shop" asp-action="product" asp-route-id="@productSlide.Id" class="slider-watch-image d-block" tabindex="0">
-                                <div class="relative-watches">
-                                    <img src="assets/images/products/@productSlide.MainImage" class="img-fluid blur-up lazyloaded" alt="product-image">
-                                    <div class="watch-price">
-                                        <h5>$@((productSlide.DiscountPrice != null) ? productSlide.DiscountPrice : productSlide.Price)</h5>
-                                        <h6>@(productSlide.Brand.Title + " " + productSlide.Title)</h6>
-                                        <div class="star-ratings">
-                                            <div class="fill-ratings" style="width: 90%;">
-                                                <span>★★★★★</span>
-                                            </div>
-                                            <div class="empty-ratings">
-                                                <span>★★★★★</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="price-number">
-                            <h2>
-                                @if (productSlide.DiscountPrice != null)
-                                {
-                                    @("$" + productSlide.DiscountPrice) <span><del>@("$" + productSlide.Price)</del></span>
-                                }
-                                else
-                                {
-                                    @productSlide.Price
-                                }
-                            </h2>
-                        </div>
-
-                        @if (Model.Slides.Count() > 1)
-                        {
-                            <div class="slider-arrow-2">
-                                <div class="left-arrow d-lg-block d-none"></div>
-                                <div class="right-arrow d-lg-block d-none"></div>
-                            </div>
-                        }
-                    </div>
-                    <!-- Slider End -->
-                }
-            </div>
-        </div>
-    </section>
+<section class="pt-0 overflow-hidden">
+    <div>
+        <div class="banner-slider box-arrow">
+            @foreach (Product productSlide in Model.Slides)
+            {<!-- Slider Start -->
+                                    <div class="banner-poster">
+                                        <div class="slider-right-detail">
+                                            <div class="labels">
+                                                <ul class="label-15">
+                                                    @if (Model.Setting.Facebook != null)
+                                                    {
+                                <li>
+                                    <a href="@Model.Setting.Facebook" target="_blank">
+                                        <img src="~/assets/images/social-icon/1.png" class="img-fluid blur-up lazyload" alt="facebook">
+                                        <h5 class="d-lg-block d-none">Facebook</h5>
+                                    </a>
+                                </li>
 }
+                                                    @if (Model.Setting.Instagram != null)
+                                                    {
+                                <li>
+                                    <a href="@Model.Setting.Instagram" target="_blank">
+                                        <img src="~/assets/images/social-icon/2.png" class="img-fluid blur-up lazyload" alt="Instagram">
+                                        <h5 class="d-lg-block d-none">Instagram</h5>
+                                    </a>
+                                </li>
+}
+                                                    @if (Model.Setting.Twitter != null)
+                                                    {
+                                <li>
+                                    <a href="@Model.Setting.Twitter" target="_blank">
+                                        <img src="~/assets/images/social-icon/3.png" class="img-fluid blur-up lazyload" alt="Twitter">
+                                        <h5 class="d-lg-block d-none">Twitter</h5>
+                                    </a>
+                                </li>
+}
+                                                </ul>
+                                            </div>
+                                            @if (productSlide.DiscountPrice != null)
+                                            {
+                        <h4>New offer</h4>
+                                                <div class="offer-box">
+                                                    @{var calculateDiscount = 100 - (double)productSlide.DiscountPrice * 100 / productSlide.Price;}
+                                                    <h6>@calculateDiscount.ToString("0.00")% off</h6>
+                                                </div>}
+                                        </div>
+
+                                        <div class="slider-bg">
+                                            <div class="bg-text">
+                                                <span>
+                                                    @if (productSlide.Brand.Title.Length > 7)
+                                                    {@("Marketo") }
+                                                    else
+                                                    {
+                                @productSlide.Brand.Title}
+                                                </span>
+                                            </div>
+
+                                            <div class="bg-circle" style="background: #362319;"></div>
+                                            <img src="~/assets/images/slider/@productSlide.SlideImage" class="watch-1 img-fluid blur-up lazyload" alt="slider-image">
+                                        </div>
+
+                                        <div class="suggestion-product d-xl-block d-none">
+                                            <h3>Suggestion Product</h3>
+
+                                            <a asp-controller="shop" asp-action="product" asp-route-id="@productSlide.Id" class="slider-watch-image d-block" tabindex="0">
+                                                <div class="relative-watches">
+                                                    <img src="assets/images/products/@productSlide.MainImage" class="img-fluid blur-up lazyloaded" alt="product-image">
+                                                    <div class="watch-price">
+                                                        <h5>$@((productSlide.DiscountPrice != null) ? productSlide.DiscountPrice : productSlide.Price)</h5>
+                                                        <h6>@(productSlide.Brand.Title + " " + productSlide.Title)</h6>
+                                                        <div class="star-ratings">
+                                                            @{ double avgstar = productSlide.Reviews.Count() > 0 ? (productSlide.Reviews.Sum(s => s.Star) / (double)productSlide.Reviews.Count()) : 0; }
+                                                            <div class="fill-ratings" style="width: @((avgstar * 20).ToString("0"))%;">
+                                                                <span>★★★★★</span>
+                                                            </div>
+                                                            <div class="empty-ratings">
+                                                                <span>★★★★★</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+
+                                        <div class="price-number">
+                                            <h2>
+                                                @if (productSlide.DiscountPrice != null)
+                                                {@("$" + productSlide.DiscountPrice) <span><del>@("$" + productSlide.Price)</del></span> }
+                                                else
+                                                {@productSlide.Price}
+                                            </h2>
+                                        </div>
+
+                                        @if (Model.Slides.Count() > 1)
+                                        {
+                    <div class="slider-arrow-2">
+                        <div class="left-arrow d-lg-block d-none"></div>
+                        <div class="right-arrow d-lg-block d-none"></div>
+                    </div>}
+                                    </div> <!-- Slider End -->}
+        </div>
+    </div>
+</section>}
 <!-- Home Slider end -->
 <!-- Custom Services Section Start -->
 <section class="service-section">
@@ -129,18 +115,17 @@
         <div class="row g-4 g-sm-3">
             @foreach (ServicePolicy servicePolicy in Model.ServicePolicies)
             {
-                <div class="col-xl-3 col-sm-6">
-                    <div class="service-wrap">
-                        <div class="service-icon">
-                            <img src="~/assets/images/service-policies/@servicePolicy.Image" />
-                        </div>
-                        <div class="service-content">
-                            <h3 class="mb-2">@servicePolicy.Title</h3>
-                            <span class="font-light">@servicePolicy.Description</span>
-                        </div>
-                    </div>
-                </div>
-            }
+<div class="col-xl-3 col-sm-6">
+    <div class="service-wrap">
+        <div class="service-icon">
+            <img src="~/assets/images/service-policies/@servicePolicy.Image" />
+        </div>
+        <div class="service-content">
+            <h3 class="mb-2">@servicePolicy.Title</h3>
+            <span class="font-light">@servicePolicy.Description</span>
+        </div>
+    </div>
+</div>      }
         </div>
     </div>
 </section>
@@ -148,47 +133,40 @@
 <!-- Poster Section Start -->
 @if (Model.Posters != null && Model.Posters.Count() > 0)
 {
-    <section class="poster-section ratio2_1">
-        <div>
-            <div class="container">
-                <div class="row justify-content-center">
+<section class="poster-section ratio2_1">
+    <div>
+        <div class="container">
+            <div class="row justify-content-center">
 
-                    @foreach (Product productPoster in Model.Posters)
-                    {
-                        <div class="col-lg-6 mt-4">
-                            <div class="poster-image">
-                                <img src="~/assets/images/poster/@productPoster.PosterImage" class="img-fluid bg-img blur-up lazyload" alt="poster-image">
-                                <div class="poster-image-details">
-                                    <div>
-                                        @if (productPoster.DiscountPrice != null)
-                                        {
-                                            var calculateDiscount = 100 - (double)productPoster.DiscountPrice * 100 / productPoster.Price;
-                                            <h5>Get @calculateDiscount.ToString("0.00")% Rewarded</h5>
-                                        }
-                                        <h2>@productPoster.Brand.Title</h2>
-                                        <p class="d-sm-block d-none my-1">@productPoster.Title</p>
-                                        <h3>
-                                            @if (productPoster.DiscountPrice != null)
-                                            {
-                                                @("$" + @productPoster.DiscountPrice) <span><del>$@productPoster.Price</del></span>
-                                            }
-                                            else
-                                            {
-                                                @("$" + @productPoster.Price)
-                                            }
-                                        </h3>
-                                        <a asp-controller="shop" asp-action="product" asp-route-id="@productPoster.Id" class="btn btn-solid-default">BUY NOW</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    }
-
-                </div>
+                @foreach (Product productPoster in Model.Posters)
+                {
+<div class="col-lg-6 mt-4">
+    <div class="poster-image">
+        <img src="~/assets/images/poster/@productPoster.PosterImage" class="img-fluid bg-img blur-up lazyload" alt="poster-image">
+        <div class="poster-image-details">
+            <div>
+                @if (productPoster.DiscountPrice != null)
+                {
+                    var calculateDiscount = 100 - (double)productPoster.DiscountPrice * 100 / productPoster.Price;
+<h5>Get @calculateDiscount.ToString("0.00")% Rewarded</h5>}
+                <h2>@productPoster.Brand.Title</h2>
+                <p class="d-sm-block d-none my-1">@productPoster.Title</p>
+                <h3>
+                    @if (productPoster.DiscountPrice != null)
+                    {@("$" + @productPoster.DiscountPrice) <span><del>$@productPoster.Price</del></span> }
+                else
+                { @("$" + @productPoster.Price)}
+                </h3>
+                <a asp-controller="shop" asp-action="product" asp-route-id="@productPoster.Id" class="btn btn-solid-default">BUY NOW</a>
             </div>
         </div>
-    </section>
-}
+    </div>
+</div>}
+
+            </div>
+        </div>
+    </div>
+</section>}
 <!-- Poster Section End -->
 <!-- New Arrival Section Start -->
 <section class="ratio_asos">
@@ -203,70 +181,68 @@
 
                     @foreach (Product product in Model.NewArrival)
                     {
-                        <div>
-                            <div class="product-box">
-                                <div class="img-wrapper">
-                                    <a asp-controller="shop" asp-action="product" asp-route-id="@product.Id">
-                                        <img src="~/assets/images/products/@product.MainImage" class="img-fluid bg-img blur-up lazyload" alt="product">
-                                    </a>
-                                    <div class="cart-wrap">
-                                        <ul>
-                                            <li>
-                                                <form id="shoppingCartForm" asp-controller="shoppingcart" asp-action="addtocart" asp-route-id="@product.Id" method="get">
-                                                    <input type="hidden" name="count" value="1" id="productCount" />
-                                                    <input type="hidden" name="colourid" value="@product.ProductColours.ElementAt(0).ColourId" id="colourid" />
+        <div>
+            <div class="product-box">
+                <div class="img-wrapper">
+                    <a asp-controller="shop" asp-action="product" asp-route-id="@product.Id">
+                        <img src="~/assets/images/products/@product.MainImage" class="img-fluid bg-img blur-up lazyload" alt="product">
+                    </a>
+                    <div class="cart-wrap">
+                        <ul>
+                            <li>
+                                <form id="shoppingCartForm" asp-controller="shoppingcart" asp-action="addtocart" asp-route-id="@product.Id" method="get">
+                                    <input type="hidden" name="count" value="1" id="productCount" />
+                                    <input type="hidden" name="colourid" value="@product.ProductColours.ElementAt(0).ColourId" id="colourid" />
 
-                                                    <button type="submit" class="addtocart-btn">
-                                                        <i data-feather="shopping-bag"></i>
-                                                    </button>
-                                                </form>
-                                            </li>
-                                            <li>
-                                                <a asp-controller="shop" asp-action="quickview" asp-route-id="@product.Id" id="quickViewBtn" data-bs-toggle="modal" data-bs-target="#quick-view">
-                                                    <i data-feather="eye"></i>
-                                                </a>
-                                            </li>
-                                            @*<li>
-                                                <a asp-controller="comparelist" asp-action="addtocompare" asp-route-id="@product.Id" class="addtocompare-btn">
-                                                    <i data-feather="refresh-cw"></i>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0)" class="wishlist addtowishlist-btn">
-                                                    <i data-feather="heart"></i>
-                                                </a>
-                                            </li>*@
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="product-details text-center">
-                                    <h3 class="theme-color">
-                                        @if (product.DiscountPrice != null)
-                                        {
-                                            <span class="font-light">$@product.DiscountPrice</span>
-                                            <s class="ml-1">$@product.Price</s>
-                                        }
-                                        else
-                                        {
-                                            <span class="font-light">$@product.Price</span>
-                                        }
-
-                                    </h3>
-                                    <a asp-controller="shop" asp-action="product" asp-route-id="@product.Id" class="font-default">
-                                        <h5>@(product.Brand.Title + " " + product.Title)</h5>
+                                    <button type="submit" class="addtocart-btn">
+                                        <i data-feather="shopping-bag"></i>
+                                    </button>
+                                </form>
+                            </li>
+                            <li>
+                                <a asp-controller="shop" asp-action="quickview" asp-route-id="@product.Id" id="quickViewBtn" data-bs-toggle="modal" data-bs-target="#quick-view">
+                                    <i data-feather="eye"></i>
+                                </a>
+                            </li>
+                            @*<li>
+                                    <a asp-controller="comparelist" asp-action="addtocompare" asp-route-id="@product.Id" class="addtocompare-btn">
+                                        <i data-feather="refresh-cw"></i>
                                     </a>
-                                    <div class="star-ratings mx-auto">
-                                        <div class="fill-ratings" style="width: 50%;">
-                                            <span>★★★★★</span>
-                                        </div>
-                                        <div class="empty-ratings">
-                                            <span>★★★★★</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="wishlist addtowishlist-btn">
+                                        <i data-feather="heart"></i>
+                                    </a>
+                                </li>*@
+                        </ul>
+                    </div>
+                </div>
+                <div class="product-details text-center">
+                    <h3 class="theme-color">
+                        @if (product.DiscountPrice != null)
+                        {
+        <span class="font-light">$@product.DiscountPrice</span>
+                            <s class="ml-1">$@product.Price</s> }
+                        else
+                        {
+        <span class="font-light">$@product.Price</span>}
+
+                    </h3>
+                    <a asp-controller="shop" asp-action="product" asp-route-id="@product.Id" class="font-default">
+                        <h5>@(product.Brand.Title + " " + product.Title)</h5>
+                    </a>
+                    <div class="star-ratings mx-auto">
+                        @{ double avgstar = product.Reviews.Count() > 0 ? (product.Reviews.Sum(s => s.Star) / (double)product.Reviews.Count()) : 0; }
+                        <div class="fill-ratings" style="width: @((avgstar * 20).ToString("0"))%;">
+                            <span>★★★★★</span>
                         </div>
-                    }
+                        <div class="empty-ratings">
+                            <span>★★★★★</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>}
 
                 </div>
             </div>
@@ -290,18 +266,17 @@
 
             @foreach (SpecialType specialType in Model.SpecialTypes)
             {
-                <div>
-                    <div class="category-wrap category-color">
-                        <a asp-controller="shop" asp-action="index">
-                            <img src="~/assets/images/special-types/@specialType.Image" class="img-fluid blur-up lazyload" alt="category image">
-                            <div class="category-content category-text t-text">
-                                <h3>@specialType.Title.Split(' ')[0]</h3>
-                                <span>@specialType.Title.Split(' ')[1].ToLower()</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            }
+<div>
+    <div class="category-wrap category-color">
+        <a asp-controller="shop" asp-action="index">
+            <img src="~/assets/images/special-types/@specialType.Image" class="img-fluid blur-up lazyload" alt="category image">
+            <div class="category-content category-text t-text">
+                <h3>@specialType.Title.Split(' ')[0]</h3>
+                <span>@specialType.Title.Split(' ')[1].ToLower()</span>
+            </div>
+        </a>
+    </div>
+</div>      }
 
         </div>
     </div>
@@ -320,70 +295,68 @@
 
                     @foreach (Product product in Model.LatestProducts)
                     {
-                        <div>
-                            <div class="product-box">
-                                <div class="img-wrapper">
-                                    <a asp-controller="shop" asp-action="product" asp-route-id="@product.Id">
-                                        <img src="~/assets/images/products/@product.MainImage" class="img-fluid bg-img blur-up lazyload" alt="product">
-                                    </a>
-                                    <div class="cart-wrap">
-                                        <ul>
-                                            <li>
-                                                <form id="shoppingCartForm" asp-controller="shoppingcart" asp-action="addtocart" asp-route-id="@product.Id" method="get">
-                                                    <input type="hidden" name="count" value="1" id="productCount" />
-                                                    <input type="hidden" name="colourid" value="@product.ProductColours.ElementAt(0).ColourId" id="colourid" />
+        <div>
+            <div class="product-box">
+                <div class="img-wrapper">
+                    <a asp-controller="shop" asp-action="product" asp-route-id="@product.Id">
+                        <img src="~/assets/images/products/@product.MainImage" class="img-fluid bg-img blur-up lazyload" alt="product">
+                    </a>
+                    <div class="cart-wrap">
+                        <ul>
+                            <li>
+                                <form id="shoppingCartForm" asp-controller="shoppingcart" asp-action="addtocart" asp-route-id="@product.Id" method="get">
+                                    <input type="hidden" name="count" value="1" id="productCount" />
+                                    <input type="hidden" name="colourid" value="@product.ProductColours.ElementAt(0).ColourId" id="colourid" />
 
-                                                    <button type="submit" class="addtocart-btn">
-                                                        <i data-feather="shopping-bag"></i>
-                                                    </button>
-                                                </form>
-                                            </li>
-                                            <li>
-                                                <a asp-controller="shop" asp-action="quickview" asp-route-id="@product.Id" id="quickViewBtn" data-bs-toggle="modal" data-bs-target="#quick-view">
-                                                    <i data-feather="eye"></i>
-                                                </a>
-                                            </li>
-                                            @*<li>
-                                                <a asp-controller="comparelist" asp-action="addtocompare" asp-route-id="@product.Id" class="addtocompare-btn">
-                                                    <i data-feather="refresh-cw"></i>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0)" class="wishlist addtowishlist-btn">
-                                                    <i data-feather="heart"></i>
-                                                </a>
-                                            </li>*@
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="product-details text-center">
-                                    <h3 class="theme-color">
-                                        @if (product.DiscountPrice != null)
-                                        {
-                                            <span class="font-light">$@product.DiscountPrice</span>
-                                            <s class="ml-1">$@product.Price</s>
-                                        }
-                                        else
-                                        {
-                                            <span class="font-light">$@product.Price</span>
-                                        }
-
-                                    </h3>
-                                    <a asp-controller="shop" asp-action="product" asp-route-id="@product.Id" class="font-default">
-                                        <h5>@(product.Brand.Title + " " + product.Title)</h5>
+                                    <button type="submit" class="addtocart-btn">
+                                        <i data-feather="shopping-bag"></i>
+                                    </button>
+                                </form>
+                            </li>
+                            <li>
+                                <a asp-controller="shop" asp-action="quickview" asp-route-id="@product.Id" id="quickViewBtn" data-bs-toggle="modal" data-bs-target="#quick-view">
+                                    <i data-feather="eye"></i>
+                                </a>
+                            </li>
+                            @*<li>
+                                    <a asp-controller="comparelist" asp-action="addtocompare" asp-route-id="@product.Id" class="addtocompare-btn">
+                                        <i data-feather="refresh-cw"></i>
                                     </a>
-                                    <div class="star-ratings mx-auto">
-                                        <div class="fill-ratings" style="width: 50%;">
-                                            <span>★★★★★</span>
-                                        </div>
-                                        <div class="empty-ratings">
-                                            <span>★★★★★</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="wishlist addtowishlist-btn">
+                                        <i data-feather="heart"></i>
+                                    </a>
+                                </li>*@
+                        </ul>
+                    </div>
+                </div>
+                <div class="product-details text-center">
+                    <h3 class="theme-color">
+                        @if (product.DiscountPrice != null)
+                        {
+        <span class="font-light">$@product.DiscountPrice</span>
+                            <s class="ml-1">$@product.Price</s> }
+                        else
+                        {
+        <span class="font-light">$@product.Price</span>}
+
+                    </h3>
+                    <a asp-controller="shop" asp-action="product" asp-route-id="@product.Id" class="font-default">
+                        <h5>@(product.Brand.Title + " " + product.Title)</h5>
+                    </a>
+                    <div class="star-ratings mx-auto">
+                        @{ double avgstar = product.Reviews.Count() > 0 ? (product.Reviews.Sum(s => s.Star) / (double)product.Reviews.Count()) : 0; }
+                        <div class="fill-ratings" style="width: @((avgstar * 20).ToString("0"))%;">
+                            <span>★★★★★</span>
                         </div>
-                    }
+                        <div class="empty-ratings">
+                            <span>★★★★★</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>}
 
                 </div>
             </div>
@@ -399,23 +372,20 @@
                 <div class="brand-slider">
                     @foreach (Brand brand in Model.Brands)
                     {
-                        <div>
-                            <div class="brand-image">
-                                @if (brand.Website != null)
-                                {
-                                    <a href="@brand.Website" target="_blank">
-                                        <img src="~/assets/images/brand/@brand.Logo" class="img-fluid blur-up lazyload" alt="brand logo">
-                                    </a>
-                                }
-                                else
-                                {
-                                    <a href="javascript:void(0)">
-                                        <img src="~/assets/images/brand/@brand.Logo" class="img-fluid blur-up lazyload" alt="brand logo">
-                                    </a>
-                                }
-                            </div>
-                        </div>
-                    }
+        <div>
+            <div class="brand-image">
+                @if (brand.Website != null)
+                {
+<a href="@brand.Website" target="_blank">
+    <img src="~/assets/images/brand/@brand.Logo" class="img-fluid blur-up lazyload" alt="brand logo">
+</a> }
+else
+{
+<a href="javascript:void(0)">
+    <img src="~/assets/images/brand/@brand.Logo" class="img-fluid blur-up lazyload" alt="brand logo">
+</a>}
+            </div>
+        </div>}
                 </div>
             </div>
         </div>

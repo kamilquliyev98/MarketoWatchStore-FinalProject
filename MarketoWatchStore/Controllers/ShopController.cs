@@ -126,7 +126,7 @@ namespace MarketoWatchStore.Controllers
         {
             if (!User.Identity.IsAuthenticated) return RedirectToAction("login", "account");
 
-            if (id is null || star is null || star <= 0 || star > 5) return View();
+            if (id is null || star is null || star <= 0 || star > 5) return RedirectToAction("error400", "home");
 
             Review review = new Review();
 
