@@ -1,16 +1,13 @@
 ﻿@model ShopVM
-@{
-    ViewBag.Title = "Shop | Marketo";
-    int inputId = 0;
-}
+@{ ViewBag.Title = "Shop | Marketo";
+                int inputId = 0; }
 
 <!-- Breadcrumb section start -->
 <section class="breadcrumb-section section-b-space">
     <ul class="circles">
         @for (int i = 1; i <= 10; i++)
         {
-            <li></li>
-        }
+<li></li>}
     </ul>
     <div class="container">
         <div class="row">
@@ -53,14 +50,13 @@
                                     <ul class="category-list">
                                         @foreach (Brand brand in Model.Brands)
                                         {
-                                            <li>
-                                                <div class="form-check ps-0 custom-form-check">
-                                                    <input class="checkbox_animated check-it" type="checkbox" id="brand@(brand.Id)">
-                                                    <label class="form-check-label" for="brand@(brand.Id)">@brand.Title</label>
-                                                    <p class="font-light">(@brand.Products.Where(p => !p.IsDeleted).Count())</p>
-                                                </div>
-                                            </li>
-                                        }
+                            <li>
+                                <div class="form-check ps-0 custom-form-check">
+                                    <input class="checkbox_animated check-it" type="checkbox" id="brand@(brand.Id)">
+                                    <label class="form-check-label" for="brand@(brand.Id)">@brand.Title</label>
+                                    <p class="font-light">(@brand.Products.Where(p => !p.IsDeleted).Count())</p>
+                                </div>
+                            </li>}
                                     </ul>
                                 </div>
                             </div>
@@ -77,10 +73,9 @@
                                     <ul class="category-list">
                                         @foreach (Colour colour in Model.Colours)
                                         {
-                                            <li>
-                                                <a asp-route-colourId="@colour.Id" style="background-color: @colour.Title;"></a>
-                                            </li>
-                                        }
+                            <li>
+                                <a asp-route-colourId="@colour.Id" style="background-color: @colour.Title;"></a>
+                            </li>}
                                     </ul>
                                 </div>
                             </div>
@@ -112,16 +107,15 @@
                                     <ul class="category-list">
                                         @foreach (var gender in Model.Genders)
                                         {
-                                            <li>
-                                                <div class="form-check ps-0 custom-form-check">
-                                                    <input class="checkbox_animated check-it" type="checkbox" id="gender@(++inputId)">
-                                                    <label class="form-check-label" for="gender@(inputId)">
-                                                        @gender
-                                                    </label>
-                                                    <p class="font-light">@Model.Products.Where(p => p.Gender == gender && !p.IsDeleted).Count()</p>
-                                                </div>
-                                            </li>
-                                        }
+                            <li>
+                                <div class="form-check ps-0 custom-form-check">
+                                    <input class="checkbox_animated check-it" type="checkbox" id="gender@(++inputId)">
+                                    <label class="form-check-label" for="gender@(inputId)">
+                                        @gender
+                                    </label>
+                                    <p class="font-light">@Model.Products.Where(p => p.Gender == gender && !p.IsDeleted).Count()</p>
+                                </div>
+                            </li>}
                                     </ul>
                                 </div>
                             </div>
@@ -138,16 +132,15 @@
                                     <ul class="category-list">
                                         @foreach (Feature feature in Model.Features)
                                         {
-                                            <li>
-                                                <div class="form-check ps-0 custom-form-check">
-                                                    <input class="checkbox_animated check-it" type="checkbox" id="feature@(feature.Id)">
-                                                    <label class="form-check-label" for="feature@(feature.Id)">
-                                                        @feature.Title
-                                                    </label>
-                                                    <p class="font-light">(@(feature.ProductFeatures.Count()))</p>
-                                                </div>
-                                            </li>
-                                        }
+                            <li>
+                                <div class="form-check ps-0 custom-form-check">
+                                    <input class="checkbox_animated check-it" type="checkbox" id="feature@(feature.Id)">
+                                    <label class="form-check-label" for="feature@(feature.Id)">
+                                        @feature.Title
+                                    </label>
+                                    <p class="font-light">(@(feature.ProductFeatures.Count()))</p>
+                                </div>
+                            </li>}
                                     </ul>
                                 </div>
                             </div>
@@ -164,16 +157,15 @@
                                     <ul class="category-list">
                                         @foreach (PowerSource powerSource in Model.PowerSources)
                                         {
-                                            <li>
-                                                <div class="form-check ps-0 custom-form-check">
-                                                    <input class="checkbox_animated check-it" type="checkbox" id="powersource@(powerSource.Id)">
-                                                    <label class="form-check-label" for="powersource@(powerSource.Id)">
-                                                        @powerSource.Title
-                                                    </label>
-                                                    <p class="font-light">(@(powerSource.Products.Where(p => !p.IsDeleted).Count()))</p>
-                                                </div>
-                                            </li>
-                                        }
+                            <li>
+                                <div class="form-check ps-0 custom-form-check">
+                                    <input class="checkbox_animated check-it" type="checkbox" id="powersource@(powerSource.Id)">
+                                    <label class="form-check-label" for="powersource@(powerSource.Id)">
+                                        @powerSource.Title
+                                    </label>
+                                    <p class="font-light">(@(powerSource.Products.Where(p => !p.IsDeleted).Count()))</p>
+                                </div>
+                            </li>}
                                     </ul>
                                 </div>
                             </div>
@@ -224,23 +216,22 @@
             <div class="col-lg-9 col-12 ratio_30">
                 @foreach (AdsBanner adsBanner in Model.AdsBanners)
                 {
-                    <div class="banner-deatils">
-                        <a href="@((adsBanner.AdsUrl != null) ? adsBanner.AdsUrl : "javascript:void(0)")" target="@((adsBanner.AdsUrl != null) ? "_blank" : "_self")">
-                            <div class="banner-image">
-                                <img src="~/assets/images/banner/@adsBanner.Image" class="img-fluid bg-img blur-up lazyload" alt="banner-image">
-                                <div class="banner-content">
-                                    <div>
-                                        <h3>@adsBanner.Title</h3>
-                                        <p>@adsBanner.Text</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="banner-contain mt-3 mb-5">
-                                <p class="font-light"> </p>
-                            </div>
-                        </a>
+    <div class="banner-deatils">
+        <a href="@((adsBanner.AdsUrl != null) ? adsBanner.AdsUrl : "javascript:void(0)")" target="@((adsBanner.AdsUrl != null) ? "_blank" : "_self")">
+            <div class="banner-image">
+                <img src="~/assets/images/banner/@adsBanner.Image" class="img-fluid bg-img blur-up lazyload" alt="banner-image">
+                <div class="banner-content">
+                    <div>
+                        <h3>@adsBanner.Title</h3>
+                        <p>@adsBanner.Text</p>
                     </div>
-                }
+                </div>
+            </div>
+            <div class="banner-contain mt-3 mb-5">
+                <p class="font-light"> </p>
+            </div>
+        </a>
+    </div>}
 
                 <div class="row g-4">
 
@@ -257,96 +248,88 @@
 
                     @foreach (Product product in Model.Products)
                     {
-                        <div>
-                            <div class="product-box">
-                                <div class="img-wrapper">
-                                    <div class="front">
-                                        <a asp-controller="shop" asp-action="product" asp-route-id="@product.Id">
-                                            <img src="~/assets/images/products/@product.MainImage" class="bg-img blur-up lazyload" alt="product">
-                                        </a>
-                                    </div>
-                                    <div class="label-block">
-                                        @if (product.IsNewArrival)
-                                        {
-                                            <span class="label label-black">New</span>
-                                        }
-                                        @if (product.DiscountPrice != null)
-                                        {
-                                            var calculateDiscount = 100 - (double)product.DiscountPrice * 100 / product.Price;
+        <div>
+            <div class="product-box">
+                <div class="img-wrapper">
+                    <div class="front">
+                        <a asp-controller="shop" asp-action="product" asp-route-id="@product.Id">
+                            <img src="~/assets/images/products/@product.MainImage" class="bg-img blur-up lazyload" alt="product">
+                        </a>
+                    </div>
+                    <div class="label-block">
+                        @if (product.IsNewArrival)
+                        {
+        <span class="label label-black">New</span>}
+                        @if (product.DiscountPrice != null)
+                        {
+                            var calculateDiscount = 100 - (double)product.DiscountPrice * 100 / product.Price;
 
-                                            <span class="label label-theme">@(calculateDiscount.ToString("0.00"))% Off</span>
-                                        }
-                                    </div>
-                                    <div class="cart-wrap">
-                                        <ul>
-                                            <li>
-                                                <form id="shoppingCartForm" asp-controller="shoppingcart" asp-action="addtocart" asp-route-id="@product.Id" method="get">
-                                                    <input type="hidden" name="count" value="1" id="productCount" />
-                                                    <input type="hidden" name="colourid" value="@product.ProductColours.ElementAt(0).ColourId" id="colourid" />
+        <span class="label label-theme">@(calculateDiscount.ToString("0.00"))% Off</span>}
+                    </div>
+                    <div class="cart-wrap">
+                        <ul>
+                            <li>
+                                <form id="shoppingCartForm" asp-controller="shoppingcart" asp-action="addtocart" asp-route-id="@product.Id" method="get">
+                                    <input type="hidden" name="count" value="1" id="productCount" />
+                                    <input type="hidden" name="colourid" value="@product.ProductColours.ElementAt(0).ColourId" id="colourid" />
 
-                                                    <button type="submit" class="addtocart-btn">
-                                                        <i data-feather="shopping-bag"></i>
-                                                    </button>
-                                                </form>
-                                            </li>
-                                            <li>
-                                                <a asp-controller="shop" asp-action="quickview" asp-route-id="@product.Id" id="quickViewBtn" data-bs-toggle="modal" data-bs-target="#quick-view">
-                                                    <i data-feather="eye"></i>
-                                                </a>
-                                            </li>
-                                            @*<li>
-                                                <a asp-controller="comparelist" asp-action="addtocompare" asp-route-id="@product.Id" class="addtocompare-btn">
-                                                    <i data-feather="refresh-cw"></i>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0)" class="wishlist addtowishlist-btn">
-                                                    <i data-feather="heart"></i>
-                                                </a>
-                                            </li>*@
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="product-details">
-                                    <div class="rating-details">
-                                        <span class="font-light grid-content">
-                                            @if (product.SpecialTypeId != null)
-                                            {
-                                                @product.SpecialType.Title
-                                            }
-                                            else
-                                            {
-                                                if (product.IsNewArrival == true)
-                                                {
-                                                    @("New arrival")
-                                                }
-                                                else
-                                                {
-                                                    @("Our collection")
-                                                }
-                                            }
-                                        </span>
-                                        <div class="star-ratings">
-                                            @{ double avgstar = product.Reviews.Count() > 0 ? (product.Reviews.Sum(s => s.Star) / (double)product.Reviews.Count()) : 0; }
-                                            <div class="fill-ratings" style="width: @((avgstar * 20).ToString("0"))%;">
-                                                <span>★★★★★</span>
-                                            </div>
-                                            <div class="empty-ratings">
-                                                <span>★★★★★</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="main-price">
-                                        <a asp-controller="shop" asp-action="product" asp-route-id="@product.Id" class="font-default">
-                                            <h5 class="ms-0">@product.Title</h5>
-                                        </a>
-                                        <h3 class="theme-color">$@((product.DiscountPrice is null) ? product.Price : product.DiscountPrice)</h3>
-                                        <a asp-controller="shoppingcart" asp-action="addtocart" asp-route-id="@product.Id" class="addtocart-btn btn listing-content">Add To Cart</a>
-                                    </div>
-                                </div>
+                                    <button type="submit" class="addtocart-btn">
+                                        <i data-feather="shopping-bag"></i>
+                                    </button>
+                                </form>
+                            </li>
+                            <li>
+                                <a asp-controller="shop" asp-action="quickview" asp-route-id="@product.Id" id="quickViewBtn" data-bs-toggle="modal" data-bs-target="#quick-view">
+                                    <i data-feather="eye"></i>
+                                </a>
+                            </li>
+                            @*<li>
+                                    <a asp-controller="comparelist" asp-action="addtocompare" asp-route-id="@product.Id" class="addtocompare-btn">
+                                        <i data-feather="refresh-cw"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="wishlist addtowishlist-btn">
+                                        <i data-feather="heart"></i>
+                                    </a>
+                                </li>*@
+                        </ul>
+                    </div>
+                </div>
+                <div class="product-details">
+                    <div class="rating-details">
+                        <span class="font-light grid-content">
+                            @if (product.SpecialTypeId != null)
+                            {
+            @product.SpecialType.Title }
+        else
+        {
+            if (product.IsNewArrival == true)
+            { @("New arrival") }
+            else
+            { @("Our collection")}
+        }
+                        </span>
+                        @{ double avgstar = product.Reviews.Count() > 0 ? (product.Reviews.Sum(s => s.Star) / (double)product.Reviews.Count()) : 0; }
+                        <div class="star-ratings" title="@avgstar">
+                            <div class="fill-ratings" style="width: @((avgstar * 20).ToString("0"))%;">
+                                <span>★★★★★</span>
+                            </div>
+                            <div class="empty-ratings">
+                                <span>★★★★★</span>
                             </div>
                         </div>
-                    }
+                    </div>
+                    <div class="main-price">
+                        <a asp-controller="shop" asp-action="product" asp-route-id="@product.Id" class="font-default">
+                            <h5 class="ms-0">@product.Title</h5>
+                        </a>
+                        <h3 class="theme-color">$@((product.DiscountPrice is null) ? product.Price : product.DiscountPrice)</h3>
+                        <a asp-controller="shoppingcart" asp-action="addtocart" asp-route-id="@product.Id" class="addtocart-btn btn listing-content">Add To Cart</a>
+                    </div>
+                </div>
+            </div>
+        </div>}
 
                 </div>
                 <!-- Prodcut setion -->

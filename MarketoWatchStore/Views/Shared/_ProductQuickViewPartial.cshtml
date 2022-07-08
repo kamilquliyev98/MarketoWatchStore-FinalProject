@@ -38,8 +38,8 @@
         <div class="col-lg-6">
             <div class="product-right">
                 <h2 class="mb-2">@(Model.Brand.Title + " " + Model.Title)</h2>
-                <div class="star-ratings">
-                    @{ double avgstar = Model.Reviews.Count() > 0 ? (Model.Reviews.Sum(s => s.Star) / (double)Model.Reviews.Count()) : 0; }
+                @{ double avgstar = Model.Reviews.Count() > 0 ? (Model.Reviews.Sum(s => s.Star) / (double)Model.Reviews.Count()) : 0; }
+                <div class="star-ratings" title="@avgstar">
                     <div class="fill-ratings" style="width: @((avgstar * 20).ToString("0"))%;">
                         <span>★★★★★</span>
                     </div>
@@ -50,20 +50,17 @@
                 <div class="price mt-3">
                     @if (Model.DiscountPrice != null)
                     {
-                        <h3>$@(Model.DiscountPrice) <s>$@(Model.Price)</s></h3>
-                    }
-                    else
-                    {
-                        <h3>$@(Model.Price)</h3>
-                    }
+            <h3>$@(Model.DiscountPrice) <s>$@(Model.Price)</s></h3> }
+                        else
+                        {
+            <h3>$@(Model.Price)</h3>}
                 </div>
                 <div class="color-types">
                     <h4>Available colors:</h4>
                     <ul class="color-variant mb-0">
                         @foreach (ProductColour productColour in Model.ProductColours)
                         {
-                            <li data-id="@productColour.Colour.Id" style="background-color: @productColour.Colour.Title;"></li>
-                        }
+            <li data-id="@productColour.Colour.Id" style="background-color: @productColour.Colour.Title;"></li>}
                     </ul>
                 </div>
                 <div class="product-details">
@@ -77,32 +74,27 @@
                         </li>
                         @if (Model.SpecialTypeId != null)
                         {
-                            <li>
-                                <span class="font-light">Special type:</span> @Model.SpecialType.Title
-                            </li>
-                        }
+            <li>
+                <span class="font-light">Special type:</span> @Model.SpecialType.Title
+            </li>}
                         @if (Model.ProductFeatures.Where(pf => pf.ProductId == Model.Id) != null && Model.ProductFeatures.Where(pf => pf.ProductId == Model.Id).Count() > 0)
                         {
-                            <li>
-                                <span class="font-light">Features:</span>
-                                @foreach (ProductFeature productFeature in Model.ProductFeatures.Where(pf => pf.ProductId == Model.Id))
-                                {
-                                    countF++;
-                                    @(productFeature.Feature.Title + ((featuresCount == countF) ? "" : ", "));
-                                }
-                            </li>
-                        }
+            <li>
+                <span class="font-light">Features:</span>
+                @foreach (ProductFeature productFeature in Model.ProductFeatures.Where(pf => pf.ProductId == Model.Id))
+                {
+                    countF++;@(productFeature.Feature.Title + ((featuresCount == countF) ? "" : ", "));
+        }
+            </li>}
                         @if (Model.ProductTags.Where(pt => pt.ProductId == Model.Id) != null && Model.ProductTags.Where(pt => pt.ProductId == Model.Id).Count() > 0)
                         {
-                            <li>
-                                <span class="font-light">Tags:</span>
-                                @foreach (ProductTag productTag in Model.ProductTags.Where(pt => pt.ProductId == Model.Id))
-                                {
-                                    countT++;
-                                    @("#" + productTag.Tag.Title + ((tagsCount == countT) ? "" : ", "));
-                                }
-                            </li>
-                        }
+            <li>
+                <span class="font-light">Tags:</span>
+                @foreach (ProductTag productTag in Model.ProductTags.Where(pt => pt.ProductId == Model.Id))
+                {
+                    countT++;@("#" + productTag.Tag.Title + ((tagsCount == countT) ? "" : ", "));
+        }
+            </li>}
                     </ul>
                 </div>
                 <div class="product-btns">

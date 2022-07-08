@@ -20,8 +20,7 @@
                                         <img src="~/assets/images/social-icon/1.png" class="img-fluid blur-up lazyload" alt="facebook">
                                         <h5 class="d-lg-block d-none">Facebook</h5>
                                     </a>
-                                </li>
-}
+                                </li>}
                                                     @if (Model.Setting.Instagram != null)
                                                     {
                                 <li>
@@ -29,8 +28,7 @@
                                         <img src="~/assets/images/social-icon/2.png" class="img-fluid blur-up lazyload" alt="Instagram">
                                         <h5 class="d-lg-block d-none">Instagram</h5>
                                     </a>
-                                </li>
-}
+                                </li>}
                                                     @if (Model.Setting.Twitter != null)
                                                     {
                                 <li>
@@ -38,8 +36,7 @@
                                         <img src="~/assets/images/social-icon/3.png" class="img-fluid blur-up lazyload" alt="Twitter">
                                         <h5 class="d-lg-block d-none">Twitter</h5>
                                     </a>
-                                </li>
-}
+                                </li>}
                                                 </ul>
                                             </div>
                                             @if (productSlide.DiscountPrice != null)
@@ -75,8 +72,8 @@
                                                     <div class="watch-price">
                                                         <h5>$@((productSlide.DiscountPrice != null) ? productSlide.DiscountPrice : productSlide.Price)</h5>
                                                         <h6>@(productSlide.Brand.Title + " " + productSlide.Title)</h6>
-                                                        <div class="star-ratings">
-                                                            @{ double avgstar = productSlide.Reviews.Count() > 0 ? (productSlide.Reviews.Sum(s => s.Star) / (double)productSlide.Reviews.Count()) : 0; }
+                                                        @{ double avgstar = productSlide.Reviews.Count() > 0 ? (productSlide.Reviews.Sum(s => s.Star) / (double)productSlide.Reviews.Count()) : 0; }
+                                                        <div class="star-ratings" title="@avgstar">
                                                             <div class="fill-ratings" style="width: @((avgstar * 20).ToString("0"))%;">
                                                                 <span>★★★★★</span>
                                                             </div>
@@ -231,8 +228,8 @@
                     <a asp-controller="shop" asp-action="product" asp-route-id="@product.Id" class="font-default">
                         <h5>@(product.Brand.Title + " " + product.Title)</h5>
                     </a>
-                    <div class="star-ratings">
-                        @{ double avgstar = product.Reviews.Count() > 0 ? (product.Reviews.Sum(s => s.Star) / (double)product.Reviews.Count()) : 0; }
+                    @{ double avgstar = product.Reviews.Count() > 0 ? (product.Reviews.Sum(s => s.Star) / (double)product.Reviews.Count()) : 0; }
+                    <div class="star-ratings" title="@avgstar">
                         <div class="fill-ratings" style="width: @((avgstar * 20).ToString("0"))%;">
                             <span>★★★★★</span>
                         </div>
@@ -345,8 +342,8 @@
                     <a asp-controller="shop" asp-action="product" asp-route-id="@product.Id" class="font-default">
                         <h5>@(product.Brand.Title + " " + product.Title)</h5>
                     </a>
-                    <div class="star-ratings">
-                        @{ double avgstar = product.Reviews.Count() > 0 ? (product.Reviews.Sum(s => s.Star) / (double)product.Reviews.Count()) : 0; }
+                    @{ double avgstar = product.Reviews.Count() > 0 ? (product.Reviews.Sum(s => s.Star) / (double)product.Reviews.Count()) : 0; }
+                    <div class="star-ratings" title="@avgstar">
                         <div class="fill-ratings" style="width: @((avgstar * 20).ToString("0"))%;">
                             <span>★★★★★</span>
                         </div>
