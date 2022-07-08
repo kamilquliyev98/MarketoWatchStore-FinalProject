@@ -26,8 +26,6 @@ namespace MarketoWatchStore.Controllers
             ContactVM contactVM = new ContactVM
             {
                 Setting = await _context.Settings.FirstOrDefaultAsync(),
-
-                Contact = await _context.Contacts.FirstOrDefaultAsync()
             };
 
             return View(contactVM);
