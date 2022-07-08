@@ -27,6 +27,8 @@
     <Compile Remove="Migrations\20220706115646_check.Designer.cs" />
     <Compile Remove="Migrations\20220706221725_AddedColourToOrderItemsTable.cs" />
     <Compile Remove="Migrations\20220706221725_AddedColourToOrderItemsTable.Designer.cs" />
+    <Compile Remove="Migrations\20220708170122_EditedAppUsersTable.cs" />
+    <Compile Remove="Migrations\20220708170122_EditedAppUsersTable.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

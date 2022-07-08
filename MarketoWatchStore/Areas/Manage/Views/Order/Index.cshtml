@@ -91,7 +91,7 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Fullname</th>
+                                        <th scope="col">Ordered by</th>
                                         <th scope="col">Order price</th>
                                         <th scope="col">Date &amp; Time</th>
                                         <th scope="col">Order status</th>
@@ -111,7 +111,7 @@
                                                 $@order.OrderItems.Sum(o => o.TotalPrice)
                                             </td>
                                             <td>
-                                                @order.CreatedAt?.ToString("g")
+                                                @order.CreatedAt?.ToString("dd.MM.yyyy HH:mm")
                                             </td>
                                             <td>
                                                 @switch (order.Status)

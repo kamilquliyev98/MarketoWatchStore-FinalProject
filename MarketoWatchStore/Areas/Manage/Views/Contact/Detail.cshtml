@@ -61,14 +61,14 @@
 
                                 <div class="row">
                                     <div class="col-lg-3 col-md-4 label ">Date:</div>
-                                    <div class="col-lg-9 col-md-8">@Model.CreatedAt?.ToString("g")</div>
+                                    <div class="col-lg-9 col-md-8">@Model.CreatedAt?.ToString("dd.MM.yyyy HH:mm")</div>
                                 </div>
 
                                 @if (Model.IsDeleted)
                                 {
                                     <div class="row">
                                         <div class="col-lg-3 col-md-4 label">Deleted at:</div>
-                                        <div class="col-lg-9 col-md-8">@Model.DeletedAt?.ToString("g")</div>
+                                        <div class="col-lg-9 col-md-8">@Model.DeletedAt?.ToString("dd.MM.yyyy HH:mm")</div>
                                     </div>
                                 }
 

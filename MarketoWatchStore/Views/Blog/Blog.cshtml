@@ -49,7 +49,7 @@
                             </div>
 
                             <div class="blog-detail-contain">
-                                <span class="font-light">@Model.CreatedAt?.ToString("g")</span>
+                                <span class="font-light">@Model.CreatedAt?.ToString("dd.MM.yyyy HH:mm")</span>
                                 <h2 class="card-title">@Model?.Title</h2>
                                 <div>
                                     @Html.Raw(Model.Content)
@@ -64,7 +64,7 @@
 
                             <div class="image-name text-weight">
                                 <h3>@Model.CreatedBy</h3>
-                                <h6>@Model.CreatedAt?.ToString("g")</h6>
+                                <h6>@Model.CreatedAt?.ToString("dd.MM.yyyy HH:mm")</h6>
                             </div>
                         </div>
 

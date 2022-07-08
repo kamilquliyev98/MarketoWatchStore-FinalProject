@@ -73,7 +73,7 @@
                                                         <h5>$@((productSlide.DiscountPrice != null) ? productSlide.DiscountPrice : productSlide.Price)</h5>
                                                         <h6>@(productSlide.Brand.Title + " " + productSlide.Title)</h6>
                                                         @{ double avgstar = productSlide.Reviews.Count() > 0 ? (productSlide.Reviews.Sum(s => s.Star) / (double)productSlide.Reviews.Count()) : 0; }
-                                                        <div class="star-ratings" title="@avgstar">
+                                                        <div class="star-ratings" title="@avgstar" style="margin: unset;">
                                                             <div class="fill-ratings" style="width: @((avgstar * 20).ToString("0"))%;">
                                                                 <span>★★★★★</span>
                                                             </div>
