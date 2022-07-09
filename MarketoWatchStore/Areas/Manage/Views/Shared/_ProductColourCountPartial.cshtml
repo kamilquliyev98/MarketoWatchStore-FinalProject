@@ -1,6 +1,6 @@
 ﻿@model Product
 
-@if (Model.ProductColours.Count() > 0)
+@if (Model?.ProductColours.Count() > 0)
 {
     for (int i = 0; i < Model.ProductColours.Count(); i++)
     {
