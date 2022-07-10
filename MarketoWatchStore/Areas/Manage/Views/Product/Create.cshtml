@@ -138,7 +138,7 @@
                                 <label asp-for="Gender" class="form-label">Gender *</label>
                                 <select asp-for="Gender" asp-items="@Html.GetEnumSelectList<GenderType>()" class="form-select" required>
                                 </select>
-                                <span asp-validation-for="PowerSourceId" class="text-danger"></span>
+                                <span asp-validation-for="Gender" class="text-danger"></span>
                             </div>
                             <div class="col-md-6">
                                 <label asp-for="SpecialTypeId" class="form-label">Special Type</label>

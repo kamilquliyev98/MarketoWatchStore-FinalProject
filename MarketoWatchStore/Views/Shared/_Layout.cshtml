@@ -271,9 +271,9 @@
                             <div class="search-full">
                                 <div class="input-group">
                                     <span class="input-group-text">
-                                        <i data-feather="search" class="font-light"></i>
+                                        <i class="font-light fas fa-search" id="searchBtn"></i>
                                     </span>
-                                    <form method="get" asp-controller="search" asp-action="index" style="flex: 1 1 auto;" autocomplete="off">
+                                    <form method="get" asp-controller="search" asp-action="index" style="flex: 1 1 auto;" autocomplete="off" id="searchForm">
                                         <input name="key" id="key" type="text" class="form-control search-type" placeholder="Search product...">
                                     </form>
                                     <span class="input-group-text close-search">
