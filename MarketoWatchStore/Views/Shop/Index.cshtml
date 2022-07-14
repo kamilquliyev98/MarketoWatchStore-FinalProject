@@ -311,7 +311,7 @@
         }
                         </span>
                         @{ double avgstar = product.Reviews.Count() > 0 ? (product.Reviews.Sum(s => s.Star) / (double)product.Reviews.Count()) : 0; }
-                        <div class="star-ratings" title="@avgstar" style="margin: unset">
+                        <div class="star-ratings" title="@avgstar.ToString("0.0")" style="margin: unset">
                             <div class="fill-ratings" style="width: @((avgstar * 20).ToString("0"))%;">
                                 <span>★★★★★</span>
                             </div>

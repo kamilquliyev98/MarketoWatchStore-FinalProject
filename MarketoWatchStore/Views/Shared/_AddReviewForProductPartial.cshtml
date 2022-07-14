@@ -4,7 +4,7 @@
 <div class="col-lg-4">
     <div class="customer-rating">
         <h2>Customer reviews</h2>
-        <div class="star-ratings" title="@avgstar" style="font-size: 30px; margin: unset;">
+        <div class="star-ratings" title="@avgstar.ToString("0.0")" style="font-size: 30px; margin: unset;">
             <div class="fill-ratings" style="width: @((avgstar * 20).ToString("0"))%;">
                 <span>★★★★★</span>
             </div>
@@ -228,7 +228,7 @@ else
 
     <div class="customer-details">
         <h5>@review.Name</h5>
-        <div class="star-ratings" title="@review.Star" style="max-width: 100px; margin: unset;">
+        <div class="star-ratings" title="@review.Star.ToString("0.0")" style="max-width: 100px; margin: unset;">
             <div class="fill-ratings" style="width: @(review.Star * 20 + "%");">
                 <span>★★★★★</span>
             </div>
