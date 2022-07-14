@@ -22,8 +22,10 @@ namespace MarketoWatchStore.Controllers
             _userManager = userManager;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
+            ViewBag.CurrentPage = page;
+
             ShopVM shopVM = new ShopVM
             {
                 Products = await _context.Products
@@ -71,6 +73,10 @@ namespace MarketoWatchStore.Controllers
                 .OrderByDescending(b => b.Id)
                 .ToListAsync()
             };
+
+            ViewBag.PageCount = Math.Ceiling((double)shopVM.Products.Count() / 16);
+
+            shopVM.Products = shopVM.Products.Skip((page - 1) * 16).Take(16);
 
             return View(shopVM);
         }
@@ -165,9 +171,15 @@ namespace MarketoWatchStore.Controllers
             return RedirectToAction(nameof(Product), new { id });
         }
 
-        public async Task<IActionResult> Filter(string brands, string colors, string genders
-           , string features, string powers
-            //int maxPrice, int page = 1
+        public IActionResult Filter(
+            string brands,
+            string colors,
+            string genders,
+            string features,
+            string powers,
+            //int minPrice,
+            //int maxPrice,
+            int page = 1
             )
         {
             IQueryable<Product> products = _context.Products
@@ -175,112 +187,96 @@ namespace MarketoWatchStore.Controllers
                 .Include(p => p.Brand)
                 .Include(p => p.SpecialType)
                 .Include(p => p.Reviews)
-                .Include(p => p.ProductFeatures).ThenInclude(p=>p.Feature)
+                .Include(p => p.ProductFeatures).ThenInclude(p => p.Feature)
                 .Include(p => p.PowerSource)
-                .Where(p => !p.IsDeleted
-                    && !p.Brand.IsDeleted
-                    && !p.PowerSource.IsDeleted
-                    )
-                ;
+                .Where(p => !p.IsDeleted && !p.Brand.IsDeleted && !p.PowerSource.IsDeleted);
 
             if (string.IsNullOrWhiteSpace(brands)
                 && string.IsNullOrWhiteSpace(colors)
                 && string.IsNullOrWhiteSpace(genders)
                 && string.IsNullOrWhiteSpace(features)
-                && string.IsNullOrWhiteSpace(powers)
-                )
+                && string.IsNullOrWhiteSpace(powers))
             {
-                return PartialView("_ShopProductListPartial", await _context.Products
-                    .Include(p => p.ProductColours)
-                    .Include(p => p.Reviews)
-                    .Include(p => p.SpecialType)
-                    .Where(p => !p.IsDeleted).ToListAsync());
+                return PartialView("_ShopProductListPartial", products.ToListAsync());
             }
+
             if (!string.IsNullOrWhiteSpace(brands))
             {
-                string[] sizs = brands.Split(",");
-                foreach (var s in sizs)
+                string[] brandsArr = brands.Split(",");
+                foreach (var b in brandsArr)
                 {
-                    if (!string.IsNullOrWhiteSpace(s))
+                    if (!string.IsNullOrWhiteSpace(b))
                     {
                         products = products
-                            .Where(p => p.BrandId.ToString() == s && !p.Brand.IsDeleted);
+                            .Where(p => p.BrandId.ToString() == b && !p.Brand.IsDeleted);
                     }
-
                 }
             }
+
             if (!string.IsNullOrWhiteSpace(colors))
             {
-                string[] colrs = colors.Split(",");
-                foreach (var c in colrs)
+                string[] colorsArr = colors.Split(",");
+                foreach (var c in colorsArr)
                 {
                     if (!string.IsNullOrWhiteSpace(c))
                     {
                         products = products
                         .Where(p => p.ProductColours.Any(p => p.ColourId.ToString() == c.ToString()));
                     }
-
                 }
             }
+
             if (!string.IsNullOrWhiteSpace(genders))
             {
-                string[] colrs = genders.Split(",");
-                foreach (var c in colrs)
+                string[] gendersArr = genders.Split(",");
+                foreach (var g in gendersArr)
                 {
-                    if (!string.IsNullOrWhiteSpace(c))
+                    if (!string.IsNullOrWhiteSpace(g))
                     {
                         products = products
-                        .Where(p => ((int)p.Gender).ToString() == c);
+                        .Where(p => ((int)p.Gender).ToString() == g);
                     }
-
                 }
             }
+
             if (!string.IsNullOrWhiteSpace(features))
             {
-                string[] colrs = features.Split(",");
-                foreach (var c in colrs)
+                string[] featuresArr = features.Split(",");
+                foreach (var f in featuresArr)
                 {
-                    if (!string.IsNullOrWhiteSpace(c))
+                    if (!string.IsNullOrWhiteSpace(f))
                     {
                         products = products
-                        .Where(p => p.ProductFeatures.Any(p => p.FeatureId.ToString() == c.ToString()));
+                        .Where(p => p.ProductFeatures.Any(p => p.FeatureId.ToString() == f.ToString()));
                     }
-
                 }
             }
+
             if (!string.IsNullOrWhiteSpace(powers))
             {
-                string[] colrs = powers.Split(",");
-                foreach (var c in colrs)
+                string[] powersArr = powers.Split(",");
+                foreach (var p in powersArr)
                 {
-                    if (!string.IsNullOrWhiteSpace(c))
+                    if (!string.IsNullOrWhiteSpace(p))
                     {
                         products = products
-                        .Where(p => p.PowerSourceId.ToString() == c.ToString());
+                        .Where(p => p.PowerSourceId.ToString() == p.ToString());
                     }
-
                 }
             }
             //if (!string.IsNullOrWhiteSpace(minPrice.ToString()))
             //{
-            //    products = from p in products
-            //               let produccs = p.ProductColorSizes.FirstOrDefault()
-            //               where produccs.Price >= minPrice
-            //               select p;
+            //    products = products.Where(p => p.Price >= minPrice);
             //}
             //if (!string.IsNullOrWhiteSpace(maxPrice.ToString()))
             //{
-            //    products = from p in products
-            //               let produccs = p.ProductColorSizes.FirstOrDefault()
-            //               where produccs.Price <= maxPrice
-            //               select p;
+            //    products = products.Where(p => p.Price <= maxPrice);
             //}
 
-            //ViewBag.PageIndex = page;
+            ViewBag.CurrentPage = page;
+            ViewBag.PageCount = Math.Ceiling((double)products.Count() / 16);
 
-            //ViewBag.PageCount = Math.Ceiling((double)products.Count() / 6);
-            
-            return PartialView("_ShopProductListPartial", products.Where(p => !p.IsDeleted).ToList());
+            return PartialView("_ShopProductListPartial", products.Skip((page - 1) * 16).Take(16));
         }
     }
 }

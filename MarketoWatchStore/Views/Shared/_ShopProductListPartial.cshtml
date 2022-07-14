@@ -1,7 +1,10 @@
 ﻿@model IEnumerable<Product>
+@{ string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+                ViewBag.PageCount = Math.Ceiling((double)Model.Count() / 16); }
 
-@foreach (Product product in Model)
-{
+<div class="row g-sm-4 g-3 row-cols-lg-4 row-cols-md-3 row-cols-2 mt-1 custom-gy-5 product-style-2 ratio_asos product-list-section">
+    @foreach (Product product in Model)
+    {
 <div>
     <div class="product-box">
         <div class="img-wrapper">
@@ -84,3 +87,62 @@ else
         </div>
     </div>
 </div>}
+</div>
+
+<nav class="page-section">
+    <ul class="pagination">
+
+        <li class="page-item @(ViewBag.CurrentPage <= 1 ? "disabled" : "")">
+            <a class="page-link" asp-controller="@controller" asp-action="index" asp-route-page="@(ViewBag.CurrentPage - 1)">
+                <span aria-hidden="true">
+                    <i class="fas fa-chevron-left"></i>
+                </span>
+            </a>
+        </li>
+
+        @if (ViewBag.CurrentPage == ViewBag.PageCount && ViewBag.CurrentPage > 2)
+        {
+<li class="page-item">
+    <a class="page-link" asp-controller="@controller" asp-action="index" asp-route-page="@(ViewBag.CurrentPage - 2)">
+        @(ViewBag.CurrentPage - 2)
+    </a>
+</li>}
+        @if (ViewBag.CurrentPage > 1)
+        {
+<li class="page-item">
+    <a class="page-link" asp-controller="@controller" asp-action="index" asp-route-page="@(ViewBag.CurrentPage - 1)">
+        @(ViewBag.CurrentPage - 1)
+    </a>
+</li>}
+
+        <li class="page-item active">
+            <a class="page-link" asp-controller="@controller" asp-action="index" asp-route-page="@(ViewBag.CurrentPage)">
+                @(ViewBag.CurrentPage)
+            </a>
+        </li>
+
+        @if (ViewBag.CurrentPage < ViewBag.PageCount)
+        {
+<li class="page-item">
+    <a class="page-link" asp-controller="@controller" asp-action="index" asp-route-page="@(ViewBag.CurrentPage + 1)">
+        @(ViewBag.CurrentPage + 1)
+    </a>
+</li>}
+        @if (ViewBag.CurrentPage == 1 && (ViewBag.CurrentPage + 2) <= ViewBag.PageCount)
+        {
+<li class="page-item">
+    <a class="page-link" asp-controller="@controller" asp-action="index" asp-route-page="@(ViewBag.CurrentPage + 2)">
+        @(ViewBag.CurrentPage + 2)
+    </a>
+</li>}
+
+        <li class="page-item @(ViewBag.CurrentPage >= ViewBag.PageCount ? "disabled" : "")">
+            <a class="page-link" asp-controller="@controller" asp-action="index" asp-route-page="@(ViewBag.CurrentPage + 1)">
+                <span aria-hidden="true">
+                    <i class="fas fa-chevron-right"></i>
+                </span>
+            </a>
+        </li>
+
+    </ul>
+</nav>

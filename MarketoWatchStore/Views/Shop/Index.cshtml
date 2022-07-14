@@ -7,8 +7,8 @@
     <ul class="circles">
         @for (int i = 1; i <= 10; i++)
         {
-<li></li>
-}
+            <li></li>
+        }
     </ul>
     <div class="container">
         <div class="row">
@@ -51,14 +51,14 @@
                                     <ul class="category-list">
                                         @foreach (Brand brand in Model.Brands)
                                         {
-                            <li>
-                                <div class="form-check ps-0 custom-form-check">
-                                    <input class="shopFilter brand checkbox_animated check-it" data-id="@brand.Id" type="checkbox" id="brand@(brand.Id)">
-                                    <label class="form-check-label" for="brand@(brand.Id)">@brand.Title</label>
-                                    <p class="font-light">(@brand.Products.Where(p => !p.IsDeleted).Count())</p>
-                                </div>
-                            </li>
-}
+                                            <li>
+                                                <div class="form-check ps-0 custom-form-check">
+                                                    <input class="shopFilter brand checkbox_animated check-it" data-id="@brand.Id" type="checkbox" id="brand@(brand.Id)">
+                                                    <label class="form-check-label" for="brand@(brand.Id)">@brand.Title</label>
+                                                    <p class="font-light">(@brand.Products.Where(p => !p.IsDeleted).Count())</p>
+                                                </div>
+                                            </li>
+                                        }
                                     </ul>
                                 </div>
                             </div>
@@ -75,10 +75,10 @@
                                     <ul class="category-list">
                                         @foreach (Colour colour in Model.Colours)
                                         {
-                            <li>
-                                <a asp-route-colourId="@colour.Id" data-id="@colour.Id" class="shopFilter color" style="background-color: @colour.Title;"></a>
-                            </li>
-}
+                                            <li>
+                                                <a asp-route-colourId="@colour.Id" data-id="@colour.Id" class="shopFilter color" style="background-color: @colour.Title;"></a>
+                                            </li>
+                                        }
                                     </ul>
                                 </div>
                             </div>
@@ -110,16 +110,16 @@
                                     <ul class="category-list">
                                         @foreach (var gender in Model.Genders)
                                         {
-                            <li>
-                                <div class="form-check ps-0 custom-form-check">
-                                    <input class="shopFilter gender checkbox_animated check-it" data-id="@((int)gender)" type="checkbox" id="gender@(++inputId)">
-                                    <label class="form-check-label" for="gender@(inputId)">
-                                        @gender
-                                    </label>
-                                    <p class="font-light">@Model.Products.Where(p => p.Gender == gender && !p.IsDeleted).Count()</p>
-                                </div>
-                            </li>
-}
+                                            <li>
+                                                <div class="form-check ps-0 custom-form-check">
+                                                    <input class="shopFilter gender checkbox_animated check-it" data-id="@((int)gender)" type="checkbox" id="gender@(++inputId)">
+                                                    <label class="form-check-label" for="gender@(inputId)">
+                                                        @gender
+                                                    </label>
+                                                    <p class="font-light">@Model.Products.Where(p => p.Gender == gender && !p.IsDeleted).Count()</p>
+                                                </div>
+                                            </li>
+                                        }
                                     </ul>
                                 </div>
                             </div>
@@ -136,16 +136,16 @@
                                     <ul class="category-list">
                                         @foreach (Feature feature in Model.Features)
                                         {
-                            <li>
-                                <div class="form-check ps-0 custom-form-check">
-                                    <input class="shopFilter feature checkbox_animated check-it" data-id="@feature.Id" type="checkbox" id="feature@(feature.Id)">
-                                    <label class="form-check-label" for="feature@(feature.Id)">
-                                        @feature.Title
-                                    </label>
-                                    <p class="font-light">(@(feature.ProductFeatures.Count()))</p>
-                                </div>
-                            </li>
-}
+                                            <li>
+                                                <div class="form-check ps-0 custom-form-check">
+                                                    <input class="shopFilter feature checkbox_animated check-it" data-id="@feature.Id" type="checkbox" id="feature@(feature.Id)">
+                                                    <label class="form-check-label" for="feature@(feature.Id)">
+                                                        @feature.Title
+                                                    </label>
+                                                    <p class="font-light">(@(feature.ProductFeatures.Count()))</p>
+                                                </div>
+                                            </li>
+                                        }
                                     </ul>
                                 </div>
                             </div>
@@ -162,58 +162,20 @@
                                     <ul class="category-list">
                                         @foreach (PowerSource powerSource in Model.PowerSources)
                                         {
-                            <li>
-                                <div class="form-check ps-0 custom-form-check">
-                                    <input class="shopFilter powerSource checkbox_animated check-it" type="checkbox" data-id="@powerSource.Id" id="powersource@(powerSource.Id)">
-                                    <label class="form-check-label" for="powersource@(powerSource.Id)">
-                                        @powerSource.Title
-                                    </label>
-                                    <p class="font-light">(@(powerSource.Products.Where(p => !p.IsDeleted).Count()))</p>
-                                </div>
-                            </li>
-}
+                                            <li>
+                                                <div class="form-check ps-0 custom-form-check">
+                                                    <input class="shopFilter powerSource checkbox_animated check-it" type="checkbox" data-id="@powerSource.Id" id="powersource@(powerSource.Id)">
+                                                    <label class="form-check-label" for="powersource@(powerSource.Id)">
+                                                        @powerSource.Title
+                                                    </label>
+                                                    <p class="font-light">(@(powerSource.Products.Where(p => !p.IsDeleted).Count()))</p>
+                                                </div>
+                                            </li>
+                                        }
                                     </ul>
                                 </div>
                             </div>
                         </div>
-
-                        @*<div class="accordion-item">
-                                <h2 class="accordion-header" id="headingSeven">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven">
-                                        Discount Range
-                                    </button>
-                                </h2>
-                                <div id="collapseSeven" class="accordion-collapse collapse show" aria-labelledby="headingSeven" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-                                        <ul class="category-list">
-                                            <li>
-                                                <div class="form-check ps-0 custom-form-check">
-                                                    <input class="checkbox_animated check-it" type="checkbox" id="off5">
-                                                    <label class="form-check-label" for="off5">
-                                                        5% and above
-                                                    </label>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="form-check ps-0 custom-form-check">
-                                                    <input class="checkbox_animated check-it" type="checkbox" id="off10">
-                                                    <label class="form-check-label" for="off10">
-                                                        10% and above
-                                                    </label>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="form-check ps-0 custom-form-check">
-                                                    <input class="checkbox_animated check-it" type="checkbox" id="off20">
-                                                    <label class="form-check-label" for="off20">
-                                                        20% and above
-                                                    </label>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>*@
 
                     </div>
                 </div>
@@ -222,22 +184,23 @@
             <div class="col-lg-9 col-12 ratio_30">
                 @foreach (AdsBanner adsBanner in Model.AdsBanners)
                 {
-    <div class="banner-deatils">
-        <a href="@((adsBanner.AdsUrl != null) ? adsBanner.AdsUrl : "javascript:void(0)")" target="@((adsBanner.AdsUrl != null) ? "_blank" : "_self")">
-            <div class="banner-image">
-                <img src="~/assets/images/banner/@adsBanner.Image" class="img-fluid bg-img blur-up lazyload" alt="banner-image">
-                <div class="banner-content">
-                    <div>
-                        <h3>@adsBanner.Title</h3>
-                        <p>@adsBanner.Text</p>
+                    <div class="banner-deatils">
+                        <a href="@((adsBanner.AdsUrl != null) ? adsBanner.AdsUrl : "javascript:void(0)")" target="@((adsBanner.AdsUrl != null) ? "_blank" : "_self")">
+                            <div class="banner-image">
+                                <img src="~/assets/images/banner/@adsBanner.Image" class="img-fluid bg-img blur-up lazyload" alt="banner-image">
+                                <div class="banner-content">
+                                    <div>
+                                        <h3>@adsBanner.Title</h3>
+                                        <p>@adsBanner.Text</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="banner-contain mt-3 mb-5">
+                                <p class="font-light"> </p>
+                            </div>
+                        </a>
                     </div>
-                </div>
-            </div>
-            <div class="banner-contain mt-3 mb-5">
-                <p class="font-light"> </p>
-            </div>
-        </a>
-    </div>}
+                }
 
                 <div class="row g-4">
 
@@ -250,38 +213,10 @@
                 </div>
                 <!-- label and featured section -->
                 <!-- Prodcut setion -->
-                <div class="row g-sm-4 g-3 row-cols-lg-4 shop-products row-cols-md-3 row-cols-2 mt-1 custom-gy-5 product-style-2 ratio_asos product-list-section">
+                <div class="shop-products">
                     @await Html.PartialAsync("_ShopProductListPartial", Model.Products)
                 </div>
                 <!-- Prodcut setion -->
-
-                <nav class="page-section">
-                    <ul class="pagination">
-                        <li class="page-item">
-                            <a class="page-link" href="javascript:void(0)" aria-label="Previous">
-                                <span aria-hidden="true">
-                                    <i class="fas fa-chevron-left"></i>
-                                </span>
-                            </a>
-                        </li>
-                        <li class="page-item active">
-                            <a class="page-link" href="javascript:void(0)">1</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="javascript:void(0)">2</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="javascript:void(0)">3</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" aria-label="Next">
-                                <span aria-hidden="true">
-                                    <i class="fas fa-chevron-right"></i>
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
             </div>
         </div>
     </div>
@@ -290,15 +225,6 @@
 
 @section CSS{
     <link rel="stylesheet" href="~/assets/ion.rangeSlider/css/ion.rangeSlider.min.css">
-@*<style>
-    .active-brand,
-    .active-color,
-    active-gender,
-    active-feature,
-    active-powerSource {
-        margin-right: 40px !important;
-    }
-</style>*@
 }
 
 @section JS{
@@ -338,8 +264,8 @@
             var gids = "";
             var fids = "";
             var pids = "";
-            //var minP = $("#input-left").val();
-            //var maxP = $("#input-right").val();
+            //var minP = $(".irs-from").before();
+            //var maxP = $(".irs-to").before();
             for (var i = 0; i < brandIds.length; i++) {
                 Bids += brandIds[i].getAttribute("data-id") + ",";
             }
@@ -367,7 +293,10 @@
             ).then(res => {
                 return res.text();
             }).then(data => {
-                $(".shop-products").html(data)
+                $(".shop-products").html(data);
+
+                /* Feather JS */
+                feather.replace();
             })
         }
     </script>
