@@ -246,3 +246,5 @@ C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Release\netc
 C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Release\netcoreapp3.1\MarketoWatchStore.dll
 C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Release\netcoreapp3.1\MarketoWatchStore.pdb
 C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Release\netcoreapp3.1\MarketoWatchStore.genruntimeconfig.cache
+C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Release\netcoreapp3.1\Razor\Areas\Manage\Views\Shared\_UsersTablePartial.cshtml.g.cs
+C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Release\netcoreapp3.1\Razor\Areas\Manage\Views\User\Index.cshtml.g.cs

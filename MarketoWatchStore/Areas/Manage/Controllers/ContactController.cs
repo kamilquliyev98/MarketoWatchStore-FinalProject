@@ -1,5 +1,6 @@
 ﻿using MarketoWatchStore.DAL;
 using MarketoWatchStore.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 namespace MarketoWatchStore.Areas.Manage.Controllers
 {
     [Area("manage")]
+    [Authorize(Roles = "SuperAdmin, Admin")]
     public class ContactController : Controller
     {
         private readonly MarketoDbContext _context;

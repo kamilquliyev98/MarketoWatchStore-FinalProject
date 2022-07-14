@@ -12,6 +12,8 @@ namespace MarketoWatchStore.Models
         [StringLength(255)]
         public string FullName { get; set; }
         public bool IsAdmin { get; set; }
+        public bool IsDeleted { get; set; }
+        public bool IsBlocked { get; set; }
         [StringLength(255)]
         public string Address { get; set; }
         [StringLength(255)]

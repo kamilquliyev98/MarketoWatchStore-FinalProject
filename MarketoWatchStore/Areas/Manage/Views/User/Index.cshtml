@@ -1,0 +1,98 @@
+﻿@model IEnumerable<AppUser>
+@{ ViewData["Title"] = "Users";
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString(); }
+
+<main id="main" class="main">
+
+    <div class="row justify-content-between align-items-center">
+        <div class="col-md-3">
+            <div class="pagetitle">
+                <h1>Users</h1>
+                <nav>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-area="manage" asp-controller="dashboard" asp-action="index">Dashboard</a></li>
+                        <li class="breadcrumb-item active">Users</li>
+                    </ol>
+                </nav>
+            </div>
+            <!-- End Page Title -->
+        </div>
+        <div class="col-md-3">
+            <form class="form-group">
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <label for="status" class="col-form-label">Show:</label>
+                    </div>
+                    <div class="col-auto">
+                        <select class="form-select" id="status" name="status">
+                            @switch (ViewBag.Status)
+                            {
+                                case "active":
+                <option value="all">All</option>
+                                    <option value="active" selected>Active</option>
+                                                        <option value="deleted">Deleted</option>
+ break;
+                                                    case "deleted":
+                                    <option value="all">All</option>
+                                                        <option value="active">Active</option>
+                                                                            <option value="deleted" selected>Deleted</option>
+ break;
+                                                                        default:
+                                                        <option value="all" selected>All</option>
+                                                                            <option value="active">Active</option>
+                                                                                                <option value="deleted">Deleted</option>
+break;
+                                                                                        }
+
+                        </select>
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-info">Filter</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-2">
+            <div class="d-grid">
+                <a asp-area="manage" asp-controller="@controller" asp-action="create" asp-route-page="@ViewBag.CurrentPage" asp-route-status="@ViewBag.Status" class="btn btn-success" type="button">Create</a>
+            </div>
+        </div>
+    </div>
+
+    <section class="section">
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                        </h5>
+
+                        <!-- Products Table -->
+                        <div id="table" class="table-responsive">
+                            @await Html.PartialAsync("_UsersTablePartial", Model)
+                        </div>
+                        <!-- End Table -->
+                        <!-- Pagination -->
+                        @await Html.PartialAsync("_PaginationPartial")
+                        <!-- End Pagination -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main>
+<!-- End #main -->
+
+@section CSS{
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+}
+
+@section JS{
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="~/manage/assets/js/custom.js" asp-append-version="true"></script>
+}
