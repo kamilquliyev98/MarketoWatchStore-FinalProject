@@ -1,0 +1,86 @@
+﻿@model IEnumerable<Product>
+
+@foreach (Product product in Model)
+{
+<div>
+    <div class="product-box">
+        <div class="img-wrapper">
+            <div class="front">
+                <a asp-controller="shop" asp-action="product" asp-route-id="@product.Id">
+                    <img src="~/assets/images/products/@product.MainImage" class="bg-img blur-up lazyload" alt="product">
+                </a>
+            </div>
+            <div class="label-block">
+                @if (product.IsNewArrival)
+                {
+<span class="label label-black">New</span>}
+                @if (product.DiscountPrice != null)
+                {
+                    var calculateDiscount = 100 - (double)product.DiscountPrice * 100 / product.Price;
+
+<span class="label label-theme">@(calculateDiscount.ToString("0.00"))% Off</span>}
+            </div>
+            <div class="cart-wrap">
+                <ul>
+                    <li>
+                        <form id="shoppingCartForm" asp-controller="shoppingcart" asp-action="addtocart" asp-route-id="@product.Id" method="get">
+                            <input type="hidden" name="count" value="1" id="productCount" />
+                            <input type="hidden" name="colourid" value="@product.ProductColours.ElementAt(0).ColourId" id="colourid" />
+
+                            <button type="submit" class="addtocart-btn">
+                                <i data-feather="shopping-bag"></i>
+                            </button>
+                        </form>
+                    </li>
+                    <li>
+                        <a asp-controller="shop" asp-action="quickview" asp-route-id="@product.Id" id="quickViewBtn" data-bs-toggle="modal" data-bs-target="#quick-view">
+                            <i data-feather="eye"></i>
+                        </a>
+                    </li>
+                    @*<li>
+                            <a asp-controller="comparelist" asp-action="addtocompare" asp-route-id="@product.Id" class="addtocompare-btn">
+                                <i data-feather="refresh-cw"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" class="wishlist addtowishlist-btn">
+                                <i data-feather="heart"></i>
+                            </a>
+                        </li>*@
+                </ul>
+            </div>
+        </div>
+        <div class="product-details">
+            <div class="rating-details">
+                <span class="font-light grid-content">
+                    @if (product.SpecialTypeId != null)
+                    {
+    @product.SpecialType.Title }
+else
+{
+    if (product.IsNewArrival == true)
+    { @("New arrival") }
+    else
+    { @("Our collection")}
+}
+                </span>
+                @{ double avgstar = product.Reviews.Count() > 0 ? (product.Reviews.Sum(s => s.Star) / (double)product.Reviews.Count()) : 0; }
+                <div class="star-ratings" title="@avgstar.ToString("0.0")" style="margin: unset">
+                    <div class="fill-ratings" style="width: @((avgstar * 20).ToString("0"))%;">
+                        <span>★★★★★</span>
+                    </div>
+                    <div class="empty-ratings">
+                        <span>★★★★★</span>
+                    </div>
+                </div>
+            </div>
+            <div class="main-price">
+                <a asp-controller="shop" asp-action="product" asp-route-id="@product.Id" class="font-default">
+                    <h5 class="ms-0">@product.Title</h5>
+                </a>
+                <h3 class="theme-color">$@((product.DiscountPrice is null) ? product.Price : product.DiscountPrice)</h3>
+                <a asp-controller="shoppingcart" asp-action="addtocart" asp-route-id="@product.Id" class="addtocart-btn btn listing-content">Add To Cart</a>
+            </div>
+        </div>
+    </div>
+</div>}

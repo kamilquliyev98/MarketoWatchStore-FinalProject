@@ -1,13 +1,14 @@
 ﻿@model ShopVM
 @{ ViewBag.Title = "Shop | Marketo";
-                int inputId = 0; }
+    int inputId = 0; }
 
 <!-- Breadcrumb section start -->
 <section class="breadcrumb-section section-b-space">
     <ul class="circles">
         @for (int i = 1; i <= 10; i++)
         {
-<li></li>}
+<li></li>
+}
     </ul>
     <div class="container">
         <div class="row">
@@ -52,11 +53,12 @@
                                         {
                             <li>
                                 <div class="form-check ps-0 custom-form-check">
-                                    <input class="checkbox_animated check-it" type="checkbox" id="brand@(brand.Id)">
+                                    <input class="shopFilter brand checkbox_animated check-it" data-id="@brand.Id" type="checkbox" id="brand@(brand.Id)">
                                     <label class="form-check-label" for="brand@(brand.Id)">@brand.Title</label>
                                     <p class="font-light">(@brand.Products.Where(p => !p.IsDeleted).Count())</p>
                                 </div>
-                            </li>}
+                            </li>
+}
                                     </ul>
                                 </div>
                             </div>
@@ -74,8 +76,9 @@
                                         @foreach (Colour colour in Model.Colours)
                                         {
                             <li>
-                                <a asp-route-colourId="@colour.Id" style="background-color: @colour.Title;"></a>
-                            </li>}
+                                <a asp-route-colourId="@colour.Id" data-id="@colour.Id" class="shopFilter color" style="background-color: @colour.Title;"></a>
+                            </li>
+}
                                     </ul>
                                 </div>
                             </div>
@@ -109,13 +112,14 @@
                                         {
                             <li>
                                 <div class="form-check ps-0 custom-form-check">
-                                    <input class="checkbox_animated check-it" type="checkbox" id="gender@(++inputId)">
+                                    <input class="shopFilter gender checkbox_animated check-it" data-id="@((int)gender)" type="checkbox" id="gender@(++inputId)">
                                     <label class="form-check-label" for="gender@(inputId)">
                                         @gender
                                     </label>
                                     <p class="font-light">@Model.Products.Where(p => p.Gender == gender && !p.IsDeleted).Count()</p>
                                 </div>
-                            </li>}
+                            </li>
+}
                                     </ul>
                                 </div>
                             </div>
@@ -134,13 +138,14 @@
                                         {
                             <li>
                                 <div class="form-check ps-0 custom-form-check">
-                                    <input class="checkbox_animated check-it" type="checkbox" id="feature@(feature.Id)">
+                                    <input class="shopFilter feature checkbox_animated check-it" data-id="@feature.Id" type="checkbox" id="feature@(feature.Id)">
                                     <label class="form-check-label" for="feature@(feature.Id)">
                                         @feature.Title
                                     </label>
                                     <p class="font-light">(@(feature.ProductFeatures.Count()))</p>
                                 </div>
-                            </li>}
+                            </li>
+}
                                     </ul>
                                 </div>
                             </div>
@@ -159,55 +164,56 @@
                                         {
                             <li>
                                 <div class="form-check ps-0 custom-form-check">
-                                    <input class="checkbox_animated check-it" type="checkbox" id="powersource@(powerSource.Id)">
+                                    <input class="shopFilter powerSource checkbox_animated check-it" type="checkbox" data-id="@powerSource.Id" id="powersource@(powerSource.Id)">
                                     <label class="form-check-label" for="powersource@(powerSource.Id)">
                                         @powerSource.Title
                                     </label>
                                     <p class="font-light">(@(powerSource.Products.Where(p => !p.IsDeleted).Count()))</p>
                                 </div>
-                            </li>}
+                            </li>
+}
                                     </ul>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingSeven">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven">
-                                    Discount Range
-                                </button>
-                            </h2>
-                            <div id="collapseSeven" class="accordion-collapse collapse show" aria-labelledby="headingSeven" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <ul class="category-list">
-                                        <li>
-                                            <div class="form-check ps-0 custom-form-check">
-                                                <input class="checkbox_animated check-it" type="checkbox" id="off5">
-                                                <label class="form-check-label" for="off5">
-                                                    5% and above
-                                                </label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="form-check ps-0 custom-form-check">
-                                                <input class="checkbox_animated check-it" type="checkbox" id="off10">
-                                                <label class="form-check-label" for="off10">
-                                                    10% and above
-                                                </label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="form-check ps-0 custom-form-check">
-                                                <input class="checkbox_animated check-it" type="checkbox" id="off20">
-                                                <label class="form-check-label" for="off20">
-                                                    20% and above
-                                                </label>
-                                            </div>
-                                        </li>
-                                    </ul>
+                        @*<div class="accordion-item">
+                                <h2 class="accordion-header" id="headingSeven">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven">
+                                        Discount Range
+                                    </button>
+                                </h2>
+                                <div id="collapseSeven" class="accordion-collapse collapse show" aria-labelledby="headingSeven" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        <ul class="category-list">
+                                            <li>
+                                                <div class="form-check ps-0 custom-form-check">
+                                                    <input class="checkbox_animated check-it" type="checkbox" id="off5">
+                                                    <label class="form-check-label" for="off5">
+                                                        5% and above
+                                                    </label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="form-check ps-0 custom-form-check">
+                                                    <input class="checkbox_animated check-it" type="checkbox" id="off10">
+                                                    <label class="form-check-label" for="off10">
+                                                        10% and above
+                                                    </label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="form-check ps-0 custom-form-check">
+                                                    <input class="checkbox_animated check-it" type="checkbox" id="off20">
+                                                    <label class="form-check-label" for="off20">
+                                                        20% and above
+                                                    </label>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
+                            </div>*@
 
                     </div>
                 </div>
@@ -244,93 +250,8 @@
                 </div>
                 <!-- label and featured section -->
                 <!-- Prodcut setion -->
-                <div class="row g-sm-4 g-3 row-cols-lg-4 row-cols-md-3 row-cols-2 mt-1 custom-gy-5 product-style-2 ratio_asos product-list-section">
-
-                    @foreach (Product product in Model.Products)
-                    {
-        <div>
-            <div class="product-box">
-                <div class="img-wrapper">
-                    <div class="front">
-                        <a asp-controller="shop" asp-action="product" asp-route-id="@product.Id">
-                            <img src="~/assets/images/products/@product.MainImage" class="bg-img blur-up lazyload" alt="product">
-                        </a>
-                    </div>
-                    <div class="label-block">
-                        @if (product.IsNewArrival)
-                        {
-        <span class="label label-black">New</span>}
-                        @if (product.DiscountPrice != null)
-                        {
-                            var calculateDiscount = 100 - (double)product.DiscountPrice * 100 / product.Price;
-
-        <span class="label label-theme">@(calculateDiscount.ToString("0.00"))% Off</span>}
-                    </div>
-                    <div class="cart-wrap">
-                        <ul>
-                            <li>
-                                <form id="shoppingCartForm" asp-controller="shoppingcart" asp-action="addtocart" asp-route-id="@product.Id" method="get">
-                                    <input type="hidden" name="count" value="1" id="productCount" />
-                                    <input type="hidden" name="colourid" value="@product.ProductColours.ElementAt(0).ColourId" id="colourid" />
-
-                                    <button type="submit" class="addtocart-btn">
-                                        <i data-feather="shopping-bag"></i>
-                                    </button>
-                                </form>
-                            </li>
-                            <li>
-                                <a asp-controller="shop" asp-action="quickview" asp-route-id="@product.Id" id="quickViewBtn" data-bs-toggle="modal" data-bs-target="#quick-view">
-                                    <i data-feather="eye"></i>
-                                </a>
-                            </li>
-                            @*<li>
-                                    <a asp-controller="comparelist" asp-action="addtocompare" asp-route-id="@product.Id" class="addtocompare-btn">
-                                        <i data-feather="refresh-cw"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)" class="wishlist addtowishlist-btn">
-                                        <i data-feather="heart"></i>
-                                    </a>
-                                </li>*@
-                        </ul>
-                    </div>
-                </div>
-                <div class="product-details">
-                    <div class="rating-details">
-                        <span class="font-light grid-content">
-                            @if (product.SpecialTypeId != null)
-                            {
-            @product.SpecialType.Title }
-        else
-        {
-            if (product.IsNewArrival == true)
-            { @("New arrival") }
-            else
-            { @("Our collection")}
-        }
-                        </span>
-                        @{ double avgstar = product.Reviews.Count() > 0 ? (product.Reviews.Sum(s => s.Star) / (double)product.Reviews.Count()) : 0; }
-                        <div class="star-ratings" title="@avgstar.ToString("0.0")" style="margin: unset">
-                            <div class="fill-ratings" style="width: @((avgstar * 20).ToString("0"))%;">
-                                <span>★★★★★</span>
-                            </div>
-                            <div class="empty-ratings">
-                                <span>★★★★★</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="main-price">
-                        <a asp-controller="shop" asp-action="product" asp-route-id="@product.Id" class="font-default">
-                            <h5 class="ms-0">@product.Title</h5>
-                        </a>
-                        <h3 class="theme-color">$@((product.DiscountPrice is null) ? product.Price : product.DiscountPrice)</h3>
-                        <a asp-controller="shoppingcart" asp-action="addtocart" asp-route-id="@product.Id" class="addtocart-btn btn listing-content">Add To Cart</a>
-                    </div>
-                </div>
-            </div>
-        </div>}
-
+                <div class="row g-sm-4 g-3 row-cols-lg-4 shop-products row-cols-md-3 row-cols-2 mt-1 custom-gy-5 product-style-2 ratio_asos product-list-section">
+                    @await Html.PartialAsync("_ShopProductListPartial", Model.Products)
                 </div>
                 <!-- Prodcut setion -->
 
@@ -369,10 +290,86 @@
 
 @section CSS{
     <link rel="stylesheet" href="~/assets/ion.rangeSlider/css/ion.rangeSlider.min.css">
+@*<style>
+    .active-brand,
+    .active-color,
+    active-gender,
+    active-feature,
+    active-powerSource {
+        margin-right: 40px !important;
+    }
+</style>*@
 }
 
 @section JS{
     <script src="~/assets/js/price-filter.js"></script>
     <script src="~/assets/ion.rangeSlider/js/ion.rangeSlider.min.js"></script>
     <script src="~/assets/js/filter.js"></script>
+
+    <script>
+        //Shop filter
+        $(document).on("click", ".shopFilter", function (e) {
+            e.preventDefault();
+            if ($(this).hasClass("brand")) {
+                $(this).toggleClass("active-brand");
+            }
+            if ($(this).hasClass("color")) {
+                $(this).toggleClass("active-color");
+            }
+            if ($(this).hasClass("gender")) {
+                $(this).toggleClass("active-gender");
+            }
+            if ($(this).hasClass("feature")) {
+                $(this).toggleClass("active-feature");
+            }
+            if ($(this).hasClass("powerSource")) {
+                $(this).toggleClass("active-powerSource");
+            }
+            ShopFetch();
+        })
+        function ShopFetch() {
+            var brandIds = document.querySelectorAll(".active-brand");
+            var colorIds = document.querySelectorAll(".active-color");
+            var genderIds = document.querySelectorAll(".active-gender");
+            var featureIds = document.querySelectorAll(".active-feature");
+            var powerSourceIds = document.querySelectorAll(".active-powerSource");
+            var Bids = "";
+            var Cids = "";
+            var gids = "";
+            var fids = "";
+            var pids = "";
+            //var minP = $("#input-left").val();
+            //var maxP = $("#input-right").val();
+            for (var i = 0; i < brandIds.length; i++) {
+                Bids += brandIds[i].getAttribute("data-id") + ",";
+            }
+            for (var i = 0; i < colorIds.length; i++) {
+                Cids += colorIds[i].getAttribute("data-id") + ",";
+            }
+            for (var i = 0; i < genderIds.length; i++) {
+                gids += genderIds[i].getAttribute("data-id") + ",";
+            }
+            for (var i = 0; i < featureIds.length; i++) {
+                fids += featureIds[i].getAttribute("data-id") + ",";
+            }
+            for (var i = 0; i < powerSourceIds.length; i++) {
+                pids += powerSourceIds[i].getAttribute("data-id") + ",";
+            }
+
+            fetch("../../shop/filter"
+                + "?brands=" + Bids.toString()
+                + "&colors=" + Cids.toString()
+                + "&genders=" + gids.toString()
+                + "&features=" + fids.toString()
+                + "&powers=" + pids.toString()
+                //+ "&minPrice=" + parseInt(minP)
+                //+ "&maxPrice=" + parseInt(maxP)
+            ).then(res => {
+                return res.text();
+            }).then(data => {
+                $(".shop-products").html(data)
+            })
+        }
+    </script>
 }
+

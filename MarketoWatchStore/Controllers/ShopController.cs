@@ -164,5 +164,123 @@ namespace MarketoWatchStore.Controllers
 
             return RedirectToAction(nameof(Product), new { id });
         }
+
+        public async Task<IActionResult> Filter(string brands, string colors, string genders
+           , string features, string powers
+            //int maxPrice, int page = 1
+            )
+        {
+            IQueryable<Product> products = _context.Products
+                .Include(p => p.ProductColours)
+                .Include(p => p.Brand)
+                .Include(p => p.SpecialType)
+                .Include(p => p.Reviews)
+                .Include(p => p.ProductFeatures).ThenInclude(p=>p.Feature)
+                .Include(p => p.PowerSource)
+                .Where(p => !p.IsDeleted
+                    && !p.Brand.IsDeleted
+                    && !p.PowerSource.IsDeleted
+                    )
+                ;
+
+            if (string.IsNullOrWhiteSpace(brands)
+                && string.IsNullOrWhiteSpace(colors)
+                && string.IsNullOrWhiteSpace(genders)
+                && string.IsNullOrWhiteSpace(features)
+                && string.IsNullOrWhiteSpace(powers)
+                )
+            {
+                return PartialView("_ShopProductListPartial", await _context.Products
+                    .Include(p => p.ProductColours)
+                    .Include(p => p.Reviews)
+                    .Include(p => p.SpecialType)
+                    .Where(p => !p.IsDeleted).ToListAsync());
+            }
+            if (!string.IsNullOrWhiteSpace(brands))
+            {
+                string[] sizs = brands.Split(",");
+                foreach (var s in sizs)
+                {
+                    if (!string.IsNullOrWhiteSpace(s))
+                    {
+                        products = products
+                            .Where(p => p.BrandId.ToString() == s && !p.Brand.IsDeleted);
+                    }
+
+                }
+            }
+            if (!string.IsNullOrWhiteSpace(colors))
+            {
+                string[] colrs = colors.Split(",");
+                foreach (var c in colrs)
+                {
+                    if (!string.IsNullOrWhiteSpace(c))
+                    {
+                        products = products
+                        .Where(p => p.ProductColours.Any(p => p.ColourId.ToString() == c.ToString()));
+                    }
+
+                }
+            }
+            if (!string.IsNullOrWhiteSpace(genders))
+            {
+                string[] colrs = genders.Split(",");
+                foreach (var c in colrs)
+                {
+                    if (!string.IsNullOrWhiteSpace(c))
+                    {
+                        products = products
+                        .Where(p => ((int)p.Gender).ToString() == c);
+                    }
+
+                }
+            }
+            if (!string.IsNullOrWhiteSpace(features))
+            {
+                string[] colrs = features.Split(",");
+                foreach (var c in colrs)
+                {
+                    if (!string.IsNullOrWhiteSpace(c))
+                    {
+                        products = products
+                        .Where(p => p.ProductFeatures.Any(p => p.FeatureId.ToString() == c.ToString()));
+                    }
+
+                }
+            }
+            if (!string.IsNullOrWhiteSpace(powers))
+            {
+                string[] colrs = powers.Split(",");
+                foreach (var c in colrs)
+                {
+                    if (!string.IsNullOrWhiteSpace(c))
+                    {
+                        products = products
+                        .Where(p => p.PowerSourceId.ToString() == c.ToString());
+                    }
+
+                }
+            }
+            //if (!string.IsNullOrWhiteSpace(minPrice.ToString()))
+            //{
+            //    products = from p in products
+            //               let produccs = p.ProductColorSizes.FirstOrDefault()
+            //               where produccs.Price >= minPrice
+            //               select p;
+            //}
+            //if (!string.IsNullOrWhiteSpace(maxPrice.ToString()))
+            //{
+            //    products = from p in products
+            //               let produccs = p.ProductColorSizes.FirstOrDefault()
+            //               where produccs.Price <= maxPrice
+            //               select p;
+            //}
+
+            //ViewBag.PageIndex = page;
+
+            //ViewBag.PageCount = Math.Ceiling((double)products.Count() / 6);
+            
+            return PartialView("_ShopProductListPartial", products.Where(p => !p.IsDeleted).ToList());
+        }
     }
 }
