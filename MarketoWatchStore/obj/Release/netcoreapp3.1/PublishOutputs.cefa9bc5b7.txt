@@ -169,6 +169,7 @@ C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Release\netc
 C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\assets\images\service-policies\secure-payment.png
 C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\assets\images\service-policies\store.png
 C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\assets\images\slider\59d3a051-9411-441e-b92c-a755095e597b_202206270400276590_slide-1.png
+C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\assets\images\slider\89c924a3-2d97-4a72-bf82-9a83b15cbfc4_202209031625550011_slider-3.png
 C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\assets\images\slider\slider-1.png
 C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\assets\images\slider\slider-1.webp
 C:\Users\Kamil\source\repos\MarketoWatchStore\MarketoWatchStore\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\assets\images\slider\slider-2.webp

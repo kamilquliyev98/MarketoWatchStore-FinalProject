@@ -46,7 +46,7 @@ namespace MarketoWatchStore.Extensions
         /// <returns></returns>
         public static string CreateFile(this IFormFile file, IWebHostEnvironment env, params string[] folders)
         {
-            string fileName = $"{Guid.NewGuid()}_{DateTime.UtcNow.AddHours(4).ToString("yyyyMMddHHmmssffff")}_{file.FileName}";
+            string fileName = $"{DateTime.UtcNow.AddHours(4).ToString("yyyyMMdd-HHmmssffff")}_{Guid.NewGuid()}_{file.FileName}";
 
             string path = env.WebRootPath;
 
