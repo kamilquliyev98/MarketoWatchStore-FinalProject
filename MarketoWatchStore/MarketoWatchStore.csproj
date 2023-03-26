@@ -33,13 +33,21 @@
     <Compile Remove="Migrations\20221128165722_Checking.Designer.cs" />
     <Compile Remove="Migrations\20221227163810_test.cs" />
     <Compile Remove="Migrations\20221227163810_test.Designer.cs" />
+    <Compile Remove="Migrations\20230114170008_Test.cs" />
+    <Compile Remove="Migrations\20230114170008_Test.Designer.cs" />
+    <Compile Remove="Migrations\20230114170132_Test.cs" />
+    <Compile Remove="Migrations\20230114170132_Test.Designer.cs" />
+    <Compile Remove="Migrations\20230114170213_Test.cs" />
+    <Compile Remove="Migrations\20230114170213_Test.Designer.cs" />
+    <Compile Remove="Migrations\20230114170638_Test.cs" />
+    <Compile Remove="Migrations\20230114170638_Test.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.25" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.25" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.25" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.25">
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.32" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.32" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.32" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.32">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

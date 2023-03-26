@@ -28,6 +28,11 @@ namespace MarketoWatchStore
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<IISOptions>(options =>
+            {
+                options.ForwardClientCertificate = false;
+            });
+
             services.AddControllersWithViews();
 
             services.AddDbContext<MarketoDbContext>(options =>
@@ -67,15 +72,35 @@ namespace MarketoWatchStore
                 app.UseHsts();
             }
 
-            app.UseRouting();
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseCookiePolicy();
+
+            app.UseRouting();
+            //app.UseRequestLocalization();
+            app.UseCors();
 
             app.UseAuthentication();
             app.UseAuthorization();
+            //app.UseSession();
+            //app.UseResponseCompression();
+            app.UseResponseCaching();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute("areas", "{area:exists}/{controller=dashboard}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(
+                    name: "blog",
+                    pattern: "blogs",
+                    defaults: new { controller = "blog", action = "index" }
+                    );
+
+                endpoints.MapControllerRoute(
+                    name: "singleblog",
+                    pattern: "blogs/{id?}",
+                    defaults: new { controller = "blog", action = "blog" }
+                    );
 
                 endpoints.MapControllerRoute("default", "{controller=home}/{action=index}/{id?}");
             });
